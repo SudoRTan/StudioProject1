@@ -3,9 +3,11 @@
 //
 #include "game.h"
 #include "Framework\console.h"
+#include "Map.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -18,6 +20,9 @@ EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 
 // Console object
 Console g_Console(80, 25, "SP1 Framework");
+
+//Map Object
+Map map;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -318,6 +323,7 @@ void renderGame()
 {
     renderMap();        // renders the map to the buffer first
     renderCharacter();  // renders the character into the buffer
+    map.renderMap(g_Console);
 }
 
 void renderMap()
