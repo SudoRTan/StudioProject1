@@ -11,6 +11,6 @@ private:
 public:
 	Collectible();
 	~Collectible();
-	void PlayerCollect();
+	void PlayerCollect(); // use playerpos obj in Player.h as parameter for comparing when player's position is the same as collectible's position
 };
 

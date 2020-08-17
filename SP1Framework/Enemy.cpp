@@ -7,6 +7,7 @@
 
 Enemy::Enemy()
 {
+	IsPlayerHit = false;
 	// test spawning of enemies on map using (5,0) as test case
 	enemypos.setX(5);
 	enemypos.setY(4);
@@ -29,4 +30,16 @@ void Enemy::Movement()
 	}
 
 	//print out map with updated x and y values of enemy (in main or somewhere else idk)
+}
+
+void Enemy::PlayerContact()
+{
+	if ((playerpos.getX() == enemypos.getX()) && (player.posY() == enemypos.getY())) // check if player moves over collectible
+	{
+
+
+
+
+		IsPlayerHit = true;
+	}
 }

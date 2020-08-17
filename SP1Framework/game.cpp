@@ -4,6 +4,7 @@
 #include "game.h"
 #include "Framework\console.h"
 #include "Map.h"
+//#include "Player.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -239,26 +240,31 @@ void moveCharacter()
     if (g_skKeyEvent[K_UP].keyDown && g_sChar.m_cLocation.Y > 0)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.Y--;       
+        g_sChar.m_cLocation.Y--;
+        //pPlayer->drop()
     }
     if (g_skKeyEvent[K_LEFT].keyDown && g_sChar.m_cLocation.X > 0)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.X--;        
+        g_sChar.m_cLocation.X--;
+        //pPlayer->moveLeft()
     }
     if (g_skKeyEvent[K_DOWN].keyDown && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.Y++;        
+        g_sChar.m_cLocation.Y++;
+        //pPlayer->jump()
     }
     if (g_skKeyEvent[K_RIGHT].keyDown && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.X++;        
+        g_sChar.m_cLocation.X++;
+        //pPlayer->moveRight()
     }
     if (g_skKeyEvent[K_SPACE].keyDown)
     {
-        g_sChar.m_bActive = !g_sChar.m_bActive;        
+        g_sChar.m_bActive = !g_sChar.m_bActive;
+        //add a pew pew command here
     }
 
    
