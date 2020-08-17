@@ -4,7 +4,7 @@
 #include "game.h"
 #include "Framework\console.h"
 #include "Map.h"
-//#include "Player.h"
+#include "Player.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -24,6 +24,9 @@ Console g_Console(80, 25, "SP1 Framework");
 
 //Map Object
 Map map;
+
+//Player Object
+Player player;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -237,6 +240,9 @@ void moveCharacter()
 {    
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
+    player.move(g_skKeyEvent);
+
+    /*
     if (g_skKeyEvent[K_UP].keyDown && g_sChar.m_cLocation.Y > 0)
     {
         //Beep(1440, 30);
@@ -267,7 +273,7 @@ void moveCharacter()
         g_sChar.m_bActive = !g_sChar.m_bActive;
         //add a pew pew command here
     }
-
+    */
    
 }
 void processUserInput()
@@ -329,8 +335,8 @@ void renderSplashScreen()  // renders the splash screen
 void renderGame()
 {
     renderMap();        // renders the map to the buffer first
-    renderCharacter();  // renders the character into the buffer
     map.renderMap(g_Console);
+    renderCharacter();  // renders the character into the buffer
 }
 
 void renderMap()
@@ -353,6 +359,9 @@ void renderMap()
 
 void renderCharacter()
 {
+
+    g_Console.writeToBuffer(player.getPositionX(), 24-player.getPositionY(), '9',FG_BLACK+BG_GRAY);
+    /*
     // Draw the location of the character
     WORD charColor = 0x0C;
     if (g_sChar.m_bActive)
@@ -360,6 +369,7 @@ void renderCharacter()
         charColor = 0x0A;
     }
     g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
+    */
 }
 
 void renderFramerate()

@@ -10,3 +10,15 @@ Player::~Player()
 {
 
 }
+
+
+
+
+void Player::move(SKeyEvent KeyEvent[K_COUNT]) {
+	if (KeyEvent[K_LEFT].keyDown) {
+		position.setX(position.getX() - 1);
+	}
+	if (KeyEvent[K_RIGHT].keyDown) {
+		position.setX(position.getX() + 1);
+	}
+}
