@@ -10,5 +10,6 @@ public:
 	~Player();
 
 	void move(SKeyEvent KeyEvent[K_COUNT]);
+	void updateHeight(double g_dElapsedTime);
 
 };
