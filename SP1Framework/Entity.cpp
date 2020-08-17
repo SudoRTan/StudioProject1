@@ -2,7 +2,7 @@
 #include <thread>
 #include <chrono>
 
-Entity::Entity() 
+Entity::Entity(): health{0}, damage{0}
 {
 	position.setX(0);
 	position.setY(0);
