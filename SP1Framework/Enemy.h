@@ -1,12 +1,12 @@
 #pragma once
 #include "Entity.h"
-//#include "Position.h"
+#include "Position.h"
 
 class Enemy :
 	public Entity
 {
 private:
-	//Position pos;
+	Position enemypos;
 public:
 	Enemy();
 	~Enemy();

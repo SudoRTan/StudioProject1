@@ -2,7 +2,8 @@
 
 Entity::Entity()
 {
-
+	position.setX(0);
+	position.setY(0);
 }
 
 Entity::~Entity()
