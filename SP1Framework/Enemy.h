@@ -6,12 +6,12 @@ class Enemy :
 	public Entity
 {
 private:
-	bool IsPlayerHit;
+	int damagetaken;
 	Position enemypos;
 public:
 	Enemy();
 	~Enemy();
 	void Movement();
-	void PlayerContact(Position playerpos);
+	int PlayerContact(Position playerpos);
 };
 
