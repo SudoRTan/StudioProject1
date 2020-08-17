@@ -20,6 +20,7 @@ public:
 	//Renders map to console
 	void renderMap(Console& console);
 
-
+	//Get map object
+	char getMap(int x, int y);
 };
 

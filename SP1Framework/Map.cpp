@@ -25,3 +25,8 @@ void Map::renderMap(Console& console) {
 	}
 }
 
+char Map::getMap(int x, int y) {
+	// Gets the map character from a specifc position
+	return mapArray[x][y];		
+}
+
