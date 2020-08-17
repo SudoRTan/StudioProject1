@@ -32,14 +32,11 @@ void Enemy::Movement()
 	//print out map with updated x and y values of enemy (in main or somewhere else idk)
 }
 
-void Enemy::PlayerContact()
+void Enemy::PlayerContact(Position playerpos)
 {
-	if ((playerpos.getX() == enemypos.getX()) && (player.posY() == enemypos.getY())) // check if player moves over collectible
+	if ((playerpos.getX() == enemypos.getX()) && (playerpos.getY() == enemypos.getY())) // check if player moves over collectible
 	{
-
-
-
-
 		IsPlayerHit = true;
+		// reduce health by some amount
 	}
 }
