@@ -1,4 +1,5 @@
 ﻿#include "Framework/console.h"
+#include "Player.h"
 #include "colors.h"
 #pragma once
 
@@ -10,15 +11,20 @@ enum MapElements {
 class Map
 {
 private:
-	char mapArray[16][80];
+	int length;
+	int height;
+
+	char** mapArray;
 
 public:
 	//Constructor/Destructor
 	Map();
+	Map(int height, int length);
 	~Map();
 
 	//Renders map to console
 	void renderMap(Console& console);
+	void renderMap(Console& console, Player& player);
 
 	//Get map object
 	char getMap(int x, int y);
