@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity()
+Entity::Entity() 
 {
 	position.setX(0);
 	position.setY(0);
