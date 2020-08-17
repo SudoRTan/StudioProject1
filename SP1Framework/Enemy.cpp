@@ -41,3 +41,6 @@ int Enemy::PlayerContact(Position playerpos) // pass in player's position object
 	}
 	return damagetaken;
 }
+
+// using setDamage function in Entity.h, setHealth(getHealth() - setDamage(PlayerContact()))
+// set current health = initial health - set damage(return statement in Enemy::PlayerContact())
