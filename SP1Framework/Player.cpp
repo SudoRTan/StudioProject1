@@ -24,7 +24,9 @@ void Player::move(SKeyEvent KeyEvent[K_COUNT]) {
 		position.setX(position.getX() + 1);
 	}
 	if (KeyEvent[K_UP].keyReleased) {
-		jumpHeight = 3;
+		if (jumpHeight == 0){
+			jumpHeight = 3;
+		}
 	}
 }
 
@@ -40,6 +42,30 @@ void Player::updateHeight(double g_dElapsedTime) {
 		lastJumpTime = g_dElapsedTime;
 
 	}
+
+}
+
+void Player::renderPlayer(Console& console) {
+	int playerX = getPositionX();
+	int playerY = getPositionY();
+
+	//16x80
+
+	int mapOffsetX = playerX - 80 / 2;
+	int mapOffsetY = playerY - 16 / 2;
+
+	if (mapOffsetX < 0) {
+		mapOffsetX = 0;
+	}
+	if (mapOffsetY < 0) {
+		mapOffsetY = 0;
+	}
+
+	if (mapOffsetX + 80 > 128) {
+		mapOffsetX = 128 - 80;
+	}
+
+	console.writeToBuffer(playerX - mapOffsetX, 24- (playerY - mapOffsetY) , '9', FG_BLACK + BG_GRAY);
 
 }
 

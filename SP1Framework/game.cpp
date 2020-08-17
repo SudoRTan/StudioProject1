@@ -23,7 +23,7 @@ EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 Console g_Console(80, 25, "SP1 Framework");
 
 //Map Object
-Map map;
+Map map(16,128);
 
 //Player Object
 Player player;
@@ -336,7 +336,7 @@ void renderSplashScreen()  // renders the splash screen
 void renderGame()
 {
     renderMap();        // renders the map to the buffer first
-    map.renderMap(g_Console);
+    map.renderMap(g_Console,player);
     renderCharacter();  // renders the character into the buffer
 }
 
@@ -360,8 +360,7 @@ void renderMap()
 
 void renderCharacter()
 {
-
-    g_Console.writeToBuffer(player.getPositionX(), 24-player.getPositionY(), '9',FG_BLACK+BG_GRAY);
+    player.renderPlayer(g_Console);
     /*
     // Draw the location of the character
     WORD charColor = 0x0C;

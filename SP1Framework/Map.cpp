@@ -35,7 +35,12 @@ Map::Map(int height, int length) {
 		}
 	}
 	for (int i = 0; i < length; i++) {
-		mapArray[0][i] = (char)FLOOR;
+		if (i % 2 == 0) {
+			mapArray[0][i] = (char)FLOOR;
+		}
+		else {
+			mapArray[0][i] = (char)FLOOR + 1;
+		}
 	}
 }
 
@@ -64,6 +69,8 @@ void Map::renderMap(Console& console, Player& player) {
 	int playerY = player.getPositionY();
 
 	//16x80
+
+	
 	int mapOffsetX = playerX - 80 / 2;
 	int mapOffsetY = playerY - 16 / 2;
 	
@@ -73,6 +80,14 @@ void Map::renderMap(Console& console, Player& player) {
 	if (mapOffsetY < 0) {
 		mapOffsetY = 0;
 	}
+	if (mapOffsetX + 80 > length) {
+		mapOffsetX = length-80;
+	}
+
+	console.writeToBuffer(0, 4, (char)48 + playerX, FG_BLACK + BG_WHITE);
+	console.writeToBuffer(0, 5, (char)48 + playerY, FG_BLACK + BG_WHITE);
+	console.writeToBuffer(0, 6, (char)48+mapOffsetX, FG_BLACK + BG_WHITE);
+	console.writeToBuffer(0, 7, (char)48+mapOffsetY, FG_BLACK + BG_WHITE);
 
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < length; j++) {
