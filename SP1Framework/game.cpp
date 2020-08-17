@@ -254,6 +254,7 @@ void moveCharacter()
         //Beep(1440, 30);
         g_sChar.m_cLocation.Y++;
         //pPlayer->jump()
+        //pPlayer->drop()
     }
     if (g_skKeyEvent[K_RIGHT].keyDown && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {

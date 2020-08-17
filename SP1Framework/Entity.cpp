@@ -18,6 +18,16 @@ Position Entity::getPosition()
 	return position;
 }
 
+int Entity::getHealth()
+{
+	return health;
+}
+
+int Entity::getDamage()
+{
+	return damage;
+}
+
 void Entity::moveLeft()
 {
 	position.setX(position.getX() - 1);
@@ -39,10 +49,15 @@ void Entity::jump(int jumpHeight)
 
 void Entity::drop()
 {
-
+	position.setY(position.getY() - 1);
 }
 
-void Entity::drop(int platformX, int platformY)
+void Entity::setHealth(int newHealth)
 {
-	
+	health = newHealth;
+}
+
+void Entity::setDamage(int newDamage)
+{
+	damage = newDamage;
 }

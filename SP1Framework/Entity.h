@@ -6,11 +6,16 @@ public:
 	Entity();
 	~Entity();
 	Position getPosition();
+	int getHealth();
+	int getDamage();
 protected:
 	Position position;
+	int health;
+	int damage;
 	void moveLeft();
 	void moveRight();
 	void jump(int jumpHeight);
 	void drop();
-	void drop(int platformX, int platformY);
+	void setHealth(int newHealth);
+	void setDamage(int newDamage);
 };
