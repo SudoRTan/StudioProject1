@@ -12,6 +12,6 @@ public:
 	Enemy();
 	~Enemy();
 	void Movement();
-	void PlayerContact();
+	void PlayerContact(Position playerpos);
 };
 
