@@ -3,8 +3,8 @@
 Collectible::Collectible()
 {
 	isCollected = false;
-	collectiblepos.setX(4);
-	collectiblepos.setY(4);
+	collectiblepos.setX(7);
+	collectiblepos.setY(7);
 }
 
 Collectible::~Collectible()

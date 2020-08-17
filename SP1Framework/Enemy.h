@@ -6,10 +6,12 @@ class Enemy :
 	public Entity
 {
 private:
+	bool IsPlayerHit;
 	Position enemypos;
 public:
 	Enemy();
 	~Enemy();
 	void Movement();
+	void PlayerContact();
 };
 
