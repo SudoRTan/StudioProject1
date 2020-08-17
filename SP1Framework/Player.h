@@ -3,5 +3,6 @@
 class Player :
 	public Entity
 {
+	Player();
+	~Player();
 };
-
