@@ -13,9 +13,14 @@ Entity::~Entity()
 
 }
 
-Position Entity::getPosition()
+int Entity::getPositionX()
 {
-	return position;
+	return position.getX();
+}
+
+int Entity::getPositionY()
+{
+	return position.getY();
 }
 
 int Entity::getHealth()

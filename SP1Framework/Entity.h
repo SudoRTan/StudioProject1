@@ -5,7 +5,8 @@ class Entity
 public:
 	Entity();
 	~Entity();
-	Position getPosition();
+	int getPositionX();
+	int getPositionY();
 	int getHealth();
 	int getDamage();
 protected:
