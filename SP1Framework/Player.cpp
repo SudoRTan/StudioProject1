@@ -23,7 +23,7 @@ void Player::move(SKeyEvent KeyEvent[K_COUNT]) {
 	if (KeyEvent[K_RIGHT].keyDown) {
 		position.setX(position.getX() + 1);
 	}
-	if (KeyEvent[K_UP].keyReleased) {
+	if (KeyEvent[K_UP].keyDown&&position.getY()==1) {
 		if (jumpHeight == 0){
 			jumpHeight = 3;
 		}
@@ -31,13 +31,13 @@ void Player::move(SKeyEvent KeyEvent[K_COUNT]) {
 }
 
 void Player::updateHeight(double g_dElapsedTime) {
-	if (g_dElapsedTime - lastJumpTime > 0.2 && jumpHeight!=0) {
+	if (g_dElapsedTime - lastJumpTime > 0.06 && jumpHeight!=0) {
 		position.setY(position.getY() + 1);
 
 		lastJumpTime = g_dElapsedTime;
 		jumpHeight--;
 	}
-	else if (position.getY() != 1 && g_dElapsedTime - lastJumpTime > 0.2) {
+	else if (position.getY() != 1 && g_dElapsedTime - lastJumpTime > 0.06) {
 		position.setY(position.getY() - 1);
 		lastJumpTime = g_dElapsedTime;
 
