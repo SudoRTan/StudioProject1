@@ -2,6 +2,9 @@
 class Position
 {
 public:
+	Position();
+	~Position();
+
 	int getX();
 	int getY();
 	void setX(int newX);
