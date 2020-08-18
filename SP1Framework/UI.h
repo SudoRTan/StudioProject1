@@ -1,20 +1,16 @@
 #pragma once
+#include "Player.h"
 using namespace std;
 
 class UI
 {
  public:
-		int Health;
-		int Maxhealth = 100;
-		unsigned int getHealth;
-	
-    int UI::getMaxHealth;
-	int UI::setMaxHealth;
-
-	
-
-
-
+	 //Constructor & Destructor
+	 UI();
+	 ~UI();
+	 int HealthBar(Player& player);
+	 void MaxHealth();
+	 //int HealthReduce();
 	
 };
 
