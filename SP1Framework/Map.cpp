@@ -108,8 +108,10 @@ The 1st section pertains to reading the .txt file and getting the length & heigh
 
 	const int yOffset = 9;
 
-	for (int h = 0; h < textheight; h++) {
-		for (int l = 0; l < textlength; l++) {
+	for (int h = 0; h < textheight; h++) 
+	{
+		for (int l = 0; l < textlength; l++) 
+		{
 			console.writeToBuffer(l, h + yOffset, mapArray[h][l], BG_CYAN + FG_LIGHTMAGENTA);
 		}
 	}
