@@ -22,5 +22,8 @@ public:
 
 	//Get map object
 	char getMap(int x, int y);
+
+	//Read map stage from .txt file
+	void LoadMap(std::string filename, Console& console);
 };
 
