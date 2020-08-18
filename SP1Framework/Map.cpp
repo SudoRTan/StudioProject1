@@ -49,10 +49,22 @@ Map::Map(int height, int length)
 			mapArray[0][i] = (char)FLOOR + 1;
 		}
 	}
-	mapArray[3][2] = (char)FLOOR;
-	mapArray[4][2] = (char)FLOOR;
-	mapArray[5][3] = (char)FLOOR;
-	mapArray[6][3] = (char)FLOOR;
+	setItem(3, 1, (char)FLOOR);
+	setItem(4, 1, (char)FLOOR);
+	setItem(5, 3, (char)FLOOR);
+	setItem(6, 3, (char)FLOOR);
+	setItem(7, 3, (char)FLOOR);
+	setItem(8, 5, (char)FLOOR);
+	setItem(9, 5, (char)FLOOR);
+	setItem(10, 5, (char)FLOOR);
+
+	setItem(15, 1, (char)FLOOR);
+	setItem(15, 2, (char)FLOOR);
+	setItem(15, 3, (char)FLOOR);
+	setItem(15, 4, (char)FLOOR);
+	setItem(15, 5, (char)FLOOR);
+
+
 	
 }
 
@@ -112,13 +124,24 @@ void Map::renderMap(Console& console, int x, int y) {
 	}
 }
 
-char Map::getMap(int x, int y)
+char Map::getItem(int x, int y)
 {
-	// Gets the map character from a specifc position
-	return mapArray[y][x];		
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return INVALID;
+	}
+	else {
+		// Gets the map character from a specifc position
+		return mapArray[y][x];
+	}
 }
 
-void Map::LoadMap(std::string filename, Console& console)
+void Map::setItem(int x, int y, char symbol) {
+	mapArray[y][x] = symbol;
+
+}
+
+
+void Map::loadMap(std::string filename, Console& console)
 {
 	/*
 This code consists of 2 sections in test2 which are seperately functional.

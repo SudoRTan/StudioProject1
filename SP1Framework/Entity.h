@@ -19,6 +19,9 @@ protected:
 	int damage;
 	int canJump;
 	double lastJumpTime;
+	double lastMovementTime;
+	double updateDelay;
+
 	void moveLeft(); //to be virtual, add movement range ltr(can make zoom zoom enemy)
 	void moveRight(); //to be virtual, add movement range ltr(can make zoom zoom enemy)
 	void jump(int jumpHeight); //to be virtual

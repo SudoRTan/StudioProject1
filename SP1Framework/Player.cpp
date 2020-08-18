@@ -6,6 +6,8 @@ Player::Player()
 	position.setY(1);
 	canJump = 0;
 	lastJumpTime = 0.0;
+	lastMovementTime = 0.0;
+	updateDelay = 0.03;
 }
 
 Player::~Player()
@@ -13,40 +15,81 @@ Player::~Player()
 
 }
 
-void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT])
-{
-	if (KeyEvent[K_LEFT].keyDown)
+void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
+{	
+	int newX = position.getX();
+	int newY = position.getY();
+
+
+
+	if (KeyEvent[K_LEFT].keyDown && g_dElapsedTime - lastMovementTime > updateDelay)
 	{
-		position.setX(position.getX() - 1);
+		newX--;
+
+		//position.setX(position.getX() - 1);
 	}
-	if (KeyEvent[K_RIGHT].keyDown)
+	if (KeyEvent[K_RIGHT].keyDown && g_dElapsedTime - lastMovementTime > updateDelay)
 	{
-		position.setX(position.getX() + 1);
+		newX++;
+
+		//position.setX(position.getX() + 1);
 	}
-	if (KeyEvent[K_UP].keyDown && map.getMap(position.getX(), position.getY() - 1)!=EMPTY )
+	if (KeyEvent[K_UP].keyOnce && map.getItem(position.getX(), position.getY() - 1)!=EMPTY )
 	{
 		if (canJump == 0)
 		{
 			canJump = 3;
 		}
 	}
+
+	if (map.getItem(newX, newY) == EMPTY) {
+		lastMovementTime = g_dElapsedTime;
+
+		map.setItem(position.getX(), position.getY(), EMPTY);
+
+		position.setX(newX);
+		position.setY(newY);
+
+		map.setItem(position.getX(), position.getY(), '9');
+
+	}
+
 }
 
 void Player::updateHeight(Map& map, double g_dElapsedTime)
 {
-	
+
+	int newX = position.getX();
+	int newY = position.getY();
+
 	if (g_dElapsedTime - lastJumpTime > 0.06 && canJump !=0)
 	{
-		position.setY(position.getY() + 1);
+		newY++;
 
 		lastJumpTime = g_dElapsedTime;
 		canJump--;
 	}
-	else if (map.getMap(position.getX(),position.getY()-1)==EMPTY &&  g_dElapsedTime - lastJumpTime > 0.06)
+	else if (g_dElapsedTime - lastJumpTime > 0.06)
 	{
-		position.setY(position.getY() - 1);
+		newY--;
+
 		lastJumpTime = g_dElapsedTime;
 	}
+
+	if (map.getItem(newX, newY) == EMPTY) {
+
+		map.setItem(position.getX(), position.getY(), EMPTY);
+
+		position.setX(newX);
+		position.setY(newY);
+
+		map.setItem(position.getX(), position.getY(), '9');
+
+	}
+	else if  ( newY != position.getY()){
+		canJump = 0;
+	}
+
 }
 
 void Player::renderPlayer(Console& console) {

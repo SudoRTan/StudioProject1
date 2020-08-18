@@ -3,6 +3,7 @@
 #include "colors.h"
 
 enum MapElements {
+	INVALID = 0,
 	EMPTY = ' ',
 	FLOOR = 178,
 	PLATFORM = 205,
@@ -27,9 +28,12 @@ public:
 	void renderMap(Console& console, int x, int y);
 
 	//Get map object
-	char getMap(int x, int y);
+	char getItem(int x, int y);
+
+	//Set map object
+	void setItem(int x, int y, char symbol);
 
 	//Read map stage from .txt file
-	void LoadMap(std::string filename, Console& console);
+	void loadMap(std::string filename, Console& console);
 };
 

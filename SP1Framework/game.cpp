@@ -72,8 +72,9 @@ void testGetInput(void) {
     SKeyEvent temp_skKeyEvent[K_COUNT];
     for (int i = 0; i < K_COUNT; i++)
     {
-        temp_skKeyEvent[i] = g_skKeyEvent[i];
+        temp_skKeyEvent[i].keyDown = g_skKeyEvent[i].keyDown;
     }
+
     g_skKeyEvent[K_UP].keyDown = isKeyPressed(VK_UP);
     g_skKeyEvent[K_DOWN].keyDown = isKeyPressed(VK_DOWN);
     g_skKeyEvent[K_LEFT].keyDown = isKeyPressed(VK_LEFT);
@@ -82,11 +83,17 @@ void testGetInput(void) {
     g_skKeyEvent[K_SPACE].keyDown = isKeyPressed(VK_SPACE);
             
     for (int i = 0; i < 4; i++) {
-        if (temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown == 0) {
-            g_skKeyEvent[i].keyReleased = temp_skKeyEvent[i].keyDown;
+        if (temp_skKeyEvent[i].keyDown && !g_skKeyEvent[i].keyDown) {
+            g_skKeyEvent[i].keyReleased = true;
         }
         else {
-            g_skKeyEvent[i].keyReleased = 0;
+            g_skKeyEvent[i].keyReleased = false;
+        }
+        if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown) {
+            g_skKeyEvent[i].keyOnce = true;
+        }
+        else {
+            g_skKeyEvent[i].keyOnce = false;
         }
     }
 }
@@ -107,9 +114,9 @@ void testGetInput(void) {
 void getInput( void )
 {
     // resets all the keyboard events
-    memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
+    //memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
     // then call the console to detect input from user
-    g_Console.readConsoleInput();   
+    //g_Console.readConsoleInput();   
     testGetInput();
 }
 
@@ -262,7 +269,7 @@ void moveCharacter()
 {    
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
-    player.move(map, g_skKeyEvent);
+    player.move(map, g_skKeyEvent, g_dElapsedTime);
     player.updateHeight(map, g_dElapsedTime);
 }
 void processUserInput()
@@ -325,7 +332,7 @@ void renderGame()
 {
     renderMap();        // renders the map to the buffer first
     map.renderMap(g_Console, player.getPositionX(), player.getPositionY());
-    renderCharacter();  // renders the character into the buffer
+    //renderCharacter();  // renders the character into the buffer
 }
 
 void renderMap()
