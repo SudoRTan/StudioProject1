@@ -49,6 +49,11 @@ Map::Map(int height, int length)
 			mapArray[0][i] = (char)FLOOR + 1;
 		}
 	}
+	mapArray[3][2] = (char)FLOOR;
+	mapArray[4][2] = (char)FLOOR;
+	mapArray[5][3] = (char)FLOOR;
+	mapArray[6][3] = (char)FLOOR;
+	
 }
 
 Map::~Map()
@@ -82,17 +87,17 @@ void Map::renderMap(Console& console, int x, int y) {
 	int mapOffsetX = playerX - 80 / 2;
 	int mapOffsetY = playerY - 16 / 2;
 	
-	if (mapOffsetX < 0)
-	{
+	if (mapOffsetX < 0){
 		mapOffsetX = 0;
 	}
-	if (mapOffsetY < 0)
-	{
+	if (mapOffsetY < 0){
 		mapOffsetY = 0;
 	}
-	if (mapOffsetX + 80 > length)
-	{
-		mapOffsetX = length-80;
+	if (mapOffsetX + 80 > length){
+		mapOffsetX = length - 80;
+	}
+	if (mapOffsetY + 16 > height) {
+		mapOffsetY = height - 16;
 	}
 
 	console.writeToBuffer(0, 4, (char)48 + playerX, FG_BLACK + BG_WHITE);
@@ -100,10 +105,8 @@ void Map::renderMap(Console& console, int x, int y) {
 	console.writeToBuffer(0, 6, (char)48+mapOffsetX, FG_BLACK + BG_WHITE);
 	console.writeToBuffer(0, 7, (char)48+mapOffsetY, FG_BLACK + BG_WHITE);
 
-	for (int i = 0; i < height; i++)
-	{
-		for (int j = 0; j < length; j++)
-		{
+	for (int i = 0; i < height; i++){
+		for (int j = 0; j < length; j++){
 			console.writeToBuffer(j, 24 - i, mapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
 		}
 	}

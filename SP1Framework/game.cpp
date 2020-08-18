@@ -262,7 +262,7 @@ void moveCharacter()
 {    
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
-    player.move(g_skKeyEvent);
+    player.move(map, g_skKeyEvent);
     player.updateHeight(map, g_dElapsedTime);
 }
 void processUserInput()

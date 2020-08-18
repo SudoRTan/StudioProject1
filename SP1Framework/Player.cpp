@@ -13,7 +13,7 @@ Player::~Player()
 
 }
 
-void Player::move(SKeyEvent KeyEvent[K_COUNT])
+void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT])
 {
 	if (KeyEvent[K_LEFT].keyDown)
 	{
@@ -23,7 +23,7 @@ void Player::move(SKeyEvent KeyEvent[K_COUNT])
 	{
 		position.setX(position.getX() + 1);
 	}
-	if (KeyEvent[K_UP].keyDown&&position.getY()==1)
+	if (KeyEvent[K_UP].keyDown && map.getMap(position.getX(), position.getY() - 1)!=EMPTY )
 	{
 		if (canJump == 0)
 		{
@@ -67,6 +67,9 @@ void Player::renderPlayer(Console& console) {
 
 	if (mapOffsetX + 80 > 128) {
 		mapOffsetX = 128 - 80;
+	}
+	if (mapOffsetY + 16 > 16) {
+		mapOffsetY = 16 - 16;
 	}
 
 	console.writeToBuffer(playerX - mapOffsetX, 24- (playerY - mapOffsetY) , '9', FG_BLACK + BG_GRAY);

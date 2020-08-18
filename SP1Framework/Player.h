@@ -12,7 +12,7 @@ public:
 	Player();
 	~Player();
 
-	void move(SKeyEvent KeyEvent[K_COUNT]);
+	void move(Map& map,SKeyEvent KeyEvent[K_COUNT]);
 	void updateHeight(Map& map, double g_dElapsedTime);
 	void renderPlayer(Console& console);
 };
