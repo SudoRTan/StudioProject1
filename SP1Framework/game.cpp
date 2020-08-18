@@ -9,7 +9,6 @@
 #include <iomanip>
 #include <sstream>
 
-
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 SKeyEvent g_skKeyEvent[K_COUNT];
@@ -71,7 +70,8 @@ void shutdown( void )
 
 void testGetInput(void) {
     SKeyEvent temp_skKeyEvent[K_COUNT];
-    for (int i = 0; i < K_COUNT; i++) {
+    for (int i = 0; i < K_COUNT; i++)
+    {
         temp_skKeyEvent[i] = g_skKeyEvent[i];
     }
     g_skKeyEvent[K_UP].keyDown = isKeyPressed(VK_UP);
@@ -81,17 +81,14 @@ void testGetInput(void) {
     g_skKeyEvent[K_ESCAPE].keyDown = isKeyPressed(VK_ESCAPE);
     g_skKeyEvent[K_SPACE].keyDown = isKeyPressed(VK_SPACE);
             
-
     for (int i = 0; i < 4; i++) {
         if (temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown == 0) {
             g_skKeyEvent[i].keyReleased = temp_skKeyEvent[i].keyDown;
         }
         else {
             g_skKeyEvent[i].keyReleased = 0;
-            
         }
     }
-
 }
 
 //--------------------------------------------------------------
@@ -109,17 +106,12 @@ void testGetInput(void) {
 //--------------------------------------------------------------
 void getInput( void )
 {
-    
     // resets all the keyboard events
     memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
     // then call the console to detect input from user
     g_Console.readConsoleInput();   
     testGetInput();
-
-    
 }
-
-
 
 //--------------------------------------------------------------
 // Purpose  : This is the handler for the keyboard input. Whenever there is a keyboard event, this function will be called.
@@ -253,7 +245,6 @@ void update(double dt)
     }
 }
 
-
 void splashScreenWait()    // waits for time to pass in splash screen
 {
     if (g_dElapsedTime > 3.0) // wait for 3 seconds to switch to game mode, else do nothing
@@ -273,40 +264,6 @@ void moveCharacter()
     // providing a beep sound whenver we shift the character
     player.move(g_skKeyEvent);
     player.updateHeight(g_dElapsedTime);
-
-    /*
-    if (g_skKeyEvent[K_UP].keyDown && g_sChar.m_cLocation.Y > 0)
-    {
-        //Beep(1440, 30);
-        g_sChar.m_cLocation.Y--;
-        //pPlayer->drop()
-    }
-    if (g_skKeyEvent[K_LEFT].keyDown && g_sChar.m_cLocation.X > 0)
-    {
-        //Beep(1440, 30);
-        g_sChar.m_cLocation.X--;
-        //pPlayer->moveLeft()
-    }
-    if (g_skKeyEvent[K_DOWN].keyDown && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
-    {
-        //Beep(1440, 30);
-        g_sChar.m_cLocation.Y++;
-        //pPlayer->jump()
-        //pPlayer->drop()   
-    }
-    if (g_skKeyEvent[K_RIGHT].keyDown && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
-    {
-        //Beep(1440, 30);
-        g_sChar.m_cLocation.X++;
-        //pPlayer->moveRight()
-    }
-    if (g_skKeyEvent[K_SPACE].keyDown)
-    {
-        g_sChar.m_bActive = !g_sChar.m_bActive;
-        //add a pew pew command here
-    }
-    */
-   
 }
 void processUserInput()
 {
@@ -378,7 +335,6 @@ void renderMap()
         0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
         0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
     };
-
     COORD c;
     for (int i = 0; i < 12; ++i)
     {
@@ -495,8 +451,4 @@ void renderInputEvents()
     default:        
         break;
     }
-    
 }
-
-
-
