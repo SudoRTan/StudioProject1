@@ -109,13 +109,14 @@ void testGetInput(void) {
 //--------------------------------------------------------------
 void getInput( void )
 {
-    testGetInput();
-    /*
+    
     // resets all the keyboard events
     memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
     // then call the console to detect input from user
     g_Console.readConsoleInput();   
-    */
+    testGetInput();
+
+    
 }
 
 
