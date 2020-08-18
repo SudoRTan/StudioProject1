@@ -1,5 +1,27 @@
 #include "Map.h"
-#include <fstream>
+
+int getSmaller(int first, int second) {
+	if (first > second)
+		return second;
+	else
+		return first;
+}
+
+
+char** createArray(int row, int column) {
+
+	char** array = new char* [row];
+	for (int i = 0; i < row; ++i)
+		array[i] = new char[column];
+
+	for (int i = 0; i < row; i++) {
+		for (int j = 0; j < column; j++) {
+			array[i][j] = 'x';
+		}
+	}
+	return array;
+}
+
 
 Map::Map()
 {
@@ -64,7 +86,59 @@ Map::Map(int height, int length)
 	setItem(15, 4, (char)FLOOR);
 	setItem(15, 5, (char)FLOOR);
 
+}
 
+Map::Map(std::string fileName)
+{
+	height = 0;
+	length = 0;
+
+	std::string line = "";
+	int lines = 0;
+	int columns = 0;
+
+	std::ifstream file(fileName);
+
+	if (file.is_open()) {
+		while (!file.eof()) {
+			getline(file, line);
+			int lengthOfLine = size(line);
+
+			if (lengthOfLine > columns) {
+				columns = lengthOfLine;
+			}
+			lines++;
+		}
+
+		file.clear();
+		file.seekg(0, std::ios::beg);
+
+		height = lines;
+		length = columns;
+
+		mapArray = createArray(lines, columns);
+
+		int readingLine = height-1;
+		while (!file.eof()) {
+			getline(file, line);
+			int lengthOfLine = size(line);
+
+			for (int i = 0; i < lengthOfLine; i++) {
+				mapArray[readingLine][i] = line[i];
+			}
+
+			if (lengthOfLine != length) {
+				for (int i = lengthOfLine; i < length; i++) {
+					mapArray[readingLine][i] = (char)EMPTY ;
+				}
+			}
+			readingLine--;
+
+		}
+
+	}
+
+	file.close();
 	
 }
 
@@ -99,17 +173,19 @@ void Map::renderMap(Console& console, int x, int y) {
 	int mapOffsetX = playerX - 80 / 2;
 	int mapOffsetY = playerY - 16 / 2;
 	
-	if (mapOffsetX < 0){
-		mapOffsetX = 0;
-	}
-	if (mapOffsetY < 0){
-		mapOffsetY = 0;
-	}
-	if (mapOffsetX + 80 > length){
+
+
+	if (mapOffsetX + 80 > length) {
 		mapOffsetX = length - 80;
 	}
 	if (mapOffsetY + 16 > height) {
 		mapOffsetY = height - 16;
+	}
+		if (mapOffsetX < 0) {
+		mapOffsetX = 0;
+	}
+	if (mapOffsetY < 0) {
+		mapOffsetY = 0;
 	}
 
 	console.writeToBuffer(0, 4, (char)48 + playerX, FG_BLACK + BG_WHITE);
@@ -117,8 +193,8 @@ void Map::renderMap(Console& console, int x, int y) {
 	console.writeToBuffer(0, 6, (char)48+mapOffsetX, FG_BLACK + BG_WHITE);
 	console.writeToBuffer(0, 7, (char)48+mapOffsetY, FG_BLACK + BG_WHITE);
 
-	for (int i = 0; i < height; i++){
-		for (int j = 0; j < length; j++){
+	for (int i = 0; i < getSmaller(16,height); i++){
+		for (int j = 0; j < getSmaller(80,length); j++){
 			console.writeToBuffer(j, 24 - i, mapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
 		}
 	}

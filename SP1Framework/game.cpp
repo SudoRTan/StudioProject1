@@ -22,7 +22,7 @@ EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 Console g_Console(80, 25, "SP1 Framework");
 
 //Map Object
-Map map(16,128);
+Map map("STAGE_1.txt");
 
 //Player Object
 Player player;

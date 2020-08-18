@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Framework/console.h"
 #include "colors.h"
+#include <fstream>
 
 enum MapElements {
 	INVALID = 0,
@@ -21,6 +22,7 @@ public:
 	//Constructor/Destructor
 	Map();
 	Map(int height, int length);
+	Map(std::string fileName);
 	~Map();
 
 	//Renders map to console
