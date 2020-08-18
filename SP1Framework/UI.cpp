@@ -1,12 +1,45 @@
+#include <iostream>
 #include "UI.h"
+#include "Entity.h"
+using namespace std;
 
-cout << Health + '/' + Maxhealth;
-float ShowHealth = float(this->getHealth()) / (float(this->getMaxHealth() / 10));
-float HiddenHealth = 10 - ShowHealth
+
+void UI::MaxHealth()
 {
-	for (int i = 0, i < ShowHealth, i++)
+	int Maxhealth = 100;
+
+};
+	
+/*int UI::HealthReduce()
+{
+
+	int HealthRemaining = - 2;
+};*/
+
+UI::UI()
+{
+	
+}
+
+
+UI::~UI()
+{
+ 
+}
+
+int UI::HealthBar(Player& player)
+{
+	cout << "Health:";
+
+	float ShowHealth = player.getHealth() / 10;
+	float HiddenHealth = 10 - ShowHealth;
+	
+	{
+		for (int i = 0; i < int(ShowHealth); i++);
 		cout << '[0]';
-	for (int i = 0, i < HideHealth, i++)
+		for (int i = 0; i < int(HiddenHealth); i++);
 		cout << '[]';
+
+	};
 
 };

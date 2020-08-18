@@ -4,7 +4,7 @@
 #include "game.h"
 #include "Framework\console.h"
 #include "Map.h"
-//#include "Player.h"
+#include "Player.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -23,7 +23,10 @@ EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 Console g_Console(80, 25, "SP1 Framework");
 
 //Map Object
-Map map;
+Map map(16,128);
+
+//Player Object
+Player player;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -66,6 +69,31 @@ void shutdown( void )
     g_Console.clearBuffer();
 }
 
+void testGetInput(void) {
+    SKeyEvent temp_skKeyEvent[K_COUNT];
+    for (int i = 0; i < K_COUNT; i++) {
+        temp_skKeyEvent[i] = g_skKeyEvent[i];
+    }
+    g_skKeyEvent[K_UP].keyDown = isKeyPressed(VK_UP);
+    g_skKeyEvent[K_DOWN].keyDown = isKeyPressed(VK_DOWN);
+    g_skKeyEvent[K_LEFT].keyDown = isKeyPressed(VK_LEFT);
+    g_skKeyEvent[K_RIGHT].keyDown = isKeyPressed(VK_RIGHT);
+    g_skKeyEvent[K_ESCAPE].keyDown = isKeyPressed(VK_ESCAPE);
+    g_skKeyEvent[K_SPACE].keyDown = isKeyPressed(VK_SPACE);
+            
+
+    for (int i = 0; i < 4; i++) {
+        if (temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown == 0) {
+            g_skKeyEvent[i].keyReleased = temp_skKeyEvent[i].keyDown;
+        }
+        else {
+            g_skKeyEvent[i].keyReleased = 0;
+            
+        }
+    }
+
+}
+
 //--------------------------------------------------------------
 // Purpose  : Get all the console input events
 //            This function sets up the keyboard and mouse input from the console.
@@ -81,11 +109,16 @@ void shutdown( void )
 //--------------------------------------------------------------
 void getInput( void )
 {
+    testGetInput();
+    /*
     // resets all the keyboard events
     memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
     // then call the console to detect input from user
-    g_Console.readConsoleInput();    
+    g_Console.readConsoleInput();   
+    */
 }
+
+
 
 //--------------------------------------------------------------
 // Purpose  : This is the handler for the keyboard input. Whenever there is a keyboard event, this function will be called.
@@ -101,7 +134,7 @@ void getInput( void )
 // Output   : void
 //--------------------------------------------------------------
 void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
-{    
+{
     switch (g_eGameState)
     {
     case S_SPLASHSCREEN: // don't handle anything for the splash screen
@@ -237,6 +270,10 @@ void moveCharacter()
 {    
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
+    player.move(g_skKeyEvent);
+    player.updateHeight(g_dElapsedTime);
+
+    /*
     if (g_skKeyEvent[K_UP].keyDown && g_sChar.m_cLocation.Y > 0)
     {
         //Beep(1440, 30);
@@ -267,7 +304,7 @@ void moveCharacter()
         g_sChar.m_bActive = !g_sChar.m_bActive;
         //add a pew pew command here
     }
-
+    */
    
 }
 void processUserInput()
@@ -329,8 +366,8 @@ void renderSplashScreen()  // renders the splash screen
 void renderGame()
 {
     renderMap();        // renders the map to the buffer first
+    map.renderMap(g_Console,player);
     renderCharacter();  // renders the character into the buffer
-    map.renderMap(g_Console);
 }
 
 void renderMap()
@@ -353,6 +390,8 @@ void renderMap()
 
 void renderCharacter()
 {
+    player.renderPlayer(g_Console);
+    /*
     // Draw the location of the character
     WORD charColor = 0x0C;
     if (g_sChar.m_bActive)
@@ -360,6 +399,7 @@ void renderCharacter()
         charColor = 0x0A;
     }
     g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
+    */
 }
 
 void renderFramerate()
