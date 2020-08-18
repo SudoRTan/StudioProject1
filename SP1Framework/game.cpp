@@ -263,7 +263,7 @@ void moveCharacter()
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
     player.move(g_skKeyEvent);
-    player.updateHeight(g_dElapsedTime);
+    player.updateHeight(map, g_dElapsedTime);
 }
 void processUserInput()
 {
@@ -324,7 +324,7 @@ void renderSplashScreen()  // renders the splash screen
 void renderGame()
 {
     renderMap();        // renders the map to the buffer first
-    map.renderMap(g_Console,player);
+    map.renderMap(g_Console, player.getPositionX(), player.getPositionY());
     renderCharacter();  // renders the character into the buffer
 }
 

@@ -1,5 +1,8 @@
 #pragma once
 #include "Position.h"
+#include "Map.h"
+
+
 class Entity
 {
 public:
@@ -14,7 +17,7 @@ protected:
 	Position position;
 	int health;
 	int damage;
-	int jumpHeight;
+	int canJump;
 	double lastJumpTime;
 	void moveLeft(); //to be virtual, add movement range ltr(can make zoom zoom enemy)
 	void moveRight(); //to be virtual, add movement range ltr(can make zoom zoom enemy)

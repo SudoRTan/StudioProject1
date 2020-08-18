@@ -32,7 +32,7 @@ Map::Map(int height, int length) {
 
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < length; j++) {
-			mapArray[i][j] = ' ';
+			mapArray[i][j] = EMPTY;
 		}
 	}
 	for (int i = 0; i < length; i++) {
@@ -65,10 +65,10 @@ void Map::renderMap(Console& console) {
 	}
 }
 
-void Map::renderMap(Console& console, Player& player) {
-	int playerX = player.getPositionX();
-	int playerY = player.getPositionY();
-
+void Map::renderMap(Console& console, int x, int y) {
+	int playerX = x;
+	
+	int playerY = y;
 	//16x80
 
 	
@@ -100,7 +100,7 @@ void Map::renderMap(Console& console, Player& player) {
 
 char Map::getMap(int x, int y) {
 	// Gets the map character from a specifc position
-	return mapArray[x][y];		
+	return mapArray[y][x];		
 }
 
 void Map::LoadMap(std::string filename, Console& console)

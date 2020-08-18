@@ -2,7 +2,7 @@
 #include <thread>
 #include <chrono>
 
-Entity::Entity(): health{0}, damage{0}, jumpHeight{0}, lastJumpTime{0}
+Entity::Entity(): health{0}, damage{0}, canJump{0}, lastJumpTime{0}
 {
 	position.setX(0);
 	position.setY(0);

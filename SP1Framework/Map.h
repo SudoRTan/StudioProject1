@@ -1,11 +1,11 @@
-﻿#include "Framework/console.h"
-#include "Player.h"
+﻿#pragma once
+#include "Framework/console.h"
 #include "colors.h"
-#pragma once
 
 enum MapElements {
 	EMPTY = ' ',
 	FLOOR = 178,
+	PLATFORM = 205,
 };
 
 class Map
@@ -24,7 +24,7 @@ public:
 
 	//Renders map to console
 	void renderMap(Console& console);
-	void renderMap(Console& console, Player& player);
+	void renderMap(Console& console, int x, int y);
 
 	//Get map object
 	char getMap(int x, int y);
