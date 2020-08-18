@@ -1,6 +1,7 @@
 #include "Position.h"
 
-Position::Position(){
+Position::Position()
+{
 	x = 1;
 	y = 1;
 }

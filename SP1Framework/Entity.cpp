@@ -2,7 +2,7 @@
 #include <thread>
 #include <chrono>
 
-Entity::Entity(): health{0}, damage{0}
+Entity::Entity(): health{0}, damage{0}, jumpHeight{0}, lastJumpTime{0}
 {
 	position.setX(0);
 	position.setY(0);
@@ -48,7 +48,6 @@ void Entity::jump(int jumpHeight)
 	for (int i = 0; i < 2; i++)
 	{
 		position.setY(position.getY() + 1);
-		std::this_thread::sleep_for(std::chrono::milliseconds(300));
 	}
 }
 

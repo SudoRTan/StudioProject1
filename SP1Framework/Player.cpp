@@ -13,36 +13,39 @@ Player::~Player()
 
 }
 
-
-
-
-void Player::move(SKeyEvent KeyEvent[K_COUNT]) {
-	if (KeyEvent[K_LEFT].keyDown) {
+void Player::move(SKeyEvent KeyEvent[K_COUNT])
+{
+	if (KeyEvent[K_LEFT].keyDown)
+	{
 		position.setX(position.getX() - 1);
 	}
-	if (KeyEvent[K_RIGHT].keyDown) {
+	if (KeyEvent[K_RIGHT].keyDown)
+	{
 		position.setX(position.getX() + 1);
 	}
-	if (KeyEvent[K_UP].keyDown&&position.getY()==1) {
-		if (jumpHeight == 0){
+	if (KeyEvent[K_UP].keyDown)
+	{
+		if (jumpHeight == 0)
+		{
 			jumpHeight = 3;
 		}
 	}
 }
 
-void Player::updateHeight(double g_dElapsedTime) {
-	if (g_dElapsedTime - lastJumpTime > 0.06 && jumpHeight!=0) {
+void Player::updateHeight(double g_dElapsedTime)
+{
+	if (g_dElapsedTime - lastJumpTime > 0.06 && jumpHeight!=0)
+	{
 		position.setY(position.getY() + 1);
 
 		lastJumpTime = g_dElapsedTime;
 		jumpHeight--;
 	}
-	else if (position.getY() != 1 && g_dElapsedTime - lastJumpTime > 0.06) {
+	else if (position.getY() != 1 && g_dElapsedTime - lastJumpTime > 0.06)
+	{
 		position.setY(position.getY() - 1);
 		lastJumpTime = g_dElapsedTime;
-
 	}
-
 }
 
 void Player::renderPlayer(Console& console) {
@@ -66,6 +69,5 @@ void Player::renderPlayer(Console& console) {
 	}
 
 	console.writeToBuffer(playerX - mapOffsetX, 24- (playerY - mapOffsetY) , '9', FG_BLACK + BG_GRAY);
-
 }
 

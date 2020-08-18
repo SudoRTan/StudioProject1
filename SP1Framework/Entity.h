@@ -22,5 +22,4 @@ protected:
 	void drop(); //to be virtual
 	void setHealth(int newHealth);
 	void setDamage(int newDamage);
-
 };

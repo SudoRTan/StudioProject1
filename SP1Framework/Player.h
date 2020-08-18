@@ -14,5 +14,4 @@ public:
 	void move(SKeyEvent KeyEvent[K_COUNT]);
 	void updateHeight(double g_dElapsedTime);
 	void renderPlayer(Console& console);
-
 };
