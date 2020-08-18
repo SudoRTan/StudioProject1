@@ -1,32 +1,38 @@
 #include "Map.h"
 #include <fstream>
 
-Map::Map() {
+Map::Map()
+{
 	height = 16;
 	length = 80;
 
 	mapArray = new char* [height];
-	for (int i = 0; i < height; i++) {
+	for (int i = 0; i < height; i++)
+	{
 		mapArray[i] = new char[length];
 	}
 
-
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < length; j++) {
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < length; j++)
+		{
 			mapArray[i][j] = ' ';
 		}
 	}
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < length; i++)
+	{
 		mapArray[0][i] = (char)FLOOR;
 	}
 }
 
-Map::Map(int height, int length) {
+Map::Map(int height, int length)
+{
 	this->height = height;
 	this->length = length;
 
 	mapArray = new char* [height];
-	for (int i = 0; i < height; i++) {
+	for (int i = 0; i < height; i++)
+	{
 		mapArray[i] = new char[length];
 	}
 
@@ -45,21 +51,23 @@ Map::Map(int height, int length) {
 	}
 }
 
-
-
-Map::~Map() {
-	for (int i = 0; i < height; i++) {
+Map::~Map()
+{
+	for (int i = 0; i < height; i++)
+	{
 		delete[] mapArray[i];
 	}
 	delete[] mapArray;
-
 }
 
-void Map::renderMap(Console& console) {
+void Map::renderMap(Console& console)
+{
 	const int yOffset = 9;
 
-	for (int i = 0; i < 16; i++) {
-		for (int j = 0; j < 80; j++) {
+	for (int i = 0; i < 16; i++)
+	{
+		for (int j = 0; j < 80; j++)
+		{
 			console.writeToBuffer(j, 24-i, mapArray[i][j],BG_CYAN+FG_LIGHTMAGENTA);
 		}
 	}
@@ -70,18 +78,20 @@ void Map::renderMap(Console& console, int x, int y) {
 	
 	int playerY = y;
 	//16x80
-
 	
 	int mapOffsetX = playerX - 80 / 2;
 	int mapOffsetY = playerY - 16 / 2;
 	
-	if (mapOffsetX < 0) {
+	if (mapOffsetX < 0)
+	{
 		mapOffsetX = 0;
 	}
-	if (mapOffsetY < 0) {
+	if (mapOffsetY < 0)
+	{
 		mapOffsetY = 0;
 	}
-	if (mapOffsetX + 80 > length) {
+	if (mapOffsetX + 80 > length)
+	{
 		mapOffsetX = length-80;
 	}
 
@@ -90,22 +100,23 @@ void Map::renderMap(Console& console, int x, int y) {
 	console.writeToBuffer(0, 6, (char)48+mapOffsetX, FG_BLACK + BG_WHITE);
 	console.writeToBuffer(0, 7, (char)48+mapOffsetY, FG_BLACK + BG_WHITE);
 
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < length; j++) {
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < length; j++)
+		{
 			console.writeToBuffer(j, 24 - i, mapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
 		}
 	}
 }
 
-
-char Map::getMap(int x, int y) {
+char Map::getMap(int x, int y)
+{
 	// Gets the map character from a specifc position
 	return mapArray[y][x];		
 }
 
 void Map::LoadMap(std::string filename, Console& console)
 {
-
 	/*
 This code consists of 2 sections in test2 which are seperately functional.
 The 1st section pertains to reading the .txt file and getting the length & height of the level from there.
@@ -164,13 +175,11 @@ The 1st section pertains to reading the .txt file and getting the length & heigh
 				map[row][col] = ' ';
 				break;
 			}
-
 			case '1':
 			{
 				map[row][col] = '@';
 				break;
 			}
-
 			// add more cases in future to 'render' other symbols on map like Enemy or Collectible to use values aside from 0 and 1
 			}
 		}

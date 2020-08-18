@@ -11,7 +11,8 @@ private:
 public:
 	Enemy();
 	~Enemy();
-	void Movement();
+	void LRMovement(); // for enemies on land moving left and right
+	void UDMovement(); // for flying enemies moving up and down
 	int PlayerContact(Position playerpos);
 };
 
