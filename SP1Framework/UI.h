@@ -1,6 +1,8 @@
 #pragma once
 #include "Player.h"
-using namespace std;
+#include "Framework/console.h"
+#include "Weapons.h"
+
 
 class UI
 {
@@ -8,7 +10,7 @@ class UI
 	 //Constructor & Destructor
 	 UI();
 	 ~UI();
-	 int HealthBar(Player& player);
+	 void HealthBar(Console& console, Player& player);
 	 void MaxHealth();
 	 //int HealthReduce();
 	
