@@ -195,10 +195,12 @@ void Map::renderMap(Console& console, int x, int y) {
 		mapOffsetY = 0;
 	}
 
+	/*
 	console.writeToBuffer(0, 4, (char)48 + playerX, FG_BLACK + BG_WHITE);
 	console.writeToBuffer(0, 5, (char)48 + playerY, FG_BLACK + BG_WHITE);
 	console.writeToBuffer(0, 6, (char)48+mapOffsetX, FG_BLACK + BG_WHITE);
 	console.writeToBuffer(0, 7, (char)48+mapOffsetY, FG_BLACK + BG_WHITE);
+	*/
 
 	for (int i = 0; i < getSmaller(16,height); i++){
 		for (int j = 0; j < getSmaller(80,length); j++){

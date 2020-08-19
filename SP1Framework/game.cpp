@@ -33,6 +33,12 @@ Player player;
 //UI Object
 UI ui;
 
+//Enemy Object(s)
+Enemy enemy;
+
+//UI Object
+UI ui;
+
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
 //            Initialize variables, allocate memory, load data from file, etc. 
@@ -353,6 +359,11 @@ void renderGame()
     //renderCharacter();  // renders the character into the buffer
 }
 
+void renderUI()
+{
+    // add ui.Function(g_Console) once UI code has been pushed.
+}
+
 void renderMap()
 {
 
@@ -461,7 +472,7 @@ void renderInputEvents()
         }
         else
         {
-            ss.str("Some Button Pressed");
+            //ss.str("Some Button Pressed");
             g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 3, ss.str(), 0x59);
         }
         break;
