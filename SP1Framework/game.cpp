@@ -5,6 +5,7 @@
 #include "Framework\console.h"
 #include "Map.h"
 #include "Player.h"
+#include "Enemy.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -26,6 +27,9 @@ Map map("STAGE_1.txt");
 
 //Player Object
 Player player;
+
+
+Enemy enemy;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function

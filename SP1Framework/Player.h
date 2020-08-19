@@ -10,6 +10,7 @@ class Player :
 {
 private:
 	int changeInHeight;
+	bool dropping;
 
 public:
 	Player();
@@ -18,5 +19,7 @@ public:
 	void move(Map& map,SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
 	void updateHeight(Map& map, double g_dElapsedTime);
 	void renderPlayer(Console& console);
+
+	char getItemBelow(Map& map);
 
 };
