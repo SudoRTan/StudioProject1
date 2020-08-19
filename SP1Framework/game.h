@@ -13,6 +13,8 @@ struct SKeyEvent
     bool keyDown;
     bool keyReleased;
     bool keyOnce;
+    bool keyTwice;
+    double timeSinceLastInput;
 };
 
 // struct to store mouse events

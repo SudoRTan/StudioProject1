@@ -82,18 +82,28 @@ void testGetInput(void) {
     g_skKeyEvent[K_ESCAPE].keyDown = isKeyPressed(VK_ESCAPE);
     g_skKeyEvent[K_SPACE].keyDown = isKeyPressed(VK_SPACE);
             
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < K_COUNT; i++) {
+
+
         if (temp_skKeyEvent[i].keyDown && !g_skKeyEvent[i].keyDown) {
             g_skKeyEvent[i].keyReleased = true;
         }
         else {
             g_skKeyEvent[i].keyReleased = false;
         }
-        if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown) {
-            g_skKeyEvent[i].keyOnce = true;
+        if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown && g_dElapsedTime - g_skKeyEvent[i].timeSinceLastInput <= 0.3) {
+            g_skKeyEvent[i].keyTwice = true;
         }
         else {
-            g_skKeyEvent[i].keyOnce = false;
+            g_skKeyEvent[i].keyTwice = false;
+
+            if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown) {
+                g_skKeyEvent[i].keyOnce = true;
+                g_skKeyEvent[i].timeSinceLastInput = g_dElapsedTime;
+            }
+            else {
+                g_skKeyEvent[i].keyOnce = false;
+            }
         }
     }
 }
@@ -409,7 +419,9 @@ void renderInputEvents()
             break;
         default: continue;
         }
-        if (g_skKeyEvent[i].keyDown)
+        if (g_skKeyEvent[i].keyTwice)
+            ss << key << " double";
+        else if (g_skKeyEvent[i].keyDown)
             ss << key << " pressed";
         else if (g_skKeyEvent[i].keyReleased)
             ss << key << " released";
