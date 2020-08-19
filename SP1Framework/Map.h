@@ -6,7 +6,7 @@
 enum MapElements {
 	INVALID = 0,
 	EMPTY = ' ',
-	FLOOR = 178,
+	FLOOR = 219,
 	PLATFORM = 205,
 };
 
