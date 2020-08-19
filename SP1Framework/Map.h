@@ -7,7 +7,7 @@ enum MapElements {
 	INVALID = 0,
 	EMPTY = ' ',
 	FLOOR = 219,
-	PLATFORM = 205,
+	PLATFORM = 45,
 };
 
 class Map
