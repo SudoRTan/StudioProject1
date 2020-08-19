@@ -9,6 +9,8 @@
 #include "UI.h"
 #include <iostream>
 #include <iomanip>
+#include <time.h>
+#include <stdlib.h>
 #include <sstream>
 
 double  g_dElapsedTime;
@@ -34,7 +36,7 @@ Player player(map.playerStartingPos.getX(), map.playerStartingPos.getY());
 UI ui;
 
 //Enemy Object(s)
-Enemy enemy;
+Enemy enemy(5,1);
 
 
 //--------------------------------------------------------------
@@ -46,6 +48,9 @@ Enemy enemy;
 //--------------------------------------------------------------
 void init( void )
 {
+    // Seeds randomness with time
+    srand((unsigned)time(NULL));
+
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
 
@@ -282,7 +287,8 @@ void updateGame()       // gameplay logic
 {
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
-                        // sound can be played here too.
+                // sound can be played here too.
+    enemy.random(map, g_dElapsedTime);
 }
 
 void moveCharacter()

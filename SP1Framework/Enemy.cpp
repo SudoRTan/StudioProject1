@@ -1,9 +1,5 @@
 #include "Enemy.h"
 
-#include <random>
-#include <time.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 Enemy::Enemy()
 {
@@ -11,12 +7,18 @@ Enemy::Enemy()
 	// test spawning of enemies on map using (5,4) as test case
 	enemypos.setX(5);
 	enemypos.setY(4);
+	lastMovementTime = 0.00;
+	updateDelay = 0.8;
 }
 
 Enemy::Enemy(int x, int y)
 {
-	enemypos.setX(x);
-	enemypos.setY(y);
+	position.setX(x);
+	position.setY(y);
+
+	lastMovementTime = 0.00;
+	updateDelay = 0.3;
+
 }
 
 Enemy::~Enemy()
@@ -38,8 +40,39 @@ void Enemy::PatrolMovement()
 	//print out map with updated x and y values of enemy (in main or somewhere else idk)
 }
 
-void Enemy::RandMovement()
+void Enemy::random(Map& map, double g_dElapsedTime)
 {
+	if (g_dElapsedTime - lastMovementTime > updateDelay) {
+		lastJumpTime = g_dElapsedTime;
+
+		int newX = position.getX();
+		int newY = position.getY();
+
+		switch (rand() % 2) {
+		case 0:
+			newX--;
+			break;
+
+		case 1:
+			newX++;
+			break;
+
+		default:
+			break;
+		}
+
+		if (map.getItem(newX, newY) == EMPTY) {
+			lastMovementTime = g_dElapsedTime;
+
+			map.setDefaultItem(position.getX(), position.getY());
+
+			position.setX(newX);
+			position.setY(newY);
+
+			map.setItem(position.getX(), position.getY(), 'E');
+		}
+	}
+	/*
 	for (int up = 0; up < 3; up++) // 3 is a temp number, change later or use different code for range of enemy movement
 	{
 		enemypos.setY(enemypos.getY() + 1); // call entity function to move up on map
@@ -50,6 +83,7 @@ void Enemy::RandMovement()
 	}
 
 	//print out map with updated x and y values of enemy (in main or somewhere else idk)
+	*/
 }
 
 int Enemy::PlayerContact(Position playerpos) // pass in player's position object into playerpos
@@ -136,7 +170,6 @@ void Enemy::patrol(Map& map, double g_dElapsedTime)
 {
 	int newX = enemypos.getX();
 	
-	srand((unsigned)time(0));
 	int direction = rand() % 3;
 	
 	switch (direction)
