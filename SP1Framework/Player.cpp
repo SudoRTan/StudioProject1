@@ -2,6 +2,7 @@
 
 Player::Player()
 {
+	health = 20;
 	position.setX(0);
 	position.setY(1);
 	canJump = 0;
@@ -10,6 +11,7 @@ Player::Player()
 	updateDelay = 0.03;
 	changeInHeight = 0;
 	dropping = false;
+	lastTouched = 0.0;
 }
 
 Player::~Player()
@@ -146,6 +148,22 @@ void Player::renderPlayer(Console& console) {
 	}
 
 	console.writeToBuffer(playerX - mapOffsetX, 24- (playerY - mapOffsetY) , '9', FG_BLACK + BG_GRAY);
+}
+
+void Player::touchEnemy(Enemy enemy, double g_dElapsedTime)
+{
+	if ((enemy.getPositionX() - position.getX() == 1 || enemy.getPositionX() - position.getX() == -1) && g_dElapsedTime - lastTouched > 0.5)
+	{
+		health = health - enemy.getDamage();
+		lastTouched = g_dElapsedTime;
+		//insert duck noises
+	}
+	else if ((enemy.getPositionY() - position.getY() == 1 || enemy.getPositionY() - position.getY() == -1) && lastTouched > 0.5)
+	{
+		health = health - enemy.getDamage();
+		lastTouched = g_dElapsedTime;
+		//insert goose noises
+	}
 }
 
 char Player::getItemBelow(Map& map) {
