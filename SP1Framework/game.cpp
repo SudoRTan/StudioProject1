@@ -5,6 +5,7 @@
 #include "Framework\console.h"
 #include "Map.h"
 #include "Player.h"
+#include "Enemy.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -22,10 +23,13 @@ EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 Console g_Console(80, 25, "SP1 Framework");
 
 //Map Object
-Map map("STAGE_1.txt");
+Map map("oopstage5.txt");
 
 //Player Object
 Player player;
+
+
+Enemy enemy;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function

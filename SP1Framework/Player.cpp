@@ -9,6 +9,7 @@ Player::Player()
 	lastMovementTime = 0.0;
 	updateDelay = 0.03;
 	changeInHeight = 0;
+	dropping = false;
 }
 
 Player::~Player()
@@ -26,15 +27,14 @@ void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 	if (KeyEvent[K_LEFT].keyDown && g_dElapsedTime - lastMovementTime > updateDelay)
 	{
 		newX--;
-
-		//position.setX(position.getX() - 1);
 	}
+
 	if (KeyEvent[K_RIGHT].keyDown && g_dElapsedTime - lastMovementTime > updateDelay)
 	{
 		newX++;
 
-		//position.setX(position.getX() + 1);
 	}
+
 	if (KeyEvent[K_UP].keyOnce && map.getItem(position.getX(), position.getY() - 1)!=EMPTY )
 	{
 		if (canJump == 0)
@@ -42,6 +42,12 @@ void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 			canJump = 3;
 		}
 	}
+
+	if (KeyEvent[K_DOWN].keyTwice) {
+		dropping = true;
+	}
+
+
 
 	if (map.getItem(newX, newY) == EMPTY) {
 		lastMovementTime = g_dElapsedTime;
@@ -58,8 +64,7 @@ void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 }
 
 void Player::updateHeight(Map& map, double g_dElapsedTime)
-{
-
+{	
 	int newX = position.getX();
 	int newY = position.getY();
 
@@ -69,46 +74,51 @@ void Player::updateHeight(Map& map, double g_dElapsedTime)
 
 		lastJumpTime = g_dElapsedTime;
 		canJump--;
-		changeInHeight = 1;
+		changeInHeight++;
+	
 	}
+	else if (dropping) {
+		newY--;
+		changeInHeight--;
+		
+	}
+
 	else if (g_dElapsedTime - lastJumpTime > 0.06)
 	{
 		newY--;
-
-		lastJumpTime = g_dElapsedTime;
-		
-		changeInHeight = -1;
+		lastJumpTime = g_dElapsedTime;	
+		changeInHeight--;
 	}
+	
+
 
 	char itemAtNewLocation = map.getItem(newX, newY);
 
 
 	if (itemAtNewLocation == EMPTY) {
-
 		map.setDefaultItem(position.getX(), position.getY());
-
 		position.setX(newX);
 		position.setY(newY);
-
 		map.setItem(position.getX(), position.getY(), '9');
-		changeInHeight = 0;
-
+	
 	}
-	else if (itemAtNewLocation == '-' && changeInHeight == 1) {
-
+	else if (itemAtNewLocation == PLATFORM && (dropping || changeInHeight > 0)) {
+		
 		map.setDefaultItem(position.getX(), position.getY());
-
 		position.setX(newX);
 		position.setY(newY);
-
 		map.setItem(position.getX(), position.getY(), '9');
-		changeInHeight = 0;
 
 	}
 
 	else if  ( newY != position.getY()){
 		canJump = 0;
 	}
+	
+	changeInHeight = 0;
+	dropping = false;
+
+
 
 }
 
@@ -138,3 +148,6 @@ void Player::renderPlayer(Console& console) {
 	console.writeToBuffer(playerX - mapOffsetX, 24- (playerY - mapOffsetY) , '9', FG_BLACK + BG_GRAY);
 }
 
+char Player::getItemBelow(Map& map) {
+	return map.getItem(position.getX(), position.getY());
+}
