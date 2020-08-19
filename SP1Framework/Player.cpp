@@ -8,6 +8,7 @@ Player::Player()
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
 	updateDelay = 0.03;
+	changeInHeight = 0;
 }
 
 Player::~Player()
@@ -45,7 +46,7 @@ void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 	if (map.getItem(newX, newY) == EMPTY) {
 		lastMovementTime = g_dElapsedTime;
 
-		map.setItem(position.getX(), position.getY(), EMPTY);
+		map.setDefaultItem(position.getX(), position.getY());
 
 		position.setX(newX);
 		position.setY(newY);
@@ -68,24 +69,43 @@ void Player::updateHeight(Map& map, double g_dElapsedTime)
 
 		lastJumpTime = g_dElapsedTime;
 		canJump--;
+		changeInHeight = 1;
 	}
 	else if (g_dElapsedTime - lastJumpTime > 0.06)
 	{
 		newY--;
 
 		lastJumpTime = g_dElapsedTime;
+		
+		changeInHeight = -1;
 	}
 
-	if (map.getItem(newX, newY) == EMPTY) {
+	char itemAtNewLocation = map.getItem(newX, newY);
 
-		map.setItem(position.getX(), position.getY(), EMPTY);
+
+	if (itemAtNewLocation == EMPTY) {
+
+		map.setDefaultItem(position.getX(), position.getY());
 
 		position.setX(newX);
 		position.setY(newY);
 
 		map.setItem(position.getX(), position.getY(), '9');
+		changeInHeight = 0;
 
 	}
+	else if (itemAtNewLocation == '-' && changeInHeight == 1) {
+
+		map.setDefaultItem(position.getX(), position.getY());
+
+		position.setX(newX);
+		position.setY(newY);
+
+		map.setItem(position.getX(), position.getY(), '9');
+		changeInHeight = 0;
+
+	}
+
 	else if  ( newY != position.getY()){
 		canJump = 0;
 	}

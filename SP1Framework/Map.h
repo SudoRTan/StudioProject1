@@ -17,6 +17,7 @@ private:
 	int height;
 
 	char** mapArray;
+	char** mapTemplate;
 
 public:
 	//Constructor/Destructor
@@ -35,7 +36,10 @@ public:
 	//Set map object
 	void setItem(int x, int y, char symbol);
 
+	void setDefaultItem(int x, int y);
+	
 	//Read map stage from .txt file
 	void loadMap(std::string filename, Console& console);
+
 };
 

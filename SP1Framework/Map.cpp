@@ -16,7 +16,7 @@ char** createArray(int row, int column) {
 
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < column; j++) {
-			array[i][j] = 'x';
+			array[i][j] = EMPTY;
 		}
 	}
 	return array;
@@ -117,6 +117,8 @@ Map::Map(std::string fileName)
 		length = columns;
 
 		mapArray = createArray(lines, columns);
+		mapTemplate = createArray(lines, columns);
+
 
 		int readingLine = height-1;
 		while (!file.eof()) {
@@ -125,11 +127,14 @@ Map::Map(std::string fileName)
 
 			for (int i = 0; i < lengthOfLine; i++) {
 				mapArray[readingLine][i] = line[i];
+				mapTemplate[readingLine][i] = line[i];
 			}
 
 			if (lengthOfLine != length) {
 				for (int i = lengthOfLine; i < length; i++) {
-					mapArray[readingLine][i] = (char)EMPTY ;
+					mapArray[readingLine][i] = (char)EMPTY;
+					mapTemplate[readingLine][i] = (char)EMPTY;
+
 				}
 			}
 			readingLine--;
@@ -147,8 +152,10 @@ Map::~Map()
 	for (int i = 0; i < height; i++)
 	{
 		delete[] mapArray[i];
+		delete[] mapTemplate[i];
 	}
 	delete[] mapArray;
+	delete[] mapTemplate;
 }
 
 void Map::renderMap(Console& console)
@@ -214,6 +221,10 @@ char Map::getItem(int x, int y)
 void Map::setItem(int x, int y, char symbol) {
 	mapArray[y][x] = symbol;
 
+}
+
+void Map::setDefaultItem(int x, int y) {
+	mapArray[y][x] = mapTemplate[y][x];
 }
 
 

@@ -8,6 +8,9 @@
 class Player :
 	public Entity
 {
+private:
+	int changeInHeight;
+
 public:
 	Player();
 	~Player();
@@ -15,4 +18,5 @@ public:
 	void move(Map& map,SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
 	void updateHeight(Map& map, double g_dElapsedTime);
 	void renderPlayer(Console& console);
+
 };
