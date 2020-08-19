@@ -10,9 +10,10 @@ private:
 	Position enemypos;
 public:
 	Enemy();
+	Enemy(int x, int y);
 	~Enemy();
-	void LRMovement(); // for enemies on land moving left and right
-	void UDMovement(); // for flying enemies moving up and down
+	void PatrolMovement(); // for enemies on land moving left and right
+	void RandMovement(); // for flying enemies moving up and down
 	int PlayerContact(Position playerpos);
 };
 
