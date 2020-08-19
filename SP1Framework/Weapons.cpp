@@ -3,6 +3,7 @@
 Weapons::Weapons()
 {
 	int ammo = 30;
+   
 }
 
 Weapons::~Weapons()
@@ -10,9 +11,9 @@ Weapons::~Weapons()
 
 }
 
-void Weapons::gun()
+void Weapons::gun(Player& player)
 {
-
+	
 
 }
 
@@ -25,23 +26,34 @@ int Weapons::shoot()
 
 int Weapons::reload()
 {
-	if (int(ammo) == 0)
+    if (int(ammo) == 0)
 	ammo = ammo + 30;
-	return ammo;
+    return ammo;
+	
 }
 
-	
-
-void Weapons::sword()
+int Weapons:: setAmmo(int newammo) 
 {
-
-
+	ammo = newammo;
+	return ammo;
+}
+	
+void Weapons::sword(Player& player)
+{
+	
+	
 }
 
 
 int Weapons::getAmmo()
 {
 	return ammo;
+}
+
+void Weapons::WeaponSwitch()
+{
+    
+
 }
 
 void Weapons::AmmoCounter(Console& console)

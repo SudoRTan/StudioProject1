@@ -3,6 +3,7 @@
 #include "game.h"
 #include "Framework/console.h"
 #include "colors.h"
+#include "Enemy.h"
 
 
 class Player :
@@ -11,6 +12,7 @@ class Player :
 private:
 	int changeInHeight;
 	bool dropping;
+	double lastTouched;
 
 public:
 	Player();
@@ -19,6 +21,7 @@ public:
 	void move(Map& map,SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
 	void updateHeight(Map& map, double g_dElapsedTime);
 	void renderPlayer(Console& console);
+	void touchEnemy(Enemy enemy, double g_dElapsedTime);
 
 	char getItemBelow(Map& map);
 
