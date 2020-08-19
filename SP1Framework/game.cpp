@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "UI.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -28,8 +29,12 @@ Map map("oopstage5.txt");
 //Player Object
 Player player;
 
-
+//Enemy Object(s)
 Enemy enemy;
+
+
+//UI Object
+UI ui;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -349,6 +354,11 @@ void renderGame()
     //renderCharacter();  // renders the character into the buffer
 }
 
+void renderUI()
+{
+    // add ui.Function(g_Console) once UI code has been pushed.
+}
+
 void renderMap()
 {
 
@@ -457,7 +467,7 @@ void renderInputEvents()
         }
         else
         {
-            ss.str("Some Button Pressed");
+            //ss.str("Some Button Pressed");
             g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 3, ss.str(), 0x59);
         }
         break;
