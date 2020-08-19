@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "UI.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -29,7 +30,8 @@ Map map("oopstage5.txt");
 Player player;
 
 
-Enemy enemy;
+//UI Object
+UI ui;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -308,11 +310,13 @@ void render()
     {
     case S_SPLASHSCREEN: renderSplashScreen();
         break;
-    case S_GAME: renderGame();
+    case S_GAME:
+        renderGame();
+        ui.render(g_Console, player);
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
-    renderInputEvents();    // renders status of input events
+    //renderInputEvents();    // renders status of input events
     renderToScreen();       // dump the contents of the buffer to the screen, one frame worth of game
 }
 

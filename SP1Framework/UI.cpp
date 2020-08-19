@@ -1,47 +1,45 @@
 #include "UI.h"
 #include "Entity.h"
 #include <iostream>
-using namespace std;
-
-
-void UI::MaxHealth()
-{
-	int Maxhealth = 100;
-
-};
-	
-int UI::HealthReduce(Player& player)
-{
-
-	int health = player.getHealth() - 2;
-	return health;
-};
 
 UI::UI()
 {
-	
+
 }
 
 
 UI::~UI()
 {
- 
+
 }
 
-void UI::HealthBar(Console& console,Player& player)
+
+void UI::render(Console& console,Player& player)
 {
-	console.writeToBuffer(0,0, (char)48, 'HP:');
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 80; j++) {
+			console.writeToBuffer(j, i, EMPTY, FG_BLACK);
+		}
+	}
 
-	float ShowHealth = player.getHealth() / 10;
-	float HiddenHealth = 10 - ShowHealth;
+
+	int currentHealth = player.getHealth()*2;
+	//float hiddenHealth = 10 - visibleHealth;
 	
-	{
-		for (int i = 0; i < int(ShowHealth); i++);
-		console.writeToBuffer(6,0,(char)48,'[0]');
-		for (int i = 0; i < int(HiddenHealth); i++);
-		console.writeToBuffer(6,0,(char)48,'[ ]');
 
-	};
+	console.writeToBuffer(1, 1, "Health: ", FG_WHITE);
+	console.writeToBuffer(1, 4, "Ammo: ", FG_WHITE);
 
+	for (int i = 0; i < 40; i++) {
+		if (i < currentHealth) {
+			console.writeToBuffer(1 + i, 2, FLOOR, FG_RED);
+		}
+		else {
+			console.writeToBuffer(1 + i, 2, FLOOR, FG_GRAY);
+		}
+		
+		console.writeToBuffer(1 + i, 5, FLOOR, FG_YELLOW);
+
+	}
 };
 
