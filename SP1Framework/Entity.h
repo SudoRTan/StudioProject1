@@ -22,10 +22,6 @@ protected:
 	double lastMovementTime;
 	double updateDelay;
 
-	void moveLeft(); //to be virtual, add movement range ltr(can make zoom zoom enemy)
-	void moveRight(); //to be virtual, add movement range ltr(can make zoom zoom enemy)
-	void jump(int jumpHeight); //to be virtual
-	void drop(); //to be virtual
 	void setHealth(int newHealth);
 	void setDamage(int newDamage);
 };

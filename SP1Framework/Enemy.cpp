@@ -13,12 +13,18 @@ Enemy::Enemy()
 	enemypos.setY(4);
 }
 
+Enemy::Enemy(int x, int y)
+{
+	enemypos.setX(x);
+	enemypos.setY(y);
+}
+
 Enemy::~Enemy()
 {
 
 }
 
-void Enemy::LRMovement()
+void Enemy::PatrolMovement()
 {
 	for (int left = 0; left < 3; left++) // 3 is a temp number, change later or use different code for range of enemy movement
 	{
@@ -32,7 +38,7 @@ void Enemy::LRMovement()
 	//print out map with updated x and y values of enemy (in main or somewhere else idk)
 }
 
-void Enemy::UDMovement()
+void Enemy::RandMovement()
 {
 	for (int up = 0; up < 3; up++) // 3 is a temp number, change later or use different code for range of enemy movement
 	{
