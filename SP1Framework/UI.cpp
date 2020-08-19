@@ -1,5 +1,6 @@
 #include "UI.h"
 #include "Entity.h"
+#include <iostream>
 using namespace std;
 
 
@@ -9,11 +10,12 @@ void UI::MaxHealth()
 
 };
 	
-/*int UI::HealthReduce()
+int UI::HealthReduce(Player& player)
 {
 
-	int HealthRemaining = - 2;
-};*/
+	int health = player.getHealth() - 2;
+	return health;
+};
 
 UI::UI()
 {
@@ -28,7 +30,7 @@ UI::~UI()
 
 void UI::HealthBar(Console& console,Player& player)
 {
-	console.writeToBuffer(0,0, (char)48, 'HP');
+	console.writeToBuffer(0,0, (char)48, 'HP:');
 
 	float ShowHealth = player.getHealth() / 10;
 	float HiddenHealth = 10 - ShowHealth;

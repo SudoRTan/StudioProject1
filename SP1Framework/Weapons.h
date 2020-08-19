@@ -1,22 +1,24 @@
 #pragma once
 #include"Framework/console.h"
-#include <Windows.h>
+#include "Player.h"
 
 class Weapons
 {
 public:
 	int ammo;
 	int getAmmo();
+	int setAmmo(int newammo);
 	void AmmoCounter(Console& console);
 	//constructor & destructor
 	Weapons();
 	~Weapons();
 
 private:
-	void gun();
-	void sword();
+	void gun(Player& player);
+	void sword(Player& player);
 	int shoot();
-	int reload(); 
-};  
+	int reload();  
+	void WeaponSwitch();
+}; 
 
 

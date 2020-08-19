@@ -12,7 +12,7 @@ class UI
 	 ~UI();
 	 void HealthBar(Console& console, Player& player);
 	 void MaxHealth();
-	 //int HealthReduce();
+	 int HealthReduce(Player& player); 
 	
 };
 
