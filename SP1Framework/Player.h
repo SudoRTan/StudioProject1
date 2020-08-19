@@ -16,6 +16,7 @@ private:
 
 public:
 	Player();
+	Player(int x, int y);
 	~Player();
 
 	void move(Map& map,SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);

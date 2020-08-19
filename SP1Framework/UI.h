@@ -1,18 +1,18 @@
 #pragma once
 #include "Player.h"
 #include "Framework/console.h"
-#include "Weapons.h"
+#include "Weapons.h"*
+#include "colors.h"
 
 
 class UI
 {
- public:
-	 //Constructor & Destructor
-	 UI();
-	 ~UI();
-	 void HealthBar(Console& console, Player& player);
-	 void MaxHealth();
-	 int HealthReduce(Player& player); 
-	
+public:
+	//Constructor & Destructor
+	UI();
+	~UI();
+	void render(Console& console, Player& player);
+
+
 };
 

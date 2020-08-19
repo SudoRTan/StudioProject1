@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "UI.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -26,10 +27,15 @@ Console g_Console(80, 25, "SP1 Framework");
 Map map("oopstage5.txt");
 
 //Player Object
-Player player;
+Player player(map.playerStartingPos.getX(), map.playerStartingPos.getY());
 
 
+//UI Object
+UI ui;
+
+//Enemy Object(s)
 Enemy enemy;
+
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -308,11 +314,13 @@ void render()
     {
     case S_SPLASHSCREEN: renderSplashScreen();
         break;
-    case S_GAME: renderGame();
+    case S_GAME:
+        renderGame();
+        ui.render(g_Console, player);
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
-    renderInputEvents();    // renders status of input events
+    //renderInputEvents();    // renders status of input events
     renderToScreen();       // dump the contents of the buffer to the screen, one frame worth of game
 }
 
@@ -347,6 +355,11 @@ void renderGame()
     //renderMap();        // renders the map to the buffer first
     map.renderMap(g_Console, player.getPositionX(), player.getPositionY());
     //renderCharacter();  // renders the character into the buffer
+}
+
+void renderUI()
+{
+    // add ui.Function(g_Console) once UI code has been pushed.
 }
 
 void renderMap()
@@ -457,7 +470,7 @@ void renderInputEvents()
         }
         else
         {
-            ss.str("Some Button Pressed");
+            //ss.str("Some Button Pressed");
             g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 3, ss.str(), 0x59);
         }
         break;
