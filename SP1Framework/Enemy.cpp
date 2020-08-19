@@ -100,18 +100,7 @@ void Enemy::random(Map& map, double g_dElapsedTime)
 			map.setItem(position.getX(), position.getY(), 'E');
 		}
 	}
-	/*
-	for (int up = 0; up < 3; up++) // 3 is a temp number, change later or use different code for range of enemy movement
-	{
-		enemypos.setY(enemypos.getY() + 1); // call entity function to move up on map
-	}
-	for (int down = 0; down < 3; down++)
-	{
-		enemypos.setY(enemypos.getY() - 1); // call entity function to move down on map
-	}
 
-	//print out map with updated x and y values of enemy (in main or somewhere else idk)
-	*/
 }
 
 int Enemy::PlayerContact(Position playerpos) // pass in player's position object into playerpos

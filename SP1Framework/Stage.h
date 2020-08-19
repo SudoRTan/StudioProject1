@@ -1,0 +1,28 @@
+#pragma once
+#include "Map.h"
+#include "Enemy.h"
+#include "Player.h"
+#include "game.h"
+#include "Framework/console.h"
+
+class Stage
+{
+private:
+	Map* map;
+	Player* player;
+	Enemy** enemy;
+	int numOfEnemies;
+
+public:
+	Stage();
+	~Stage();
+
+	void loadMap(std::string fileName);
+
+	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
+
+	void render(Console& console);
+
+
+};
+
