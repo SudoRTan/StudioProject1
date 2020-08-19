@@ -3,12 +3,13 @@
 
 Enemy::Enemy()
 {
-	damagetaken = 0;
 	// test spawning of enemies on map using (5,4) as test case
 	enemypos.setX(5);
 	enemypos.setY(4);
 	lastMovementTime = 0.00;
 	updateDelay = 0.8;
+	direction = 0;
+
 }
 
 Enemy::Enemy(int x, int y)
@@ -18,6 +19,7 @@ Enemy::Enemy(int x, int y)
 
 	lastMovementTime = 0.00;
 	updateDelay = 0.3;
+	direction = 0;
 
 }
 
@@ -26,18 +28,44 @@ Enemy::~Enemy()
 
 }
 
-void Enemy::PatrolMovement()
+void Enemy::patrol(Map& map, double g_dElapsedTime)
 {
-	for (int left = 0; left < 3; left++) // 3 is a temp number, change later or use different code for range of enemy movement
-	{
-		enemypos.setX(enemypos.getX() - 1); // call entity function to move left on map
-	}
-	for (int right = 0; right < 3; right++)
-	{
-		enemypos.setX(enemypos.getX() + 1); // call entity function to move right on map
-	}
+	if (g_dElapsedTime - lastMovementTime > updateDelay) {
+		lastJumpTime = g_dElapsedTime;
 
-	//print out map with updated x and y values of enemy (in main or somewhere else idk)
+		int newX = position.getX();
+		int newY = position.getY();
+
+		switch (direction) {
+		case 0:
+			newX--;
+			break;
+
+		case 1:
+			newX++;
+			break;
+
+		default:
+			break;
+		}
+
+		char itemAtNewLocation = map.getItem(newX, newY);
+		char floorAtNewLocation = map.getItem(newX, newY - 1);
+
+		if (itemAtNewLocation != EMPTY || floorAtNewLocation == EMPTY) {
+			direction = !direction;
+		}
+		else {
+			lastMovementTime = g_dElapsedTime;
+
+			map.setDefaultItem(position.getX(), position.getY());
+
+			position.setX(newX);
+			position.setY(newY);
+
+			map.setItem(position.getX(), position.getY(), 'E');
+		}
+	}
 }
 
 void Enemy::random(Map& map, double g_dElapsedTime)
@@ -166,33 +194,3 @@ int Enemy::PlayerContact(Position playerpos) // pass in player's position object
 
 }*/
 	
-void Enemy::patrol(Map& map, double g_dElapsedTime)
-{
-	int newX = enemypos.getX();
-	
-	int direction = rand() % 3;
-	
-	switch (direction)
-	{
-	  case (1):
-		  if (enemypos.getX() == 0)
-			  break;
-		  else
-		  {
-	        
-				  
-		  }
-	 case (2):
-	  {
-		 if (enemypos.getX() == 99)//need x
-			 break;
-		 else
-		 {
-
-
-
-		 }
-
-	  }
-	}
-}

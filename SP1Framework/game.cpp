@@ -36,7 +36,7 @@ Player player(map.playerStartingPos.getX(), map.playerStartingPos.getY());
 UI ui;
 
 //Enemy Object(s)
-Enemy enemy(5,1);
+Enemy enemy(18,6);
 
 
 //--------------------------------------------------------------
@@ -288,7 +288,7 @@ void updateGame()       // gameplay logic
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
                 // sound can be played here too.
-    enemy.random(map, g_dElapsedTime);
+    enemy.patrol(map, g_dElapsedTime);
 }
 
 void moveCharacter()
@@ -388,7 +388,7 @@ void renderMap()
 
 void renderCharacter()
 {
-    player.renderPlayer(g_Console);
+    //player.renderPlayer(g_Console);
     /*
     // Draw the location of the character
     WORD charColor = 0x0C;
