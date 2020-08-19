@@ -2,9 +2,9 @@
 
 Player::Player()
 {
-	health = 20;
 	position.setX(0);
 	position.setY(1);
+	health = 20;
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
@@ -13,6 +13,21 @@ Player::Player()
 	dropping = false;
 	lastTouched = 0.0;
 }
+
+
+Player::Player(int x, int y) {
+	position.setX(x);
+	position.setY(y);
+	health = 20;
+	canJump = 0;
+	lastJumpTime = 0.0;
+	lastMovementTime = 0.0;
+	updateDelay = 0.03;
+	changeInHeight = 0;
+	dropping = false;
+	lastTouched = 0.0;
+}
+
 
 Player::~Player()
 {

@@ -28,6 +28,10 @@ Map::Map()
 	height = 16;
 	length = 80;
 
+	playerStartingPos.setX(0);
+	playerStartingPos.setY(1);
+
+
 	mapArray = new char* [height];
 	for (int i = 0; i < height; i++)
 	{
@@ -51,6 +55,11 @@ Map::Map(int height, int length)
 {
 	this->height = height;
 	this->length = length;
+	
+	playerStartingPos.setX(0);
+	playerStartingPos.setY(1);
+
+
 
 	mapArray = new char* [height];
 	for (int i = 0; i < height; i++)
@@ -93,6 +102,10 @@ Map::Map(std::string fileName)
 	height = 0;
 	length = 0;
 
+	playerStartingPos.setX(0);
+	playerStartingPos.setY(1);
+
+
 	std::string line = "";
 	int lines = 0;
 	int columns = 0;
@@ -107,6 +120,7 @@ Map::Map(std::string fileName)
 			if (lengthOfLine > columns) {
 				columns = lengthOfLine;
 			}
+
 			lines++;
 		}
 
@@ -126,6 +140,11 @@ Map::Map(std::string fileName)
 			int lengthOfLine = size(line);
 
 			for (int i = 0; i < lengthOfLine; i++) {
+				if (line[i] == 'P') {
+					playerStartingPos.setX(i);
+					playerStartingPos.setY(readingLine);
+					line[i] = EMPTY;
+				}
 				mapArray[readingLine][i] = line[i];
 				mapTemplate[readingLine][i] = line[i];
 			}

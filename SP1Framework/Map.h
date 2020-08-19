@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Framework/console.h"
 #include "colors.h"
+#include "Position.h"
 #include <fstream>
 
 enum MapElements {
@@ -9,6 +10,8 @@ enum MapElements {
 	FLOOR = 219,
 	PLATFORM = 45,
 };
+
+
 
 class Map
 {
@@ -25,6 +28,8 @@ public:
 	Map(int height, int length);
 	Map(std::string fileName);
 	~Map();
+
+	Position playerStartingPos;
 
 	//Renders map to console
 	void renderMap(Console& console);

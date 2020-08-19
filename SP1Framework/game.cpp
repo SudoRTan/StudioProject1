@@ -27,7 +27,7 @@ Console g_Console(80, 25, "SP1 Framework");
 Map map("oopstage5.txt");
 
 //Player Object
-Player player;
+Player player(map.playerStartingPos.getX(), map.playerStartingPos.getY());
 
 
 //UI Object
@@ -36,8 +36,6 @@ UI ui;
 //Enemy Object(s)
 Enemy enemy;
 
-//UI Object
-UI ui;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
