@@ -1,6 +1,9 @@
 #pragma once
 #include "Entity.h"
 #include "Position.h"
+#include "Map.h"
+#include "ctime"
+
 
 class Enemy :
 	public Entity
@@ -8,8 +11,8 @@ class Enemy :
 private:
 	int damagetaken;
 	Position enemypos;
-	void patrol();
-void random();
+	void patrol(Map& map, double g_dElapsedTime);
+void random(Map& map);
 
 public:
 	Enemy();

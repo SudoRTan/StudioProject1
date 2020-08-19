@@ -65,32 +65,28 @@ int Enemy::PlayerContact(Position playerpos) // pass in player's position object
 // using setDamage function in Entity.h, setHealth(getHealth() - setDamage(PlayerContact()))
 // set current health = initial health - set damage(return statement in Enemy::PlayerContact())
 
-void Enemy::random()
+/*void Enemy::random(Map& map)
 {
 	int random = rand() % 5;
 	switch (random)
 	{
-		case(1)
+	case(1):
 		{
-           
-			enemypos.getX() && enemypos.getY()
-
+		if (enemypos.getY() == 0)
+			break;
+		// if 
+		else
 			{
 				for (int up = 0; up < 3; up++)
 					enemypos.setY(enemypos.getY() + 1);
 			}
 			
-		   
-				
-		    
-
-		    
-
 		}
-		case (2)
+	case (2):
 		{
-			if enemypos.getY() = 24
+			if (enemypos.getY() == 24)
 				break;
+			//
 			else
 			{
 				for (int down = 0; down < 3; down++)
@@ -101,36 +97,69 @@ void Enemy::random()
 
 
 		}
-		case (3)
+	case (3):
 		{
-			if enemypos.getX() = 0
+			if (enemypos.getX() == 0)
 				break;
-			e
+			//
+			else
+			{
+				for (int left = 0; left < 3; left++)
+				{
+					enemypos.setX(enemypos.getX() - 3);
+				}
+			}
 
 
 		}
-		case (4)
+	case (4):
 		{
-
-
+			if (enemypos.getX() == 0 )
+				break;
+			//
+			else
+			{
+				for (int right = 0; right < 3; right++)
+				{
+					enemypos.setX(enemypos.getX() + 3);
+			    }
+			}
 		}
 
 
 	}
 
 
-}
+}*/
 	
-void Enemy::patrol()
-{   
-    for (int left = 0; left < 3; left++) 
+void Enemy::patrol(Map& map, double g_dElapsedTime)
+{
+	int newX = enemypos.getX();
+	
+	srand((unsigned)time(0));
+	int direction = rand() % 3;
+	
+	switch (direction)
 	{
-		enemypos.setX(enemypos.getX() - 3); 
-	}
-	for (int right = 0; right < 3; right++)
-	{
-		enemypos.setX(enemypos.getX() + 3); 
+	  case (1):
+		  if (enemypos.getX() == 0)
+			  break;
+		  else
+		  {
+	        
+				  
+		  }
+	 case (2):
+	  {
+		 if (enemypos.getX() == 99)//need x
+			 break;
+		 else
+		 {
+
+
+
+		 }
+
+	  }
 	}
 }
-	
-	
