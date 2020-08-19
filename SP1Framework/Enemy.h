@@ -8,9 +8,6 @@ class Enemy :
 private:
 	int damagetaken;
 	Position enemypos;
-	void patrol();
-void random();
-
 public:
 	Enemy();
 	Enemy(int x, int y);
