@@ -1,23 +1,33 @@
 #pragma once
 #include"Framework/console.h"
 #include "Player.h"
+#include"Map.h"
 
 class Weapon
 {
+private:
+	int damage;
+	std::string name;
+
+protected:
+	void setDamage(int damage);
+	void setName(std::string name);
+
 public:
-	int ammo;
-	int getAmmo();
-	int setAmmo(int newammo);
-	//constructor & destructor
+
 	Weapon();
 	~Weapon();
 
-private:
-	void gun(Player& player);
-	void sword(Player& player);
-	int shoot();
-	int reload();  
-	void WeaponSwitch();
+	int getDamage();
+	std::string getName();
+
+	virtual void use(Map& map) = 0;
+
+
+
+
+	//constructor & destructor
+
 }; 
 
 
