@@ -47,6 +47,9 @@ public:
 
 	void takeDamage(int damage, double g_dElapsedTime);
 
+	void takeDamage(int damage);
+
+
 	int getDirection();
 
 };

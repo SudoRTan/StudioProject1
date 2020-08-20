@@ -50,6 +50,10 @@ void Entity::takeDamage(int damage, double g_dElapsedTime) {
 	}
 }
 
+void Entity::takeDamage(int damage) {
+	health = health - damage;
+}
+
 int Entity::getDirection() {
 	return direction;
 }
