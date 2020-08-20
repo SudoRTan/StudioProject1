@@ -15,7 +15,7 @@ private:
 	int numOfEnemies;
 	UI ui;
 
-	
+	Enemy* getEnemy(int x, int y);
 
 public:
 	Stage();

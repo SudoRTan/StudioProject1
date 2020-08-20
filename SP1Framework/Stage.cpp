@@ -62,6 +62,19 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 
 	int playerReturnValue = player->move(*map, KeyEvent, g_dElapsedTime);
 	player->updateHeight(*map, g_dElapsedTime);
+	
+	if (playerReturnValue == PLAYER_DAMAGED) {
+		Enemy* attackingEnemy = getEnemy(player->getEnemyLocation().X, player->getEnemyLocation().Y);
+		player->takeDamage(attackingEnemy->getDamage());
+	}
+	/*
+	switch (playerReturnValue) {
+	case PLAYER_DAMAGED:
+		break;
+	default:
+		break;
+	}
+	*/
 
 
 	if (enemy != nullptr) {
@@ -86,4 +99,18 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 void Stage::render(Console& console) {
 	ui.render(console, *player);
 	map->renderMap(console, player->getPositionX(), player->getPositionY());
+}
+
+
+Enemy* Stage::getEnemy(int x, int y) {
+	Enemy* returnEnemy = nullptr;
+	
+	
+	for (int i = 0; i < numOfEnemies; i++) {
+		if (enemy[i]->getPositionX() == x && enemy[i]->getPositionY() == y) {
+			returnEnemy = enemy[i];
+		}
+
+	}
+	return returnEnemy;
 }

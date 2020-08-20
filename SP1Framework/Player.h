@@ -13,6 +13,7 @@ private:
 	int changeInHeight;
 	bool dropping;
 	double lastTouched;
+	COORD enemyLocation;
 
 public:
 	Player();
@@ -27,4 +28,6 @@ public:
 	char getItemBelow(Map& map);
 
 	void setPosition(int x, int y);
+
+	COORD getEnemyLocation();
 };

@@ -12,6 +12,8 @@ Player::Player()
 	changeInHeight = 0;
 	dropping = false;
 	lastTouched = 0.0;
+	enemyLocation.X = 0;
+	enemyLocation.Y = 0;
 }
 
 
@@ -26,6 +28,8 @@ Player::Player(int x, int y) {
 	changeInHeight = 0;
 	dropping = false;
 	lastTouched = 0.0;
+	enemyLocation.X = 0;
+	enemyLocation.Y = 0;
 }
 
 
@@ -67,6 +71,10 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 	char itemAtNewLocation = map.getItem(newX, newY);
 	if (itemAtNewLocation == 'E') {
 		lastMovementTime = g_dElapsedTime;
+
+		enemyLocation.X = newX;
+		enemyLocation.Y = newY;
+
 		return PLAYER_DAMAGED;
 	}
 
@@ -192,4 +200,8 @@ char Player::getItemBelow(Map& map) {
 void Player::setPosition(int x, int y) {
 	position.setX(x);
 	position.setY(y);
+}
+
+COORD Player::getEnemyLocation() {
+	return enemyLocation;
 }
