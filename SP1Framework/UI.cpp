@@ -24,12 +24,12 @@ void UI::splashScreen(Console& console)
 		}
 	}
 
-	console.writeToBuffer(40, 10, "2020 Vision", FG_WHITE); // positions tbc
-	console.writeToBuffer(40, 14, "Play", FG_WHITE);
-	console.writeToBuffer(40, 16, "Level Select", FG_WHITE);
+	console.writeToBuffer(35, 10, "2020 Vision", FG_WHITE); // positions tbc
+	console.writeToBuffer(35, 12, "Play Game", FG_WHITE);
+	console.writeToBuffer(35, 14, "Level Select", FG_WHITE);
 };
 
-void UI::render(Console& console, Player& player)
+void UI::render(Console& console, Player& player/*,Weapons& weapons*/)
 {
 
 	
@@ -41,7 +41,8 @@ void UI::render(Console& console, Player& player)
 
 
 	int currentHealth = player.getHealth() * 2;
-	//float hiddenHealth = 10 - visibleHealth;
+	//int currentAmmo = weapons.getAmmo() * 2;
+	
 
 
 	console.writeToBuffer(1, 1, "Health: ", FG_WHITE);
@@ -55,8 +56,13 @@ void UI::render(Console& console, Player& player)
 			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_GRAY);
 		}
 
-		console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_YELLOW);
-
+		/*if (i < currentAmmo) {
+			console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_YELLOW);
+		}
+		else {
+			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_GRAY);
+		}*/
 	}
-};
+	
+ };
 
