@@ -84,6 +84,6 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 }
 
 void Stage::render(Console& console) {
-
+	ui.render(console, *player);
 	map->renderMap(console, player->getPositionX(), player->getPositionY());
 }

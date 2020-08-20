@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "game.h"
+#include "UI.h"
 #include "Framework/console.h"
 
 class Stage
@@ -12,6 +13,7 @@ private:
 	Player* player;
 	Enemy** enemy;
 	int numOfEnemies;
+	UI ui;
 
 	
 

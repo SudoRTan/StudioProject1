@@ -20,6 +20,7 @@ Enemy::Enemy(int x, int y)
 	lastMovementTime = 0.00;
 	updateDelay = 0.3;
 	direction = 0;
+	setDamage(1);
 
 }
 
@@ -70,6 +71,7 @@ int Enemy::patrol(Map& map, double g_dElapsedTime)
 			return NO_CHANGE;
 		}
 	}
+	return NO_CHANGE;
 }
 
 void Enemy::random(Map& map, double g_dElapsedTime)

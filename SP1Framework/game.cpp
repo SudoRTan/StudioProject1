@@ -330,12 +330,12 @@ void render()
     switch (g_eGameState)
     {
     case S_SPLASHSCREEN: //renderSplashScreen();
-        ui.splashScreen(g_Console);
+        //ui.splashScreen(g_Console);
 
         break;
     case S_GAME:
         renderGame();
-        ui.render(g_Console, player);
+        //ui.render(g_Console, player);
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
