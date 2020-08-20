@@ -28,7 +28,7 @@ Enemy::~Enemy()
 
 }
 
-void Enemy::patrol(Map& map, double g_dElapsedTime)
+int Enemy::patrol(Map& map, double g_dElapsedTime)
 {
 	if (g_dElapsedTime - lastMovementTime > updateDelay) {
 		lastJumpTime = g_dElapsedTime;
@@ -51,9 +51,12 @@ void Enemy::patrol(Map& map, double g_dElapsedTime)
 
 		char itemAtNewLocation = map.getItem(newX, newY);
 		char floorAtNewLocation = map.getItem(newX, newY - 1);
-
-		if (itemAtNewLocation != EMPTY || floorAtNewLocation == EMPTY) {
+		if (itemAtNewLocation == '9') {
+			return PLAYER_DAMAGED;
+		}
+		else if (itemAtNewLocation != EMPTY || floorAtNewLocation == EMPTY){
 			direction = !direction;
+			return NO_CHANGE;
 		}
 		else {
 			lastMovementTime = g_dElapsedTime;
@@ -64,6 +67,7 @@ void Enemy::patrol(Map& map, double g_dElapsedTime)
 			position.setY(newY);
 
 			map.setItem(position.getX(), position.getY(), 'E');
+			return NO_CHANGE;
 		}
 	}
 }

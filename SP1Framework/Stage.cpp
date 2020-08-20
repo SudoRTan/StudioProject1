@@ -60,13 +60,24 @@ void Stage::loadMap(std::string fileName) {
 
 void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 
-	player->move(*map, KeyEvent, g_dElapsedTime);
+	int playerReturnValue = player->move(*map, KeyEvent, g_dElapsedTime);
 	player->updateHeight(*map, g_dElapsedTime);
+
 
 	if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {
+			int enemyReturnValue = 0;
+
 			if (enemy[i]!=nullptr) {
-				enemy[i]->patrol(*map, g_dElapsedTime);
+				enemyReturnValue = enemy[i]->patrol(*map, g_dElapsedTime);
+			}
+
+			switch (enemyReturnValue) {
+			case PLAYER_DAMAGED:
+				player->takeDamage(enemy[i]->getDamage());
+				break;
+			default:
+				break;
 			}
 		}
 	}

@@ -18,7 +18,7 @@ public:
 	Enemy();
 	Enemy(int x, int y);
 	~Enemy();
-	void patrol(Map& map, double g_dElapsedTime); // for enemies on land moving left and right
+	int patrol(Map& map, double g_dElapsedTime); // for enemies on land moving left and right
 	
 	void random(Map& map, double g_dElapsedTime);
 

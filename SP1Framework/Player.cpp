@@ -34,7 +34,7 @@ Player::~Player()
 
 }
 
-void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
+int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 {	
 	int newX = position.getX();
 	int newY = position.getY();
@@ -64,9 +64,13 @@ void Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 		dropping = true;
 	}
 
+	char itemAtNewLocation = map.getItem(newX, newY);
+	if (itemAtNewLocation == 'E') {
+		lastMovementTime = g_dElapsedTime;
+		return PLAYER_DAMAGED;
+	}
 
-
-	if (map.getItem(newX, newY) == EMPTY) {
+	else if (itemAtNewLocation == EMPTY) {
 		lastMovementTime = g_dElapsedTime;
 
 		map.setDefaultItem(position.getX(), position.getY());

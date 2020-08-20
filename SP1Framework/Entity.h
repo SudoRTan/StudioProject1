@@ -3,6 +3,13 @@
 #include "Map.h"
 
 
+enum ENTITY_STATE {
+	NO_CHANGE,
+	PLAYER_DAMAGED
+	
+};
+
+
 class Entity
 {
 public:
@@ -12,6 +19,8 @@ public:
 	int getPositionY();
 	int getHealth();
 	int getDamage();
+
+	void takeDamage(int damage);
 
 protected:
 	Position position;

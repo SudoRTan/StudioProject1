@@ -42,3 +42,7 @@ void Entity::setDamage(int newDamage)
 {
 	damage = newDamage;
 }
+
+void Entity::takeDamage(int damage) {
+	health = health - damage;
+}
