@@ -101,6 +101,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 		map.setItem(position.getX(), position.getY(), '9');
 
 	}
+	return NO_CHANGE;
 
 }
 

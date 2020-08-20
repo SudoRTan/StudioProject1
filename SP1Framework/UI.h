@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "Framework/console.h"
-#include "Weapons.h"
+#include "Weapon.h"
 #include "colors.h"
 
 

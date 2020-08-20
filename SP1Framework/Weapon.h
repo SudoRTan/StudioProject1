@@ -2,15 +2,15 @@
 #include"Framework/console.h"
 #include "Player.h"
 
-class Weapons
+class Weapon
 {
 public:
 	int ammo;
 	int getAmmo();
 	int setAmmo(int newammo);
 	//constructor & destructor
-	Weapons();
-	~Weapons();
+	Weapon();
+	~Weapon();
 
 private:
 	void gun(Player& player);

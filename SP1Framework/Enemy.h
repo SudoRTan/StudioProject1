@@ -10,7 +10,6 @@ class Enemy :
 {
 private:
 	int damagetaken;
-	int direction;
 
 	Position enemypos;
 
