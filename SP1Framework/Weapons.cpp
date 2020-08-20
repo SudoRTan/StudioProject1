@@ -56,17 +56,3 @@ void Weapons::WeaponSwitch()
 
 }
 
-void Weapons::AmmoCounter(Console& console)
-{
-	console.writeToBuffer(0, 1, (char)48, 'Ammo');
-	float ShowAmmo = Weapons::getAmmo() / 10;
-	float HiddenAmmo = 10 - ShowAmmo;
-	{
-		for (int i = 0; i < int(ShowAmmo); i++);
-		console.writeToBuffer(6, 1, (char)48, '[0]');
-		for (int i = 0; i < int(HiddenAmmo); i++);
-		console.writeToBuffer(6, 1, (char)48, '[ ]');
-
-	}
-
-}

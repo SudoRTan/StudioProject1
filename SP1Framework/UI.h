@@ -13,7 +13,7 @@ public:
 	~UI();
 
 
-	void render(Console& console, Player& player);
+	void render(Console& console, Player& player,Weapons& weapons);
 	void splashScreen(Console& console);
 
 };
