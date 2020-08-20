@@ -4,6 +4,9 @@
 #include "Framework/console.h"
 #include "colors.h"
 #include "Enemy.h"
+#include "Weapon.h"
+#include "MeleeWeapon.h"
+
 
 
 class Player :
@@ -13,6 +16,7 @@ private:
 	int changeInHeight;
 	bool dropping;
 	COORD enemyLocation;
+	Weapon* weapon;
 
 public:
 	Player();
@@ -29,4 +33,6 @@ public:
 	void setPosition(int x, int y);
 
 	COORD getEnemyLocation();
+
+	void attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 };

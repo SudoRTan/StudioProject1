@@ -28,9 +28,9 @@ std::string Weapon::getName() {
 }
 
 
-
+/*
 void Weapon::use(Map& map) {
 
 }
 
-
+*/

@@ -19,6 +19,8 @@ Player::Player()
 	enemyLocation.Y = 0;
 
 	direction = RIGHT;
+
+	weapon = new MeleeWeapon;
 }
 
 
@@ -40,6 +42,9 @@ Player::Player(int x, int y) {
 	enemyLocation.Y = 0;
 
 	direction = RIGHT;
+
+	weapon = new MeleeWeapon;
+
 }
 
 
@@ -217,4 +222,15 @@ void Player::setPosition(int x, int y) {
 
 COORD Player::getEnemyLocation() {
 	return enemyLocation;
+}
+
+void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
+	weapon->animate(map, g_dElapsedTime, direction, position.getX(), position.getY() + 1);
+
+	if (KeyEvent[K_SPACE].keyOnce) {
+		if (weapon != nullptr) {
+			weapon->use(map, enemyArray, enemyArraySize, direction, position.getX(), position.getY()+1);
+		}
+	}
+	
 }

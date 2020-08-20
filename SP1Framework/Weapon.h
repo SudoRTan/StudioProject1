@@ -1,6 +1,7 @@
 #pragma once
 #include"Framework/console.h"
 #include"Map.h"
+#include "Enemy.h"
 
 class Weapon
 {
@@ -10,10 +11,11 @@ private:
 	
 
 protected:
-	
 	int phase;
 	void setDamage(int damage);
 	void setName(std::string name);
+	double lastAnimateTime;
+
 
 public:
 
@@ -24,7 +26,9 @@ public:
 	int getDamage();
 	std::string getName();
 
-	virtual void use(Map& map) = 0;
+	virtual void animate(Map& map, double g_dElapsedTime, int direction, int x, int y) = 0;
+	
+	virtual void use(Map& map, Enemy** enemyArray, int enemyArraySize, int direction, int x, int y) = 0;
 
 
 
