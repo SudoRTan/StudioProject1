@@ -229,6 +229,13 @@ Map::~Map()
 	}
 	delete[] mapArray;
 	delete[] mapTemplate;
+
+	for (int i = 0; i < numberOfEnemies; i++) {
+		delete positionOfEnemies[i];
+	}
+
+	delete[] symbolOfEnemies;
+	delete[] positionOfEnemies;
 }
 
 void Map::renderMap(Console& console)

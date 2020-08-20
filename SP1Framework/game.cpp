@@ -40,7 +40,7 @@ UI ui;
 Enemy enemy(18,6);
 
 
-Stage stage;
+Stage* stage = new Stage;
 
 
 
@@ -73,7 +73,7 @@ void init( void )
     g_Console.setMouseHandler(mouseHandler);
 
     //Loads the stage map
-    stage.loadMap("oopstage5.txt");
+    stage->loadMap("oopstage5.txt");
 }
 
 //--------------------------------------------------------------
@@ -87,7 +87,7 @@ void shutdown( void )
 {
     // Reset to white text on black background
     colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-
+    delete stage;
     g_Console.clearBuffer();
 }
 
@@ -304,7 +304,7 @@ void moveCharacter()
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
    
-    stage.update(g_skKeyEvent, g_dElapsedTime);
+    stage->update(g_skKeyEvent, g_dElapsedTime);
     
     // player.move(map, g_skKeyEvent, g_dElapsedTime);
     //player.updateHeight(map, g_dElapsedTime);
@@ -369,7 +369,7 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-    stage.render(g_Console);
+    stage->render(g_Console);
 
 
     //renderMap();        // renders the map to the buffer first

@@ -18,15 +18,27 @@ Stage::~Stage() {
 		map = nullptr;
 	}
 	if (enemy != nullptr) {
+		for (int i = 0; i < numOfEnemies; i++) {
+			delete enemy[i];
+		}
 		delete[] enemy;
 		enemy = nullptr;
 	}
+	int stop = 3;
 }
 
 
 
 void Stage::loadMap(std::string fileName) {
-	map = new Map(fileName);
+	if (map == nullptr) {
+		map = new Map(fileName);
+
+	}
+	else {
+		delete map;
+		map = new Map(fileName);
+
+	}
 	
 	numOfEnemies = map->getNumberOfEnemies();
 
