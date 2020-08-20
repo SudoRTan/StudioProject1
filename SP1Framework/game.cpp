@@ -329,7 +329,8 @@ void render()
     clearScreen();      // clears the current screen and draw from scratch 
     switch (g_eGameState)
     {
-    case S_SPLASHSCREEN: renderSplashScreen();
+    case S_SPLASHSCREEN: //renderSplashScreen();
+        ui.splashScreen(g_Console);
         break;
     case S_GAME:
         renderGame();
@@ -338,8 +339,9 @@ void render()
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
     renderInputEvents();    // renders status of input events
-    renderToScreen();       // dump the contents of the buffer to the screen, one frame worth of game
-}
+    renderToScreen();       // dump the contents of the buffer to the screen, one frame worth of game 
+    
+}   
 
 void clearScreen()
 {

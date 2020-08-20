@@ -13,8 +13,23 @@ UI::~UI()
 
 }
 
+void UI::splashScreen(Console& console)
+{
+	for (int i = 0; i < 24; i++)
+	{
+		for (int j = 0; j < 80; j++)
+		{
+			console.writeToBuffer(j, i, EMPTY, FG_BLACK);
+			
+		}
+	}
 
-void UI::render(Console& console,Player& player)
+	console.writeToBuffer(40, 10, "2020 Vision", FG_WHITE); // positions tbc
+	console.writeToBuffer(40, 14, "Play", FG_WHITE);
+	console.writeToBuffer(40, 16, "Level Select", FG_WHITE);
+};
+
+void UI::render(Console& console, Player& player)
 {
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 80; j++) {
@@ -23,9 +38,9 @@ void UI::render(Console& console,Player& player)
 	}
 
 
-	int currentHealth = player.getHealth()*2;
+	int currentHealth = player.getHealth() * 2;
 	//float hiddenHealth = 10 - visibleHealth;
-	
+
 
 	console.writeToBuffer(1, 1, "Health: ", FG_WHITE);
 	console.writeToBuffer(1, 4, "Ammo: ", FG_WHITE);
@@ -37,7 +52,7 @@ void UI::render(Console& console,Player& player)
 		else {
 			console.writeToBuffer(1 + i, 2, FLOOR, FG_GRAY);
 		}
-		
+
 		console.writeToBuffer(1 + i, 5, FLOOR, FG_YELLOW);
 
 	}

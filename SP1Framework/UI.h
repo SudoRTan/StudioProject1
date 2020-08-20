@@ -12,7 +12,7 @@ public:
 	UI();
 	~UI();
 	void render(Console& console, Player& player);
-
+	void splashScreen(Console& console);
 
 };
 
