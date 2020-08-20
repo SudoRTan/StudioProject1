@@ -23,16 +23,14 @@ void Weapon::setName(std::string name) {
 int Weapon::getDamage() {
 	return damage;
 }
-
 std::string Weapon::getName() {
 	return name;
 }
 
 
-/*
+
 void Weapon::use(Map& map) {
 
 }
-*/
 
 

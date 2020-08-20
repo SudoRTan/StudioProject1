@@ -1,6 +1,5 @@
 #pragma once
 #include"Framework/console.h"
-#include "Player.h"
 #include"Map.h"
 
 class Weapon
@@ -8,13 +7,17 @@ class Weapon
 private:
 	int damage;
 	std::string name;
+	
 
 protected:
+	
+	int phase;
 	void setDamage(int damage);
 	void setName(std::string name);
 
 public:
 
+	//constructor & destructor
 	Weapon();
 	~Weapon();
 
@@ -26,7 +29,6 @@ public:
 
 
 
-	//constructor & destructor
 
 }; 
 

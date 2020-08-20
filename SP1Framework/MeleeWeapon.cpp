@@ -3,6 +3,7 @@
 MeleeWeapon::MeleeWeapon() {
 	setName("Melee");
 	setDamage(10);
+	phase = 3;
 
 }
 
