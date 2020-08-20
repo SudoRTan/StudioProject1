@@ -24,7 +24,7 @@ EGAMESTATES g_eGameState = S_GAME; // initial state
 Console g_Console(80, 25, "SP1 Framework");
 
 //Map Object
-Map map("oopstage5.txt");
+Map map("stage2_2.txt");
 
 //Player Object
 Player player(map.playerStartingPos.getX(), map.playerStartingPos.getY());
