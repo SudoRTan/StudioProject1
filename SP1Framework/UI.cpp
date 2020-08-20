@@ -31,6 +31,8 @@ void UI::splashScreen(Console& console)
 
 void UI::render(Console& console, Player& player)
 {
+
+	
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 80; j++) {
 			console.writeToBuffer(j, i, EMPTY, FG_BLACK);
@@ -47,13 +49,13 @@ void UI::render(Console& console, Player& player)
 
 	for (int i = 0; i < 40; i++) {
 		if (i < currentHealth) {
-			console.writeToBuffer(1 + i, 2, FLOOR, FG_RED);
+			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_RED);
 		}
 		else {
-			console.writeToBuffer(1 + i, 2, FLOOR, FG_GRAY);
+			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_GRAY);
 		}
 
-		console.writeToBuffer(1 + i, 5, FLOOR, FG_YELLOW);
+		console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_YELLOW);
 
 	}
 };

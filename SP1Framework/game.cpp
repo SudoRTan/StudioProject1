@@ -21,7 +21,7 @@ SMouseEvent g_mouseEvent;
 
 // Game specific variables here
 SGameChar   g_sChar;
-EGAMESTATES g_eGameState = S_GAME; // initial state
+EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 
 // Console object
 Console g_Console(80, 25, "SP1 Framework");
@@ -331,6 +331,7 @@ void render()
     {
     case S_SPLASHSCREEN: //renderSplashScreen();
         ui.splashScreen(g_Console);
+
         break;
     case S_GAME:
         renderGame();
