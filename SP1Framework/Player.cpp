@@ -8,7 +8,7 @@ Player::Player()
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
-	updateDelay = 0.03;
+	updateDelay = 0.04;
 	changeInHeight = 0;
 	dropping = false;
 	lastTouched = 0.0;
@@ -22,7 +22,7 @@ Player::Player(int x, int y) {
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
-	updateDelay = 0.03;
+	updateDelay = 0.04;
 	changeInHeight = 0;
 	dropping = false;
 	lastTouched = 0.0;

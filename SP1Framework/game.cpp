@@ -7,8 +7,11 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "UI.h"
+#include "Stage.h"
 #include <iostream>
 #include <iomanip>
+#include <time.h>
+#include <stdlib.h>
 #include <sstream>
 
 double  g_dElapsedTime;
@@ -34,7 +37,11 @@ Player player(map.playerStartingPos.getX(), map.playerStartingPos.getY());
 UI ui;
 
 //Enemy Object(s)
-Enemy enemy;
+Enemy enemy(18,6);
+
+
+Stage stage;
+
 
 
 //--------------------------------------------------------------
@@ -46,6 +53,9 @@ Enemy enemy;
 //--------------------------------------------------------------
 void init( void )
 {
+    // Seeds randomness with time
+    srand((unsigned)time(NULL));
+
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
 
@@ -61,6 +71,9 @@ void init( void )
     // remember to set your keyboard handler, so that your functions can be notified of input events
     g_Console.setKeyboardHandler(keyboardHandler);
     g_Console.setMouseHandler(mouseHandler);
+
+    //Loads the stage map
+    stage.loadMap("oopstage5.txt");
 }
 
 //--------------------------------------------------------------
@@ -282,15 +295,19 @@ void updateGame()       // gameplay logic
 {
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
-                        // sound can be played here too.
+                // sound can be played here too.
+    //enemy.patrol(map, g_dElapsedTime);
 }
 
 void moveCharacter()
 {    
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
-    player.move(map, g_skKeyEvent, g_dElapsedTime);
-    player.updateHeight(map, g_dElapsedTime);
+   
+    stage.update(g_skKeyEvent, g_dElapsedTime);
+    
+    // player.move(map, g_skKeyEvent, g_dElapsedTime);
+    //player.updateHeight(map, g_dElapsedTime);
 }
 void processUserInput()
 {
@@ -320,7 +337,7 @@ void render()
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
-    //renderInputEvents();    // renders status of input events
+    renderInputEvents();    // renders status of input events
     renderToScreen();       // dump the contents of the buffer to the screen, one frame worth of game
 }
 
@@ -352,8 +369,11 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
+    stage.render(g_Console);
+
+
     //renderMap();        // renders the map to the buffer first
-    map.renderMap(g_Console, player.getPositionX(), player.getPositionY());
+    //map.renderMap(g_Console, player.getPositionX(), player.getPositionY());
     //renderCharacter();  // renders the character into the buffer
 }
 
@@ -382,7 +402,7 @@ void renderMap()
 
 void renderCharacter()
 {
-    player.renderPlayer(g_Console);
+    //player.renderPlayer(g_Console);
     /*
     // Draw the location of the character
     WORD charColor = 0x0C;
