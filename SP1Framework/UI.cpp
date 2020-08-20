@@ -24,9 +24,9 @@ void UI::splashScreen(Console& console)
 		}
 	}
 
-	console.writeToBuffer(40, 10, "2020 Vision", FG_WHITE); // positions tbc
-	console.writeToBuffer(40, 14, "Play", FG_WHITE);
-	console.writeToBuffer(40, 16, "Level Select", FG_WHITE);
+	console.writeToBuffer(35, 10, "2020 Vision", FG_WHITE); // positions tbc
+	console.writeToBuffer(35, 12, "Play Game", FG_WHITE);
+	console.writeToBuffer(35, 14, "Level Select", FG_WHITE);
 };
 
 void UI::render(Console& console, Player& player)
