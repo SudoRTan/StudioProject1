@@ -15,7 +15,6 @@ private:
 	int numOfEnemies;
 	UI ui;
 
-	Enemy* getEnemy(int x, int y);
 
 public:
 	Stage();
@@ -30,3 +29,5 @@ public:
 
 };
 
+
+Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize);

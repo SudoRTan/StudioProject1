@@ -64,7 +64,7 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 	player->updateHeight(*map, g_dElapsedTime);
 	
 	if (playerReturnValue == PLAYER_DAMAGED) {
-		Enemy* attackingEnemy = getEnemy(player->getEnemyLocation().X, player->getEnemyLocation().Y);
+		Enemy* attackingEnemy = getEnemy(player->getEnemyLocation().X, player->getEnemyLocation().Y, enemy, numOfEnemies);
 		player->takeDamage(attackingEnemy->getDamage(), g_dElapsedTime);
 	}
 	/*
@@ -102,11 +102,11 @@ void Stage::render(Console& console) {
 }
 
 
-Enemy* Stage::getEnemy(int x, int y) {
+Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
 	Enemy* returnEnemy = nullptr;
 	
 	
-	for (int i = 0; i < numOfEnemies; i++) {
+	for (int i = 0; i < arraySize; i++) {
 		if (enemy[i]->getPositionX() == x && enemy[i]->getPositionY() == y) {
 			returnEnemy = enemy[i];
 		}
