@@ -20,16 +20,22 @@ public:
 	int getHealth();
 	int getDamage();
 
-	void takeDamage(int damage);
+	void takeDamage(int damage, double g_dElapsedTime);
 
 protected:
 	Position position;
 	int health;
 	int damage;
 	int canJump;
+
+
 	double lastJumpTime;
 	double lastMovementTime;
 	double updateDelay;
+
+	double damageDelay;
+	double lastDamageTime;
+
 
 	void setHealth(int newHealth);
 	void setDamage(int newDamage);

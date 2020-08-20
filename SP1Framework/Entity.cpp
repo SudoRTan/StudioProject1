@@ -43,6 +43,9 @@ void Entity::setDamage(int newDamage)
 	damage = newDamage;
 }
 
-void Entity::takeDamage(int damage) {
-	health = health - damage;
+void Entity::takeDamage(int damage, double g_dElapsedTime) {
+	if (g_dElapsedTime - lastDamageTime > damageDelay) {
+		health = health - damage;
+		lastDamageTime = g_dElapsedTime;
+	}
 }

@@ -11,7 +11,10 @@ Player::Player()
 	updateDelay = 0.04;
 	changeInHeight = 0;
 	dropping = false;
-	lastTouched = 0.0;
+
+	lastDamageTime = 0.0;
+	damageDelay = 0.3;
+
 	enemyLocation.X = 0;
 	enemyLocation.Y = 0;
 }
@@ -27,7 +30,10 @@ Player::Player(int x, int y) {
 	updateDelay = 0.04;
 	changeInHeight = 0;
 	dropping = false;
-	lastTouched = 0.0;
+
+	lastDamageTime = 0.0;
+	damageDelay = 0.2;
+	
 	enemyLocation.X = 0;
 	enemyLocation.Y = 0;
 }
@@ -179,16 +185,16 @@ void Player::renderPlayer(Console& console) {
 
 void Player::touchEnemy(Enemy enemy, double g_dElapsedTime)
 {
-	if ((enemy.getPositionX() - position.getX() == 1 || enemy.getPositionX() - position.getX() == -1) && g_dElapsedTime - lastTouched > 0.5)
+	if ((enemy.getPositionX() - position.getX() == 1 || enemy.getPositionX() - position.getX() == -1) && g_dElapsedTime - lastDamageTime > 0.5)
 	{
 		health = health - enemy.getDamage();
-		lastTouched = g_dElapsedTime;
+		lastDamageTime = g_dElapsedTime;
 		//insert duck noises
 	}
-	else if ((enemy.getPositionY() - position.getY() == 1 || enemy.getPositionY() - position.getY() == -1) && lastTouched > 0.5)
+	else if ((enemy.getPositionY() - position.getY() == 1 || enemy.getPositionY() - position.getY() == -1) && lastDamageTime > 0.5)
 	{
 		health = health - enemy.getDamage();
-		lastTouched = g_dElapsedTime;
+		lastDamageTime = g_dElapsedTime;
 		//insert goose noises
 	}
 }

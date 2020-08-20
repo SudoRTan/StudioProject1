@@ -12,7 +12,6 @@ class Player :
 private:
 	int changeInHeight;
 	bool dropping;
-	double lastTouched;
 	COORD enemyLocation;
 
 public:

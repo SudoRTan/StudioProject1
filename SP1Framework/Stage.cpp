@@ -65,7 +65,7 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 	
 	if (playerReturnValue == PLAYER_DAMAGED) {
 		Enemy* attackingEnemy = getEnemy(player->getEnemyLocation().X, player->getEnemyLocation().Y);
-		player->takeDamage(attackingEnemy->getDamage());
+		player->takeDamage(attackingEnemy->getDamage(), g_dElapsedTime);
 	}
 	/*
 	switch (playerReturnValue) {
@@ -87,7 +87,7 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 
 			switch (enemyReturnValue) {
 			case PLAYER_DAMAGED:
-				player->takeDamage(enemy[i]->getDamage());
+				player->takeDamage(enemy[i]->getDamage(), g_dElapsedTime);
 				break;
 			default:
 				break;
