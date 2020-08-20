@@ -29,7 +29,7 @@ void UI::splashScreen(Console& console)
 	console.writeToBuffer(35, 14, "Level Select", FG_WHITE);
 };
 
-void UI::render(Console& console, Player& player,Weapons& weapons)
+void UI::render(Console& console, Player& player/*,Weapons& weapons*/)
 {
 
 	
@@ -41,8 +41,8 @@ void UI::render(Console& console, Player& player,Weapons& weapons)
 
 
 	int currentHealth = player.getHealth() * 2;
-	int currentAmmo = weapons.getAmmo() * 2;
-	//float hiddenHealth = 10 - visibleHealth;
+	//int currentAmmo = weapons.getAmmo() * 2;
+	
 
 
 	console.writeToBuffer(1, 1, "Health: ", FG_WHITE);
@@ -56,12 +56,13 @@ void UI::render(Console& console, Player& player,Weapons& weapons)
 			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_GRAY);
 		}
 
-		if (i < currentAmmo) {
+		/*if (i < currentAmmo) {
 			console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_YELLOW);
 		}
-		else{
+		else {
 			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_GRAY);
-	}   
+		}*/
+	}
 	
-};
+ };
 
