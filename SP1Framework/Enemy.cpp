@@ -119,6 +119,22 @@ int Enemy::PlayerContact(Position playerpos) // pass in player's position object
 	return damagetaken;
 }
 
+
+Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
+	Enemy* returnEnemy = nullptr;
+
+
+	for (int i = 0; i < arraySize; i++) {
+		if (enemy[i]->getPositionX() == x && enemy[i]->getPositionY() == y) {
+			returnEnemy = enemy[i];
+		}
+
+	}
+	return returnEnemy;
+}
+
+
+
 // using setDamage function in Entity.h, setHealth(getHealth() - setDamage(PlayerContact()))
 // set current health = initial health - set damage(return statement in Enemy::PlayerContact())
 

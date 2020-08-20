@@ -30,4 +30,3 @@ public:
 };
 
 
-Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize);

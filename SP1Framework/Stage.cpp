@@ -102,15 +102,3 @@ void Stage::render(Console& console) {
 }
 
 
-Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
-	Enemy* returnEnemy = nullptr;
-	
-	
-	for (int i = 0; i < arraySize; i++) {
-		if (enemy[i]->getPositionX() == x && enemy[i]->getPositionY() == y) {
-			returnEnemy = enemy[i];
-		}
-
-	}
-	return returnEnemy;
-}
