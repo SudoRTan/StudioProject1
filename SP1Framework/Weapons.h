@@ -8,7 +8,6 @@ public:
 	int ammo;
 	int getAmmo();
 	int setAmmo(int newammo);
-	void AmmoCounter(Console& console);
 	//constructor & destructor
 	Weapons();
 	~Weapons();
