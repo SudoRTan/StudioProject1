@@ -26,4 +26,5 @@ public:
 
 	char getItemBelow(Map& map);
 
+	void setPosition(int x, int y);
 };

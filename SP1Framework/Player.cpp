@@ -184,3 +184,8 @@ void Player::touchEnemy(Enemy enemy, double g_dElapsedTime)
 char Player::getItemBelow(Map& map) {
 	return map.getItem(position.getX(), position.getY());
 }
+
+void Player::setPosition(int x, int y) {
+	position.setX(x);
+	position.setY(y);
+}

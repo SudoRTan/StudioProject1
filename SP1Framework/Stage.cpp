@@ -18,18 +18,44 @@ Stage::~Stage() {
 		map = nullptr;
 	}
 	if (enemy != nullptr) {
+		for (int i = 0; i < numOfEnemies; i++) {
+			delete enemy[i];
+		}
 		delete[] enemy;
 		enemy = nullptr;
 	}
+	int stop = 3;
 }
 
 
 
 void Stage::loadMap(std::string fileName) {
-	map = new Map(fileName);
-	enemy = new Enemy*;
-	enemy[0] = new Enemy(5,1);
-	numOfEnemies = 1;
+	if (map == nullptr) {
+		map = new Map(fileName);
+
+	}
+	else {
+		delete map;
+		map = new Map(fileName);
+
+	}
+	
+	numOfEnemies = map->getNumberOfEnemies();
+
+	COORD** enemyPosition = map->getPositionOfEnemies();
+
+	char* enemySymbol = map->getSymbolOfEnemies();
+
+	player->setPosition(map->getPlayerPosition().X, map->getPlayerPosition().Y);
+
+	enemy = new Enemy * [numOfEnemies];
+
+	for (int i = 0; i < numOfEnemies; i++) {
+		enemy[i] = new Enemy(enemyPosition[i]->X, enemyPosition[i]->Y);
+
+	}
+	
+
 }
 
 void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {

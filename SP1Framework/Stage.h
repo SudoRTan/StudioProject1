@@ -13,6 +13,8 @@ private:
 	Enemy** enemy;
 	int numOfEnemies;
 
+	
+
 public:
 	Stage();
 	~Stage();
