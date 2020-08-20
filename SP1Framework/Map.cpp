@@ -28,8 +28,8 @@ Map::Map()
 	height = 16;
 	length = 80;
 
-	playerStartingPos.setX(0);
-	playerStartingPos.setY(1);
+	playerStartingPos.X = 0;
+	playerStartingPos.Y = 1;
 
 
 	mapArray = new char* [height];
@@ -49,15 +49,26 @@ Map::Map()
 	{
 		mapArray[0][i] = (char)FLOOR;
 	}
+
+
+
+
+	numberOfEnemies = 1;
+
+	symbolOfEnemies = new char[numberOfEnemies];
+
+	for (int i = 0; i < numberOfEnemies; i++) {
+
+	}
 }
 
 Map::Map(int height, int length)
 {
 	this->height = height;
 	this->length = length;
-	
-	playerStartingPos.setX(0);
-	playerStartingPos.setY(1);
+
+	playerStartingPos.X = 0;
+	playerStartingPos.Y = 1;
 
 
 
@@ -102,9 +113,10 @@ Map::Map(std::string fileName)
 	height = 0;
 	length = 0;
 
-	playerStartingPos.setX(0);
-	playerStartingPos.setY(1);
+	playerStartingPos.X = 0;
+	playerStartingPos.Y = 1;
 
+	numberOfEnemies = 0;
 
 	std::string line = "";
 	int lines = 0;
@@ -140,13 +152,12 @@ Map::Map(std::string fileName)
 			int lengthOfLine = size(line);
 
 			for (int i = 0; i < lengthOfLine; i++) {
-				if (line[i] == 'P') {
-					playerStartingPos.setX(i);
-					playerStartingPos.setY(readingLine);
-					line[i] = EMPTY;
-				}
 				mapArray[readingLine][i] = line[i];
 				mapTemplate[readingLine][i] = line[i];
+
+				if (mapArray[readingLine][i] == 'E') {
+					numberOfEnemies++;
+				}
 			}
 
 			if (lengthOfLine != length) {
@@ -157,7 +168,50 @@ Map::Map(std::string fileName)
 				}
 			}
 			readingLine--;
+		}
 
+		// Creates positionOfEnemies array;
+
+		positionOfEnemies = new COORD* [numberOfEnemies];
+		for (int i = 0; i < numberOfEnemies; i++) {
+			positionOfEnemies[i] = new COORD;
+			positionOfEnemies[i]->X = 0;
+			positionOfEnemies[i]->Y = 0;
+		}
+
+
+		//Creates symbolOfEnemies array;
+		symbolOfEnemies = new char[numberOfEnemies];
+		for (int i = 0; i < numberOfEnemies; i++) {
+			symbolOfEnemies[i] = 0;
+		}
+		
+
+
+		int enemyCounter = 0;
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < length; j++) {
+				switch (mapArray[i][j]) {
+				case 'P':
+					playerStartingPos.X = j;
+					playerStartingPos.Y = i;
+					mapArray[i][j] = EMPTY;
+					mapTemplate[i][j] = EMPTY;
+					break;
+
+				case 'E':
+					positionOfEnemies[enemyCounter]->X = j;
+					positionOfEnemies[enemyCounter]->Y = i;
+					symbolOfEnemies[enemyCounter] = 'E';
+					mapArray[i][j] = EMPTY;
+					mapTemplate[i][j] = EMPTY;
+					enemyCounter++;
+					break;
+
+				default:
+					break;
+				}
+			}
 		}
 
 	}
@@ -330,4 +384,27 @@ The 1st section pertains to reading the .txt file and getting the length & heigh
 			console.writeToBuffer(l, h + yOffset, mapArray[h][l], BG_CYAN + FG_LIGHTMAGENTA);
 		}
 	}
+}
+
+
+int Map::getNumberOfEnemies() {
+	return numberOfEnemies;
+}
+
+COORD** Map::getPositionOfEnemies() {
+	COORD** returnData = positionOfEnemies;
+	
+	return returnData;
+
+}
+
+char* Map::getSymbolOfEnemies() {
+
+	char* returnData = symbolOfEnemies;
+
+	return returnData;
+}
+
+COORD Map::getPlayerPosition() {
+	return playerStartingPos;
 }

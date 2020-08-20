@@ -30,7 +30,7 @@ Console g_Console(80, 25, "SP1 Framework");
 Map map("oopstage5.txt");
 
 //Player Object
-Player player(map.playerStartingPos.getX(), map.playerStartingPos.getY());
+Player player(1, 1);
 
 
 //UI Object

@@ -4,6 +4,7 @@
 #include "Position.h"
 #include <fstream>
 
+
 enum MapElements {
 	INVALID = 0,
 	EMPTY = ' ',
@@ -22,6 +23,18 @@ private:
 	char** mapArray;
 	char** mapTemplate;
 
+
+	//Used to store locations / number of enemies;
+	int numberOfEnemies;
+	COORD** positionOfEnemies;
+	char* symbolOfEnemies;
+	COORD playerStartingPos;
+
+
+
+
+
+
 public:
 	//Constructor/Destructor
 	Map();
@@ -29,7 +42,6 @@ public:
 	Map(std::string fileName);
 	~Map();
 
-	Position playerStartingPos;
 
 	//Renders map to console
 	void renderMap(Console& console);
@@ -45,6 +57,16 @@ public:
 	
 	//Read map stage from .txt file
 	void loadMap(std::string filename, Console& console);
+
+
+
+	int getNumberOfEnemies();
+	COORD** getPositionOfEnemies();
+	char* getSymbolOfEnemies();
+
+
+	COORD getPlayerPosition();
+
 
 };
 
