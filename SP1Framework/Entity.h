@@ -10,17 +10,13 @@ enum ENTITY_STATE {
 };
 
 
+enum DIRECTION {
+	LEFT,
+	RIGHT
+};
+
 class Entity
 {
-public:
-	Entity();
-	~Entity();
-	int getPositionX();
-	int getPositionY();
-	int getHealth();
-	int getDamage();
-
-	void takeDamage(int damage, double g_dElapsedTime);
 
 protected:
 	Position position;
@@ -36,7 +32,21 @@ protected:
 	double damageDelay;
 	double lastDamageTime;
 
+	int direction;
 
 	void setHealth(int newHealth);
 	void setDamage(int newDamage);
+
+public:
+	Entity();
+	~Entity();
+	int getPositionX();
+	int getPositionY();
+	int getHealth();
+	int getDamage();
+
+	void takeDamage(int damage, double g_dElapsedTime);
+
+	int getDirection();
+
 };

@@ -17,6 +17,8 @@ Player::Player()
 
 	enemyLocation.X = 0;
 	enemyLocation.Y = 0;
+
+	direction = RIGHT;
 }
 
 
@@ -32,10 +34,12 @@ Player::Player(int x, int y) {
 	dropping = false;
 
 	lastDamageTime = 0.0;
-	damageDelay = 0.2;
+	damageDelay = 0.3;
 	
 	enemyLocation.X = 0;
 	enemyLocation.Y = 0;
+
+	direction = RIGHT;
 }
 
 
@@ -53,11 +57,13 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 
 	if (KeyEvent[K_LEFT].keyDown && g_dElapsedTime - lastMovementTime > updateDelay)
 	{
+		direction = LEFT;
 		newX--;
 	}
 
 	if (KeyEvent[K_RIGHT].keyDown && g_dElapsedTime - lastMovementTime > updateDelay)
 	{
+		direction = RIGHT;
 		newX++;
 
 	}

@@ -49,3 +49,7 @@ void Entity::takeDamage(int damage, double g_dElapsedTime) {
 		lastDamageTime = g_dElapsedTime;
 	}
 }
+
+int Entity::getDirection() {
+	return direction;
+}
