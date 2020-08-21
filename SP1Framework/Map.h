@@ -5,7 +5,7 @@
 #include <fstream>
 #include "createArray.h"
 
-enum MapElements {
+enum MAP_ELEMENTS {
 	INVALID = 0,
 	EMPTY = ' ',
 	FLOOR = 219,
