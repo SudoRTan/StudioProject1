@@ -23,6 +23,8 @@ private:
 	char** mapArray;
 	char** mapTemplate;
 
+	char** tempMapArray;
+
 
 	//Used to store locations / number of enemies;
 	int numberOfEnemies;
@@ -55,6 +57,8 @@ public:
 
 	void setDefaultItem(int x, int y);
 	
+	void setTempItem(int x, int y, char symbol);
+
 	//Read map stage from .txt file
 	void loadMap(std::string filename, Console& console);
 

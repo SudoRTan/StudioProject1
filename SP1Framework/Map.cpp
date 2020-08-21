@@ -116,6 +116,8 @@ Map::Map(std::string fileName)
 	playerStartingPos.X = 0;
 	playerStartingPos.Y = 1;
 
+
+
 	numberOfEnemies = 0;
 
 	std::string line = "";
@@ -144,6 +146,7 @@ Map::Map(std::string fileName)
 
 		mapArray = createArray(lines, columns);
 		mapTemplate = createArray(lines, columns);
+		tempMapArray = createArray(lines, columns);
 
 
 		int readingLine = height-1;
@@ -211,6 +214,7 @@ Map::Map(std::string fileName)
 				default:
 					break;
 				}
+				tempMapArray[i][j] = mapArray[i][j];
 			}
 		}
 
@@ -226,9 +230,12 @@ Map::~Map()
 	{
 		delete[] mapArray[i];
 		delete[] mapTemplate[i];
+		delete[] tempMapArray[i];
 	}
 	delete[] mapArray;
 	delete[] mapTemplate;
+	delete[] tempMapArray;
+
 
 	for (int i = 0; i < numberOfEnemies; i++) {
 		delete positionOfEnemies[i];
@@ -268,7 +275,7 @@ void Map::renderMap(Console& console, int x, int y) {
 	if (mapOffsetY + 16 > height) {
 		mapOffsetY = height - 16;
 	}
-		if (mapOffsetX < 0) {
+	if (mapOffsetX < 0) {
 		mapOffsetX = 0;
 	}
 	if (mapOffsetY < 0) {
@@ -284,7 +291,14 @@ void Map::renderMap(Console& console, int x, int y) {
 
 	for (int i = 0; i < getSmaller(16,height); i++){
 		for (int j = 0; j < getSmaller(80,length); j++){
-			console.writeToBuffer(j, 24 - i, mapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
+			if (mapArray[i + mapOffsetY][j + mapOffsetX] != tempMapArray[i + mapOffsetY][j + mapOffsetX]) {
+				console.writeToBuffer(j, 24 - i, tempMapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
+				tempMapArray[i + mapOffsetY][j + mapOffsetX] = mapArray[i + mapOffsetY][j + mapOffsetX];
+			}
+			else {
+				console.writeToBuffer(j, 24 - i, mapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
+
+			}
 		}
 	}
 }
@@ -309,6 +323,9 @@ void Map::setDefaultItem(int x, int y) {
 	mapArray[y][x] = mapTemplate[y][x];
 }
 
+void Map::setTempItem(int x, int y, char symbol) {
+	tempMapArray[y][x] = symbol;
+}
 
 void Map::loadMap(std::string filename, Console& console)
 {
