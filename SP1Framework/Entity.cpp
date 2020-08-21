@@ -54,6 +54,20 @@ void Entity::takeDamage(int damage) {
 	health = health - damage;
 }
 
+bool Entity::isLocatedAt(int x, int y) {
+	bool isPresent = false;
+
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			if (position.getX() + i == x && position.getY() + j == y) {
+				isPresent = true;
+			}
+		}
+	}
+	return isPresent;
+}
+
+
 int Entity::getDirection() {
 	return direction;
 }
