@@ -8,19 +8,6 @@ int getSmaller(int first, int second) {
 }
 
 
-char** createArray(int row, int column) {
-
-	char** array = new char* [row];
-	for (int i = 0; i < row; ++i)
-		array[i] = new char[column];
-
-	for (int i = 0; i < row; i++) {
-		for (int j = 0; j < column; j++) {
-			array[i][j] = EMPTY;
-		}
-	}
-	return array;
-}
 
 
 Map::Map()
@@ -144,9 +131,9 @@ Map::Map(std::string fileName)
 		height = lines;
 		length = columns;
 
-		mapArray = createArray(lines, columns);
-		mapTemplate = createArray(lines, columns);
-		tempMapArray = createArray(lines, columns);
+		mapArray = createArray(columns, lines);
+		mapTemplate = createArray(columns, lines);
+		tempMapArray = createArray(columns, lines);
 
 
 		int readingLine = height-1;

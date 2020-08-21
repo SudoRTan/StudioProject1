@@ -3,7 +3,7 @@
 #include "colors.h"
 #include "Position.h"
 #include <fstream>
-
+#include "createArray.h"
 
 enum MapElements {
 	INVALID = 0,
