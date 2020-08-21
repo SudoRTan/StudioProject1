@@ -11,9 +11,15 @@ private:
 	
 
 protected:
-	int phase;
 	void setDamage(int damage);
 	void setName(std::string name);
+
+	double useTime;
+	double lastUseTime;
+
+	// Animation variables
+	int animationPhases;
+	int currentAnimationPhase;
 	double lastAnimateTime;
 
 
@@ -28,7 +34,7 @@ public:
 
 	virtual void animate(Map& map, double g_dElapsedTime, int direction, int x, int y) = 0;
 	
-	virtual void use(Map& map, Enemy** enemyArray, int enemyArraySize, int direction, int x, int y) = 0;
+	virtual void use(Map& map, Enemy** enemyArray, int enemyArraySize, double g_dElapsedTime, int direction, int x, int y) = 0;
 
 
 

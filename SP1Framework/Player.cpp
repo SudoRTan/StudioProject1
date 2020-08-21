@@ -229,7 +229,7 @@ void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime
 		weapon->animate(map, g_dElapsedTime, direction, position.getX(), position.getY() + 1);
 
 		if (KeyEvent[K_SPACE].keyOnce) {
-			weapon->use(map, enemyArray, enemyArraySize, direction, position.getX(), position.getY() + 1);
+			weapon->use(map, enemyArray, enemyArraySize, g_dElapsedTime, direction, position.getX(), position.getY() + 1);
 		}
 	}
 			
