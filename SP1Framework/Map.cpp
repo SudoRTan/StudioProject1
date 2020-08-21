@@ -302,12 +302,33 @@ char Map::getItem(int x, int y)
 }
 
 void Map::setItem(int x, int y, char symbol) {
-	mapArray[y][x] = symbol;
-
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return;
+	}
+	else {
+		mapArray[y][x] = symbol;
+	}
 }
 
+char Map::getDefaultItem(int x, int y)
+{
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return INVALID;
+	}
+	else {
+		// Gets the map character from a specifc position
+		return mapTemplate[y][x];
+	}
+}
+
+
 void Map::setDefaultItem(int x, int y) {
-	mapArray[y][x] = mapTemplate[y][x];
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return;
+	}
+	else {
+		mapArray[y][x] = mapTemplate[y][x];
+	}
 }
 
 void Map::setTempItem(int x, int y, char symbol) {

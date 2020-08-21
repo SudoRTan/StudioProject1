@@ -55,6 +55,8 @@ public:
 	//Set map object
 	void setItem(int x, int y, char symbol);
 
+
+	char getDefaultItem(int x, int y);
 	void setDefaultItem(int x, int y);
 	
 	void setTempItem(int x, int y, char symbol);
