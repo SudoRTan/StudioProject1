@@ -75,6 +75,7 @@ bool Entity::canEntityMove(Map& map, int x, int y) {
 			char itemAtNewLocation = map.getDefaultItem(x + i, y + j);
 			switch (itemAtNewLocation) {
 			case EMPTY:
+			case PLATFORM:
 				validMove = true;
 				break;
 

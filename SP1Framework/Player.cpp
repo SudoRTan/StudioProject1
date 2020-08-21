@@ -9,7 +9,8 @@ Player::Player()
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
 	updateDelay = 0.04;
-	changeInHeight = 0;
+	updateHeightDelay = 0.06;
+
 	dropping = false;
 
 	lastDamageTime = 0.0;
@@ -42,7 +43,8 @@ Player::Player(int x, int y) {
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
 	updateDelay = 0.04;
-	changeInHeight = 0;
+	updateHeightDelay = 0.06;
+
 	dropping = false;
 
 	lastDamageTime = 0.0;
@@ -170,34 +172,46 @@ void Player::updateHeight(Map& map, double g_dElapsedTime)
 {	
 	int newX = position.getX();
 	int newY = position.getY();
+	if (g_dElapsedTime - lastJumpTime > updateHeightDelay) {
+		if (canJump != 0)
+		{
+			newY++;
+			canJump--;
 
-	if (g_dElapsedTime - lastJumpTime > 0.06 && canJump !=0)
-	{
-		newY++;
+		}
+		else if (dropping) {
+			newY--;
 
-		lastJumpTime = g_dElapsedTime;
-		canJump--;
-		changeInHeight++;
-	
+		}
+
+		else if (getItemBelow(map) == EMPTY)
+		{
+			newY--;
+
+		}
 	}
-	else if (dropping) {
-		newY--;
-		changeInHeight--;
-		
+
+	if (position.getX() != newX || position.getY() != newY) {
+		bool validMove = canEntityMove(map, newX, newY);
+		if (validMove) {
+			lastJumpTime = g_dElapsedTime;
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					map.setDefaultItem(position.getX() + i, position.getY() + j);
+				}
+			}
+			position.setX(newX);
+			position.setY(newY);
+
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					map.setItem(newX + i, newY + j, symbolArray[j][i]);
+				}
+			}
+		}
 	}
 
-	else if (g_dElapsedTime - lastJumpTime > 0.06)
-	{
-		newY--;
-		lastJumpTime = g_dElapsedTime;	
-		changeInHeight--;
-	}
-	
-
-
-	char itemAtNewLocation = map.getItem(newX, newY);
-
-
+	/*
 	if (itemAtNewLocation == EMPTY) {
 
 		//map.setDefaultItem(position.getX(), position.getY());
@@ -233,8 +247,7 @@ void Player::updateHeight(Map& map, double g_dElapsedTime)
 	else if  ( newY != position.getY()){
 		canJump = 0;
 	}
-	
-	changeInHeight = 0;
+	*/
 	dropping = false;
 
 
@@ -284,7 +297,7 @@ void Player::touchEnemy(Enemy enemy, double g_dElapsedTime)
 }
 
 char Player::getItemBelow(Map& map) {
-	return map.getItem(position.getX(), position.getY());
+	return map.getDefaultItem(position.getX(), position.getY() - 1);
 }
 
 void Player::setPosition(int x, int y) {

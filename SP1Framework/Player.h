@@ -17,8 +17,9 @@ class Player :
 	public Entity
 {
 private:
-	int changeInHeight;
 	bool dropping;
+	double updateHeightDelay;
+
 	COORD enemyLocation;
 	Weapon* weapon;
 
