@@ -36,7 +36,8 @@ void MeleeWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x,
 		}
 
 
-
+		/*
+		OLD ANIMATIOM
 		switch (currentAnimationPhase) {
 		case 1:
 			map.setTempItem(x + offSet, y, '0');
@@ -57,6 +58,29 @@ void MeleeWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x,
 			break;
 
 		}
+		*/
+
+		switch (currentAnimationPhase) {
+		case 1:
+			map.setTempItem(x + offSet, y, (char)POINTING_DOWNWARDS);
+			map.setTempItem(x + offSet * 2, y - 1, (char)POINTING_DOWNWARDS);
+			break;
+
+		case 2:
+			map.setTempItem(x + offSet, y, (char)POINTING_STRAIGHT);
+			map.setTempItem(x + offSet * 2, y, (char)POINTING_STRAIGHT);
+			break;
+
+		case 3:
+			map.setTempItem(x + offSet, y, (char)POINTING_UPWARDS);
+			map.setTempItem(x + offSet * 2, y + 1, (char)POINTING_UPWARDS);
+			break;
+
+		default:
+			break;
+
+		}
+
 		if (g_dElapsedTime - lastAnimateTime > (useTime / animationPhases)) {
 			lastAnimateTime = g_dElapsedTime;
 			currentAnimationPhase--;
