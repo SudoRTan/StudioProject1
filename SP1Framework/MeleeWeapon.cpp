@@ -28,33 +28,38 @@ void MeleeWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x,
 		break;
 	}
 
-	if (g_dElapsedTime - lastAnimateTime > 0.02 && phase != 0) {
-	
-		switch (phase) {
-		case 2:
-			map.setTempItem(x + offSet, y, '0');
-			map.setTempItem(x + offSet * 2, y - 1, '0');
-			break;
 
-		case 3:
-			map.setTempItem(x + offSet, y, '0');
-			map.setTempItem(x + offSet * 2, y, '0');
-			break;
 
-		case 4:
-			map.setTempItem(x + offSet, y, '0');
-			map.setTempItem(x + offSet * 2, y + 1, '0');
-			break;
+	switch (phase) {
+	case 1:
+		map.setTempItem(x + offSet, y, '0');
+		map.setTempItem(x + offSet * 2, y - 1, '0');
+		break;
 
-		default:
-			break;
-		}
+	case 2:
+		map.setTempItem(x + offSet, y, '0');
+		map.setTempItem(x + offSet * 2, y, '0');
+		break;
+
+	case 3:
+		map.setTempItem(x + offSet, y, '0');
+		map.setTempItem(x + offSet * 2, y + 1, '0');
+		break;
+
+	default:
+		break;
+		
+	}
+
+	if (g_dElapsedTime - lastAnimateTime > 0.03) {
+		lastAnimateTime = g_dElapsedTime;
 		phase--;
 	}
+
 }
 
 void MeleeWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, int direction, int x, int y) {
-	phase = 4;
+	phase = 3;
 	if (direction == LEFT) {
 		for (int i = 1; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
