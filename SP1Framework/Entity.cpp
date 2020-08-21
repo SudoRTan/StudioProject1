@@ -72,7 +72,7 @@ bool Entity::canEntityMove(Map& map, int x, int y) {
 	
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
-			char itemAtNewLocation = map.getItem(x + i, y + j);
+			char itemAtNewLocation = map.getDefaultItem(x + i, y + j);
 			switch (itemAtNewLocation) {
 			case EMPTY:
 				validMove = true;

@@ -140,19 +140,27 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 	}
 	*/
 
-	bool validMove = canEntityMove(map, newX, newY);
+	if ((position.getX() != newX || position.getY() != newY) && g_dElapsedTime - lastMovementTime > updateDelay) {
+		bool validMove = canEntityMove(map, newX, newY);
+		if (validMove) {
+			lastMovementTime = g_dElapsedTime;
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					map.setDefaultItem(position.getX() + i, position.getY() + j);
+				}
+			}
+			position.setX(newX);
+			position.setY(newY);
 
-	if (validMove) {
-		position.setX(newX);
-		position.setY(newY);
-	}
-
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j < height; j++) {
-			map.setDefaultItem(position.getX() + i, position.getY() + j);
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					map.setItem(newX + i, newY + j, symbolArray[j][i]);
+				}
+			}
 		}
 	}
 
+	
 
 	return NO_CHANGE;
 
