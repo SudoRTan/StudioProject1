@@ -28,40 +28,22 @@ void MeleeWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x,
 		break;
 	}
 
-	if (phase != 0) {
-		map.setDefaultItem(x + offSet, y + 1);
-		map.setDefaultItem(x + offSet * 2, y + 1);
-		map.setDefaultItem(x + offSet, y);
-		map.setDefaultItem(x + offSet * 2, y);
-		map.setDefaultItem(x + offSet, y - 1);
-		map.setDefaultItem(x + offSet * 2, y - 1);
-
-	}
 	if (g_dElapsedTime - lastAnimateTime > 0.02 && phase != 0) {
 	
-
-		map.setDefaultItem(x + offSet, y + 1);
-		map.setDefaultItem(x + offSet * 2, y + 1);
-		map.setDefaultItem(x + offSet, y);
-		map.setDefaultItem(x + offSet * 2, y);
-		map.setDefaultItem(x + offSet, y - 1);
-		map.setDefaultItem(x + offSet * 2, y - 1);
-
-
 		switch (phase) {
 		case 2:
-			map.setItem(x + offSet, y, '0');
-			map.setItem(x + offSet * 2, y - 1, '0');
+			map.setTempItem(x + offSet, y, '0');
+			map.setTempItem(x + offSet * 2, y - 1, '0');
 			break;
 
 		case 3:
-			map.setItem(x + offSet, y, '0');
-			map.setItem(x + offSet * 2, y, '0');
+			map.setTempItem(x + offSet, y, '0');
+			map.setTempItem(x + offSet * 2, y, '0');
 			break;
 
 		case 4:
-			map.setItem(x + offSet, y, '0');
-			map.setItem(x + offSet * 2, y + 1, '0');
+			map.setTempItem(x + offSet, y, '0');
+			map.setTempItem(x + offSet * 2, y + 1, '0');
 			break;
 
 		default:
