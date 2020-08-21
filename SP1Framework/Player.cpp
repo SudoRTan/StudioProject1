@@ -21,6 +21,16 @@ Player::Player()
 	direction = RIGHT;
 
 	weapon = new MeleeWeapon;
+
+
+	height = 3;
+	width = 1;
+
+	symbolArray = createArray(width, height);
+
+	symbolArray[0][0] = PLAYER_LEGS;
+	symbolArray[1][0] = PLAYER_BODY;
+	symbolArray[2][0] = PLAYER_HEAD;
 }
 
 
@@ -45,6 +55,15 @@ Player::Player(int x, int y) {
 
 	weapon = new MeleeWeapon;
 
+	height = 3;
+	width = 1;
+
+	symbolArray = createArray(width, height);
+
+	symbolArray[0][0] = PLAYER_LEGS;
+	symbolArray[1][0] = PLAYER_BODY;
+	symbolArray[2][0] = PLAYER_HEAD;
+
 }
 
 
@@ -58,7 +77,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 	int newX = position.getX();
 	int newY = position.getY();
 
-
+	
 
 	if (KeyEvent[K_LEFT].keyDown && g_dElapsedTime - lastMovementTime > updateDelay)
 	{
@@ -84,7 +103,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 	if (KeyEvent[K_DOWN].keyTwice) {
 		dropping = true;
 	}
-
+	/*
 	char itemAtNewLocation = map.getItem(newX, newY);
 	if (itemAtNewLocation == 'E') {
 		lastMovementTime = g_dElapsedTime;
@@ -96,6 +115,13 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 	}
 
 	else if (itemAtNewLocation == EMPTY) {
+		
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				map.setDefaultItem(position.getX() + i, position.getY() + j);
+			}
+		}
+		
 		lastMovementTime = g_dElapsedTime;
 
 		map.setDefaultItem(position.getX(), position.getY());
@@ -103,9 +129,31 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 		position.setX(newX);
 		position.setY(newY);
 
-		map.setItem(position.getX(), position.getY(), '9');
+		//map.setItem(position.getX(), position.getY(), '9');
+		
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				map.setItem(newX + i, newY + j, symbolArray[j][i]);
+			}
+		}
 
 	}
+	*/
+
+	bool validMove = canEntityMove(map, newX, newY);
+
+	if (validMove) {
+		position.setX(newX);
+		position.setY(newY);
+	}
+
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setDefaultItem(position.getX() + i, position.getY() + j);
+		}
+	}
+
+
 	return NO_CHANGE;
 
 }
@@ -143,18 +191,34 @@ void Player::updateHeight(Map& map, double g_dElapsedTime)
 
 
 	if (itemAtNewLocation == EMPTY) {
-		map.setDefaultItem(position.getX(), position.getY());
+
+		//map.setDefaultItem(position.getX(), position.getY());
+
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				map.setTempItem(newX + i, newY + j, symbolArray[j][i]);
+			}
+		}
+
 		position.setX(newX);
 		position.setY(newY);
-		map.setItem(position.getX(), position.getY(), '9');
+		//map.setItem(position.getX(), position.getY(), '9');
 	
 	}
 	else if (itemAtNewLocation == PLATFORM && (dropping || changeInHeight > 0)) {
 		
-		map.setDefaultItem(position.getX(), position.getY());
+		//map.setDefaultItem(position.getX(), position.getY());
+
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				map.setTempItem(newX + i, newY + j, symbolArray[j][i]);
+			}
+		}
+
 		position.setX(newX);
 		position.setY(newY);
-		map.setItem(position.getX(), position.getY(), '9');
+
+		//map.setItem(position.getX(), position.getY(), '9');
 
 	}
 

@@ -67,6 +67,31 @@ bool Entity::isLocatedAt(int x, int y) {
 	return isPresent;
 }
 
+bool Entity::canEntityMove(Map& map, int x, int y) {
+	bool validMove = false;
+	
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			char itemAtNewLocation = map.getItem(x + i, y + j);
+			switch (itemAtNewLocation) {
+			case EMPTY:
+				validMove = true;
+				break;
+
+			case INVALID:
+			default:
+				validMove = false;
+				break;
+			}
+			if (validMove == false){
+				return validMove;
+			}
+		}
+	}
+	return validMove;
+}
+
+
 
 int Entity::getDirection() {
 	return direction;

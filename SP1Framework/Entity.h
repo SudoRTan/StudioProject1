@@ -55,6 +55,7 @@ public:
 
 	bool isLocatedAt(int x, int y);
 
+	bool canEntityMove(Map& map, int x, int y);
 
 	int getDirection();
 

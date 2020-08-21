@@ -7,7 +7,11 @@
 #include "Weapon.h"
 #include "MeleeWeapon.h"
 
-
+enum PLAYER_ELEMENTS {
+	PLAYER_HEAD = '0',
+	PLAYER_BODY = '|',
+	PLAYER_LEGS = 'A'
+};
 
 class Player :
 	public Entity
