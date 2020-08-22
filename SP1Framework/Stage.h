@@ -13,12 +13,19 @@ private:
 	Player* player;
 	Enemy** enemy;
 	int numOfEnemies;
+	int stageNumber;
+	int levelNumber;
 	UI ui;
+	std::string currentStage;
 
 
 public:
 	Stage();
 	~Stage();
+
+	std::string getStage(void);
+
+	void updateStage(void);
 
 	void loadMap(std::string fileName);
 
