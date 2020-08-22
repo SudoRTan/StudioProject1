@@ -70,7 +70,8 @@ int Enemy::patrol(Map& map, double g_dElapsedTime)
 		}
 
 		bool validMove = canEntityMove(map, newX, newY);
-		if (validMove) {
+		bool solidFloor = onSolidFloor(map, newX, newY);
+		if (validMove && solidFloor) {
 			lastMovementTime = g_dElapsedTime;
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++) {
@@ -155,8 +156,8 @@ void Enemy::random(Map& map, double g_dElapsedTime)
 }
 
 
-void Enemy::update(Map& map, double g_dElapsedTime) {
-	patrol(map, g_dElapsedTime);
+int Enemy::update(Map& map, double g_dElapsedTime) {
+	return patrol(map, g_dElapsedTime);
 }
 
 int Enemy::PlayerContact(Position playerpos) // pass in player's position object into playerpos

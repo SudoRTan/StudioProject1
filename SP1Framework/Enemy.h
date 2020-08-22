@@ -21,7 +21,7 @@ public:
 	
 	void random(Map& map, double g_dElapsedTime);
 
-	virtual void update(Map& map, double g_dElapsedTime);
+	virtual int update(Map& map, double g_dElapsedTime);
 
 
 	int PlayerContact(Position playerpos);

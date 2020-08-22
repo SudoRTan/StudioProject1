@@ -84,7 +84,7 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 			int enemyReturnValue = 0;
 
 			if (enemy[i]!=nullptr) {
-				enemyReturnValue = enemy[i]->patrol(*map, g_dElapsedTime);
+				enemyReturnValue = enemy[i]->update(*map, g_dElapsedTime);
 			}
 
 			switch (enemyReturnValue) {
