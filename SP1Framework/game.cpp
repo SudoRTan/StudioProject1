@@ -21,7 +21,7 @@ SMouseEvent g_mouseEvent;
 
 // Game specific variables here
 SGameChar   g_sChar;
-EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
+EGAMESTATES g_eGameState = S_GAME; // initial state
 
 // Console object
 Console g_Console(80, 25, "SP1 Framework");
@@ -41,8 +41,6 @@ Enemy enemy(18,6);
 
 
 Stage* stage = new Stage;
-
-
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -73,7 +71,7 @@ void init( void )
     g_Console.setMouseHandler(mouseHandler);
 
     //Loads the stage map
-    stage->loadMap("oopstage5.txt");
+    stage->loadMap(stage->getStage());
 }
 
 //--------------------------------------------------------------

@@ -1,4 +1,5 @@
 #include "Stage.h"
+#include <sstream>
 
 
 Stage::Stage() {
@@ -6,6 +7,9 @@ Stage::Stage() {
 	map = nullptr;
 	enemy = nullptr;
 	numOfEnemies = 0;
+	stageNumber = 1; // player starts game at stage1_1
+	levelNumber = 1;
+	currentStage = "stage1_1.txt";
 }
 
 Stage::~Stage() {
@@ -27,9 +31,54 @@ Stage::~Stage() {
 	int stop = 3;
 }
 
+std::string Stage::getStage(void)
+{
+	return currentStage;
+}
 
+void Stage::updateStage(void)
+{
+	if (player->reachDoor() == true)
+	{
+		std::ostringstream ss;
+		ss.str("");
+		levelNumber++;
+
+		if (levelNumber == 4)
+		{
+			ss << "stage" << stageNumber << "_" << "B" << ".txt";
+			stageNumber++;
+			levelNumber = 0;
+		}
+		else
+		{
+			ss << "stage" << stageNumber << "_" << levelNumber << ".txt";
+		}
+
+		currentStage = ss.str(); // convert text from stringstream to string
+	}
+}
 
 void Stage::loadMap(std::string fileName) {
+
+	if (player->reachDoor() == true)
+	{
+		levelNumber++;
+		if (levelNumber == 4)
+		{
+
+		}
+		else
+		{
+
+		}
+	}
+	if (levelNumber == 4)
+	{
+		stageNumber++;
+		levelNumber = 0;
+	}
+
 	if (map == nullptr) {
 		map = new Map(fileName);
 
