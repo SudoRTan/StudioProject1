@@ -93,6 +93,52 @@ bool Entity::canEntityMove(Map& map, int x, int y) {
 }
 
 
+bool Entity::onSolidFloor(Map& map, int x, int y) {
+	bool onSolidFloor = true;
+	for (int i = 0; i < width; i++) {
+		char floorAtNewLocation = map.getDefaultItem(x + i, y - 1);
+		switch (floorAtNewLocation) {
+		case EMPTY:
+			onSolidFloor = false;
+			break;
+
+		case PLATFORM:
+		case '=':
+			onSolidFloor = true;
+		}
+		if (onSolidFloor == false) {
+			return onSolidFloor;
+		}
+	}
+	return onSolidFloor;
+}
+
+
+bool Entity::hangingOnEdge(Map& map, int x, int y) {
+	bool onEmptySpace = false;
+	bool onSolidGround = false;
+	for (int i = 0; i < width; i++) {
+		char floorAtNewLocation = map.getDefaultItem(x + i, y - 1);
+		
+		switch (floorAtNewLocation) {
+		case EMPTY:
+			onEmptySpace = true;
+			break;
+		
+		case PLATFORM:
+		case '=':
+			onSolidGround = true;
+		}
+	}
+	if (onEmptySpace && onSolidGround) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+
 
 int Entity::getDirection() {
 	return direction;

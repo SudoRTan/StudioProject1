@@ -57,6 +57,10 @@ public:
 
 	bool canEntityMove(Map& map, int x, int y);
 
+	bool onSolidFloor(Map& map, int x, int y);
+
+	bool hangingOnEdge(Map& map, int x, int y);
+
 	int getDirection();
 
 };
