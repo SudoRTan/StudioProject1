@@ -8,7 +8,11 @@
 enum MAP_ELEMENTS {
 	INVALID = 0,
 	EMPTY = ' ',
+	DOOR = 68,
+	SPIKE = 94,
+	LAVA = 95,
 	FLOOR = 219,
+	WALL = 124,
 	PLATFORM = 45,
 };
 
