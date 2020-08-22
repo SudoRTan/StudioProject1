@@ -90,43 +90,46 @@ void shutdown( void )
 }
 
 void testGetInput(void) {
-    SKeyEvent temp_skKeyEvent[K_COUNT];
-    for (int i = 0; i < K_COUNT; i++)
-    {
-        temp_skKeyEvent[i].keyDown = g_skKeyEvent[i].keyDown;
-    }
-
-    g_skKeyEvent[K_UP].keyDown = isKeyPressed(VK_UP);
-    g_skKeyEvent[K_DOWN].keyDown = isKeyPressed(VK_DOWN);
-    g_skKeyEvent[K_LEFT].keyDown = isKeyPressed(VK_LEFT);
-    g_skKeyEvent[K_RIGHT].keyDown = isKeyPressed(VK_RIGHT);
-    g_skKeyEvent[K_ESCAPE].keyDown = isKeyPressed(VK_ESCAPE);
-    g_skKeyEvent[K_SPACE].keyDown = isKeyPressed(VK_SPACE);
-            
-    for (int i = 0; i < K_COUNT; i++) {
-
-
-        if (temp_skKeyEvent[i].keyDown && !g_skKeyEvent[i].keyDown) {
-            g_skKeyEvent[i].keyReleased = true;
+    if (GetConsoleWindow() == GetForegroundWindow()) {
+        SKeyEvent temp_skKeyEvent[K_COUNT];
+        for (int i = 0; i < K_COUNT; i++)
+        {
+            temp_skKeyEvent[i].keyDown = g_skKeyEvent[i].keyDown;
         }
-        else {
-            g_skKeyEvent[i].keyReleased = false;
-        }
-        if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown && g_dElapsedTime - g_skKeyEvent[i].timeSinceLastInput <= 0.3) {
-            g_skKeyEvent[i].keyTwice = true;
-        }
-        else {
-            g_skKeyEvent[i].keyTwice = false;
 
-            if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown) {
-                g_skKeyEvent[i].keyOnce = true;
-                g_skKeyEvent[i].timeSinceLastInput = g_dElapsedTime;
+        g_skKeyEvent[K_UP].keyDown = isKeyPressed(VK_UP);
+        g_skKeyEvent[K_DOWN].keyDown = isKeyPressed(VK_DOWN);
+        g_skKeyEvent[K_LEFT].keyDown = isKeyPressed(VK_LEFT);
+        g_skKeyEvent[K_RIGHT].keyDown = isKeyPressed(VK_RIGHT);
+        g_skKeyEvent[K_ESCAPE].keyDown = isKeyPressed(VK_ESCAPE);
+        g_skKeyEvent[K_SPACE].keyDown = isKeyPressed(VK_SPACE);
+
+        for (int i = 0; i < K_COUNT; i++) {
+
+
+            if (temp_skKeyEvent[i].keyDown && !g_skKeyEvent[i].keyDown) {
+                g_skKeyEvent[i].keyReleased = true;
             }
             else {
-                g_skKeyEvent[i].keyOnce = false;
+                g_skKeyEvent[i].keyReleased = false;
+            }
+            if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown && g_dElapsedTime - g_skKeyEvent[i].timeSinceLastInput <= 0.3) {
+                g_skKeyEvent[i].keyTwice = true;
+            }
+            else {
+                g_skKeyEvent[i].keyTwice = false;
+
+                if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown) {
+                    g_skKeyEvent[i].keyOnce = true;
+                    g_skKeyEvent[i].timeSinceLastInput = g_dElapsedTime;
+                }
+                else {
+                    g_skKeyEvent[i].keyOnce = false;
+                }
             }
         }
     }
+
 }
 
 //--------------------------------------------------------------
