@@ -10,6 +10,16 @@ Enemy::Enemy()
 	updateDelay = 0.8;
 	direction = 0;
 
+	height = 2;
+	width = 2;
+
+	symbolArray = createArray(width, height);
+	
+	symbolArray[0][0] = 'E';
+	symbolArray[1][0] = 'E';
+	symbolArray[0][1] = 'E';
+	symbolArray[1][1] = 'E';
+
 }
 
 Enemy::Enemy(int x, int y)
@@ -22,6 +32,15 @@ Enemy::Enemy(int x, int y)
 	direction = 0;
 	setDamage(1);
 
+	height = 2;
+	width = 2;
+
+	symbolArray = createArray(width, height);
+
+	symbolArray[0][0] = 'E';
+	symbolArray[1][0] = 'E';
+	symbolArray[0][1] = 'E';
+	symbolArray[1][1] = 'E';
 }
 
 Enemy::~Enemy()
@@ -50,6 +69,31 @@ int Enemy::patrol(Map& map, double g_dElapsedTime)
 			break;
 		}
 
+		bool validMove = canEntityMove(map, newX, newY);
+		if (validMove) {
+			lastMovementTime = g_dElapsedTime;
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					map.setDefaultItem(position.getX() + i, position.getY() + j);
+				}
+			}
+			position.setX(newX);
+			position.setY(newY);
+
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					map.setItem(newX + i, newY + j, symbolArray[j][i]);
+				}
+			}
+		}
+		else {
+			direction = !direction;
+		}
+
+
+
+
+		/*
 		char itemAtNewLocation = map.getItem(newX, newY);
 		char floorAtNewLocation = map.getItem(newX, newY - 1);
 		if (itemAtNewLocation == '9') {
@@ -69,7 +113,8 @@ int Enemy::patrol(Map& map, double g_dElapsedTime)
 
 			map.setItem(position.getX(), position.getY(), 'E');
 			return NO_CHANGE;
-		}
+			*/
+		
 	}
 	return NO_CHANGE;
 }
@@ -107,6 +152,11 @@ void Enemy::random(Map& map, double g_dElapsedTime)
 		}
 	}
 
+}
+
+
+void Enemy::update(Map& map, double g_dElapsedTime) {
+	patrol(map, g_dElapsedTime);
 }
 
 int Enemy::PlayerContact(Position playerpos) // pass in player's position object into playerpos
