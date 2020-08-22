@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Player.h"
 
 
 Enemy::Enemy()
@@ -48,7 +49,7 @@ Enemy::~Enemy()
 
 }
 
-int Enemy::patrol(Map& map, double g_dElapsedTime)
+int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 {
 	if (g_dElapsedTime - lastMovementTime > updateDelay) {
 		lastJumpTime = g_dElapsedTime;
@@ -73,17 +74,22 @@ int Enemy::patrol(Map& map, double g_dElapsedTime)
 		bool solidFloor = onSolidFloor(map, newX, newY);
 		if (validMove && solidFloor) {
 			lastMovementTime = g_dElapsedTime;
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					map.setDefaultItem(position.getX() + i, position.getY() + j);
-				}
+			if (contactPlayer(newX, newY, player)) {
+				player.takeDamage(getDamage(), g_dElapsedTime);
 			}
-			position.setX(newX);
-			position.setY(newY);
+			else{
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
+						map.setDefaultItem(position.getX() + i, position.getY() + j);
+					}
+				}
+				position.setX(newX);
+				position.setY(newY);
 
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					map.setItem(newX + i, newY + j, symbolArray[j][i]);
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
+						map.setItem(newX + i, newY + j, symbolArray[j][i]);
+					}
 				}
 			}
 		}
@@ -156,9 +162,24 @@ void Enemy::random(Map& map, double g_dElapsedTime)
 }
 
 
-int Enemy::update(Map& map, double g_dElapsedTime) {
-	return patrol(map, g_dElapsedTime);
+int Enemy::update(Map& map, double g_dElapsedTime, Player& player) {
+	return patrol(map, g_dElapsedTime, player);
 }
+
+
+bool Enemy::contactPlayer(int x, int y, Player& player) {
+	bool contactingPlayer = false;
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			if (player.isLocatedAt(x + i, y + i)) {
+				contactingPlayer = true;
+			}
+			 
+		}
+	}
+	return contactingPlayer;
+}
+
 
 int Enemy::PlayerContact(Position playerpos) // pass in player's position object into playerpos
 {
