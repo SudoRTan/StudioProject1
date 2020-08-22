@@ -174,13 +174,12 @@ int Enemy::PlayerContact(Position playerpos) // pass in player's position object
 Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
 	Enemy* returnEnemy = nullptr;
 
-
 	for (int i = 0; i < arraySize; i++) {
-		if (enemy[i]->getPositionX() == x && enemy[i]->getPositionY() == y) {
+		if (enemy[i]->isLocatedAt(x,y)) {
 			returnEnemy = enemy[i];
 		}
-
 	}
+
 	return returnEnemy;
 }
 
