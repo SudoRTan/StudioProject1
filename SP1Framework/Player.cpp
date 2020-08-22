@@ -74,7 +74,7 @@ Player::~Player()
 
 }
 
-int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
+int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
 {	
 	int newX = position.getX();
 	int newY = position.getY();
@@ -146,17 +146,33 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 		bool validMove = canEntityMove(map, newX, newY);
 		if (validMove) {
 			lastMovementTime = g_dElapsedTime;
+
+			Enemy* enemyAtNewLocation = nullptr;
+			
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++) {
-					map.setDefaultItem(position.getX() + i, position.getY() + j);
+					if (enemyAtNewLocation == nullptr) {
+						enemyAtNewLocation = getEnemy(newX + i, newY + j, enemyArray, enemyArraySize);
+					}
 				}
 			}
-			position.setX(newX);
-			position.setY(newY);
+			if (enemyAtNewLocation != nullptr) {
+				takeDamage(enemyAtNewLocation->getDamage(), g_dElapsedTime);
+			}
 
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					map.setItem(newX + i, newY + j, symbolArray[j][i]);
+			else {
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
+						map.setDefaultItem(position.getX() + i, position.getY() + j);
+					}
+				}
+				position.setX(newX);
+				position.setY(newY);
+
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
+						map.setItem(newX + i, newY + j, symbolArray[j][i]);
+					}
 				}
 			}
 		}

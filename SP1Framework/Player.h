@@ -28,7 +28,7 @@ public:
 	Player(int x, int y);
 	~Player();
 
-	int move(Map& map,SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
+	int move(Map& map,SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 	void updateHeight(Map& map, double g_dElapsedTime);
 	void renderPlayer(Console& console);
 	void touchEnemy(Enemy enemy, double g_dElapsedTime);
