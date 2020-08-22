@@ -13,7 +13,7 @@ enum MAP_ELEMENTS {
 	LAVA = 95,
 	FLOOR = 219,
 	WALL = 124,
-	PLATFORM = 45,
+	PLATFORM = 45
 };
 
 
