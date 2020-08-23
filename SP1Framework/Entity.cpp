@@ -4,6 +4,15 @@
 
 Entity::Entity(): health{0}, damage{0}, canJump{0}, lastJumpTime{0}
 {
+	damage = 0;
+	damageDelay = 0;
+	height = 0;
+	lastDamageTime = 0;
+	lastMovementTime = 0;
+	symbolArray = nullptr;
+	updateDelay = 0;
+	width = 0;
+
 	position.setX(0);
 	position.setY(0);
 }
