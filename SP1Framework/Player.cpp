@@ -94,7 +94,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 
 	}
 
-	if (KeyEvent[K_UP].keyOnce && map.getItem(position.getX(), position.getY() - 1)!=EMPTY )
+	if (KeyEvent[K_UP].keyOnce && map.getItem(position.getX(), position.getY() - 1) != EMPTY)
 	{
 		if (canJump == 0)
 		{
@@ -105,42 +105,6 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 	if (KeyEvent[K_DOWN].keyTwice) {
 		dropping = true;
 	}
-	/*
-	char itemAtNewLocation = map.getItem(newX, newY);
-	if (itemAtNewLocation == 'E') {
-		lastMovementTime = g_dElapsedTime;
-
-		enemyLocation.X = newX;
-		enemyLocation.Y = newY;
-
-		return PLAYER_DAMAGED;
-	}
-
-	else if (itemAtNewLocation == EMPTY) {
-		
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				map.setDefaultItem(position.getX() + i, position.getY() + j);
-			}
-		}
-		
-		lastMovementTime = g_dElapsedTime;
-
-		map.setDefaultItem(position.getX(), position.getY());
-
-		position.setX(newX);
-		position.setY(newY);
-
-		//map.setItem(position.getX(), position.getY(), '9');
-		
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				map.setItem(newX + i, newY + j, symbolArray[j][i]);
-			}
-		}
-
-	}
-	*/
 
 	if ((position.getX() != newX || position.getY() != newY) && g_dElapsedTime - lastMovementTime > updateDelay) {
 		bool validMove = canEntityMove(map, newX, newY);
@@ -220,46 +184,7 @@ void Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, i
 		}
 	}
 
-	/*
-	if (itemAtNewLocation == EMPTY) {
-
-		//map.setDefaultItem(position.getX(), position.getY());
-
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				map.setTempItem(newX + i, newY + j, symbolArray[j][i]);
-			}
-		}
-
-		position.setX(newX);
-		position.setY(newY);
-		//map.setItem(position.getX(), position.getY(), '9');
-	
-	}
-	else if (itemAtNewLocation == PLATFORM && (dropping || changeInHeight > 0)) {
-		
-		//map.setDefaultItem(position.getX(), position.getY());
-
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				map.setTempItem(newX + i, newY + j, symbolArray[j][i]);
-			}
-		}
-
-		position.setX(newX);
-		position.setY(newY);
-
-		//map.setItem(position.getX(), position.getY(), '9');
-
-	}
-
-	else if  ( newY != position.getY()){
-		canJump = 0;
-	}
-	*/
 	dropping = false;
-
-
 
 }
 

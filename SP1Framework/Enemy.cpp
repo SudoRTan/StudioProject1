@@ -84,32 +84,6 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 		else {
 			direction = !direction;
 		}
-
-
-
-
-		/*
-		char itemAtNewLocation = map.getItem(newX, newY);
-		char floorAtNewLocation = map.getItem(newX, newY - 1);
-		if (itemAtNewLocation == '9') {
-			return PLAYER_DAMAGED;
-		}
-		else if (itemAtNewLocation != EMPTY || floorAtNewLocation == EMPTY){
-			direction = !direction;
-			return NO_CHANGE;
-		}
-		else {
-			lastMovementTime = g_dElapsedTime;
-
-			map.setDefaultItem(position.getX(), position.getY());
-
-			position.setX(newX);
-			position.setY(newY);
-
-			map.setItem(position.getX(), position.getY(), 'E');
-			return NO_CHANGE;
-			*/
-		
 	}
 	return NO_CHANGE;
 }
@@ -192,75 +166,3 @@ Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
 	return returnEnemy;
 }
 
-
-
-// using setDamage function in Entity.h, setHealth(getHealth() - setDamage(PlayerContact()))
-// set current health = initial health - set damage(return statement in Enemy::PlayerContact())
-
-/*void Enemy::random(Map& map)
-{
-	int random = rand() % 5;
-	switch (random)
-	{
-	case(1):
-		{
-		if (enemypos.getY() == 0)
-			break;
-		// if 
-		else
-			{
-				for (int up = 0; up < 3; up++)
-					enemypos.setY(enemypos.getY() + 1);
-			}
-			
-		}
-	case (2):
-		{
-			if (enemypos.getY() == 24)
-				break;
-			//
-			else
-			{
-				for (int down = 0; down < 3; down++)
-				{
-					enemypos.setY(enemypos.getY() - 1);
-				}
-			}
-
-
-		}
-	case (3):
-		{
-			if (enemypos.getX() == 0)
-				break;
-			//
-			else
-			{
-				for (int left = 0; left < 3; left++)
-				{
-					enemypos.setX(enemypos.getX() - 3);
-				}
-			}
-
-
-		}
-	case (4):
-		{
-			if (enemypos.getX() == 0 )
-				break;
-			//
-			else
-			{
-				for (int right = 0; right < 3; right++)
-				{
-					enemypos.setX(enemypos.getX() + 3);
-			    }
-			}
-		}
-
-
-	}
-
-
-}*/
-	
