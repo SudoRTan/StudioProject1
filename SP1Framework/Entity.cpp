@@ -98,13 +98,17 @@ bool Entity::onSolidFloor(Map& map, int x, int y) {
 	for (int i = 0; i < width; i++) {
 		char floorAtNewLocation = map.getDefaultItem(x + i, y - 1);
 		switch (floorAtNewLocation) {
+		case PLATFORM:
+		case FLOOR:
+		case '=':
+			onSolidFloor = true;
+			break;
+
 		case EMPTY:
+		default:
 			onSolidFloor = false;
 			break;
 
-		case PLATFORM:
-		case '=':
-			onSolidFloor = true;
 		}
 		if (onSolidFloor == false) {
 			return onSolidFloor;
@@ -126,8 +130,9 @@ bool Entity::hangingOnEdge(Map& map, int x, int y) {
 			break;
 		
 		case PLATFORM:
-		case '=':
+		case FLOOR:
 			onSolidGround = true;
+			break;
 		}
 	}
 	if (onEmptySpace && onSolidGround) {
