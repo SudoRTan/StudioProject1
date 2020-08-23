@@ -9,9 +9,6 @@ class Enemy :
 	public Entity
 {
 private:
-	int damagetaken;
-
-	Position enemypos;
 
 public:
 	Enemy();
@@ -27,7 +24,6 @@ public:
 
 	bool contactPlayer(int x, int y, Player& player);
 
-	int PlayerContact(Position playerpos);
 };
 
 Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize);

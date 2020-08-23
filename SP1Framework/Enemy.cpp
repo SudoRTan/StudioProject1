@@ -5,8 +5,6 @@
 Enemy::Enemy()
 {
 	// test spawning of enemies on map using (5,4) as test case
-	enemypos.setX(5);
-	enemypos.setY(4);
 	lastMovementTime = 0.00;
 	updateDelay = 0.8;
 	direction = 0;
@@ -153,16 +151,6 @@ bool Enemy::contactPlayer(int x, int y, Player& player) {
 	return contactingPlayer;
 }
 
-
-int Enemy::PlayerContact(Position playerpos) // pass in player's position object into playerpos
-{
-	if ((playerpos.getX() == enemypos.getX()) && (playerpos.getY() == enemypos.getY())) // check if player into enemy
-	{
-		damagetaken = 2;
-		// reduce health by some amount
-	}
-	return damagetaken;
-}
 
 
 Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
