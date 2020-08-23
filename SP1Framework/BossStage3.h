@@ -1,9 +1,9 @@
 #pragma once
 #include "Enemy.h"
-class BossStage2 :
+class BossStage3 :
     public Enemy
 {
 public:
-    BossStage2();
-    ~BossStage2();
+    BossStage3();
+    ~BossStage3();
 };

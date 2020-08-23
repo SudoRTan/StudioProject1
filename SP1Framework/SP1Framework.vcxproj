@@ -79,7 +79,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BossStage1.cpp" />
+    <ClCompile Include="BossStage1Fire.cpp" />
     <ClCompile Include="BossStage2.cpp" />
+    <ClCompile Include="BossStage3.cpp" />
     <ClCompile Include="Collectible.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -98,7 +100,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BossStage1.h" />
+    <ClInclude Include="BossStage1Fire.h" />
     <ClInclude Include="BossStage2.h" />
+    <ClInclude Include="BossStage3.h" />
     <ClInclude Include="Collectible.h" />
     <ClInclude Include="createArray.h" />
     <ClInclude Include="Enemy.h" />
