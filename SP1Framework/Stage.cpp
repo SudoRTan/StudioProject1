@@ -60,7 +60,7 @@ void Stage::updateStage(void)
 }
 
 void Stage::loadMap(std::string fileName) {
-
+	/*
 	if (player->reachDoor() == true)
 	{
 		levelNumber++;
@@ -78,6 +78,7 @@ void Stage::loadMap(std::string fileName) {
 		stageNumber++;
 		levelNumber = 0;
 	}
+	*/
 
 	if (map == nullptr) {
 		map = new Map(fileName);

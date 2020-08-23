@@ -15,6 +15,9 @@ class GameManager
 private:
 	Stage stage;
 	int currGameState;
+	
+	int currStage;
+	int currLevel;
 
 	
 
