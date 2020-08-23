@@ -184,7 +184,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 
 }
 
-void Player::updateHeight(Map& map, double g_dElapsedTime)
+void Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
 {	
 	int newX = position.getX();
 	int newY = position.getY();
@@ -211,17 +211,33 @@ void Player::updateHeight(Map& map, double g_dElapsedTime)
 		bool validMove = canEntityMove(map, newX, newY);
 		if (validMove) {
 			lastJumpTime = g_dElapsedTime;
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					map.setDefaultItem(position.getX() + i, position.getY() + j);
-				}
-			}
-			position.setX(newX);
-			position.setY(newY);
+			
+			Enemy* enemyAtNewLocation = nullptr;
 
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++) {
-					map.setItem(newX + i, newY + j, symbolArray[j][i]);
+					if (enemyAtNewLocation == nullptr) {
+						enemyAtNewLocation = getEnemy(newX + i, newY + j, enemyArray, enemyArraySize);
+					}
+				}
+			}
+			if (enemyAtNewLocation != nullptr) {
+				takeDamage(enemyAtNewLocation->getDamage(), g_dElapsedTime);
+			}
+
+			else {
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
+						map.setDefaultItem(position.getX() + i, position.getY() + j);
+					}
+				}
+				position.setX(newX);
+				position.setY(newY);
+
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
+						map.setItem(newX + i, newY + j, symbolArray[j][i]);
+					}
 				}
 			}
 		}
@@ -350,7 +366,7 @@ void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime
 
 int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
 	move(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
-	updateHeight(map, g_dElapsedTime);
+	updateHeight(map, g_dElapsedTime, enemyArray, enemyArraySize);
 	attack(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
 	
 	return 0;

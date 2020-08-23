@@ -24,7 +24,7 @@ private:
 	Weapon* weapon;
 
 	int move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
-	void updateHeight(Map& map, double g_dElapsedTime);
+	void updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 	void attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 
 public:
