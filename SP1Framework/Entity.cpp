@@ -44,7 +44,7 @@ void Entity::setDamage(int newDamage)
 }
 
 
-void Entity::updateMapWithNewPosition(Map& map, int newX, int newY) {
+void Entity::updateNewPosition(Map& map, int newX, int newY) {
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
 			map.setDefaultItem(position.getX() + i, position.getY() + j);

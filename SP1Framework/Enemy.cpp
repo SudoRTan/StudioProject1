@@ -78,7 +78,7 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 				player.takeDamage(getDamage(), g_dElapsedTime);
 			}
 			else{
-				updateMapWithNewPosition(map, newX, newY);
+				updateNewPosition(map, newX, newY);
 			}
 		}
 		else {

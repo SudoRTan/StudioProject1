@@ -125,7 +125,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 			}
 
 			else {
-				updateMapWithNewPosition(map, newX, newY);
+				updateNewPosition(map, newX, newY);
 			}
 		}
 	}
@@ -178,7 +178,7 @@ void Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, i
 			}
 
 			else {
-				updateMapWithNewPosition(map, newX, newY);
+				updateNewPosition(map, newX, newY);
 
 			}
 		}
