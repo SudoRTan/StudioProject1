@@ -127,18 +127,29 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 
 	if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {
-			int enemyReturnValue = 0;
+			if (enemy[i] != nullptr) {
+				if (enemy[i]->getHealth() <= 0) {
+					enemy[i]->death(*map);
+					delete enemy[i];
+					enemy[i] = nullptr;
+				}
+				else {
+					int enemyReturnValue = 0;
 
-			if (enemy[i]!=nullptr) {
-				enemyReturnValue = enemy[i]->update(*map, g_dElapsedTime, *player);
-			}
+					if (enemy[i] != nullptr) {
+						enemyReturnValue = enemy[i]->update(*map, g_dElapsedTime, *player);
+					}
 
-			switch (enemyReturnValue) {
-			case PLAYER_DAMAGED:
-				player->takeDamage(enemy[i]->getDamage(), g_dElapsedTime);
-				break;
-			default:
-				break;
+					switch (enemyReturnValue) {
+					case PLAYER_DAMAGED:
+						player->takeDamage(enemy[i]->getDamage(), g_dElapsedTime);
+						break;
+					default:
+						break;
+					}
+				}
+
+
 			}
 		}
 	}

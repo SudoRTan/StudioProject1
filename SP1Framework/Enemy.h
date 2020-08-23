@@ -23,6 +23,8 @@ public:
 
 	virtual int update(Map& map, double g_dElapsedTime, Player& player);
 
+	virtual void death(Map& map);
+
 	bool contactPlayer(int x, int y, Player& player);
 
 	int PlayerContact(Position playerpos);

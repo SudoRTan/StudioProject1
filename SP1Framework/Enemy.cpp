@@ -21,6 +21,7 @@ Enemy::Enemy()
 	symbolArray[0][1] = 'E';
 	symbolArray[1][1] = 'E';
 
+	setHealth(2);
 }
 
 Enemy::Enemy(int x, int y)
@@ -42,6 +43,9 @@ Enemy::Enemy(int x, int y)
 	symbolArray[1][0] = 'E';
 	symbolArray[0][1] = 'E';
 	symbolArray[1][1] = 'E';
+
+	setHealth(2);
+
 }
 
 Enemy::~Enemy()
@@ -128,6 +132,13 @@ int Enemy::update(Map& map, double g_dElapsedTime, Player& player) {
 	return patrol(map, g_dElapsedTime, player);
 }
 
+void Enemy::death(Map& map) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setDefaultItem(position.getX() + i, position.getY() + j);
+		}
+	}
+}
 
 bool Enemy::contactPlayer(int x, int y, Player& player) {
 	bool contactingPlayer = false;
@@ -158,8 +169,10 @@ Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
 	Enemy* returnEnemy = nullptr;
 
 	for (int i = 0; i < arraySize; i++) {
-		if (enemy[i]->isLocatedAt(x,y)) {
-			returnEnemy = enemy[i];
+		if (enemy[i] != nullptr) {
+			if (enemy[i]->isLocatedAt(x, y)) {
+				returnEnemy = enemy[i];
+			}
 		}
 	}
 
