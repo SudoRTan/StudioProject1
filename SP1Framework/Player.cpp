@@ -347,3 +347,11 @@ void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime
 	}
 			
 }
+
+int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
+	move(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
+	updateHeight(map, g_dElapsedTime);
+	attack(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
+	
+	return 0;
+}

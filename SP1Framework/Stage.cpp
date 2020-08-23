@@ -109,10 +109,7 @@ void Stage::loadMap(std::string fileName) {
 
 void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 
-	int playerReturnValue = player->move(*map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
-	player->updateHeight(*map, g_dElapsedTime);
-	player->attack(*map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
-
+	int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
 	
 	if (playerReturnValue == PLAYER_DAMAGED) {
 		Enemy* attackingEnemy = getEnemy(player->getEnemyLocation().X, player->getEnemyLocation().Y, enemy, numOfEnemies);
