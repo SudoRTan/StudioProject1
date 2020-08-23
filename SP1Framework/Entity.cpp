@@ -43,6 +43,24 @@ void Entity::setDamage(int newDamage)
 	damage = newDamage;
 }
 
+
+void Entity::updateMapWithNewPosition(Map& map, int newX, int newY) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setDefaultItem(position.getX() + i, position.getY() + j);
+		}
+	}
+	position.setX(newX);
+	position.setY(newY);
+
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setItem(newX + i, newY + j, symbolArray[j][i]);
+		}
+	}
+}
+
+
 void Entity::takeDamage(int damage, double g_dElapsedTime) {
 	if (g_dElapsedTime - lastDamageTime > damageDelay) {
 		health = health - damage;

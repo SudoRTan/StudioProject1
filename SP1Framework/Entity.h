@@ -42,6 +42,8 @@ protected:
 	void setHealth(int newHealth);
 	void setDamage(int newDamage);
 
+	void updateMapWithNewPosition(Map& map, int newX, int newY);
+
 public:
 	Entity();
 	~Entity();
