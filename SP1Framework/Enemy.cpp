@@ -171,7 +171,7 @@ bool Enemy::contactPlayer(int x, int y, Player& player) {
 	bool contactingPlayer = false;
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
-			if (player.isLocatedAt(x + i, y + i)) {
+			if (player.isLocatedAt(x + i, y + j)) {
 				contactingPlayer = true;
 			}
 			 
