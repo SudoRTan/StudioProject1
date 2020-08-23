@@ -161,19 +161,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 			}
 
 			else {
-				for (int i = 0; i < width; i++) {
-					for (int j = 0; j < height; j++) {
-						map.setDefaultItem(position.getX() + i, position.getY() + j);
-					}
-				}
-				position.setX(newX);
-				position.setY(newY);
-
-				for (int i = 0; i < width; i++) {
-					for (int j = 0; j < height; j++) {
-						map.setItem(newX + i, newY + j, symbolArray[j][i]);
-					}
-				}
+				updateMapWithNewPosition(map, newX, newY);
 			}
 		}
 	}
@@ -226,19 +214,8 @@ void Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, i
 			}
 
 			else {
-				for (int i = 0; i < width; i++) {
-					for (int j = 0; j < height; j++) {
-						map.setDefaultItem(position.getX() + i, position.getY() + j);
-					}
-				}
-				position.setX(newX);
-				position.setY(newY);
+				updateMapWithNewPosition(map, newX, newY);
 
-				for (int i = 0; i < width; i++) {
-					for (int j = 0; j < height; j++) {
-						map.setItem(newX + i, newY + j, symbolArray[j][i]);
-					}
-				}
 			}
 		}
 	}

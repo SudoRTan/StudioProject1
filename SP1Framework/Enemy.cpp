@@ -78,19 +78,7 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 				player.takeDamage(getDamage(), g_dElapsedTime);
 			}
 			else{
-				for (int i = 0; i < width; i++) {
-					for (int j = 0; j < height; j++) {
-						map.setDefaultItem(position.getX() + i, position.getY() + j);
-					}
-				}
-				position.setX(newX);
-				position.setY(newY);
-
-				for (int i = 0; i < width; i++) {
-					for (int j = 0; j < height; j++) {
-						map.setItem(newX + i, newY + j, symbolArray[j][i]);
-					}
-				}
+				updateMapWithNewPosition(map, newX, newY);
 			}
 		}
 		else {
