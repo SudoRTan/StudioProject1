@@ -5,6 +5,7 @@ Player::Player()
 	position.setX(0);
 	position.setY(1);
 	health = 20;
+	maxHealth = 20;
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
@@ -39,6 +40,7 @@ Player::Player(int x, int y) {
 	position.setX(x);
 	position.setY(y);
 	health = 20;
+	maxHealth = 20;
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
@@ -252,6 +254,7 @@ void Player::setPosition(int x, int y) {
 COORD Player::getEnemyLocation() {
 	return enemyLocation;
 }
+
 
 void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
 	if (weapon != nullptr) {

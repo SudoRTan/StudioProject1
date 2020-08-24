@@ -175,3 +175,7 @@ bool Entity::hangingOnEdge(Map& map, int x, int y) {
 int Entity::getDirection() {
 	return direction;
 }
+
+void Entity::resetHealth() {
+	health = maxHealth;
+}
