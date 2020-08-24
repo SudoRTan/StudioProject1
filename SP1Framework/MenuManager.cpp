@@ -11,6 +11,7 @@ MenuManager::MenuManager() {
 	menus[START_MENU] = new StartMenu;
 	menus[PAUSE_MENU] = new PauseMenu;
 	menus[LEVEL_SELECT] = new LevelSelectMenu;
+	menus[PLAYER_DEATH] = new DeathMenu;
 }
 
 MenuManager::~MenuManager() {

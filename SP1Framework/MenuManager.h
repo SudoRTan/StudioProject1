@@ -9,6 +9,7 @@
 #include "StartMenu.h"
 #include "PauseMenu.h"
 #include "LevelSelectMenu.h"
+#include "DeathMenu.h"
 
 class MenuManager
 {

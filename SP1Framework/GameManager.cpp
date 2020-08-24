@@ -65,11 +65,17 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 		currGameState = IN_LEVEL;
 		break;
 	
+
+	case RELOAD_LEVEL:
+		player->resetHealth();
 	case LOAD_LEVEL:
 		loadStage();
 		currGameState = IN_LEVEL;
 		break;
 
+
+	case START_MENU:
+		player->resetHealth();
 	default:
 		menu.update(currGameState, KeyEvent, currStage, currLevel);
 		break;
@@ -84,8 +90,10 @@ void GameManager::render(Console& console) {
 
 	case FINISHED_LEVEL:
 	case LOAD_LEVEL:
+	case RELOAD_LEVEL:
 		break;
 
+	case PLAYER_DEATH:
 	default:
 		menu.render(currGameState, console);
 		break;
@@ -106,7 +114,7 @@ void GameManager::loadStage() {
 		stage->loadMap(ss.str());
 	}
 	else {
-		if (stage->getStage() == "Stage") {
+		if (stage->getType() == "Stage") {
 			stage->loadMap(ss.str());
 		}
 	}
