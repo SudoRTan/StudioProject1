@@ -62,15 +62,11 @@ void Stage::loadMap(std::string fileName) {
 	}
 	*/
 
-	if (map == nullptr) {
-		map = new Map(fileName);
+	cleanUp();
+	
+	map = new Map(fileName);
 
-	}
-	else {
-		delete map;
-		map = new Map(fileName);
 
- 	}
 	
 	numOfEnemies = map->getNumberOfEnemies();
 
@@ -127,3 +123,4 @@ void Stage::render(Console& console) {
 std::string Stage::getType() {
 	return type;
 }
+

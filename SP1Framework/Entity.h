@@ -67,4 +67,6 @@ public:
 	int getDirection();
 
 	void resetHealth();
+
+	void cleanUp();
 };

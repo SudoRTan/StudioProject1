@@ -73,7 +73,8 @@ Player::Player(int x, int y) {
 
 Player::~Player()
 {
-
+	cleanUp();
+	delete weapon;
 }
 
 int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
