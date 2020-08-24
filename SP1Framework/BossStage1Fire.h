@@ -1,4 +1,5 @@
 #pragma once
+#include "Player.h"
 #include "Enemy.h"
 class BossStage1Fire :
 	public Enemy
@@ -6,4 +7,5 @@ class BossStage1Fire :
 public:
 	BossStage1Fire();
 	~BossStage1Fire();
+	void takeDamage(Player player);
 };

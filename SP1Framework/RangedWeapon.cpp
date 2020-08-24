@@ -1,6 +1,6 @@
 #include "RangedWeapon.h"
 
-/*RangedWeapon::RangedWeapon(){
+RangedWeapon::RangedWeapon(){
 	setName("Ranged");
 	setDamage(10);
 
@@ -9,7 +9,7 @@
 
 	animationPhases = 3;
 	currentAnimationPhase = 0;
-	lastAnimateTime = 0;*/
+	lastAnimateTime = 0;
 
 
 }

@@ -16,7 +16,11 @@ enum MAP_ELEMENTS {
 	PLATFORM = 45
 };
 
-
+enum ENEMY_TYPES {
+	ENEMY_1 = 49,
+	ENEMY_2 = 50,
+	ENEMY_3 = 51
+};
 
 class Map
 {
