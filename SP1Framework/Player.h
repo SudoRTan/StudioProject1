@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Weapon.h"
 #include "MeleeWeapon.h"
+#include "RangedWeapon.h"
 
 enum PLAYER_ELEMENTS {
 	PLAYER_HEAD = '0',
@@ -24,7 +25,7 @@ private:
 	Weapon* weapon;
 
 	int move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
-	void updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
+	int updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 	void attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 
 public:
@@ -35,7 +36,6 @@ public:
 	
 	void renderPlayer(Console& console);
 	void touchEnemy(Enemy enemy, double g_dElapsedTime);
-	bool reachDoor();
 
 	int update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 

@@ -83,19 +83,26 @@
     <ClCompile Include="BossStage2.cpp" />
     <ClCompile Include="BossStage3.cpp" />
     <ClCompile Include="Collectible.cpp" />
+    <ClCompile Include="DeathMenu.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="LevelSelectMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="createArray.cpp" />
+    <ClCompile Include="RangedWeapon.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
@@ -106,6 +113,7 @@
     <ClInclude Include="BossStage3.h" />
     <ClInclude Include="Collectible.h" />
     <ClInclude Include="createArray.h" />
+    <ClInclude Include="DeathMenu.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Framework\console.h" />
@@ -113,11 +121,18 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="colors.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="gameState.h" />
+    <ClInclude Include="LevelSelectMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MeleeWeapon.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="RangedWeapon.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="StartMenu.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>

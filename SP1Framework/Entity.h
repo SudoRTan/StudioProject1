@@ -21,6 +21,7 @@ class Entity
 protected:
 	Position position;
 	int health;
+	int maxHealth;
 	int damage;
 	int canJump;
 	int direction;
@@ -65,4 +66,7 @@ public:
 
 	int getDirection();
 
+	void resetHealth();
+
+	void cleanUp();
 };

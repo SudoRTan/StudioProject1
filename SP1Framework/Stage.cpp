@@ -2,28 +2,33 @@
 #include <sstream>
 
 
-Stage::Stage() {
-	player = new Player;
+Stage::Stage(Player* player) {
+	this->player = player;
 	map = nullptr;
 	enemy = nullptr;
 	numOfEnemies = 0;
 	stageNumber = 1; // player starts game at stage1_1
 	levelNumber = 1;
 	currentStage = "stage1_1.txt";
+
+	type = "Stage";
 }
 
 Stage::~Stage() {
-	if (player != nullptr) {
-		delete player;
-		player = nullptr;
-	}
+	cleanUp();
+}
+
+
+void Stage::cleanUp(void) {
 	if (map != nullptr) {
 		delete map;
 		map = nullptr;
 	}
 	if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {
-			delete enemy[i];
+			if (enemy[i] != nullptr) {
+				delete enemy[i];
+			}
 		}
 		delete[] enemy;
 		enemy = nullptr;
@@ -35,28 +40,6 @@ std::string Stage::getStage(void)
 	return currentStage;
 }
 
-void Stage::updateStage(void)
-{
-	if (player->reachDoor() == true)
-	{
-		std::ostringstream ss;
-		ss.str("");
-		levelNumber++;
-
-		if (levelNumber == 4)
-		{
-			ss << "stage" << stageNumber << "_" << "B" << ".txt";
-			stageNumber++;
-			levelNumber = 0;
-		}
-		else
-		{
-			ss << "stage" << stageNumber << "_" << levelNumber << ".txt";
-		}
-
-		currentStage = ss.str(); // convert text from stringstream to string
-	}
-}
 
 void Stage::loadMap(std::string fileName) {
 	/*
@@ -79,15 +62,11 @@ void Stage::loadMap(std::string fileName) {
 	}
 	*/
 
-	if (map == nullptr) {
-		map = new Map(fileName);
+	cleanUp();
+	
+	map = new Map(fileName);
 
-	}
-	else {
-		delete map;
-		map = new Map(fileName);
 
- 	}
 	
 	numOfEnemies = map->getNumberOfEnemies();
 
@@ -107,25 +86,15 @@ void Stage::loadMap(std::string fileName) {
 
 }
 
-int Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
+void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
 
 	int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
 
-	/*
-	if (playerReturnValue == PLAYER_DAMAGED) {
-		Enemy* attackingEnemy = getEnemy(player->getEnemyLocation().X, player->getEnemyLocation().Y, enemy, numOfEnemies);
-		player->takeDamage(attackingEnemy->getDamage(), g_dElapsedTime);
-	}
-	switch (playerReturnValue) {
-	case PLAYER_DAMAGED:
-		break;
-	default:
-		break;
-	}
-	*/
-
 	if (playerReturnValue == PLAYER_REACHED_DOOR) {
-		return 4;
+		gameState = FINISHED_LEVEL;
+	}
+	if (player->getHealth() <= 0) {
+		gameState = PLAYER_DEATH;
 	}
 
 	if (enemy != nullptr) {
@@ -138,22 +107,8 @@ int Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 				}
 				else {
 					int enemyReturnValue = 0;
-
-					if (enemy[i] != nullptr) {
-						enemyReturnValue = enemy[i]->update(*map, g_dElapsedTime, *player);
-					}
-					/*
-					switch (enemyReturnValue) {
-					case PLAYER_DAMAGED:
-						player->takeDamage(enemy[i]->getDamage(), g_dElapsedTime);
-						break;
-					default:
-						break;
-					}
-					*/
+					enemyReturnValue = enemy[i]->update(*map, g_dElapsedTime, *player);
 				}
-
-
 			}
 		}
 	}
@@ -164,4 +119,8 @@ void Stage::render(Console& console) {
 	map->renderMap(console, player->getPositionX(), player->getPositionY());
 }
 
+
+std::string Stage::getType() {
+	return type;
+}
 

@@ -5,6 +5,9 @@
 #include "game.h"
 #include "UI.h"
 #include "Framework/console.h"
+#include "gameState.h"
+
+
 
 class Stage
 {
@@ -18,20 +21,24 @@ private:
 	UI ui;
 	std::string currentStage;
 
+	std::string type;
+
+	void cleanUp(void);
 
 public:
-	Stage();
-	~Stage();
+	Stage(Player* player);
+	virtual ~Stage();
 
 	std::string getStage(void);
 
-	void updateStage(void);
 
 	void loadMap(std::string fileName);
 
-	int update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
+	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
 
 	void render(Console& console);
+
+	std::string getType();
 
 
 };

@@ -63,18 +63,18 @@ void MeleeWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x,
 		{
 			switch (currentAnimationPhase) {
 			case 1:
-				map.setTempItem(x + offSet, y, (char)POINTING_DOWNWARDS);
-				map.setTempItem(x + offSet * 2, y - 1, (char)POINTING_DOWNWARDS);
+				map.setTempItem(x + offSet, y + 1, (char)POINTING_DOWNWARDS);
+				map.setTempItem(x + offSet * 2, y, (char)POINTING_DOWNWARDS);
 				break;
 
 			case 2:
-				map.setTempItem(x + offSet, y, (char)POINTING_STRAIGHT);
-				map.setTempItem(x + offSet * 2, y, (char)POINTING_STRAIGHT);
+				map.setTempItem(x + offSet, y + 1, (char)POINTING_STRAIGHT);
+				map.setTempItem(x + offSet * 2, y + 1, (char)POINTING_STRAIGHT);
 				break;
 
 			case 3:
-				map.setTempItem(x + offSet, y, (char)POINTING_UPWARDS);
-				map.setTempItem(x + offSet * 2, y + 1, (char)POINTING_UPWARDS);
+				map.setTempItem(x + offSet, y + 1, (char)POINTING_UPWARDS);
+				map.setTempItem(x + offSet * 2, y + 2, (char)POINTING_UPWARDS);
 				break;
 
 			default:
@@ -86,18 +86,18 @@ void MeleeWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x,
 		{
 			switch (currentAnimationPhase) {
 			case 1:
-				map.setTempItem(x + offSet, y, (char)POINTING_UPWARDS);
-				map.setTempItem(x + offSet * 2, y - 1, (char)POINTING_UPWARDS);
+				map.setTempItem(x + offSet, y + 1, (char)POINTING_UPWARDS);
+				map.setTempItem(x + offSet * 2, y, (char)POINTING_UPWARDS);
 				break;
 
 			case 2:
-				map.setTempItem(x + offSet, y, (char)POINTING_STRAIGHT);
-				map.setTempItem(x + offSet * 2, y, (char)POINTING_STRAIGHT);
+				map.setTempItem(x + offSet, y + 1, (char)POINTING_STRAIGHT);
+				map.setTempItem(x + offSet * 2, y + 1, (char)POINTING_STRAIGHT);
 				break;
 
 			case 3:
-				map.setTempItem(x + offSet, y, (char)POINTING_DOWNWARDS);
-				map.setTempItem(x + offSet * 2, y + 1, (char)POINTING_DOWNWARDS);
+				map.setTempItem(x + offSet, y + 1, (char)POINTING_DOWNWARDS);
+				map.setTempItem(x + offSet * 2, y + 2, (char)POINTING_DOWNWARDS);
 				break;
 
 			default:
