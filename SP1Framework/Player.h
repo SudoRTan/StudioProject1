@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Weapon.h"
 #include "MeleeWeapon.h"
+#include "RangedWeapon.h"
 
 enum PLAYER_ELEMENTS {
 	PLAYER_HEAD = '0',
