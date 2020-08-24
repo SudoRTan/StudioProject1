@@ -4,14 +4,14 @@
 #include "gameState.h"
 #include <iostream>
 #include "Framework/console.h"
-#include "Menu.h"
+#include "MenuManager.h"
 
 
 class GameManager
 {
 private:
 	Stage stage;
-	Menu menu;
+	MenuManager menu;
 
 
 	int currGameState;

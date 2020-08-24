@@ -93,11 +93,14 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="createArray.cpp" />
     <ClCompile Include="RangedWeapon.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
@@ -119,10 +122,13 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="RangedWeapon.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="StartMenu.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>

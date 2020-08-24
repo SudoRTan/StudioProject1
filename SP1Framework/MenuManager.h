@@ -3,18 +3,21 @@
 #include "gameState.h"
 #include "Framework/console.h"
 #include "colors.h"
-
 #include <fstream>
+
+#include "Menu.h"
+#include "StartMenu.h"
+#include "PauseMenu.h"
+
 
 class MenuManager
 {
 private:
-	int currentSelection;
 
-	void renderStartMenu(Console& console);
+	Menu** menus;
+
 	void renderPauseMenu(Console& console);
 
-	void updateStartMenu(int& gameState, SKeyEvent KeyEvent[K_COUNT]);
 
 	void updateLevelSelectMenu(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel);
 
