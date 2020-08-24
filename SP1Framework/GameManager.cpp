@@ -7,6 +7,8 @@ GameManager::GameManager(){
 	currLevel = 1;
 
 	pauseTime = 0.0;
+	timeEnlapsedSincePause = 0.0;
+	gameTime = 0.0;
 
 	currGameState = IN_LEVEL;
 	stage.loadMap(stage.getStage());
