@@ -3,13 +3,17 @@
 #include "colors.h"
 #include "Position.h"
 #include <fstream>
+#include "createArray.h"
 
-
-enum MapElements {
+enum MAP_ELEMENTS {
 	INVALID = 0,
 	EMPTY = ' ',
+	DOOR = 68,
+	SPIKE = 94,
+	LAVA = 95,
 	FLOOR = 219,
-	PLATFORM = 45,
+	WALL = 124,
+	PLATFORM = 45
 };
 
 
@@ -55,6 +59,8 @@ public:
 	//Set map object
 	void setItem(int x, int y, char symbol);
 
+
+	char getDefaultItem(int x, int y);
 	void setDefaultItem(int x, int y);
 	
 	void setTempItem(int x, int y, char symbol);

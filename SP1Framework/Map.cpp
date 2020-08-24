@@ -8,19 +8,6 @@ int getSmaller(int first, int second) {
 }
 
 
-char** createArray(int row, int column) {
-
-	char** array = new char* [row];
-	for (int i = 0; i < row; ++i)
-		array[i] = new char[column];
-
-	for (int i = 0; i < row; i++) {
-		for (int j = 0; j < column; j++) {
-			array[i][j] = EMPTY;
-		}
-	}
-	return array;
-}
 
 
 Map::Map()
@@ -144,9 +131,9 @@ Map::Map(std::string fileName)
 		height = lines;
 		length = columns;
 
-		mapArray = createArray(lines, columns);
-		mapTemplate = createArray(lines, columns);
-		tempMapArray = createArray(lines, columns);
+		mapArray = createArray(columns, lines);
+		mapTemplate = createArray(columns, lines);
+		tempMapArray = createArray(columns, lines);
 
 
 		int readingLine = height-1;
@@ -315,12 +302,33 @@ char Map::getItem(int x, int y)
 }
 
 void Map::setItem(int x, int y, char symbol) {
-	mapArray[y][x] = symbol;
-
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return;
+	}
+	else {
+		mapArray[y][x] = symbol;
+	}
 }
 
+char Map::getDefaultItem(int x, int y)
+{
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return INVALID;
+	}
+	else {
+		// Gets the map character from a specifc position
+		return mapTemplate[y][x];
+	}
+}
+
+
 void Map::setDefaultItem(int x, int y) {
-	mapArray[y][x] = mapTemplate[y][x];
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return;
+	}
+	else {
+		mapArray[y][x] = mapTemplate[y][x];
+	}
 }
 
 void Map::setTempItem(int x, int y, char symbol) {

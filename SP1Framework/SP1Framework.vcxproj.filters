@@ -63,7 +63,22 @@
     <ClCompile Include="MeleeWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RangedWeapon.cpp">
+    <ClCompile Include="createArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStage1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStage2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStage3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStage1Fire.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,7 +125,22 @@
     <ClInclude Include="MeleeWeapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RangedWeapon.h">
+    <ClInclude Include="createArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStage1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStage2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStage3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStage1Fire.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,7 +9,8 @@ Player::Player()
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
 	updateDelay = 0.04;
-	changeInHeight = 0;
+	updateHeightDelay = 0.06;
+
 	dropping = false;
 
 	lastDamageTime = 0.0;
@@ -21,6 +22,16 @@ Player::Player()
 	direction = RIGHT;
 
 	weapon = new MeleeWeapon;
+
+
+	height = 3;
+	width = 1;
+
+	symbolArray = createArray(width, height);
+
+	symbolArray[0][0] = PLAYER_LEGS;
+	symbolArray[1][0] = PLAYER_BODY;
+	symbolArray[2][0] = PLAYER_HEAD;
 }
 
 
@@ -32,7 +43,8 @@ Player::Player(int x, int y) {
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
 	updateDelay = 0.04;
-	changeInHeight = 0;
+	updateHeightDelay = 0.06;
+
 	dropping = false;
 
 	lastDamageTime = 0.0;
@@ -45,6 +57,15 @@ Player::Player(int x, int y) {
 
 	weapon = new MeleeWeapon;
 
+	height = 3;
+	width = 1;
+
+	symbolArray = createArray(width, height);
+
+	symbolArray[0][0] = PLAYER_LEGS;
+	symbolArray[1][0] = PLAYER_BODY;
+	symbolArray[2][0] = PLAYER_HEAD;
+
 }
 
 
@@ -53,12 +74,12 @@ Player::~Player()
 
 }
 
-int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
+int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
 {	
 	int newX = position.getX();
 	int newY = position.getY();
 
-
+	
 
 	if (KeyEvent[K_LEFT].keyDown && g_dElapsedTime - lastMovementTime > updateDelay)
 	{
@@ -73,7 +94,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 
 	}
 
-	if (KeyEvent[K_UP].keyOnce && map.getItem(position.getX(), position.getY() - 1)!=EMPTY )
+	if (KeyEvent[K_UP].keyOnce && map.getItem(position.getX(), position.getY() - 1) != EMPTY)
 	{
 		if (canJump == 0)
 		{
@@ -85,87 +106,85 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime)
 		dropping = true;
 	}
 
-	char itemAtNewLocation = map.getItem(newX, newY);
-	if (itemAtNewLocation == 'E') {
-		lastMovementTime = g_dElapsedTime;
+	if ((position.getX() != newX || position.getY() != newY) && g_dElapsedTime - lastMovementTime > updateDelay) {
+		bool validMove = canEntityMove(map, newX, newY);
+		if (validMove) {
+			lastMovementTime = g_dElapsedTime;
 
-		enemyLocation.X = newX;
-		enemyLocation.Y = newY;
+			Enemy* enemyAtNewLocation = nullptr;
+			
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					if (enemyAtNewLocation == nullptr) {
+						enemyAtNewLocation = getEnemy(newX + i, newY + j, enemyArray, enemyArraySize);
+					}
+				}
+			}
+			if (enemyAtNewLocation != nullptr) {
+				takeDamage(enemyAtNewLocation->getDamage(), g_dElapsedTime);
+			}
 
-		return PLAYER_DAMAGED;
+			else {
+				updateNewPosition(map, newX, newY);
+			}
+		}
 	}
 
-	else if (itemAtNewLocation == EMPTY) {
-		lastMovementTime = g_dElapsedTime;
+	
 
-		map.setDefaultItem(position.getX(), position.getY());
-
-		position.setX(newX);
-		position.setY(newY);
-
-		map.setItem(position.getX(), position.getY(), '9');
-
-	}
 	return NO_CHANGE;
 
 }
 
-void Player::updateHeight(Map& map, double g_dElapsedTime)
+void Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
 {	
 	int newX = position.getX();
 	int newY = position.getY();
+	if (g_dElapsedTime - lastJumpTime > updateHeightDelay) {
+		if (canJump != 0)
+		{
+			newY++;
+			canJump--;
 
-	if (g_dElapsedTime - lastJumpTime > 0.06 && canJump !=0)
-	{
-		newY++;
+		}
+		else if (dropping) {
+			newY--;
 
-		lastJumpTime = g_dElapsedTime;
-		canJump--;
-		changeInHeight++;
-	
-	}
-	else if (dropping) {
-		newY--;
-		changeInHeight--;
-		
-	}
+		}
 
-	else if (g_dElapsedTime - lastJumpTime > 0.06)
-	{
-		newY--;
-		lastJumpTime = g_dElapsedTime;	
-		changeInHeight--;
-	}
-	
+		else if (getItemBelow(map) == EMPTY)
+		{
+			newY--;
 
-
-	char itemAtNewLocation = map.getItem(newX, newY);
-
-
-	if (itemAtNewLocation == EMPTY) {
-		map.setDefaultItem(position.getX(), position.getY());
-		position.setX(newX);
-		position.setY(newY);
-		map.setItem(position.getX(), position.getY(), '9');
-	
-	}
-	else if (itemAtNewLocation == PLATFORM && (dropping || changeInHeight > 0)) {
-		
-		map.setDefaultItem(position.getX(), position.getY());
-		position.setX(newX);
-		position.setY(newY);
-		map.setItem(position.getX(), position.getY(), '9');
-
+		}
 	}
 
-	else if  ( newY != position.getY()){
-		canJump = 0;
+	if (position.getX() != newX || position.getY() != newY) {
+		bool validMove = canEntityMove(map, newX, newY);
+		if (validMove) {
+			lastJumpTime = g_dElapsedTime;
+			
+			Enemy* enemyAtNewLocation = nullptr;
+
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					if (enemyAtNewLocation == nullptr) {
+						enemyAtNewLocation = getEnemy(newX + i, newY + j, enemyArray, enemyArraySize);
+					}
+				}
+			}
+			if (enemyAtNewLocation != nullptr) {
+				takeDamage(enemyAtNewLocation->getDamage(), g_dElapsedTime);
+			}
+
+			else {
+				updateNewPosition(map, newX, newY);
+
+			}
+		}
 	}
-	
-	changeInHeight = 0;
+
 	dropping = false;
-
-
 
 }
 
@@ -211,8 +230,20 @@ void Player::touchEnemy(Enemy enemy, double g_dElapsedTime)
 	}
 }
 
+bool Player::reachDoor()
+{
+	if ((position.getX() + 1 == 'D'))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 char Player::getItemBelow(Map& map) {
-	return map.getItem(position.getX(), position.getY());
+	return map.getDefaultItem(position.getX(), position.getY() - 1);
 }
 
 void Player::setPosition(int x, int y) {
@@ -233,4 +264,12 @@ void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime
 		}
 	}
 			
+}
+
+int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
+	move(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
+	updateHeight(map, g_dElapsedTime, enemyArray, enemyArraySize);
+	attack(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
+	
+	return 0;
 }

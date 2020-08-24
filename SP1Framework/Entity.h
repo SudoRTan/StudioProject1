@@ -1,7 +1,7 @@
 #pragma once
 #include "Position.h"
 #include "Map.h"
-
+#include "createArray.h"
 
 enum ENTITY_STATE {
 	NO_CHANGE,
@@ -23,6 +23,7 @@ protected:
 	int health;
 	int damage;
 	int canJump;
+	int direction;
 
 
 	double lastJumpTime;
@@ -32,10 +33,16 @@ protected:
 	double damageDelay;
 	double lastDamageTime;
 
-	int direction;
+	// Variables to store 2d Entites
+	int height;
+	int width;
+	char** symbolArray;
+
 
 	void setHealth(int newHealth);
 	void setDamage(int newDamage);
+
+	void updateNewPosition(Map& map, int newX, int newY);
 
 public:
 	Entity();
@@ -46,9 +53,15 @@ public:
 	int getDamage();
 
 	void takeDamage(int damage, double g_dElapsedTime);
-
 	void takeDamage(int damage);
 
+	bool isLocatedAt(int x, int y);
+
+	bool canEntityMove(Map& map, int x, int y);
+
+	bool onSolidFloor(Map& map, int x, int y);
+
+	bool hangingOnEdge(Map& map, int x, int y);
 
 	int getDirection();
 

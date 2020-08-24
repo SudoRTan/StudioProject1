@@ -8,6 +8,7 @@
 #include "Enemy.h"
 #include "UI.h"
 #include "Stage.h"
+#include "GameManager.h"
 #include <iostream>
 #include <iomanip>
 #include <time.h>
@@ -21,7 +22,7 @@ SMouseEvent g_mouseEvent;
 
 // Game specific variables here
 SGameChar   g_sChar;
-EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
+EGAMESTATES g_eGameState = S_GAME; // initial state
 
 // Console object
 Console g_Console(80, 25, "SP1 Framework");
@@ -40,8 +41,9 @@ UI ui;
 Enemy enemy(18,6);
 
 
-Stage* stage = new Stage;
+//Stage* stage = new Stage;
 
+GameManager gameManager;
 
 
 //--------------------------------------------------------------
@@ -73,7 +75,7 @@ void init( void )
     g_Console.setMouseHandler(mouseHandler);
 
     //Loads the stage map
-    stage->loadMap("oopstage5.txt");
+    //stage->loadMap(stage->getStage());
 }
 
 //--------------------------------------------------------------
@@ -87,48 +89,51 @@ void shutdown( void )
 {
     // Reset to white text on black background
     colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-    delete stage;
+
     g_Console.clearBuffer();
 }
 
 void testGetInput(void) {
-    SKeyEvent temp_skKeyEvent[K_COUNT];
-    for (int i = 0; i < K_COUNT; i++)
-    {
-        temp_skKeyEvent[i].keyDown = g_skKeyEvent[i].keyDown;
-    }
-
-    g_skKeyEvent[K_UP].keyDown = isKeyPressed(VK_UP);
-    g_skKeyEvent[K_DOWN].keyDown = isKeyPressed(VK_DOWN);
-    g_skKeyEvent[K_LEFT].keyDown = isKeyPressed(VK_LEFT);
-    g_skKeyEvent[K_RIGHT].keyDown = isKeyPressed(VK_RIGHT);
-    g_skKeyEvent[K_ESCAPE].keyDown = isKeyPressed(VK_ESCAPE);
-    g_skKeyEvent[K_SPACE].keyDown = isKeyPressed(VK_SPACE);
-            
-    for (int i = 0; i < K_COUNT; i++) {
-
-
-        if (temp_skKeyEvent[i].keyDown && !g_skKeyEvent[i].keyDown) {
-            g_skKeyEvent[i].keyReleased = true;
+    if (GetConsoleWindow() == GetForegroundWindow()) {
+        SKeyEvent temp_skKeyEvent[K_COUNT];
+        for (int i = 0; i < K_COUNT; i++)
+        {
+            temp_skKeyEvent[i].keyDown = g_skKeyEvent[i].keyDown;
         }
-        else {
-            g_skKeyEvent[i].keyReleased = false;
-        }
-        if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown && g_dElapsedTime - g_skKeyEvent[i].timeSinceLastInput <= 0.3) {
-            g_skKeyEvent[i].keyTwice = true;
-        }
-        else {
-            g_skKeyEvent[i].keyTwice = false;
 
-            if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown) {
-                g_skKeyEvent[i].keyOnce = true;
-                g_skKeyEvent[i].timeSinceLastInput = g_dElapsedTime;
+        g_skKeyEvent[K_UP].keyDown = isKeyPressed(VK_UP);
+        g_skKeyEvent[K_DOWN].keyDown = isKeyPressed(VK_DOWN);
+        g_skKeyEvent[K_LEFT].keyDown = isKeyPressed(VK_LEFT);
+        g_skKeyEvent[K_RIGHT].keyDown = isKeyPressed(VK_RIGHT);
+        g_skKeyEvent[K_ESCAPE].keyDown = isKeyPressed(VK_ESCAPE);
+        g_skKeyEvent[K_SPACE].keyDown = isKeyPressed(VK_SPACE);
+
+        for (int i = 0; i < K_COUNT; i++) {
+
+
+            if (temp_skKeyEvent[i].keyDown && !g_skKeyEvent[i].keyDown) {
+                g_skKeyEvent[i].keyReleased = true;
             }
             else {
-                g_skKeyEvent[i].keyOnce = false;
+                g_skKeyEvent[i].keyReleased = false;
+            }
+            if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown && g_dElapsedTime - g_skKeyEvent[i].timeSinceLastInput <= 0.3) {
+                g_skKeyEvent[i].keyTwice = true;
+            }
+            else {
+                g_skKeyEvent[i].keyTwice = false;
+
+                if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown) {
+                    g_skKeyEvent[i].keyOnce = true;
+                    g_skKeyEvent[i].timeSinceLastInput = g_dElapsedTime;
+                }
+                else {
+                    g_skKeyEvent[i].keyOnce = false;
+                }
             }
         }
     }
+
 }
 
 //--------------------------------------------------------------
@@ -293,7 +298,7 @@ void splashScreenWait()    // waits for time to pass in splash screen
 
 void updateGame()       // gameplay logic
 {
-    processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
+    //processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
                 // sound can be played here too.
     //enemy.patrol(map, g_dElapsedTime);
@@ -304,8 +309,11 @@ void moveCharacter()
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
    
-    stage->update(g_skKeyEvent, g_dElapsedTime);
+    //stage->update(g_skKeyEvent, g_dElapsedTime);
     
+    gameManager.update(g_skKeyEvent, g_dElapsedTime);
+
+
     // player.move(map, g_skKeyEvent, g_dElapsedTime);
     //player.updateHeight(map, g_dElapsedTime);
 }
@@ -372,7 +380,7 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-    stage->render(g_Console);
+    gameManager.render(g_Console);
 
 
     //renderMap();        // renders the map to the buffer first
