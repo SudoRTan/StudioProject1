@@ -1,14 +1,16 @@
 #pragma once
 #include <vector>
+#include "Stage.h"
 #include "Enemy.h"
 #include "BossStage1Fire.h"
 class BossStage1 :
-    public Enemy
+    public Stage
 {
 public:
     BossStage1();
     ~BossStage1();
-protected:
-    std::vector<BossStage1Fire*> fireVector;
     static int fireCount;
+    void update(); //change to updateStage
+private:
+    std::vector<BossStage1Fire*> fireVector;
 };

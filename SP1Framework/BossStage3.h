@@ -1,7 +1,8 @@
 #pragma once
+#include "Stage.h"
 #include "Enemy.h"
 class BossStage3 :
-    public Enemy
+    public Stage
 {
 public:
     BossStage3();
