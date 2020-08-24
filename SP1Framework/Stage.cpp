@@ -97,6 +97,9 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& game
 	if (playerReturnValue == PLAYER_REACHED_DOOR) {
 		gameState = FINISHED_LEVEL;
 	}
+	if (player->getHealth() <= 0) {
+		gameState = PLAYER_DEATH;
+	}
 
 	if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {

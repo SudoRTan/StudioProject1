@@ -75,11 +75,11 @@ void LevelSelectMenu::render(Console& console) {
 	if (selectedStage) {
 		for (int i = 0; i < totalSelections; i++) {
 			if (i + 1 == currentSelection) {
-				console.writeToBuffer(10, 10 + i, "Stage: " + std::to_string(i + 1), FG_RED);
+				console.writeToBuffer(10, 10 + i, "Level: " + std::to_string(i + 1), FG_RED);
 			}
 
 			else {
-				console.writeToBuffer(10, 10 + i, "Stage: " + std::to_string(i + 1), FG_WHITE);
+				console.writeToBuffer(10, 10 + i, "Level: " + std::to_string(i + 1), FG_WHITE);
 			}
 		}
 	}
