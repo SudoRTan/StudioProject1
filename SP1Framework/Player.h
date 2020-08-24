@@ -35,7 +35,6 @@ public:
 	
 	void renderPlayer(Console& console);
 	void touchEnemy(Enemy enemy, double g_dElapsedTime);
-	bool reachDoor();
 
 	int update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 

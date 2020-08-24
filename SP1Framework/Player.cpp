@@ -233,17 +233,6 @@ void Player::touchEnemy(Enemy enemy, double g_dElapsedTime)
 	}
 }
 
-bool Player::reachDoor()
-{
-	if ((position.getX() + 1 == 'D'))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
 
 char Player::getItemBelow(Map& map) {
 	return map.getDefaultItem(position.getX(), position.getY() - 1);
