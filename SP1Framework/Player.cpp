@@ -128,6 +128,9 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 				updateNewPosition(map, newX, newY);
 			}
 		}
+		else if (map.getItem(newX, newY) == 'D') {
+			return PLAYER_REACHED_DOOR;
+		}
 	}
 
 	
@@ -267,9 +270,10 @@ void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime
 }
 
 int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
-	move(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
+	int playerUpdateValue = 0;
+	playerUpdateValue = move(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
 	updateHeight(map, g_dElapsedTime, enemyArray, enemyArraySize);
 	attack(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
 	
-	return 0;
+	return playerUpdateValue;
 }

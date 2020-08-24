@@ -28,7 +28,6 @@ Stage::~Stage() {
 		delete[] enemy;
 		enemy = nullptr;
 	}
-	int stop = 3;
 }
 
 std::string Stage::getStage(void)
@@ -108,15 +107,15 @@ void Stage::loadMap(std::string fileName) {
 
 }
 
-void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
+int Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 
 	int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
-	
+
+	/*
 	if (playerReturnValue == PLAYER_DAMAGED) {
 		Enemy* attackingEnemy = getEnemy(player->getEnemyLocation().X, player->getEnemyLocation().Y, enemy, numOfEnemies);
 		player->takeDamage(attackingEnemy->getDamage(), g_dElapsedTime);
 	}
-	/*
 	switch (playerReturnValue) {
 	case PLAYER_DAMAGED:
 		break;
@@ -125,6 +124,9 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 	}
 	*/
 
+	if (playerReturnValue == PLAYER_REACHED_DOOR) {
+		return 4;
+	}
 
 	if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {
@@ -140,7 +142,7 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 					if (enemy[i] != nullptr) {
 						enemyReturnValue = enemy[i]->update(*map, g_dElapsedTime, *player);
 					}
-
+					/*
 					switch (enemyReturnValue) {
 					case PLAYER_DAMAGED:
 						player->takeDamage(enemy[i]->getDamage(), g_dElapsedTime);
@@ -148,6 +150,7 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 					default:
 						break;
 					}
+					*/
 				}
 
 

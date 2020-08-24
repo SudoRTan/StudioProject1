@@ -29,7 +29,7 @@ public:
 
 	void loadMap(std::string fileName);
 
-	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
+	int update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
 
 	void render(Console& console);
 
