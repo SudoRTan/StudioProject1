@@ -10,7 +10,7 @@ GameManager::GameManager(){
 	timeEnlapsedSincePause = 0.0;
 	gameTime = 0.0;
 
-	currGameState = IN_LEVEL;
+	currGameState = START_MENU;
 	stage.loadMap(stage.getStage());
 
 }
@@ -46,9 +46,6 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 		stage.update(KeyEvent, gameTime, currGameState);
 		break;
 
-	case PAUSE_MENU:
-		break;
-
 	case FINISHED_LEVEL:
 		if (currLevel == 3) {
 			currLevel = 1;
@@ -60,6 +57,7 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 		break;
 
 	default:
+		menu.update(currGameState, KeyEvent, currStage, currLevel);
 		break;
 	}
 }	
