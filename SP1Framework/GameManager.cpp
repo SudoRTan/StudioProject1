@@ -69,6 +69,8 @@ void GameManager::render(Console& console) {
 		break;
 
 	case FINISHED_LEVEL:
+		break;
+
 	default:
 		menu.render(currGameState, console);
 		break;

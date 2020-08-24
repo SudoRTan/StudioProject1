@@ -89,6 +89,7 @@
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="LevelSelectMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="colors.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="gameState.h" />
+    <ClInclude Include="LevelSelectMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="Menu.h" />

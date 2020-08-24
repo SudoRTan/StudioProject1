@@ -11,7 +11,7 @@ StartMenu::~StartMenu() {
 
 void StartMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
 	if (KeyEvent[K_SPACE].keyOnce) {
-		gameState = IN_LEVEL;
+		gameState = LEVEL_SELECT;
 	}
 }
 
