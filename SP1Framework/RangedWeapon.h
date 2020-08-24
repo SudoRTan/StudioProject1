@@ -21,3 +21,7 @@ enum RANGED_WEAPON_STATE {
 	POINTING_DOWNWARDS,
 };
 
+class RangedWeapon
+{
+};
+
