@@ -3,14 +3,17 @@
 #include "game.h"
 #include "gameState.h"
 #include <iostream>
-#include <fstream>
-
+#include "Framework/console.h"
+#include "Menu.h"
 
 
 class GameManager
 {
 private:
 	Stage stage;
+	Menu menu;
+
+
 	int currGameState;
 	
 	int currStage;
@@ -29,6 +32,6 @@ public:
 	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
 	void render(Console& console);
 
-	void renderPauseMenu(Console& console);
+
 };
 

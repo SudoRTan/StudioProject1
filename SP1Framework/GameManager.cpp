@@ -62,7 +62,7 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 	default:
 		break;
 	}
-}
+}	
 
 void GameManager::render(Console& console) {
 	switch (currGameState) {
@@ -70,31 +70,11 @@ void GameManager::render(Console& console) {
 		stage.render(console);
 		break;
 
-	case PAUSE_MENU:
-		renderPauseMenu(console);
-		break;
-
-
 	case FINISHED_LEVEL:
-
 	default:
+		menu.render(currGameState, console);
 		break;
 	}
 	
 }
 
-void GameManager::renderPauseMenu(Console& console) {
-
-	std::string line;
-	std::ifstream pauseText("pauseButton.txt");
-	int linecount = 0;
-
-	if (pauseText.is_open()) {
-		while (std::getline(pauseText, line)) {
-			console.writeToBuffer(9, 5 + linecount, line, FG_BLUE);
-			linecount++;
-		}
-		pauseText.close();
-	}
-
-}
