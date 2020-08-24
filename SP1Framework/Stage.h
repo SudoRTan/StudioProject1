@@ -21,20 +21,24 @@ private:
 	UI ui;
 	std::string currentStage;
 
+	std::string type;
+
+	void cleanUp(void);
 
 public:
-	Stage();
-	~Stage();
+	Stage(Player* player);
+	virtual ~Stage();
 
 	std::string getStage(void);
 
-	void updateStage(void);
 
 	void loadMap(std::string fileName);
 
 	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
 
 	void render(Console& console);
+
+	std::string getType();
 
 
 };

@@ -2,28 +2,33 @@
 #include <sstream>
 
 
-Stage::Stage() {
-	player = new Player;
+Stage::Stage(Player* player) {
+	this->player = player;
 	map = nullptr;
 	enemy = nullptr;
 	numOfEnemies = 0;
 	stageNumber = 1; // player starts game at stage1_1
 	levelNumber = 1;
 	currentStage = "stage1_1.txt";
+
+	type = "Stage";
 }
 
 Stage::~Stage() {
-	if (player != nullptr) {
-		delete player;
-		player = nullptr;
-	}
+	cleanUp();
+}
+
+
+void Stage::cleanUp(void) {
 	if (map != nullptr) {
 		delete map;
 		map = nullptr;
 	}
 	if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {
-			delete enemy[i];
+			if (enemy[i] != nullptr) {
+				delete enemy[i];
+			}
 		}
 		delete[] enemy;
 		enemy = nullptr;
@@ -35,30 +40,6 @@ std::string Stage::getStage(void)
 	return currentStage;
 }
 
-void Stage::updateStage(void)
-{
-	/*
-	if (player->reachDoor() == true)
-	{
-		std::ostringstream ss;
-		ss.str("");
-		levelNumber++;
-
-		if (levelNumber == 4)
-		{
-			ss << "stage" << stageNumber << "_" << "B" << ".txt";
-			stageNumber++;
-			levelNumber = 0;
-		}
-		else
-		{
-			ss << "stage" << stageNumber << "_" << levelNumber << ".txt";
-		}
-
-		currentStage = ss.str(); // convert text from stringstream to string
-	}
-	*/
-}
 
 void Stage::loadMap(std::string fileName) {
 	/*
@@ -140,3 +121,6 @@ void Stage::render(Console& console) {
 }
 
 
+std::string Stage::getType() {
+	return type;
+}

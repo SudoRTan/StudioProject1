@@ -7,7 +7,7 @@ class BossStage1 :
     public Stage
 {
 public:
-    BossStage1();
+    BossStage1(Player* player);
     ~BossStage1();
     static int fireCount;
     void update(); //change to updateStage

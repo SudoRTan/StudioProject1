@@ -50,7 +50,7 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 		if (selectedStage) {
 			currStage = selectedStage;
 			currLevel = currentSelection;
-			gameState = IN_LEVEL;
+			gameState = LOAD_LEVEL;
 		}
 		else {
 			selectedStage = currentSelection;
