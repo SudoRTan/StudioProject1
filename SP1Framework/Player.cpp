@@ -260,10 +260,10 @@ COORD Player::getEnemyLocation() {
 
 void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
 	if (weapon != nullptr) {
-		weapon->animate(map, g_dElapsedTime, direction, position.getX(), position.getY() + 1);
+		weapon->animate(map, g_dElapsedTime, direction, position.getX(), position.getY());
 
 		if (KeyEvent[K_SPACE].keyOnce) {
-			weapon->use(map, enemyArray, enemyArraySize, g_dElapsedTime, direction, position.getX(), position.getY() + 1);
+			weapon->use(map, enemyArray, enemyArraySize, g_dElapsedTime, direction, position.getX(), position.getY());
 		}
 	}
 			

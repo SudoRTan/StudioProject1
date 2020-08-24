@@ -87,7 +87,7 @@ void Stage::loadMap(std::string fileName) {
 		delete map;
 		map = new Map(fileName);
 
-	}
+ 	}
 	
 	numOfEnemies = map->getNumberOfEnemies();
 

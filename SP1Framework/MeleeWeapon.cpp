@@ -122,7 +122,7 @@ void MeleeWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double g
 		if (direction == LEFT) {
 			for (int i = 1; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
-					Enemy* enemyInRange = getEnemy(x - i, j - 1 + i, enemyArray, enemyArraySize);
+					Enemy* enemyInRange = getEnemy(x - i, y + j, enemyArray, enemyArraySize);
 					if (enemyInRange != nullptr) {
 						enemyInRange->takeDamage(getDamage());
 					}
@@ -133,7 +133,7 @@ void MeleeWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double g
 		else if (direction == RIGHT) {
 			for (int i = 1; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
-					Enemy* enemyInRange = getEnemy(x + i, j - 1 + i, enemyArray, enemyArraySize);
+					Enemy* enemyInRange = getEnemy(x + i, y + j, enemyArray, enemyArraySize);
 					if (enemyInRange != nullptr) {
 						enemyInRange->takeDamage(getDamage());
 					}
