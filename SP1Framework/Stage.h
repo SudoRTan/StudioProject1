@@ -5,6 +5,9 @@
 #include "game.h"
 #include "UI.h"
 #include "Framework/console.h"
+#include "gameState.h"
+
+
 
 class Stage
 {
@@ -29,7 +32,7 @@ public:
 
 	void loadMap(std::string fileName);
 
-	int update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
+	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
 
 	void render(Console& console);
 
