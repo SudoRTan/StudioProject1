@@ -23,9 +23,7 @@ BossStage1Fire::~BossStage1Fire()
 
 }
 
-double BossStage1Fire::getLastSpawnTime()
+int BossStage1Fire::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)
 {
-	return lastSpawnTime;
+	return 0;
 }
-
-int 
