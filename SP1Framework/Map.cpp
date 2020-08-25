@@ -196,7 +196,7 @@ Map::Map(std::string fileName)
 
 					break;
 				case 'H':
-					//mapTemplate[i][j] = EMPTY;
+					mapTemplate[i][j] = EMPTY;
 					break;
 
 				default:
