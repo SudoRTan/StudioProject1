@@ -195,8 +195,9 @@ int Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, in
 	else if (getItemBelow(map) == LAVA) {
 		setHealth(0);
 	}
-	return NO_CHANGE;
+	
 	dropping = false;
+	return NO_CHANGE;
 
 }
 
