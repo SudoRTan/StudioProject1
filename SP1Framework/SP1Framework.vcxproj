@@ -112,6 +112,7 @@
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponCollectible.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmmoCollectible.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponCollectible.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
