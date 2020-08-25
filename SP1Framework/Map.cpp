@@ -197,6 +197,9 @@ Map::Map(std::string fileName)
 					mapTemplate[i][j] = EMPTY;
 					enemyCounter++;
 					break;
+				case 'H':
+					//mapTemplate[i][j] = EMPTY;
+					break;
 
 				default:
 					break;
