@@ -11,7 +11,7 @@ BossStage1::BossStage1(Player* player):Stage(player) //add spawning of water gun
 
 BossStage1::~BossStage1()
 {
-	
+		
 }
 
 void BossStage1::update()
