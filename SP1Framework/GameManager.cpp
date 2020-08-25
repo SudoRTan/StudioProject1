@@ -30,23 +30,7 @@ GameManager::~GameManager() {
 
 void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 	
-	if (KeyEvent[K_ESCAPE].keyOnce) {
-		switch (currGameState) {
-		case PAUSE_MENU:
-			currGameState = IN_LEVEL;
-			timeEnlapsedSincePause = g_dElapsedTime - pauseTime;
-			break;
-
-		case IN_LEVEL:
-			currGameState = PAUSE_MENU;
-			pauseTime = gameTime;
-			break;
-
-		default: 
-			break;
-		}
-	}
-
+	
 	gameTime = g_dElapsedTime - timeEnlapsedSincePause;
 
 
@@ -65,6 +49,10 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 		currGameState = IN_LEVEL;
 		break;
 	
+	case RESUME_LEVEL:
+		currGameState = IN_LEVEL;
+		timeEnlapsedSincePause = g_dElapsedTime - pauseTime;
+		break;
 
 	case RELOAD_LEVEL:
 		player->resetHealth();
@@ -80,6 +68,19 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 		menu.update(currGameState, KeyEvent, currStage, currLevel);
 		break;
 	}
+
+	if (KeyEvent[K_ESCAPE].keyOnce) {
+		switch (currGameState) {
+		case IN_LEVEL:
+			currGameState = PAUSE_MENU;
+			pauseTime = gameTime;
+			break;
+
+		default:
+			break;
+		}
+	}
+
 }	
 
 void GameManager::render(Console& console) {
@@ -91,6 +92,8 @@ void GameManager::render(Console& console) {
 	case FINISHED_LEVEL:
 	case LOAD_LEVEL:
 	case RELOAD_LEVEL:
+	case LEVEL_COMPLETE_MENU:
+	case  RESUME_LEVEL:
 		break;
 
 	case PLAYER_DEATH:
