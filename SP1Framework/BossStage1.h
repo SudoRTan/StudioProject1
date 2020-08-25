@@ -10,7 +10,7 @@ public:
     BossStage1(Player* player);
     ~BossStage1();
     static int fireCount;
-    void update(); //change to updateStage
+    void update();
 private:
     std::vector<BossStage1Fire*> fireVector;
 };
