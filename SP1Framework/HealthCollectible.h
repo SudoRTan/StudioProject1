@@ -5,7 +5,10 @@ class HealthCollectible
 {
 private:
 public:
-	HealthCollectible();
+	HealthCollectible(int x, int y);
 	~HealthCollectible();
+
+
+	void update(Map& map);
 };
 

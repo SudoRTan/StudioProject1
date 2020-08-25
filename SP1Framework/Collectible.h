@@ -5,13 +5,18 @@
 class Collectible
 	: public Entity
 {
-private:
-	bool isCollected;
+protected:
+	std::string type;
 
 public:
 	Collectible(int x, int y);
-	~Collectible();
+	virtual ~Collectible();
 	//void PlayerCollect(Position playerpos); // use playerpos obj in Player.h as parameter for comparing when player's position is the same as collectible's position
-	void update(Map& map);
+	
+	virtual void update(Map& map);
+	std::string getType();
+
+
 };
 
+Collectible* getCollectible(int x, int y, Collectible** collectible, int arraySize);

@@ -2,7 +2,9 @@
 
 Collectible::Collectible(int x, int y)
 {
-	isCollected = false;
+	//isCollected = false;
+	
+	
 	position.setX(x); // set collectible's position on map to (7,7) for testing purposes
 	position.setY(y);
 }
@@ -31,3 +33,29 @@ void Collectible::PlayerCollect(Position playerpos) // pass in player's position
 void Collectible::update(Map& map) {
 	map.setTempItem(position.getX(), position.getY(), 'C');
 }
+
+
+std::string Collectible::getType() {
+	return type;
+}
+
+
+
+Collectible* getCollectible(int x, int y, Collectible** collectible, int arraySize) {
+	Collectible* returnCollectible = nullptr;
+
+	if (collectible != nullptr) {
+		for (int i = 0; i < arraySize; i++) {
+			if (collectible[i] != nullptr) {
+				if (collectible[i]->isLocatedAt(x, y)) {
+					returnCollectible = collectible[i];
+				}
+			}
+		}
+	}
+
+
+	return returnCollectible;
+}
+
+

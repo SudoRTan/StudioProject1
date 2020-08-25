@@ -7,6 +7,7 @@
 #include "Framework/console.h"
 #include "Map.h"
 #include "gameState.h"
+#include "HealthCollectible.h"
 
 
 class EntityManager

@@ -74,7 +74,14 @@ void EntityManager::loadCollectible(int sizeOfArray, EntityTemplate** collectibl
 
 
 	for (int i = 0; i < sizeOfArray; i++) {
-		collectible[i] = new Collectible(collectibleTemplate[i]->postion.X, collectibleTemplate[i]->postion.Y);
+		switch (collectibleTemplate[i]->symbol) {
+		case 'H':
+			collectible[i] = new HealthCollectible(collectibleTemplate[i]->postion.X, collectibleTemplate[i]->postion.Y);
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }
