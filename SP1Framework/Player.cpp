@@ -301,13 +301,29 @@ void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime
 			
 }
 
-int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
+int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize, Collectible** collectibleArray, int collectibleArraySize) {
 	int playerUpdateValue = 0;
 	playerUpdateValue = move(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
 	if (playerUpdateValue == NO_CHANGE) {
 		playerUpdateValue = updateHeight(map, g_dElapsedTime, enemyArray, enemyArraySize);
 		attack(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
 	}
+
+	Collectible* collectibleInLocation = getCollectible(position.getX(), position.getY(), collectibleArray, collectibleArraySize);
+
+	if (collectibleInLocation != nullptr) {
+		int collectibleType = collectibleInLocation->getType();
+		switch (collectibleType) {
+		case HEALTH:
+			resetHealth();
+			collectibleInLocation->collect();
+			break;
+
+		default:
+			break;
+		}
+	}
+
 	return playerUpdateValue;
 	
 }

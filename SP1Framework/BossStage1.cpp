@@ -18,7 +18,7 @@ BossStage1::~BossStage1()
 
 void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)
 {
-	int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, entityManager.enemy, numOfEnemies);
+	//int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, entityManager.enemy, numOfEnemies);
 
 	if (fireVector.empty() == true)
 	{

@@ -24,6 +24,11 @@ enum ENEMY_TYPES {
 	ENEMY_3 = 51
 };
 
+
+enum COLLECTIBLE_TYPES {
+	HEALTH = 'H',
+};
+
 class Map
 {
 private:

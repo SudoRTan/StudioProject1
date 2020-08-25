@@ -1,12 +1,14 @@
 #pragma once
-#include "Player.h"
 #include "Entity.h"
+
+class Player;
 
 class Collectible
 	: public Entity
 {
 protected:
-	std::string type;
+	int type;
+	bool collected;
 
 public:
 	Collectible(int x, int y);
@@ -14,9 +16,11 @@ public:
 	//void PlayerCollect(Position playerpos); // use playerpos obj in Player.h as parameter for comparing when player's position is the same as collectible's position
 	
 	virtual void update(Map& map);
-	std::string getType();
+	int getType();
 
+	void collect();
 
+	bool isCollected();
 };
 
 Collectible* getCollectible(int x, int y, Collectible** collectible, int arraySize);

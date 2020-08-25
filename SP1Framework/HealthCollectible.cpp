@@ -2,7 +2,7 @@
 
 HealthCollectible::HealthCollectible(int x, int y) :Collectible(x, y)
 {
-	type = "Health";
+	type = HEALTH;
 
 
 	height = 1;

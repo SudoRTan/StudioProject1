@@ -7,6 +7,8 @@ Collectible::Collectible(int x, int y)
 	
 	position.setX(x); // set collectible's position on map to (7,7) for testing purposes
 	position.setY(y);
+
+	collected = false;
 }
 
 Collectible::~Collectible()
@@ -35,11 +37,17 @@ void Collectible::update(Map& map) {
 }
 
 
-std::string Collectible::getType() {
+int Collectible::getType() {
 	return type;
 }
 
+void Collectible::collect() {
+	collected = true;
+}
 
+bool Collectible::isCollected() {
+	return collected;
+}
 
 Collectible* getCollectible(int x, int y, Collectible** collectible, int arraySize) {
 	Collectible* returnCollectible = nullptr;

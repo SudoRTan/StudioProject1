@@ -16,7 +16,7 @@ EntityManager::~EntityManager() {
 
 
 void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
-	int playerReturnValue = player->update(map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
+	int playerReturnValue = player->update(map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies, collectible, numOfCollectibles);
 
 	if (playerReturnValue == PLAYER_GOT_HEALTH) {
 		player->resetHealth();
@@ -46,7 +46,14 @@ void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElap
 	if (collectible != nullptr) {
 		for (int i = 0; i < numOfCollectibles; i++) {
 			if (collectible[i] != nullptr) {
-				collectible[i]->update(map);
+				if (collectible[i]->isCollected()) {
+					delete collectible[i];
+					collectible[i] = nullptr;
+				}
+				else {
+					collectible[i]->update(map);
+
+				}
 			}
 		}
 	}
@@ -75,7 +82,7 @@ void EntityManager::loadCollectible(int sizeOfArray, EntityTemplate** collectibl
 
 	for (int i = 0; i < sizeOfArray; i++) {
 		switch (collectibleTemplate[i]->symbol) {
-		case 'H':
+		case HEALTH:
 			collectible[i] = new HealthCollectible(collectibleTemplate[i]->postion.X, collectibleTemplate[i]->postion.Y);
 			break;
 

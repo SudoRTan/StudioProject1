@@ -7,6 +7,7 @@
 #include "Weapon.h"
 #include "MeleeWeapon.h"
 #include "RangedWeapon.h"
+#include "Collectible.h"
 
 enum PLAYER_ELEMENTS {
 	PLAYER_HEAD = '0',
@@ -40,7 +41,7 @@ public:
 	void renderPlayer(Console& console);
 	void touchEnemy(Enemy enemy, double g_dElapsedTime);
 
-	int update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
+	int update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize, Collectible** collectibleArray, int collectibleArraySize);
 
 	char getItemBelow(Map& map);
 

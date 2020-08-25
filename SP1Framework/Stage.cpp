@@ -63,9 +63,9 @@ void Stage::loadMap(std::string fileName) {
 	EntityTemplate** collectiblePositions = map->getCollectibleTemplate();
 
 	numOfEnemies = map->getNumberOfEnemies();
-	int test = map->getNumberOfCollectibles();
+	int numOfCollectibles = map->getNumberOfCollectibles();
 
-	entityManager.loadCollectible(test, collectiblePositions);
+	entityManager.loadCollectible(numOfCollectibles, collectiblePositions);
 
 	entityManager.loadEnemy(numOfEnemies, enemyPositions);
 
