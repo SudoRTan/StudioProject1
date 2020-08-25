@@ -57,13 +57,13 @@ void DeathMenu::render(Console& console) {
 	
 
 	if (currentSelection == 1) {
-		console.writeToBuffer(10, 10, "TRY AGAIN", FG_RED);
-		console.writeToBuffer(10, 12, "EXIT TO MAIN MENU", FG_WHITE);
+		console.writeToBuffer(14, 15, "TRY AGAIN", FG_RED);
+		console.writeToBuffer(14, 17, "EXIT TO MAIN MENU", FG_WHITE);
 	}
 
 	else if (currentSelection == 2) {
-		console.writeToBuffer(10, 10, "TRY AGAIN" , FG_WHITE);
-		console.writeToBuffer(10, 12, "EXIT TO MAIN MENU", FG_RED);
+		console.writeToBuffer(14, 15, "TRY AGAIN" , FG_WHITE);
+		console.writeToBuffer(14, 17, "EXIT TO MAIN MENU", FG_RED);
 	}
 
 }
