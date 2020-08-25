@@ -4,7 +4,7 @@ RangedWeapon::RangedWeapon(){
 	setName("Ranged");
 	setDamage(1);
 
-	useTime =0.06;
+	useTime = 0.06;
 	lastUseTime = 0.00;
 
 	animationPhases = 1;
@@ -78,23 +78,21 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 		currentAnimationPhase = 3;
 
 		if (direction == LEFT) {
-			for (int i = 1; i < 3; i++) {
-				for (int j = 0; j < 6; j++) {
-					Enemy* enemyInRange = getEnemy(x - i, y + j, enemyArray, enemyArraySize);
-					if (enemyInRange != nullptr) {
-						enemyInRange->takeDamage(getDamage());
-					}
+			for (int i = 1; i < 15; i++) {
+				Enemy* enemyInRange = getEnemy(x - i, y + 1, enemyArray, enemyArraySize);
+				if (enemyInRange != nullptr) {
+					enemyInRange->takeDamage(getDamage());
 				}
+
 			}
+
 		}
-		
+
 		else if (direction == RIGHT) {
-			for (int i = 1; i < 3; i++) {
-				for (int j = 0; j < 6; j++) {
-					Enemy* enemyInRange = getEnemy(x + i, y + j, enemyArray, enemyArraySize);
-					if (enemyInRange != nullptr) {
-						enemyInRange->takeDamage(getDamage());
-					}
+			for (int i = 1; i < 15; i++) {
+				Enemy* enemyInRange = getEnemy(x + i, y + 1, enemyArray, enemyArraySize);
+				if (enemyInRange != nullptr) {
+					enemyInRange->takeDamage(getDamage());
 				}
 			}
 		}
