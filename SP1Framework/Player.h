@@ -19,6 +19,8 @@ class Player :
 {
 private:
 	bool dropping;
+	bool jumping;
+
 	double updateHeightDelay;
 
 	COORD enemyLocation;
@@ -27,6 +29,7 @@ private:
 	int move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 	int updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 	void attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
+
 
 public:
 	Player();

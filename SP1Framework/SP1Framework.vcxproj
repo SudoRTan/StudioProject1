@@ -89,6 +89,7 @@
     <ClCompile Include="EnemyType2.cpp" />
     <ClCompile Include="EnemyType3.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
@@ -120,9 +121,11 @@
     <ClInclude Include="createArray.h" />
     <ClInclude Include="DeathMenu.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyTemplate.h" />
     <ClInclude Include="EnemyType2.h" />
     <ClInclude Include="EnemyType3.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />

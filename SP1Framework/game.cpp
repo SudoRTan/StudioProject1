@@ -117,7 +117,7 @@ void testGetInput(void) {
             else {
                 g_skKeyEvent[i].keyReleased = false;
             }
-            if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown && g_dElapsedTime - g_skKeyEvent[i].timeSinceLastInput <= 0.3) {
+            if (!temp_skKeyEvent[i].keyDown && g_skKeyEvent[i].keyDown && g_dElapsedTime - g_skKeyEvent[i].timeSinceLastInput <= 0.2) {
                 g_skKeyEvent[i].keyTwice = true;
             }
             else {
