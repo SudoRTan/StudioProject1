@@ -96,9 +96,9 @@ void EntityManager::cleanUp() {
 			if (collectible[i] != nullptr) {
 				delete collectible[i];
 			}
-			delete[] collectible;
-			collectible = nullptr;
 		}
+		delete[] collectible;
+		collectible = nullptr;
 	}
 
 }
