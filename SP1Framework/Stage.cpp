@@ -90,6 +90,9 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& game
 
 	int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
 
+	if (playerReturnValue == PLAYER_GOT_HEALTH) {
+		player->resetHealth();
+	}
 	if (playerReturnValue == PLAYER_REACHED_DOOR) {
 		gameState = FINISHED_LEVEL;
 	}

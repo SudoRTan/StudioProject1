@@ -134,6 +134,10 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 		else if (map.getDefaultItem(newX, newY) == 'D') {
 			return PLAYER_REACHED_DOOR;
 		}
+		else if (map.getItem(newX, newY) == 'H') {
+			map.setItem(newX, newY, EMPTY);
+			return PLAYER_GOT_HEALTH;
+		}
 	}
 
 	
@@ -188,6 +192,9 @@ int Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, in
 
 			}
 		}
+	}
+	else if (map.getItem(newX, newY - 1) == HEALTH_COLLECTIBLE) {
+		return PLAYER_GOT_HEALTH;
 	}
 	else if (getItemBelow(map) == DOOR) {
 		return PLAYER_REACHED_DOOR;
