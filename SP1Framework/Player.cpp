@@ -13,6 +13,7 @@ Player::Player()
 	updateHeightDelay = 0.06;
 
 	dropping = false;
+	jumping = false;
 
 	lastDamageTime = 0.0;
 	damageDelay = 0.3;
@@ -48,6 +49,7 @@ Player::Player(int x, int y) {
 	updateHeightDelay = 0.06;
 
 	dropping = false;
+	jumping = false;
 
 	lastDamageTime = 0.0;
 	damageDelay = 0.3;
@@ -96,13 +98,19 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 		newX++;
 
 	}
-
+	/*
 	if (KeyEvent[K_UP].keyOnce && map.getItem(position.getX(), position.getY() - 1) != EMPTY)
 	{
 		if (canJump == 0)
 		{
 			canJump = 3;
 		}
+	}
+	*/
+	if (KeyEvent[K_UP].keyOnce && jumping == false)
+	{
+		jumping = true;
+		canJump = 3;
 	}
 
 	if (KeyEvent[K_DOWN].keyTwice) {
@@ -155,7 +163,6 @@ int Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, in
 		{
 			newY++;
 			canJump--;
-
 		}
 		else if (dropping) {
 			newY--;
@@ -184,7 +191,12 @@ int Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, in
 				}
 			}
 			if (enemyAtNewLocation != nullptr) {
-				takeDamage(enemyAtNewLocation->getDamage(), g_dElapsedTime);
+
+				if (canJump == 0) {
+					jumping = false;
+				}
+
+ 				takeDamage(enemyAtNewLocation->getDamage(), g_dElapsedTime);
 			}
 
 			else {
@@ -196,11 +208,24 @@ int Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, in
 	else if (map.getItem(newX, newY - 1) == HEALTH_COLLECTIBLE) {
 		return PLAYER_GOT_HEALTH;
 	}
-	else if (getItemBelow(map) == DOOR) {
+
+	switch (getItemBelow(map)) {
+	case DOOR:
 		return PLAYER_REACHED_DOOR;
-	}
-	else if (getItemBelow(map) == LAVA) {
+		break;
+
+	case LAVA:
 		setHealth(0);
+		break;
+
+	case '=':
+	case '-':
+		jumping = false;
+		break;
+
+	default:
+		break;
+
 	}
 	
 	dropping = false;
