@@ -1,6 +1,6 @@
 #include "HealthCollectible.h"
 
-HealthCollectible::HealthCollectible()
+HealthCollectible::HealthCollectible():Collectible(1,1)
 {
 
 }

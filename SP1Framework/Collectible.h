@@ -7,12 +7,11 @@ class Collectible
 {
 private:
 	bool isCollected;
-	int CollectibleCount = 0;
-	Position collectiblepos;
 
 public:
-	Collectible();
+	Collectible(int x, int y);
 	~Collectible();
-	void PlayerCollect(Position playerpos); // use playerpos obj in Player.h as parameter for comparing when player's position is the same as collectible's position
+	//void PlayerCollect(Position playerpos); // use playerpos obj in Player.h as parameter for comparing when player's position is the same as collectible's position
+	void update(Map& map);
 };
 

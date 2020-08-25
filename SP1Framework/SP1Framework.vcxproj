@@ -125,7 +125,7 @@
     <ClInclude Include="createArray.h" />
     <ClInclude Include="DeathMenu.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyTemplate.h" />
+    <ClInclude Include="EntityTemplate.h" />
     <ClInclude Include="EnemyType2.h" />
     <ClInclude Include="EnemyType3.h" />
     <ClInclude Include="Entity.h" />

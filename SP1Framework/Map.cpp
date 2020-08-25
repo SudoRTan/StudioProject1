@@ -96,6 +96,7 @@ Map::Map(std::string fileName)
 
 
 	numberOfEnemies = 0;
+	numberOfCollectible = 0;
 
 	std::string line = "";
 	int lines = 0;
@@ -138,6 +139,9 @@ Map::Map(std::string fileName)
 				if (mapArray[readingLine][i] == 'E') {
 					numberOfEnemies++;
 				}
+				else if (mapArray[readingLine][i] == 'H') {
+					numberOfCollectible++;
+				}
 			}
 
 			if (lengthOfLine != length) {
@@ -152,10 +156,10 @@ Map::Map(std::string fileName)
 
 		// Creates array to store starting location of Enemies;
 
-		enemyTemplate = new EnemyTemplate * [numberOfEnemies];
+		enemyTemplate = new EntityTemplate * [numberOfEnemies];
 
 		for (int i = 0; i < numberOfEnemies; i++) {
-			enemyTemplate[i] = new EnemyTemplate;
+			enemyTemplate[i] = new EntityTemplate;
 			
 			enemyTemplate[i]->postion.X = 0;
 			enemyTemplate[i]->postion.Y = 0;
@@ -163,11 +167,22 @@ Map::Map(std::string fileName)
 			
 		}
 
+		collectibleTemplate = new EntityTemplate * [numberOfCollectible];
+
+		for (int i = 0; i < numberOfCollectible; i++) {
+			collectibleTemplate[i] = new EntityTemplate;
+
+			collectibleTemplate[i]->postion.X = 0;
+			collectibleTemplate[i]->postion.Y = 0;
+			collectibleTemplate[i]->symbol = ' ';
+
+		}
 
 		
 
 
 		int enemyCounter = 0;
+		int collectibleCounter = 0;
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < length; j++) {
 				switch (mapArray[i][j]) {
@@ -186,17 +201,16 @@ Map::Map(std::string fileName)
 					enemyTemplate[enemyCounter]->postion.X = j;
 					enemyTemplate[enemyCounter]->postion.Y = i;
 					enemyTemplate[enemyCounter]->symbol = 'E';
-					
-					
-					
 					enemyCounter++;
-
-
-
-
 					break;
+
 				case 'H':
+					collectibleTemplate[collectibleCounter]->postion.X = j;
+					collectibleTemplate[collectibleCounter]->postion.Y = i;
+					collectibleTemplate[collectibleCounter]->symbol = 'H';
+					mapArray[i][j] = EMPTY;
 					mapTemplate[i][j] = EMPTY;
+					collectibleCounter++;
 					break;
 
 				default:
@@ -230,6 +244,12 @@ Map::~Map()
 	}
 
 	delete[] enemyTemplate;
+
+	for (int i = 0; i < numberOfCollectible; i++) {
+		delete collectibleTemplate[i];
+	}
+
+	delete[] collectibleTemplate;
 }
 
 void Map::renderMap(Console& console)
@@ -428,6 +448,14 @@ COORD Map::getPlayerPosition() {
 	return playerStartingPos;
 }
 
-EnemyTemplate** Map::getEnemyTemplate() {
+EntityTemplate** Map::getEnemyTemplate() {
 	return enemyTemplate;
+}
+
+int Map::getNumberOfCollectibles() {
+	return numberOfCollectible;
+}
+
+EntityTemplate** Map::getCollectibleTemplate() {
+	return collectibleTemplate;
 }

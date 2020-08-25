@@ -43,9 +43,16 @@ void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElap
 			}
 		}
 	}
+	if (collectible != nullptr) {
+		for (int i = 0; i < numOfCollectibles; i++) {
+			if (collectible[i] != nullptr) {
+				collectible[i]->update(map);
+			}
+		}
+	}
 }
 
-void EntityManager::loadEnemy(int sizeOfArray, EnemyTemplate** enemyTemplate) {
+void EntityManager::loadEnemy(int sizeOfArray, EntityTemplate** enemyTemplate) {
 
 	enemy = new Enemy * [sizeOfArray];
 
@@ -58,6 +65,21 @@ void EntityManager::loadEnemy(int sizeOfArray, EnemyTemplate** enemyTemplate) {
 
 }
 
+
+void EntityManager::loadCollectible(int sizeOfArray, EntityTemplate** collectibleTemplate) {
+
+	collectible = new Collectible * [sizeOfArray];
+
+	numOfCollectibles = sizeOfArray;
+
+
+	for (int i = 0; i < sizeOfArray; i++) {
+		collectible[i] = new Collectible(collectibleTemplate[i]->postion.X, collectibleTemplate[i]->postion.Y);
+	}
+
+}
+
+
 void EntityManager::cleanUp() {
 	if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {
@@ -68,4 +90,15 @@ void EntityManager::cleanUp() {
 		delete[] enemy;
 		enemy = nullptr;
 	}
+
+	if (collectible != nullptr) {
+		for (int i = 0; i < numOfCollectibles; i++) {
+			if (collectible[i] != nullptr) {
+				delete collectible[i];
+			}
+			delete[] collectible;
+			collectible = nullptr;
+		}
+	}
+
 }

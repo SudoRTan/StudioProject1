@@ -1,6 +1,6 @@
 #include "AmmoCollectible.h"
 
-AmmoCollectible::AmmoCollectible()
+AmmoCollectible::AmmoCollectible():Collectible(1,1)
 {
 
 }

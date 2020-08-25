@@ -1,7 +1,7 @@
 #pragma once
 #include "Map.h"
 #include "Enemy.h"
-#include "EnemyTemplate.h"
+#include "EntityTemplate.h"
 #include "Player.h"
 #include "game.h"
 #include "UI.h"

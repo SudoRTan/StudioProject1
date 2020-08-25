@@ -1,6 +1,6 @@
 #include "WeaponCollectible.h"
 
-WeaponCollectible::WeaponCollectible()
+WeaponCollectible::WeaponCollectible():Collectible(1,1)
 {
 
 }
