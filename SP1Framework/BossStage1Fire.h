@@ -7,5 +7,6 @@ class BossStage1Fire :
 public:
 	BossStage1Fire();
 	~BossStage1Fire();
-	void takeDamage(Player player);
+	double getLastSpawnTime();
+	int update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
 };
