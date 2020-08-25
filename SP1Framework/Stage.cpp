@@ -2,10 +2,9 @@
 #include <sstream>
 
 
-Stage::Stage(Player* player) {
+Stage::Stage(Player* player) : entityManager(player) {
 	this->player = player;
 	map = nullptr;
-	enemy = nullptr;
 	numOfEnemies = 0;
 	stageNumber = 1; // player starts game at stage1_1
 	levelNumber = 1;
@@ -24,15 +23,9 @@ void Stage::cleanUp(void) {
 		delete map;
 		map = nullptr;
 	}
-	if (enemy != nullptr) {
-		for (int i = 0; i < numOfEnemies; i++) {
-			if (enemy[i] != nullptr) {
-				delete enemy[i];
-			}
-		}
-		delete[] enemy;
-		enemy = nullptr;
-	}
+
+	entityManager.cleanUp();
+
 }
 
 std::string Stage::getStage(void)
@@ -66,40 +59,26 @@ void Stage::loadMap(std::string fileName) {
 	
 	map = new Map(fileName);
 
-
+	EnemyTemplate**  enemyPositions = map->getEnemyTemplate();
 	
+
 	numOfEnemies = map->getNumberOfEnemies();
 
-	COORD** enemyPosition = map->getPositionOfEnemies();
+	entityManager.loadEnemy(numOfEnemies, enemyPositions);
 
-	char* enemySymbol = map->getSymbolOfEnemies();
 
 	player->setPosition(map->getPlayerPosition().X, map->getPlayerPosition().Y);
-
-	enemy = new Enemy * [numOfEnemies];
-
-	for (int i = 0; i < numOfEnemies; i++) {
-		enemy[i] = new Enemy(enemyPosition[i]->X, enemyPosition[i]->Y);
-
-	}
 	
 
 }
 
 void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
 
-	int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
 
-	if (playerReturnValue == PLAYER_GOT_HEALTH) {
-		player->resetHealth();
-	}
-	if (playerReturnValue == PLAYER_REACHED_DOOR) {
-		gameState = FINISHED_LEVEL;
-	}
-	if (player->getHealth() <= 0) {
-		gameState = PLAYER_DEATH;
-	}
 
+	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState);
+	
+	/*
 	if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {
 			if (enemy[i] != nullptr) {
@@ -115,6 +94,7 @@ void Stage::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& game
 			}
 		}
 	}
+	*/
 }
 
 void Stage::render(Console& console) {

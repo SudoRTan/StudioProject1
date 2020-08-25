@@ -1,12 +1,13 @@
 #pragma once
 #include "Map.h"
 #include "Enemy.h"
+#include "EnemyTemplate.h"
 #include "Player.h"
 #include "game.h"
 #include "UI.h"
 #include "Framework/console.h"
 #include "gameState.h"
-
+#include "EntityManager.h"
 
 
 class Stage
@@ -14,7 +15,6 @@ class Stage
 private:
 	Map* map;
 	Player* player;
-	Enemy** enemy;
 	int numOfEnemies;
 	int stageNumber;
 	int levelNumber;
@@ -24,6 +24,9 @@ private:
 	std::string type;
 
 	void cleanUp(void);
+
+	EntityManager entityManager;
+
 
 public:
 	Stage(Player* player);

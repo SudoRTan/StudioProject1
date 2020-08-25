@@ -4,6 +4,7 @@
 #include "Position.h"
 #include <fstream>
 #include "createArray.h"
+#include "EnemyTemplate.h"
 
 enum MAP_ELEMENTS {
 	INVALID = 0,
@@ -37,10 +38,10 @@ private:
 
 	//Used to store locations / number of enemies;
 	int numberOfEnemies;
-	COORD** positionOfEnemies;
-	char* symbolOfEnemies;
-	COORD playerStartingPos;
+	EnemyTemplate** enemyTemplate;
 
+
+	COORD playerStartingPos;
 
 
 
@@ -76,12 +77,11 @@ public:
 
 
 	int getNumberOfEnemies();
-	COORD** getPositionOfEnemies();
-	char* getSymbolOfEnemies();
 
 
 	COORD getPlayerPosition();
 
+	EnemyTemplate** getEnemyTemplate();
 
 };
 

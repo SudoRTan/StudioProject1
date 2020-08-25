@@ -37,16 +37,6 @@ Map::Map()
 		mapArray[0][i] = (char)FLOOR;
 	}
 
-
-
-
-	numberOfEnemies = 1;
-
-	symbolOfEnemies = new char[numberOfEnemies];
-
-	for (int i = 0; i < numberOfEnemies; i++) {
-
-	}
 }
 
 Map::Map(int height, int length)
@@ -160,21 +150,20 @@ Map::Map(std::string fileName)
 			readingLine--;
 		}
 
-		// Creates positionOfEnemies array;
+		// Creates array to store starting location of Enemies;
 
-		positionOfEnemies = new COORD* [numberOfEnemies];
+		enemyTemplate = new EnemyTemplate * [numberOfEnemies];
+
 		for (int i = 0; i < numberOfEnemies; i++) {
-			positionOfEnemies[i] = new COORD;
-			positionOfEnemies[i]->X = 0;
-			positionOfEnemies[i]->Y = 0;
+			enemyTemplate[i] = new EnemyTemplate;
+			
+			enemyTemplate[i]->postion.X = 0;
+			enemyTemplate[i]->postion.Y = 0;
+			enemyTemplate[i]->symbol = ' ';
+			
 		}
 
 
-		//Creates symbolOfEnemies array;
-		symbolOfEnemies = new char[numberOfEnemies];
-		for (int i = 0; i < numberOfEnemies; i++) {
-			symbolOfEnemies[i] = 0;
-		}
 		
 
 
@@ -190,12 +179,21 @@ Map::Map(std::string fileName)
 					break;
 
 				case 'E':
-					positionOfEnemies[enemyCounter]->X = j;
-					positionOfEnemies[enemyCounter]->Y = i;
-					symbolOfEnemies[enemyCounter] = 'E';
 					mapArray[i][j] = EMPTY;
 					mapTemplate[i][j] = EMPTY;
+					
+					
+					enemyTemplate[enemyCounter]->postion.X = j;
+					enemyTemplate[enemyCounter]->postion.Y = i;
+					enemyTemplate[enemyCounter]->symbol = 'E';
+					
+					
+					
 					enemyCounter++;
+
+
+
+
 					break;
 				case 'H':
 					//mapTemplate[i][j] = EMPTY;
@@ -228,11 +226,10 @@ Map::~Map()
 
 
 	for (int i = 0; i < numberOfEnemies; i++) {
-		delete positionOfEnemies[i];
+		delete enemyTemplate[i];
 	}
 
-	delete[] symbolOfEnemies;
-	delete[] positionOfEnemies;
+	delete[] enemyTemplate;
 }
 
 void Map::renderMap(Console& console)
@@ -426,20 +423,11 @@ int Map::getNumberOfEnemies() {
 	return numberOfEnemies;
 }
 
-COORD** Map::getPositionOfEnemies() {
-	COORD** returnData = positionOfEnemies;
-	
-	return returnData;
-
-}
-
-char* Map::getSymbolOfEnemies() {
-
-	char* returnData = symbolOfEnemies;
-
-	return returnData;
-}
 
 COORD Map::getPlayerPosition() {
 	return playerStartingPos;
+}
+
+EnemyTemplate** Map::getEnemyTemplate() {
+	return enemyTemplate;
 }
