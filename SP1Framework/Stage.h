@@ -11,7 +11,7 @@
 
 class Stage
 {
-private:
+protected:
 	Map* map;
 	Player* player;
 	Enemy** enemy;
@@ -34,7 +34,7 @@ public:
 
 	void loadMap(std::string fileName);
 
-	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
+	virtual void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
 
 	void render(Console& console);
 
