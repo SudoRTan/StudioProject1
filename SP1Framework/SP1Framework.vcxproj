@@ -86,6 +86,8 @@
     <ClCompile Include="Collectible.cpp" />
     <ClCompile Include="DeathMenu.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyType2.cpp" />
+    <ClCompile Include="EnemyType3.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Framework\console.cpp" />
@@ -104,6 +106,7 @@
     <ClCompile Include="createArray.cpp" />
     <ClCompile Include="RangedWeapon.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="EnemyType1.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Weapon.cpp" />
@@ -119,6 +122,8 @@
     <ClInclude Include="DeathMenu.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyTemplate.h" />
+    <ClInclude Include="EnemyType2.h" />
+    <ClInclude Include="EnemyType3.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Framework\console.h" />
@@ -137,6 +142,7 @@
     <ClInclude Include="Position.h" />
     <ClInclude Include="RangedWeapon.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="EnemyType1.h" />
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Weapon.h" />
