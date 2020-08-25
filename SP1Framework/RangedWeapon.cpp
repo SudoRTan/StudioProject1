@@ -2,12 +2,12 @@
 
 RangedWeapon::RangedWeapon(){
 	setName("Ranged");
-	setDamage(10);
+	setDamage(1);
 
 	useTime =0.06;
 	lastUseTime = 0.00;
 
-	animationPhases = 3;
+	animationPhases = 1;
 	currentAnimationPhase = 0;
 	lastAnimateTime = 0;
 
@@ -37,49 +37,30 @@ void RangedWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x
 
 		if (direction == RIGHT)
 		{
+			
 			switch (currentAnimationPhase) {
 			case 1:
-				map.setTempItem(x + offSet, y, (char)R_POINTING_DOWNWARDS);
-				map.setTempItem(x + offSet * 2, y - 1, (char)R_POINTING_DOWNWARDS);
-				break;
-
-			case 2:
-				map.setTempItem(x + offSet, y, (char)R_POINTING_STRAIGHT);
-				map.setTempItem(x + offSet * 2, y, (char)R_POINTING_STRAIGHT);
-				break;
-
-			case 3:
-				map.setTempItem(x + offSet, y, (char)R_POINTING_UPWARDS);
-				map.setTempItem(x + offSet * 2, y + 1, (char)R_POINTING_UPWARDS);
+				map.setTempItem(x + offSet, y + 1, (char)R_POINTING_RIGHT);
+				map.setTempItem(x + offSet * 2, y + 1, (char)R_POINTING_RIGHT);
 				break;
 
 			default:
 				break;
-
 			}
+				
 		}
 		if (direction == LEFT)
-		{
-			switch (currentAnimationPhase) {
+		{ 
+			switch (currentAnimationPhase){
 			case 1:
-				map.setTempItem(x + offSet, y, (char)R_POINTING_UPWARDS);
-				map.setTempItem(x + offSet * 2, y - 1, (char)R_POINTING_UPWARDS);
-				break;
-
-			case 2:
-				map.setTempItem(x + offSet, y, (char)R_POINTING_STRAIGHT);
-				map.setTempItem(x + offSet * 2, y, (char)R_POINTING_STRAIGHT);
-				break;
-
-			case 3:
-				map.setTempItem(x + offSet, y, (char)R_POINTING_DOWNWARDS);
-				map.setTempItem(x + offSet * 2, y + 1, (char)R_POINTING_DOWNWARDS);
+				map.setTempItem(x + offSet, y + 1, (char)R_POINTING_LEFT);
+				map.setTempItem(x + offSet * 2, y + 1, (char)R_POINTING_LEFT);
 				break;
 
 			default:
 				break;
-
 			}
+			
 		}
 
 		if (g_dElapsedTime - lastAnimateTime > (useTime / animationPhases)) {
@@ -98,7 +79,7 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 
 		if (direction == LEFT) {
 			for (int i = 1; i < 3; i++) {
-				for (int j = 0; j < 5; j++) {
+				for (int j = 0; j < 6; j++) {
 					Enemy* enemyInRange = getEnemy(x - i, y + j, enemyArray, enemyArraySize);
 					if (enemyInRange != nullptr) {
 						enemyInRange->takeDamage(getDamage());
@@ -106,10 +87,10 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 				}
 			}
 		}
-
+		
 		else if (direction == RIGHT) {
 			for (int i = 1; i < 3; i++) {
-				for (int j = 0; j < 5; j++) {
+				for (int j = 0; j < 6; j++) {
 					Enemy* enemyInRange = getEnemy(x + i, y + j, enemyArray, enemyArraySize);
 					if (enemyInRange != nullptr) {
 						enemyInRange->takeDamage(getDamage());
