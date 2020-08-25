@@ -50,7 +50,7 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 		if (selectedStage) {
 			currStage = selectedStage;
 			currLevel = currentSelection;
-			gameState = IN_LEVEL;
+			gameState = LOAD_LEVEL;
 		}
 		else {
 			selectedStage = currentSelection;
@@ -69,14 +69,17 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 }
 
 void LevelSelectMenu::render(Console& console) {
+
+	console.writeToBuffer(10, 8, "[Up/Down]Select Stage [Esc]Back to Title Screen", FG_WHITE);
+
 	if (selectedStage) {
 		for (int i = 0; i < totalSelections; i++) {
 			if (i + 1 == currentSelection) {
-				console.writeToBuffer(10, 10 + i, "Stage: " + std::to_string(i), FG_RED);
+				console.writeToBuffer(10, 10 + i, "Level: " + std::to_string(i + 1), FG_RED);
 			}
 
 			else {
-				console.writeToBuffer(10, 10 + i, "Stage: " + std::to_string(i), FG_WHITE);
+				console.writeToBuffer(10, 10 + i, "Level: " + std::to_string(i + 1), FG_WHITE);
 			}
 		}
 	}
@@ -84,11 +87,11 @@ void LevelSelectMenu::render(Console& console) {
 	else {
 		for (int i = 0; i < totalStage; i++) {
 			if (i + 1 == currentSelection) {
-				console.writeToBuffer(10, 10 + i, "Stage: " + std::to_string(i), FG_RED);
+				console.writeToBuffer(10, 10 + i, "Stage: " + std::to_string(i + 1), FG_RED);
 			}
 
 			else {
-				console.writeToBuffer(10, 10 + i, "Stage: " + std::to_string(i), FG_WHITE);
+				console.writeToBuffer(10, 10 + i, "Stage: " + std::to_string(i + 1), FG_WHITE);
 			}
 		}
 	}

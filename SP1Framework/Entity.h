@@ -5,7 +5,8 @@
 
 enum ENTITY_STATE {
 	NO_CHANGE,
-	PLAYER_REACHED_DOOR
+	PLAYER_REACHED_DOOR,
+	PLAYER_GOT_HEALTH
 	
 };
 
@@ -21,6 +22,7 @@ class Entity
 protected:
 	Position position;
 	int health;
+	int maxHealth;
 	int damage;
 	int canJump;
 	int direction;
@@ -65,4 +67,7 @@ public:
 
 	int getDirection();
 
+	void resetHealth();
+
+	void cleanUp();
 };

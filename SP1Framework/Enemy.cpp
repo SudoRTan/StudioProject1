@@ -48,7 +48,7 @@ Enemy::Enemy(int x, int y)
 
 Enemy::~Enemy()
 {
-
+	cleanUp();
 }
 
 int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)

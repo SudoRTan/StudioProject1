@@ -5,6 +5,6 @@ class BossStage3 :
     public Stage
 {
 public:
-    BossStage3();
+    BossStage3(Player* player);
     ~BossStage3();
 };

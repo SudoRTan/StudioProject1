@@ -1,7 +1,7 @@
 #include "BossStage1.h"
 static int fireCount = 0;
 
-BossStage1::BossStage1() //add spawning of water gun here
+BossStage1::BossStage1(Player* player):Stage(player) //add spawning of water gun here
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -11,7 +11,7 @@ BossStage1::BossStage1() //add spawning of water gun here
 
 BossStage1::~BossStage1()
 {
-	
+		
 }
 
 void BossStage1::update()

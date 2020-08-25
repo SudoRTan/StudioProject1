@@ -5,6 +5,8 @@ BossStage1Fire::BossStage1Fire()
 	position.setX(4 * (rand() % 5));
 	position.setY(1 + 5 * (rand() % 24));
 	setHealth(3);
+	height = 2;
+	width = 3;
 }
 
 BossStage1Fire::~BossStage1Fire()

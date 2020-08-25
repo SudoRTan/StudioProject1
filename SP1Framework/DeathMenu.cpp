@@ -1,16 +1,16 @@
-#include "PauseMenu.h"
+#include "DeathMenu.h"
 
-
-PauseMenu::PauseMenu() {
+DeathMenu::DeathMenu() {
 	currentSelection = 1;
 	totalSelections = 2;
 }
 
-PauseMenu::~PauseMenu() {
+DeathMenu::~DeathMenu() {
 
 }
 
-void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
+
+void DeathMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
 	if (KeyEvent[K_DOWN].keyOnce) {
 		currentSelection++;
 		if (currentSelection > totalSelections) {
@@ -25,41 +25,45 @@ void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 	}
 	else if (KeyEvent[K_SPACE].keyOnce) {
 		if (currentSelection == 1) {
-			gameState = RESUME_LEVEL;
+			gameState = RELOAD_LEVEL;
 		}
 		else {
 			gameState = START_MENU;
 		}
 	}
 	else if (KeyEvent[K_ESCAPE].keyOnce) {
-		gameState = RESUME_LEVEL;
+		gameState = START_MENU;
 
 	}
+
+
+
 }
 
 
-
-void PauseMenu::render(Console& console) {
+void DeathMenu::render(Console& console) {
 	std::string line;
-	std::ifstream pauseText("pauseButton.txt");
+	std::ifstream file("deathScreen.txt");
 	int linecount = 0;
 
-	if (pauseText.is_open()) {
-		while (std::getline(pauseText, line)) {
-			console.writeToBuffer(9, 5 + linecount, line, FG_BLUE);
+	if (file.is_open()) {
+		while (std::getline(file, line)) {
+			console.writeToBuffer(12, 2 + linecount, line, FG_RED + BG_WHITE);
 			linecount++;
 		}
-		pauseText.close();
+		file.close();
 	}
+
+	
+
 	if (currentSelection == 1) {
-		console.writeToBuffer(10, 10, "RESUME", FG_RED);
+		console.writeToBuffer(10, 10, "TRY AGAIN", FG_RED);
 		console.writeToBuffer(10, 12, "EXIT TO MAIN MENU", FG_WHITE);
 	}
 
 	else if (currentSelection == 2) {
-		console.writeToBuffer(10, 10, "RESUME", FG_WHITE);
+		console.writeToBuffer(10, 10, "TRY AGAIN" , FG_WHITE);
 		console.writeToBuffer(10, 12, "EXIT TO MAIN MENU", FG_RED);
 	}
-
 
 }

@@ -5,6 +5,7 @@ Player::Player()
 	position.setX(0);
 	position.setY(1);
 	health = 20;
+	maxHealth = 20;
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
@@ -39,6 +40,7 @@ Player::Player(int x, int y) {
 	position.setX(x);
 	position.setY(y);
 	health = 20;
+	maxHealth = 20;
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
@@ -71,7 +73,8 @@ Player::Player(int x, int y) {
 
 Player::~Player()
 {
-
+	cleanUp();
+	delete weapon;
 }
 
 int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
@@ -128,8 +131,12 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 				updateNewPosition(map, newX, newY);
 			}
 		}
-		else if (map.getItem(newX, newY) == 'D') {
+		else if (map.getDefaultItem(newX, newY) == 'D') {
 			return PLAYER_REACHED_DOOR;
+		}
+		else if (map.getItem(newX, newY) == 'H') {
+			map.setItem(newX, newY, EMPTY);
+			return PLAYER_GOT_HEALTH;
 		}
 	}
 
@@ -139,7 +146,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 
 }
 
-void Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
+int Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
 {	
 	int newX = position.getX();
 	int newY = position.getY();
@@ -186,8 +193,18 @@ void Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, i
 			}
 		}
 	}
-
+	else if (map.getItem(newX, newY - 1) == HEALTH_COLLECTIBLE) {
+		return PLAYER_GOT_HEALTH;
+	}
+	else if (getItemBelow(map) == DOOR) {
+		return PLAYER_REACHED_DOOR;
+	}
+	else if (getItemBelow(map) == LAVA) {
+		setHealth(0);
+	}
+	
 	dropping = false;
+	return NO_CHANGE;
 
 }
 
@@ -247,6 +264,7 @@ COORD Player::getEnemyLocation() {
 	return enemyLocation;
 }
 
+
 void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
 	if (weapon != nullptr) {
 		weapon->animate(map, g_dElapsedTime, direction, position.getX(), position.getY());
@@ -261,8 +279,10 @@ void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime
 int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
 	int playerUpdateValue = 0;
 	playerUpdateValue = move(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
-	updateHeight(map, g_dElapsedTime, enemyArray, enemyArraySize);
-	attack(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
-	
+	if (playerUpdateValue == NO_CHANGE) {
+		playerUpdateValue = updateHeight(map, g_dElapsedTime, enemyArray, enemyArraySize);
+		attack(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
+	}
 	return playerUpdateValue;
+	
 }

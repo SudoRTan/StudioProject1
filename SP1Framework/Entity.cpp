@@ -175,3 +175,15 @@ bool Entity::hangingOnEdge(Map& map, int x, int y) {
 int Entity::getDirection() {
 	return direction;
 }
+
+void Entity::resetHealth() {
+	health = maxHealth;
+}
+
+void Entity::cleanUp() {
+	for (int i = 0; i < width; i++) {
+		delete[] symbolArray[i];
+	}
+
+	delete[] symbolArray;
+}

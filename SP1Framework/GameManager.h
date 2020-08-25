@@ -5,13 +5,15 @@
 #include <iostream>
 #include "Framework/console.h"
 #include "MenuManager.h"
-
+#include <sstream>
 
 class GameManager
 {
 private:
-	Stage stage;
 	MenuManager menu;
+
+	Player* player;
+	Stage* stage;
 
 
 	int currGameState;
@@ -32,6 +34,6 @@ public:
 	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
 	void render(Console& console);
 
-
+	void loadStage();
 };
 
