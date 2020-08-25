@@ -156,13 +156,16 @@ bool Enemy::contactPlayer(int x, int y, Player& player) {
 Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
 	Enemy* returnEnemy = nullptr;
 
-	for (int i = 0; i < arraySize; i++) {
-		if (enemy[i] != nullptr) {
-			if (enemy[i]->isLocatedAt(x, y)) {
-				returnEnemy = enemy[i];
+	if (enemy != nullptr) {
+		for (int i = 0; i < arraySize; i++) {
+			if (enemy[i] != nullptr) {
+				if (enemy[i]->isLocatedAt(x, y)) {
+					returnEnemy = enemy[i];
+				}
 			}
 		}
 	}
+	
 
 	return returnEnemy;
 }
