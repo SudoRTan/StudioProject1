@@ -38,7 +38,7 @@ void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int&
 
 void LevelCompleteMenu::render(Console& console) {
 	std::string boxLine;
-	std::ifstream boxFile("deathMenuBox.txt");
+	std::ifstream boxFile("levelCompleteMenuBox.txt");
 	int boxLinecount = 0;
 
 	if (boxFile.is_open()) {
@@ -51,12 +51,12 @@ void LevelCompleteMenu::render(Console& console) {
 	boxLinecount = 0;
 
 	std::string pauseButtonLine;
-	std::ifstream pauseButtonFile("deathScreen.txt");
+	std::ifstream pauseButtonFile("levelComplete.txt");
 	int pauseButtonLineCount = 0;
 
 	if (pauseButtonFile.is_open()) {
 		while (std::getline(pauseButtonFile, pauseButtonLine)) {
-			console.writeToBuffer(11, 1 + pauseButtonLineCount, pauseButtonLine, FG_RED + BG_WHITE);
+			console.writeToBuffer(1, 1 + pauseButtonLineCount, pauseButtonLine, FG_RED + BG_WHITE);
 			pauseButtonLineCount++;
 		}
 		pauseButtonFile.close();
