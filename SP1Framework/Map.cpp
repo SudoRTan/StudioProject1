@@ -140,17 +140,8 @@ Map::Map(std::string fileName)
 				switch (mapArray[readingLine][i]) {
 					//If the item is an Enemy
 				case 'E':
-					numberOfEnemies++;
-					break;
-
 				case '1':
-					numberOfEnemies++;
-					break;
-
 				case '2':
-					numberOfEnemies++;
-					break;
-
 				case '3':
 					numberOfEnemies++;
 					break;
@@ -218,33 +209,9 @@ Map::Map(std::string fileName)
 					break;
 
 					//Enenmy is at location
-				case 'E':			
-					enemyTemplate[enemyCounter]->postion.X = j;
-					enemyTemplate[enemyCounter]->postion.Y = i;
-					enemyTemplate[enemyCounter]->symbol = mapArray[i][j];
-					enemyCounter++;
-					mapArray[i][j] = EMPTY;
-					mapTemplate[i][j] = EMPTY;
-					break;
-
+				case 'E':
 				case '1':
-					enemyTemplate[enemyCounter]->postion.X = j;
-					enemyTemplate[enemyCounter]->postion.Y = i;
-					enemyTemplate[enemyCounter]->symbol = mapArray[i][j];
-					enemyCounter++;
-					mapArray[i][j] = EMPTY;
-					mapTemplate[i][j] = EMPTY;
-					break;
-
 				case '2':
-					enemyTemplate[enemyCounter]->postion.X = j;
-					enemyTemplate[enemyCounter]->postion.Y = i;
-					enemyTemplate[enemyCounter]->symbol = mapArray[i][j];
-					enemyCounter++;
-					mapArray[i][j] = EMPTY;
-					mapTemplate[i][j] = EMPTY;
-					break;
-
 				case '3':
 					enemyTemplate[enemyCounter]->postion.X = j;
 					enemyTemplate[enemyCounter]->postion.Y = i;
