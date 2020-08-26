@@ -22,6 +22,9 @@ protected:
 	int currentAnimationPhase;
 	double lastAnimateTime;
 
+	virtual void animate(Map& map, double elapsedTime, int direction, int x, int y) = 0;
+	virtual void use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y) = 0;
+
 
 public:
 
@@ -31,10 +34,6 @@ public:
 
 	int getDamage();
 	std::string getName();
-
-	virtual void animate(Map& map, double elapsedTime, int direction, int x, int y) = 0;
-	
-	virtual void use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y) = 0;
 
 
 	virtual void update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y, bool attacking);
