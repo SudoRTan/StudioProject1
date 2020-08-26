@@ -44,6 +44,7 @@ void Projectile::update(Map& map, double elapsedTime) {
 			updateNewPosition(map, newX, newY);
 		}
 		else {
+			map.setDefaultItem(position.getX(), position.getY());
 			health = 0;
 		}
 	}
