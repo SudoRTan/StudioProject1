@@ -1,11 +1,13 @@
 #pragma once
-#include "Stage.h"
 #include "game.h"
 #include "gameState.h"
 #include <iostream>
 #include "Framework/console.h"
 #include "MenuManager.h"
 #include <sstream>
+
+#include "Stage.h"
+#include "BossStage1.h"
 
 class GameManager
 {
