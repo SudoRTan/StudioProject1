@@ -11,7 +11,5 @@ public:
 	void update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel);
 
 	void render(Console& console);
-private: 
-	int selectedOption;
 };
 
