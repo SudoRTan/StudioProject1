@@ -1,17 +1,18 @@
-#include "DeathMenu.h"
+#include "LevelCompleteMenu.h"
 
-DeathMenu::DeathMenu() {
+
+
+
+LevelCompleteMenu::LevelCompleteMenu() {
 	currentSelection = 1;
 	totalSelections = 2;
 }
 
-DeathMenu::~DeathMenu() {
+LevelCompleteMenu::~LevelCompleteMenu() {
 
 }
 
-
-void DeathMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
-	
+void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
 	if (KeyEvent[K_UP].keyOnce || KeyEvent[K_LEFT].keyOnce) {
 		decreaseSelection();
 	}
@@ -22,7 +23,7 @@ void DeathMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 
 	else if (KeyEvent[K_SPACE].keyOnce) {
 		if (currentSelection == 1) {
-			gameState = RELOAD_LEVEL;
+			gameState = FINISHED_LEVEL;
 		}
 		else {
 			currentSelection = 1;
@@ -33,41 +34,9 @@ void DeathMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 		gameState = START_MENU;
 
 	}
-
-
-
 }
 
-
-/*void DeathMenu::render(Console& console) {
-	std::string line;
-	std::ifstream file("deathScreen.txt");
-	int linecount = 0;
-
-	if (file.is_open()) {
-		while (std::getline(file, line)) {
-			console.writeToBuffer(12, 2 + linecount, line, FG_RED + BG_WHITE);
-			linecount++;
-		}
-		file.close();
-	}
-
-	
-
-	if (currentSelection == 1) {
-		console.writeToBuffer(14, 15, "TRY AGAIN", FG_RED);
-		console.writeToBuffer(14, 17, "EXIT TO MAIN MENU", FG_WHITE);
-	}
-
-	else if (currentSelection == 2) {
-		console.writeToBuffer(14, 15, "TRY AGAIN" , FG_WHITE);
-		console.writeToBuffer(14, 17, "EXIT TO MAIN MENU", FG_RED);
-	}
-
-}*/
-
-void DeathMenu::render(Console& console) {
-
+void LevelCompleteMenu::render(Console& console) {
 	std::string boxLine;
 	std::ifstream boxFile("deathMenuBox.txt");
 	int boxLinecount = 0;
@@ -95,11 +64,11 @@ void DeathMenu::render(Console& console) {
 	pauseButtonLineCount = 0;
 
 	if (currentSelection == 1) {
-		console.writeToBuffer(15, 16, "TRY AGAIN", FG_RED);
+		console.writeToBuffer(15, 16, "NEXT LEVEL", FG_RED);
 		console.writeToBuffer(53, 16, "MAIN MENU", FG_WHITE);
 	}
 	else {
-		console.writeToBuffer(15, 16, "TRY AGAIN", FG_WHITE);
+		console.writeToBuffer(15, 16, "NEXT LEVEL", FG_WHITE);
 		console.writeToBuffer(53, 16, "MAIN MENU", FG_RED);
 	}
 }

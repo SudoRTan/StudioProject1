@@ -96,6 +96,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HealthCollectible.cpp" />
+    <ClCompile Include="LevelCompleteMenu.cpp" />
     <ClCompile Include="LevelSelectMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="gameState.h" />
     <ClInclude Include="HealthCollectible.h" />
+    <ClInclude Include="LevelCompleteMenu.h" />
     <ClInclude Include="LevelSelectMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MeleeWeapon.h" />

@@ -94,8 +94,7 @@ void GameManager::render(Console& console) {
 	case FINISHED_LEVEL:
 	case LOAD_LEVEL:
 	case RELOAD_LEVEL:
-	case LEVEL_COMPLETE_MENU:
-	case  RESUME_LEVEL:
+	case RESUME_LEVEL:
 		break;
 
 	case PLAYER_DEATH:
