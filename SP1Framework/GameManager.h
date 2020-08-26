@@ -33,9 +33,9 @@ public:
 	~GameManager(); 
 
 
-	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime);
+	void update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime);
 	void render(Console& console);
 
-	void loadStage();
+	void loadStage(double enlapsedTime);
 };
 

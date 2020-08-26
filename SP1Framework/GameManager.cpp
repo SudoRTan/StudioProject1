@@ -28,10 +28,10 @@ GameManager::~GameManager() {
 	player = nullptr;
 }
 
-void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
+void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
 	
 	
-	gameTime = g_dElapsedTime - timeEnlapsedSincePause;
+	gameTime = enlapsedTime - timeEnlapsedSincePause;
 
 
 	switch (currGameState) {
@@ -46,20 +46,20 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 		}
 		currLevel++;
 		//stage->loadMap("stage" + std::to_string(currStage) + "_" + std::to_string(currLevel) + ".txt");
-		loadStage();
+		loadStage(enlapsedTime);
 		currGameState = IN_LEVEL;
 		break;
 	
 	case RESUME_LEVEL:
 		currGameState = IN_LEVEL;
-		timeEnlapsedSincePause = g_dElapsedTime - pauseTime;
+		timeEnlapsedSincePause = enlapsedTime - pauseTime;
 		break;
 
 	case RELOAD_LEVEL:
 		player->resetHealth();
 
 	case LOAD_LEVEL:
-		loadStage();
+		loadStage(enlapsedTime);
 		currGameState = IN_LEVEL;
 		break;
 
@@ -105,7 +105,7 @@ void GameManager::render(Console& console) {
 	
 }
 
-void GameManager::loadStage() {
+void GameManager::loadStage(double enlapsedTime) {
 	std::stringstream ss;
 
 	
@@ -115,11 +115,11 @@ void GameManager::loadStage() {
 	
 	if (currLevel == 4) {
 		if (stage == nullptr) {
-			stage = new BossStage1(player);
+			stage = new BossStage1(player, enlapsedTime);
 		}
 		else {
 			delete stage;
-			stage = new BossStage1(player);
+			stage = new BossStage1(player, enlapsedTime);
 		}
 	}
 	else {
