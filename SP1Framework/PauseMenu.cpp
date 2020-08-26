@@ -66,34 +66,50 @@ void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 
 void PauseMenu::render(Console& console)
 {
-
+	// Initialize variables to load pause button box
 	std::string boxLine;
-	std::ifstream boxFile("pauseButton.txt");
+	std::ifstream boxFile("pauseMenuBox.txt");
 	int boxLinecount = 0;
-
+	
+	//Load pause button box
 	if (boxFile.is_open()) {
 		while (std::getline(boxFile, boxLine)) {
-			console.writeToBuffer(8, 1 + boxLinecount, boxLine, FG_RED + BG_WHITE);
+			console.writeToBuffer(12, 12 + boxLinecount, boxLine, FG_RED + BG_WHITE);
 			boxLinecount++;
 		}
 		boxFile.close();
 	}
 	boxLinecount = 0;
 
-	for (int i = 0; i < totalSelections; i++) {
-		if (i + 1 == currentSelection) {
-			console.writeToBuffer(10, 10, "RESUME", FG_WHITE);
-			console.writeToBuffer(10, 12, "EXIT TO MAIN MENU ", FG_RED);
-		}
 
+	// Initialize variables to load pause button
+	std::string pauseButtonLine;
+	std::ifstream pauseButtonFile("pauseButton.txt");
+	int pauseButtonLineCount = 0;
 
-		else {
-			
-			console.writeToBuffer(10, 10, "RESUME", FG_RED);
-			console.writeToBuffer(10, 12, "EXIT TO MAIN MENU ", FG_WHITE);
+	//Load pause button
+	if (pauseButtonFile.is_open()) {
+		while (std::getline(pauseButtonFile, pauseButtonLine)) {
+			console.writeToBuffer(8, 1 + pauseButtonLineCount, pauseButtonLine, FG_RED + BG_WHITE);
+			pauseButtonLineCount++;
 		}
+		pauseButtonFile.close();
+	}
+	pauseButtonLineCount = 0;
+
+	//First option Selected
+	if (currentSelection == 1) {
+		console.writeToBuffer(17, 14, "RESUME", FG_RED);
+		console.writeToBuffer(53, 14, "MAIN MENU", FG_WHITE);
 	}
 
+	//Second Option selected
+	else {
+		console.writeToBuffer(17, 14, "RESUME", FG_WHITE);
+		console.writeToBuffer(53, 14, "MAIN MENU", FG_RED);
+	}
+	
+    
 }
 
 
