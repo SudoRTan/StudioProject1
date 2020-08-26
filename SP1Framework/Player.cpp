@@ -290,26 +290,16 @@ COORD Player::getEnemyLocation() {
 }
 
 
-void Player::attack(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize) {
-	if (weapon != nullptr) {
-		weapon->update(map, enemyArray, enemyArraySize, g_dElapsedTime, direction, position.getX(), position.getY(), KeyEvent[K_SPACE].keyOnce);
-		/*
-		weapon->animate(map, g_dElapsedTime, direction, position.getX(), position.getY());
-
-		if (KeyEvent[K_SPACE].keyOnce) {
-			weapon->use(map, enemyArray, enemyArraySize, g_dElapsedTime, direction, position.getX(), position.getY());
-		}
-		*/
-	}
-			
-}
-
 int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize, Collectible** collectibleArray, int collectibleArraySize) {
 	int playerUpdateValue = 0;
 	playerUpdateValue = move(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
 	if (playerUpdateValue == NO_CHANGE) {
 		playerUpdateValue = updateHeight(map, g_dElapsedTime, enemyArray, enemyArraySize);
-		attack(map, KeyEvent, g_dElapsedTime, enemyArray, enemyArraySize);
+		
+		// Update Weapon if weapon != nullptr
+		if (weapon != nullptr) {
+			weapon->update(map, enemyArray, enemyArraySize, g_dElapsedTime, direction, position.getX(), position.getY(), KeyEvent[K_SPACE].keyOnce);
+		}
 	}
 
 	Collectible* collectibleInLocation = getCollectible(position.getX(), position.getY(), collectibleArray, collectibleArraySize);
