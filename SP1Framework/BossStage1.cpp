@@ -20,6 +20,8 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 {
 	//int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, entityManager.enemy, numOfEnemies);
 
+	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState);
+
 	if (fireVector.empty() == true)
 	{
 		gameState = FINISHED_LEVEL;
@@ -36,6 +38,9 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 			delete fireVector.at(i);
 			fireVector.at(i) = nullptr;
 			//fireVector.pop_back(); uncomment if doesnt resize, also require testing
+		}
+		else {
+			fireVector.at(i)->update(*map, g_dElapsedTime, *player);
 		}
 	}
 	spawnFire(g_dElapsedTime);

@@ -23,7 +23,8 @@ BossStage1Fire::~BossStage1Fire()
 
 }
 
-int BossStage1Fire::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)
+int BossStage1Fire::update(Map& map, double g_dElapsedTime, Player& player)
 {
+	updateNewPosition(map, position.getX(), position.getY());
 	return 0;
 }

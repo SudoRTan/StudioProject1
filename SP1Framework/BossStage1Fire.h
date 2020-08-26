@@ -7,5 +7,5 @@ class BossStage1Fire :
 public:
 	BossStage1Fire();
 	~BossStage1Fire();
-	int update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
+	int update(Map& map, double g_dElapsedTime, Player& player);
 };
