@@ -39,7 +39,7 @@ void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 
 
 
-void PauseMenu::render(Console& console) {
+/*void PauseMenu::render(Console& console) {
 	std::string line;
 	std::ifstream pauseText("pauseButton.txt");
 	int linecount = 0;
@@ -62,4 +62,40 @@ void PauseMenu::render(Console& console) {
 	}
 
 
+}*/
+
+void PauseMenu::render(Console& console)
+{
+
+	std::string boxLine;
+	std::ifstream boxFile("pauseButton.txt");
+	int boxLinecount = 0;
+
+	if (boxFile.is_open()) {
+		while (std::getline(boxFile, boxLine)) {
+			console.writeToBuffer(8, 1 + boxLinecount, boxLine, FG_RED + BG_WHITE);
+			boxLinecount++;
+		}
+		boxFile.close();
+	}
+	boxLinecount = 0;
+
+	for (int i = 0; i < totalSelections; i++) {
+		if (i + 1 == currentSelection) {
+			console.writeToBuffer(10, 10, "RESUME", FG_WHITE);
+			console.writeToBuffer(10, 12, "EXIT TO MAIN MENU ", FG_RED);
+		}
+
+
+		else {
+			
+			console.writeToBuffer(10, 10, "RESUME", FG_RED);
+			console.writeToBuffer(10, 12, "EXIT TO MAIN MENU ", FG_WHITE);
+		}
+	}
+
 }
+
+
+
+ 
