@@ -4,7 +4,7 @@
 #include "Position.h"
 #include <fstream>
 #include "createArray.h"
-#include "EnemyTemplate.h"
+#include "EntityTemplate.h"
 
 enum MAP_ELEMENTS {
 	INVALID = 0,
@@ -24,6 +24,11 @@ enum ENEMY_TYPES {
 	ENEMY_3 = 51
 };
 
+
+enum COLLECTIBLE_TYPES {
+	HEALTH = 'H',
+};
+
 class Map
 {
 private:
@@ -38,8 +43,10 @@ private:
 
 	//Used to store locations / number of enemies;
 	int numberOfEnemies;
-	EnemyTemplate** enemyTemplate;
+	EntityTemplate** enemyTemplate;
 
+	int numberOfCollectible;
+	EntityTemplate** collectibleTemplate;
 
 	COORD playerStartingPos;
 
@@ -81,7 +88,12 @@ public:
 
 	COORD getPlayerPosition();
 
-	EnemyTemplate** getEnemyTemplate();
+	EntityTemplate** getEnemyTemplate();
+
+
+	int getNumberOfCollectibles();
+	EntityTemplate** getCollectibleTemplate();
+
 
 };
 

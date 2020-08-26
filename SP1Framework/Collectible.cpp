@@ -1,17 +1,21 @@
 #include "Collectible.h"
 
-Collectible::Collectible()
+Collectible::Collectible(int x, int y)
 {
-	isCollected = false;
-	collectiblepos.setX(7); // set collectible's position on map to (7,7) for testing purposes
-	collectiblepos.setY(7);
+	//isCollected = false;
+	
+	
+	position.setX(x); // set collectible's position on map to (7,7) for testing purposes
+	position.setY(y);
+
+	collected = false;
 }
 
 Collectible::~Collectible()
 {
 
 }
-
+/*
 void Collectible::PlayerCollect(Position playerpos) // pass in player's position object into playerpos
 {
 	if ((playerpos.getX() == collectiblepos.getX()) && (playerpos.getY() == collectiblepos.getY())) // check if player moves over collectible
@@ -26,3 +30,40 @@ void Collectible::PlayerCollect(Position playerpos) // pass in player's position
 		//remove collectible from the map where the player currently is
 	}
 }
+*/
+
+void Collectible::update(Map& map) {
+	map.setTempItem(position.getX(), position.getY(), 'C');
+}
+
+
+int Collectible::getType() {
+	return type;
+}
+
+void Collectible::collect() {
+	collected = true;
+}
+
+bool Collectible::isCollected() {
+	return collected;
+}
+
+Collectible* getCollectible(int x, int y, Collectible** collectible, int arraySize) {
+	Collectible* returnCollectible = nullptr;
+
+	if (collectible != nullptr) {
+		for (int i = 0; i < arraySize; i++) {
+			if (collectible[i] != nullptr) {
+				if (collectible[i]->isLocatedAt(x, y)) {
+					returnCollectible = collectible[i];
+				}
+			}
+		}
+	}
+
+
+	return returnCollectible;
+}
+
+

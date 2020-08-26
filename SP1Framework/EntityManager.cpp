@@ -16,7 +16,7 @@ EntityManager::~EntityManager() {
 
 
 void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
-	int playerReturnValue = player->update(map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies);
+	int playerReturnValue = player->update(map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies, collectible, numOfCollectibles);
 
 	if (playerReturnValue == PLAYER_GOT_HEALTH) {
 		player->resetHealth();
@@ -43,9 +43,23 @@ void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElap
 			}
 		}
 	}
+	if (collectible != nullptr) {
+		for (int i = 0; i < numOfCollectibles; i++) {
+			if (collectible[i] != nullptr) {
+				if (collectible[i]->isCollected()) {
+					delete collectible[i];
+					collectible[i] = nullptr;
+				}
+				else {
+					collectible[i]->update(map);
+
+				}
+			}
+		}
+	}
 }
 
-void EntityManager::loadEnemy(int sizeOfArray, EnemyTemplate** enemyTemplate) {
+void EntityManager::loadEnemy(int sizeOfArray, EntityTemplate** enemyTemplate) {
 
 	enemy = new Enemy * [sizeOfArray];
 
@@ -53,10 +67,38 @@ void EntityManager::loadEnemy(int sizeOfArray, EnemyTemplate** enemyTemplate) {
 
 
 	for (int i = 0; i < sizeOfArray; i++) {
-		enemy[i] = new Enemy(enemyTemplate[i]->postion.X, enemyTemplate[i]->postion.Y);
+		switch (enemyTemplate[i]->symbol) {
+		case 'E':
+			enemy[i] = new Enemy(enemyTemplate[i]->postion.X, enemyTemplate[i]->postion.Y);
+			break;
+		default:
+			break;
+		}
 	}
 
 }
+
+
+void EntityManager::loadCollectible(int sizeOfArray, EntityTemplate** collectibleTemplate) {
+
+	collectible = new Collectible * [sizeOfArray];
+
+	numOfCollectibles = sizeOfArray;
+
+
+	for (int i = 0; i < sizeOfArray; i++) {
+		switch (collectibleTemplate[i]->symbol) {
+		case HEALTH:
+			collectible[i] = new HealthCollectible(collectibleTemplate[i]->postion.X, collectibleTemplate[i]->postion.Y);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+}
+
 
 void EntityManager::cleanUp() {
 	if (enemy != nullptr) {
@@ -68,4 +110,15 @@ void EntityManager::cleanUp() {
 		delete[] enemy;
 		enemy = nullptr;
 	}
+
+	if (collectible != nullptr) {
+		for (int i = 0; i < numOfCollectibles; i++) {
+			if (collectible[i] != nullptr) {
+				delete collectible[i];
+			}
+		}
+		delete[] collectible;
+		collectible = nullptr;
+	}
+
 }

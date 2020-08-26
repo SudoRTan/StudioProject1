@@ -3,7 +3,7 @@
 
 
 
-struct EnemyTemplate {
+struct EntityTemplate {
 	COORD postion;
 	char symbol;
 };

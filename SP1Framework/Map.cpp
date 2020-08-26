@@ -96,6 +96,7 @@ Map::Map(std::string fileName)
 
 
 	numberOfEnemies = 0;
+	numberOfCollectible = 0;
 
 	std::string line = "";
 	int lines = 0;
@@ -135,11 +136,24 @@ Map::Map(std::string fileName)
 				mapArray[readingLine][i] = line[i];
 				mapTemplate[readingLine][i] = line[i];
 
-				if (mapArray[readingLine][i] == 'E') {
+				//Checks all the elements in the map
+				switch (mapArray[readingLine][i]) {
+					//If the item is an Enemy
+				case 'E':
 					numberOfEnemies++;
-				}
-			}
+					break;
+					
+					//If the item is a collectible
+				case HEALTH:
+					numberOfCollectible++;
+					break;
 
+				default:
+					break;
+				}
+
+			}
+			/*
 			if (lengthOfLine != length) {
 				for (int i = lengthOfLine; i < length; i++) {
 					mapArray[readingLine][i] = (char)EMPTY;
@@ -147,15 +161,16 @@ Map::Map(std::string fileName)
 
 				}
 			}
+			*/
 			readingLine--;
 		}
 
 		// Creates array to store starting location of Enemies;
 
-		enemyTemplate = new EnemyTemplate * [numberOfEnemies];
+		enemyTemplate = new EntityTemplate * [numberOfEnemies];
 
 		for (int i = 0; i < numberOfEnemies; i++) {
-			enemyTemplate[i] = new EnemyTemplate;
+			enemyTemplate[i] = new EntityTemplate;
 			
 			enemyTemplate[i]->postion.X = 0;
 			enemyTemplate[i]->postion.Y = 0;
@@ -163,14 +178,26 @@ Map::Map(std::string fileName)
 			
 		}
 
+		collectibleTemplate = new EntityTemplate * [numberOfCollectible];
+
+		for (int i = 0; i < numberOfCollectible; i++) {
+			collectibleTemplate[i] = new EntityTemplate;
+
+			collectibleTemplate[i]->postion.X = 0;
+			collectibleTemplate[i]->postion.Y = 0;
+			collectibleTemplate[i]->symbol = ' ';
+
+		}
 
 		
 
 
 		int enemyCounter = 0;
+		int collectibleCounter = 0;
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < length; j++) {
 				switch (mapArray[i][j]) {
+					// PLayer is at location
 				case 'P':
 					playerStartingPos.X = j;
 					playerStartingPos.Y = i;
@@ -178,25 +205,24 @@ Map::Map(std::string fileName)
 					mapTemplate[i][j] = EMPTY;
 					break;
 
-				case 'E':
-					mapArray[i][j] = EMPTY;
-					mapTemplate[i][j] = EMPTY;
-					
-					
+					//Enenmy is at location
+				case 'E':			
 					enemyTemplate[enemyCounter]->postion.X = j;
 					enemyTemplate[enemyCounter]->postion.Y = i;
-					enemyTemplate[enemyCounter]->symbol = 'E';
-					
-					
-					
+					enemyTemplate[enemyCounter]->symbol = mapArray[i][j];
 					enemyCounter++;
-
-
-
-
-					break;
-				case 'H':
+					mapArray[i][j] = EMPTY;
 					mapTemplate[i][j] = EMPTY;
+					break;
+
+					//Collectible is at location
+				case HEALTH:
+					collectibleTemplate[collectibleCounter]->postion.X = j;
+					collectibleTemplate[collectibleCounter]->postion.Y = i;
+					collectibleTemplate[collectibleCounter]->symbol = mapArray[i][j];
+					mapArray[i][j] = EMPTY;
+					mapTemplate[i][j] = EMPTY;
+					collectibleCounter++;
 					break;
 
 				default:
@@ -230,6 +256,12 @@ Map::~Map()
 	}
 
 	delete[] enemyTemplate;
+
+	for (int i = 0; i < numberOfCollectible; i++) {
+		delete collectibleTemplate[i];
+	}
+
+	delete[] collectibleTemplate;
 }
 
 void Map::renderMap(Console& console)
@@ -332,7 +364,12 @@ void Map::setDefaultItem(int x, int y) {
 }
 
 void Map::setTempItem(int x, int y, char symbol) {
-	tempMapArray[y][x] = symbol;
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return;
+	}
+	else {
+		tempMapArray[y][x] = symbol;
+	}
 }
 
 void Map::loadMap(std::string filename, Console& console)
@@ -428,6 +465,14 @@ COORD Map::getPlayerPosition() {
 	return playerStartingPos;
 }
 
-EnemyTemplate** Map::getEnemyTemplate() {
+EntityTemplate** Map::getEnemyTemplate() {
 	return enemyTemplate;
+}
+
+int Map::getNumberOfCollectibles() {
+	return numberOfCollectible;
+}
+
+EntityTemplate** Map::getCollectibleTemplate() {
+	return collectibleTemplate;
 }

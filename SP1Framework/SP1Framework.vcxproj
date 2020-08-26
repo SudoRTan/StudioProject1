@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AmmoCollectible.cpp" />
     <ClCompile Include="BossStage1.cpp" />
     <ClCompile Include="BossStage1Fire.cpp" />
     <ClCompile Include="BossStage2.cpp" />
@@ -94,6 +95,7 @@
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="HealthCollectible.cpp" />
     <ClCompile Include="LevelSelectMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -110,8 +112,10 @@
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponCollectible.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AmmoCollectible.h" />
     <ClInclude Include="BossStage1.h" />
     <ClInclude Include="BossStage1Fire.h" />
     <ClInclude Include="BossStage2.h" />
@@ -121,7 +125,7 @@
     <ClInclude Include="createArray.h" />
     <ClInclude Include="DeathMenu.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyTemplate.h" />
+    <ClInclude Include="EntityTemplate.h" />
     <ClInclude Include="EnemyType2.h" />
     <ClInclude Include="EnemyType3.h" />
     <ClInclude Include="Entity.h" />
@@ -132,6 +136,7 @@
     <ClInclude Include="colors.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="gameState.h" />
+    <ClInclude Include="HealthCollectible.h" />
     <ClInclude Include="LevelSelectMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MeleeWeapon.h" />
@@ -146,6 +151,7 @@
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponCollectible.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
