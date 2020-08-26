@@ -13,6 +13,7 @@ public:
 
 	void use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y);
 
+	void update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y, bool attacking);
 };
 
 enum MELEE_WEAPON_STATE {

@@ -142,3 +142,11 @@ void MeleeWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double e
 		}
 	}
 }
+
+void MeleeWeapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y, bool attacking) {
+	if (attacking) {
+		use(map, enemyArray, enemyArraySize, elapsedTime, direction, x, y);
+	}
+	animate(map, elapsedTime, direction, x, y);
+
+}

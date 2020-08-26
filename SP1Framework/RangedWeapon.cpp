@@ -70,9 +70,6 @@ void RangedWeapon::animate(Map& map, double elapsedTime, int direction, int x, i
 			currentAnimationPhase--;
 		}
 	}
-	if (bullet != nullptr) {
-		bullet->update(map, elapsedTime);
-	}
 }
 
 
@@ -102,15 +99,26 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 			}
 		}
 
-		if (bullet != nullptr) {
-			if (bullet->getHealth() == 0) {
-				delete bullet;
-				bullet = nullptr;
-			}
-		}
-		else {
+		if (bullet == nullptr) {
 			bullet = new Projectile(x, y, direction);
 		}
 
 	}
+}
+
+void RangedWeapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y, bool attacking) {
+	if (attacking) {
+		use(map, enemyArray, enemyArraySize, elapsedTime, direction, x, y);
+	}
+	if (bullet != nullptr) {
+		if (bullet->getHealth() == 0) {
+			delete bullet;
+			bullet = nullptr;
+		}
+		else {
+			bullet->update(map, elapsedTime);
+		}
+	}
+	animate(map, elapsedTime, direction, x, y);
+
 }

@@ -28,9 +28,9 @@ std::string Weapon::getName() {
 }
 
 
-void Weapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y) {
-	use(map, enemyArray, enemyArraySize, elapsedTime, direction, x, y);
-	animate(map, elapsedTime, direction, x, y);
+void Weapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y, bool attacking) {
+	//use(map, enemyArray, enemyArraySize, elapsedTime, direction, x, y);
+	//animate(map, elapsedTime, direction, x, y);
 
 }
 
