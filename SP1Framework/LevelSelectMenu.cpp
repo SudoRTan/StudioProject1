@@ -3,16 +3,16 @@
 
 LevelSelectMenu::LevelSelectMenu() {
 	currentSelection = 1;
-	totalSelections = 3;
+	totalSelections = 4;
 
 
-	totalStage = 3;
+	totalStage = 5;
 
 
 	selectedStage = 0;
 }
 
-LevelSelectMenu::~LevelSelectMenu() {
+LevelSelectMenu::~LevelSelectMenu() { 
 
 }
 
@@ -103,12 +103,23 @@ void LevelSelectMenu::render(Console& console) {
 		linecount = 0;
 
 		for (int i = 0; i < totalSelections; i++) {
-			if (i + 1 == currentSelection) {
-				console.writeToBuffer(8 + (i * 27), 14, "Level: " + std::to_string(i + 1), FG_RED);
-			}
+			if (i < 3) {
+				if (i + 1 == currentSelection) {
+					console.writeToBuffer(8 + (i * 27), 14, "Level: " + std::to_string(i + 1), FG_RED);
+				}
 
+				else {
+					console.writeToBuffer(8 + (i * 27), 14, "Level: " + std::to_string(i + 1), FG_WHITE);
+				}
+			}
 			else {
-				console.writeToBuffer(8 + (i * 27), 14, "Level: " + std::to_string(i + 1), FG_WHITE);
+				if (i + 1 == currentSelection) {
+					console.writeToBuffer(8 + ((i - 3) * 27), 20, "Level: " + std::to_string(i + 1), FG_RED);
+				}
+
+				else {
+					console.writeToBuffer(8 + ((i - 3) * 27), 20, "Level: " + std::to_string(i + 1), FG_WHITE);
+				}
 			}
 		}
 	}
@@ -129,12 +140,26 @@ void LevelSelectMenu::render(Console& console) {
 		linecount = 0;
 
 		for (int i = 0; i < totalStage; i++) {
-			if (i + 1 == currentSelection) {
-				console.writeToBuffer(8 + (i * 27), 14, "Stage: " + std::to_string(i + 1), FG_RED);
-			}
 
+			if (i < 3) {
+
+				if (i + 1 == currentSelection) {
+					console.writeToBuffer(8 + (i * 27), 14, "Stage: " + std::to_string(i + 1), FG_RED);
+				}
+
+				else {
+					console.writeToBuffer(8 + (i * 27), 14, "Stage: " + std::to_string(i + 1), FG_WHITE);
+				}
+			}
 			else {
-				console.writeToBuffer(8 + (i * 27), 14, "Stage: " + std::to_string(i + 1), FG_WHITE);
+
+				if (i + 1 == currentSelection) {
+					console.writeToBuffer(8 + ((i - 3) * 27), 20, "Stage: " + std::to_string(i + 1), FG_RED);
+				}
+
+				else {
+					console.writeToBuffer(8 + ((i - 3) * 27), 20, "Stage: " + std::to_string(i + 1), FG_WHITE);
+				}
 			}
 		}
 	}

@@ -9,5 +9,5 @@ public:
 	BossStage1Fire::BossStage1Fire();
 	BossStage1Fire(std::vector<BossStage1Fire*>& fireVector);
 	~BossStage1Fire();
-	int update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
+	int update(Map& map, double g_dElapsedTime, Player& player);
 };

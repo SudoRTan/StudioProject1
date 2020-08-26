@@ -11,23 +11,20 @@ PauseMenu::~PauseMenu() {
 }
 
 void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
-	if (KeyEvent[K_DOWN].keyOnce) {
-		currentSelection++;
-		if (currentSelection > totalSelections) {
-			currentSelection = 1;
-		}
+	if (KeyEvent[K_UP].keyOnce || KeyEvent[K_LEFT].keyOnce) {
+		decreaseSelection();
 	}
-	else if (KeyEvent[K_UP].keyOnce) {
-		currentSelection--;
-		if (currentSelection == 0) {
-			currentSelection = totalSelections;
-		}
+
+	else if (KeyEvent[K_DOWN].keyOnce || KeyEvent[K_RIGHT].keyOnce) {
+		increaseSelection();
 	}
+	
 	else if (KeyEvent[K_SPACE].keyOnce) {
 		if (currentSelection == 1) {
 			gameState = RESUME_LEVEL;
 		}
 		else {
+			currentSelection = 1;
 			gameState = START_MENU;
 		}
 	}

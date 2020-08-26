@@ -13,7 +13,16 @@ protected:
 	int currentSelection;
 	int totalSelections;
 
+	void increaseSelection();
+	void decreaseSelection();
+
 public:
+
+	//Constructors and destructors
+	Menu();
+	~Menu();
+
+	// Pure virtual functions
 	virtual void update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) = 0;
 
 	virtual void render(Console& console) = 0;

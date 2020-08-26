@@ -140,17 +140,8 @@ Map::Map(std::string fileName)
 				switch (mapArray[readingLine][i]) {
 					//If the item is an Enemy
 				case 'E':
-					numberOfEnemies++;
-					break;
-
 				case '1':
-					numberOfEnemies++;
-					break;
-
 				case '2':
-					numberOfEnemies++;
-					break;
-
 				case '3':
 					numberOfEnemies++;
 					break;
@@ -218,33 +209,9 @@ Map::Map(std::string fileName)
 					break;
 
 					//Enenmy is at location
-				case 'E':			
-					enemyTemplate[enemyCounter]->postion.X = j;
-					enemyTemplate[enemyCounter]->postion.Y = i;
-					enemyTemplate[enemyCounter]->symbol = mapArray[i][j];
-					enemyCounter++;
-					mapArray[i][j] = EMPTY;
-					mapTemplate[i][j] = EMPTY;
-					break;
-
+				case 'E':
 				case '1':
-					enemyTemplate[enemyCounter]->postion.X = j;
-					enemyTemplate[enemyCounter]->postion.Y = i;
-					enemyTemplate[enemyCounter]->symbol = mapArray[i][j];
-					enemyCounter++;
-					mapArray[i][j] = EMPTY;
-					mapTemplate[i][j] = EMPTY;
-					break;
-
 				case '2':
-					enemyTemplate[enemyCounter]->postion.X = j;
-					enemyTemplate[enemyCounter]->postion.Y = i;
-					enemyTemplate[enemyCounter]->symbol = mapArray[i][j];
-					enemyCounter++;
-					mapArray[i][j] = EMPTY;
-					mapTemplate[i][j] = EMPTY;
-					break;
-
 				case '3':
 					enemyTemplate[enemyCounter]->postion.X = j;
 					enemyTemplate[enemyCounter]->postion.Y = i;
@@ -349,9 +316,9 @@ void Map::renderMap(Console& console, int x, int y) {
 
 	for (int i = 0; i < getSmaller(16,height); i++){
 		for (int j = 0; j < getSmaller(80,length); j++){
-			if (mapArray[i + mapOffsetY][j + mapOffsetX] != tempMapArray[i + mapOffsetY][j + mapOffsetX]) {
+			if (tempMapArray[i + mapOffsetY][j + mapOffsetX]!=' ') {
 				console.writeToBuffer(j, 24 - i, tempMapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
-				tempMapArray[i + mapOffsetY][j + mapOffsetX] = mapArray[i + mapOffsetY][j + mapOffsetX];
+				tempMapArray[i + mapOffsetY][j + mapOffsetX] = ' ';
 			}
 			else {
 				console.writeToBuffer(j, 24 - i, mapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);

@@ -36,16 +36,17 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 
 	switch (currGameState) {
 	case IN_LEVEL:
-		stage->update(KeyEvent, gameTime, currGameState);
+		stage->update(KeyEvent, gameTime,  currGameState);
 		break;
 
 	case FINISHED_LEVEL:
-		if (currLevel == 3) {
+		if (currLevel == 4) {
 			currLevel = 1;
 			currStage++;
 		}
 		currLevel++;
-		stage->loadMap("stage" + std::to_string(currStage) + "_" + std::to_string(currLevel) + ".txt");
+		//stage->loadMap("stage" + std::to_string(currStage) + "_" + std::to_string(currLevel) + ".txt");
+		loadStage();
 		currGameState = IN_LEVEL;
 		break;
 	
@@ -56,6 +57,7 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime) {
 
 	case RELOAD_LEVEL:
 		player->resetHealth();
+
 	case LOAD_LEVEL:
 		loadStage();
 		currGameState = IN_LEVEL;
@@ -92,8 +94,7 @@ void GameManager::render(Console& console) {
 	case FINISHED_LEVEL:
 	case LOAD_LEVEL:
 	case RELOAD_LEVEL:
-	case LEVEL_COMPLETE_MENU:
-	case  RESUME_LEVEL:
+	case RESUME_LEVEL:
 		break;
 
 	case PLAYER_DEATH:
@@ -112,14 +113,24 @@ void GameManager::loadStage() {
 
 	std::string test = ss.str();
 	
-	if (stage == nullptr) {
-		stage = new Stage(player);
-		stage->loadMap(ss.str());
-	}
-	else {
-		if (stage->getType() == "Stage") {
-			stage->loadMap(ss.str());
+	if (currLevel == 4) {
+		if (stage == nullptr) {
+			stage = new BossStage1(player);
+		}
+		else {
+			delete stage;
+			stage = new BossStage1(player);
 		}
 	}
+	else {
+		if (stage == nullptr) {
+			stage = new Stage(player);
+		}
+		else {
+			delete stage;
+			stage = new Stage(player);
+		}
+	}
+	stage->loadMap(ss.str());
 	
 }

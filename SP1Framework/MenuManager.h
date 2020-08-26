@@ -10,6 +10,7 @@
 #include "PauseMenu.h"
 #include "LevelSelectMenu.h"
 #include "DeathMenu.h"
+#include "LevelCompleteMenu.h"
 
 class MenuManager
 {
