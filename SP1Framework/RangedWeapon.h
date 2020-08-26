@@ -13,9 +13,9 @@ public:
 	RangedWeapon();
 	~RangedWeapon();
 
-	void animate(Map& map, double g_ElapsedTime, int direction, int x, int y);
+	void animate(Map& map, double elapsedTime, int direction, int x, int y);
 
-	void use(Map& map, Enemy** enemyArray, int enemyArraySize, double g_ElapsedTime, int direction, int x, int y);
+	void use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y);
 
 };
 

@@ -19,7 +19,7 @@ RangedWeapon::~RangedWeapon() {
 
 }
 
-void RangedWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x, int y) {
+void RangedWeapon::animate(Map& map, double elapsedTime, int direction, int x, int y) {
 
 	if (currentAnimationPhase != 0) {
 		int offSet = 0;
@@ -65,21 +65,21 @@ void RangedWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x
 			
 		}
 
-		if (g_dElapsedTime - lastAnimateTime > (useTime / animationPhases)) {
-			lastAnimateTime = g_dElapsedTime;
+		if (elapsedTime - lastAnimateTime > (useTime / animationPhases)) {
+			lastAnimateTime = elapsedTime;
 			currentAnimationPhase--;
 		}
 	}
 	if (bullet != nullptr) {
-		bullet->update(map, g_dElapsedTime);
+		bullet->update(map, elapsedTime);
 	}
 }
 
 
-void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double g_dElapsedTime, int direction, int x, int y) {
+void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y) {
 
-	if (g_dElapsedTime - lastUseTime > useTime) {
-		lastUseTime = g_dElapsedTime;
+	if (elapsedTime - lastUseTime > useTime) {
+		lastUseTime = elapsedTime;
 		currentAnimationPhase = 3;
 
 		if (direction == LEFT) {

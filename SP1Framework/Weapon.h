@@ -32,12 +32,12 @@ public:
 	int getDamage();
 	std::string getName();
 
-	virtual void animate(Map& map, double g_dElapsedTime, int direction, int x, int y) = 0;
+	virtual void animate(Map& map, double elapsedTime, int direction, int x, int y) = 0;
 	
-	virtual void use(Map& map, Enemy** enemyArray, int enemyArraySize, double g_dElapsedTime, int direction, int x, int y) = 0;
+	virtual void use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y) = 0;
 
 
-
+	void update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y);
 
 
 }; 
