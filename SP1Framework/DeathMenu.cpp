@@ -41,7 +41,7 @@ void DeathMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 }
 
 
-void DeathMenu::render(Console& console) {
+/*void DeathMenu::render(Console& console) {
 	std::string line;
 	std::ifstream file("deathScreen.txt");
 	int linecount = 0;
@@ -66,4 +66,42 @@ void DeathMenu::render(Console& console) {
 		console.writeToBuffer(14, 17, "EXIT TO MAIN MENU", FG_RED);
 	}
 
+}*/
+
+void DeathMenu::render(Console& console) {
+
+	std::string boxLine;
+	std::ifstream boxFile("deathMenuBox.txt");
+	int boxLinecount = 0;
+
+	if (boxFile.is_open()) {
+		while (std::getline(boxFile, boxLine)) {
+			console.writeToBuffer(12, 14 + boxLinecount, boxLine, FG_RED + BG_WHITE);
+			boxLinecount++;
+		}
+		boxFile.close();
+	}
+	boxLinecount = 0;
+
+	std::string pauseButtonLine;
+	std::ifstream pauseButtonFile("deathScreen.txt");
+	int pauseButtonLineCount = 0;
+
+	if (pauseButtonFile.is_open()) {
+		while (std::getline(pauseButtonFile, pauseButtonLine)) {
+			console.writeToBuffer(11, 1 + pauseButtonLineCount, pauseButtonLine, FG_RED + BG_WHITE);
+			pauseButtonLineCount++;
+		}
+		pauseButtonFile.close();
+	}
+	pauseButtonLineCount = 0;
+
+	if (currentSelection == 1) {
+		console.writeToBuffer(15, 16, "TRY AGAIN", FG_RED);
+		console.writeToBuffer(53, 16, "MAIN MENU", FG_WHITE);
+	}
+	else {
+		console.writeToBuffer(15, 16, "TRY AGAIN", FG_WHITE);
+		console.writeToBuffer(53, 16, "MAIN MENU", FG_RED);
+	}
 }
