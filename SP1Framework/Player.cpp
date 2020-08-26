@@ -23,7 +23,7 @@ Player::Player()
 
 	direction = RIGHT;
 
-	weapon = new MeleeWeapon;
+	weapon = new RangedWeapon;
 
 
 	height = 3;
@@ -59,7 +59,7 @@ Player::Player(int x, int y) {
 
 	direction = RIGHT;
 
-	weapon = new MeleeWeapon;
+	weapon = new RangedWeapon;
 
 	height = 3;
 	width = 1;

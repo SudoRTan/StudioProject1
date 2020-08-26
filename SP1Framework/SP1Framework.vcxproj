@@ -107,6 +107,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="createArray.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RangedWeapon.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="EnemyType1.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="RangedWeapon.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="EnemyType1.h" />

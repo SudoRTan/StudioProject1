@@ -11,6 +11,8 @@ RangedWeapon::RangedWeapon(){
 	currentAnimationPhase = 0;
 	lastAnimateTime = 0;
 
+	bullet = nullptr;
+
 
 }
 RangedWeapon::~RangedWeapon() {
@@ -68,6 +70,9 @@ void RangedWeapon::animate(Map& map, double g_dElapsedTime, int direction, int x
 			currentAnimationPhase--;
 		}
 	}
+	if (bullet != nullptr) {
+		bullet->update(map, g_dElapsedTime);
+	}
 }
 
 
@@ -96,5 +101,16 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 				}
 			}
 		}
+
+		if (bullet != nullptr) {
+			if (bullet->getHealth() == 0) {
+				delete bullet;
+				bullet = nullptr;
+			}
+		}
+		else {
+			bullet = new Projectile(x, y, direction);
+		}
+
 	}
 }

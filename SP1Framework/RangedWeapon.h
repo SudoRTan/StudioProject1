@@ -1,9 +1,13 @@
 #pragma once
 #include "Weapon.h"
+#include "Projectile.h"
 
 class RangedWeapon :
 	public Weapon
 {
+private:
+	Projectile* bullet;
+
 public:
 
 	RangedWeapon();
