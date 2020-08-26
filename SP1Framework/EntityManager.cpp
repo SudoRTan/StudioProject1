@@ -71,6 +71,19 @@ void EntityManager::loadEnemy(int sizeOfArray, EntityTemplate** enemyTemplate) {
 		case 'E':
 			enemy[i] = new Enemy(enemyTemplate[i]->postion.X, enemyTemplate[i]->postion.Y);
 			break;
+			
+		case '1':
+			enemy[i] = new EnemyType1(enemyTemplate[i]->postion.X, enemyTemplate[i]->postion.Y);
+			break;
+
+		case '2':
+			enemy[i] = new EnemyType2(enemyTemplate[i]->postion.X, enemyTemplate[i]->postion.Y);
+			break;
+
+		case '3':
+			enemy[i] = new EnemyType3(enemyTemplate[i]->postion.X, enemyTemplate[i]->postion.Y);
+			break;
+
 		default:
 			break;
 		}

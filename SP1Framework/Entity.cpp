@@ -87,7 +87,9 @@ bool Entity::isLocatedAt(int x, int y) {
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
 			if (position.getX() + i == x && position.getY() + j == y) {
-				isPresent = true;
+				if (symbolArray[j][i] != ' ') {
+					isPresent = true;
+				}
 			}
 		}
 	}
