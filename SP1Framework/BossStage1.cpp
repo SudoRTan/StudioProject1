@@ -46,10 +46,13 @@ void BossStage1::spawnFire(double g_dElapsedTime)
 	if (g_dElapsedTime - lastSpawnTime > 5)
 	{
 		lastSpawnTime = g_dElapsedTime;
-		int firePresent = fireVector.size();
-		for (int i = 0; i < firePresent; i++)
+		if (fireVector.size() < 120)
 		{
-			fireVector.push_back(new BossStage1Fire);
+			int firePresent = fireVector.size();
+			for (int i = 0; i < firePresent; i++)
+			{
+				fireVector.push_back(new BossStage1Fire(fireVector));
+			}
 		}
 	}
 }
