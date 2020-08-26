@@ -2,6 +2,8 @@
 
 BossStage1Fire::BossStage1Fire()
 {
+	position.setX(4 * (rand() % 5));
+	position.setY(1 + 3 * (rand() % 24));
 	setHealth(3);
 	damageDelay = 0.1;
 	cleanUp();
@@ -28,7 +30,11 @@ BossStage1Fire::BossStage1Fire(std::vector<BossStage1Fire*>& fireVector)
 			if (tempX != fireVector.at(i)->getPositionX() && tempY != fireVector.at(i)->getPositionY())
 				positionCheckPass++;
 		if (positionCheckPass == fireVector.size())
+		{
+			position.setX(tempX);
+			position.setY(tempY);
 			setPositionCheck = true;
+		}
 	}
 	setHealth(3);
 	damageDelay = 0.1;
