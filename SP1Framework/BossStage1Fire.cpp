@@ -8,18 +8,18 @@ BossStage1Fire::BossStage1Fire()
 	height = 2;
 	width = 3;
 	symbolArray = createArray(width, height);
-	symbolArray[0][0] = ' ';
-	symbolArray[0][1] = ')';
-	symbolArray[0][2] = ' ';
-	symbolArray[1][0] = '(';
-	symbolArray[1][1] = '_';
-	symbolArray[1][2] = ')';
+	symbolArray[0][0] = '(';
+	symbolArray[0][1] = '_';
+	symbolArray[0][2] = ')';
+	symbolArray[1][0] = ' ';
+	symbolArray[1][1] = ')';
+	symbolArray[1][2] = ' ';
 }
 
 BossStage1Fire::BossStage1Fire(std::vector<BossStage1Fire*>& fireVector)
 {
 	bool setPositionCheck = false;
-	while (setPositionCheck = false)
+	while (setPositionCheck == false)
 	{
 		int positionCheckPass = 0;
 		int tempX = 4 * (rand() % 5);
@@ -36,12 +36,12 @@ BossStage1Fire::BossStage1Fire(std::vector<BossStage1Fire*>& fireVector)
 	height = 2;
 	width = 3;
 	symbolArray = createArray(width, height);
-	symbolArray[0][0] = ' ';
-	symbolArray[0][1] = ')';
-	symbolArray[0][2] = ' ';
-	symbolArray[1][0] = '(';
-	symbolArray[1][1] = '_';
-	symbolArray[1][2] = ')';
+	symbolArray[0][0] = '(';
+	symbolArray[0][1] = '_';
+	symbolArray[0][2] = ')';
+	symbolArray[1][0] = ' ';
+	symbolArray[1][1] = ')';
+	symbolArray[1][2] = ' ';
 }
 
 BossStage1Fire::~BossStage1Fire()
