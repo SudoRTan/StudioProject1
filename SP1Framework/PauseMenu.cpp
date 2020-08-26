@@ -68,32 +68,47 @@ void PauseMenu::render(Console& console)
 {
 
 	std::string boxLine;
-	std::ifstream boxFile("pauseButton.txt");
+	std::ifstream boxFile("pauseMenuBox.txt");
 	int boxLinecount = 0;
-
+	
 	if (boxFile.is_open()) {
 		while (std::getline(boxFile, boxLine)) {
-			console.writeToBuffer(8, 1 + boxLinecount, boxLine, FG_RED + BG_WHITE);
+			console.writeToBuffer(12, 12 + boxLinecount, boxLine, FG_RED + BG_WHITE);
 			boxLinecount++;
 		}
 		boxFile.close();
 	}
 	boxLinecount = 0;
 
-	for (int i = 0; i < totalSelections; i++) {
-		if (i + 1 == currentSelection) {
-			console.writeToBuffer(10, 10, "RESUME", FG_WHITE);
-			console.writeToBuffer(10, 12, "EXIT TO MAIN MENU ", FG_RED);
+
+	if (selectedOption) {
+		std::string boxLine;
+		std::ifstream boxFile("pauseButton.txt");
+		int boxLinecount = 0;
+
+		if (boxFile.is_open()) {
+			while (std::getline(boxFile, boxLine)) {
+				console.writeToBuffer(8, 1 + boxLinecount, boxLine, FG_RED + BG_WHITE);
+				boxLinecount++;
+			}
+			boxFile.close();
 		}
+		boxLinecount = 0;
+
+		for (int i = 0; i < totalSelections; i++) {
+			if (i + 1 == currentSelection) {
+				console.writeToBuffer(17, 14, "RESUME", FG_WHITE);
+				console.writeToBuffer(53, 14, "MAIN MENU", FG_RED);
+			}
 
 
-		else {
-			
-			console.writeToBuffer(10, 10, "RESUME", FG_RED);
-			console.writeToBuffer(10, 12, "EXIT TO MAIN MENU ", FG_WHITE);
+			else {
+
+				console.writeToBuffer(17, 14, "RESUME", FG_RED);
+				console.writeToBuffer(53, 14, "MAIN MENU", FG_WHITE);
+			}
 		}
-	}
-
+    }
 }
 
 
