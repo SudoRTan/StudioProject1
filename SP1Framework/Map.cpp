@@ -153,7 +153,7 @@ Map::Map(std::string fileName)
 				}
 
 			}
-
+			/*
 			if (lengthOfLine != length) {
 				for (int i = lengthOfLine; i < length; i++) {
 					mapArray[readingLine][i] = (char)EMPTY;
@@ -161,6 +161,7 @@ Map::Map(std::string fileName)
 
 				}
 			}
+			*/
 			readingLine--;
 		}
 
@@ -363,7 +364,12 @@ void Map::setDefaultItem(int x, int y) {
 }
 
 void Map::setTempItem(int x, int y, char symbol) {
-	tempMapArray[y][x] = symbol;
+	if (x < 0 || y < 0 || x >= length || y >= height) {
+		return;
+	}
+	else {
+		tempMapArray[y][x] = symbol;
+	}
 }
 
 void Map::loadMap(std::string filename, Console& console)
