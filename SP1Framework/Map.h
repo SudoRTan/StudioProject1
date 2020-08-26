@@ -43,6 +43,7 @@ private:
 
 	//Used to store locations / number of enemies;
 	int numberOfEnemies;
+
 	EntityTemplate** enemyTemplate;
 
 	int numberOfCollectible;

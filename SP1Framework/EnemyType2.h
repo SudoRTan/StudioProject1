@@ -6,6 +6,7 @@ class EnemyType2
 private:
 public:
 	EnemyType2();
+	EnemyType2(int x, int y);
 	~EnemyType2();
 	int update(Map& map, double g_dElapsedTime, Player& player);
 };
