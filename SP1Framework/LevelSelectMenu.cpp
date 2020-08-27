@@ -19,31 +19,20 @@ LevelSelectMenu::~LevelSelectMenu() {
 void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
 	if (KeyEvent[K_DOWN].keyOnce) {
 		if (selectedStage) {
-			currentSelection++;
-			if (currentSelection > totalSelections) {
-				currentSelection = 1;
-			}
+			increaseSelection();
 		}
 		else {
-			currentSelection++;
-			if (currentSelection > totalStage) {
-				currentSelection = 1;
-			}
+			increaseSelection(totalStage);
 		}
 
 	}
 	else if (KeyEvent[K_UP].keyOnce) {
 		if (selectedStage) {
-			currentSelection--;
-			if (currentSelection == 0) {
-				currentSelection = totalSelections;
-			}
+			decreaseSelection();
+
 		}
 		else {
-			currentSelection--;
-			if (currentSelection == 0) {
-				currentSelection = totalStage;
-			}
+			decreaseSelection(totalStage);
 		}
 	}
 	else if (KeyEvent[K_SPACE].keyOnce) {

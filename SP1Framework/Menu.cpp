@@ -10,16 +10,33 @@ Menu::~Menu() {
 }
 
 
-void Menu::increaseSelection() {
+void Menu::increaseSelection(int numberOfOptions) {
 	currentSelection++;
-	if (currentSelection > totalSelections) {
-		currentSelection = 1;
+
+	if (numberOfOptions != 0) {
+		if (currentSelection > numberOfOptions) {
+			currentSelection = 1;
+		}
 	}
+	else {
+		if (currentSelection > totalSelections) {
+			currentSelection = 1;
+		}
+	}
+	
 }
 
-void Menu::decreaseSelection() {
+void Menu::decreaseSelection(int numberOfOptions) {
 	currentSelection--;
-	if (currentSelection == 0) {
-		currentSelection = totalSelections;
+
+	if (numberOfOptions != 0) {
+		if (currentSelection == 0) {
+			currentSelection = numberOfOptions;
+		}
+	}
+	else {
+		if (currentSelection == 0) {
+			currentSelection = totalSelections;
+		}
 	}
 }
