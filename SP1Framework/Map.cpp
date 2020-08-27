@@ -94,9 +94,19 @@ Map::Map(std::string fileName)
 	playerStartingPos.Y = 1;
 
 
-
+	// Sets default values for mapArrays
 	numberOfEnemies = 0;
 	numberOfCollectible = 0;
+
+	enemyTemplate = nullptr;
+	collectibleTemplate = nullptr;
+
+	mapArray = nullptr;
+	mapTemplate = nullptr;
+
+	tempMapArray = nullptr;
+
+
 
 	std::string line = "";
 	int lines = 0;
@@ -243,38 +253,50 @@ Map::Map(std::string fileName)
 				tempMapArray[i][j] = mapArray[i][j];
 			}
 		}
+		file.close();
 
 	}
 
-	file.close();
 	
 }
 
 Map::~Map()
 {
 	// deletes values in map arrays when level is complete and default destructor is called
-	for (int i = 0; i < height; i++)
-	{
-		delete[] mapArray[i];
-		delete[] mapTemplate[i];
-		delete[] tempMapArray[i];
+	if (mapArray != nullptr) {
+		for (int i = 0; i < height; i++)
+		{
+			delete[] mapArray[i];
+			delete[] mapTemplate[i];
+			delete[] tempMapArray[i];
+		}
+		delete[] mapArray;
+		delete[] mapTemplate;
+		delete[] tempMapArray;
 	}
-	delete[] mapArray;
-	delete[] mapTemplate;
-	delete[] tempMapArray;
+	
+	if (enemyTemplate != nullptr) {
+		for (int i = 0; i < numberOfEnemies; i++) {
+			if (enemyTemplate[i] != nullptr) {
+				delete enemyTemplate[i];
+			}
+		}
 
-
-	for (int i = 0; i < numberOfEnemies; i++) {
-		delete enemyTemplate[i];
+		delete[] enemyTemplate;
 	}
 
-	delete[] enemyTemplate;
 
-	for (int i = 0; i < numberOfCollectible; i++) {
-		delete collectibleTemplate[i];
+	if (collectibleTemplate != nullptr) {
+		for (int i = 0; i < numberOfCollectible; i++) {
+			if (collectibleTemplate[i] != nullptr) {
+				delete collectibleTemplate[i];
+			}
+		}
+
+		delete[] collectibleTemplate;
 	}
 
-	delete[] collectibleTemplate;
+	
 }
 
 void Map::renderMap(Console& console)
