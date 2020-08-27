@@ -28,7 +28,8 @@ enum ENEMY_TYPES {
 enum COLLECTIBLE_TYPES {
 	HEALTH = 'H',
 	AMMO = 'A',
-	WEAPON = 'W'
+	SWORD = 'S',
+	GUN = 'G'
 };
 
 class Map

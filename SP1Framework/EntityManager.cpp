@@ -103,7 +103,8 @@ void EntityManager::loadCollectible(int sizeOfArray, EntityTemplate** collectibl
 		switch (collectibleTemplate[i]->symbol) {
 		case HEALTH:
 		case AMMO:
-		case WEAPON:
+		case SWORD:
+		case GUN:
 			collectible[i] = new Collectible(collectibleTemplate[i]->postion.X, collectibleTemplate[i]->postion.Y, collectibleTemplate[i]->symbol);
 			break;
 

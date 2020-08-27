@@ -6,6 +6,8 @@ Player::Player()
 	position.setY(1);
 	health = 20;
 	maxHealth = 20;
+	ammo = 0;
+	maxAmmo = 20;
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
@@ -77,6 +79,18 @@ Player::~Player()
 {
 	cleanUp();
 	delete weapon;
+}
+
+int Player::getAmmo()
+{
+	if (weapon != nullptr)
+	{
+		return weapon->getAmmo();
+	}
+	else
+	{
+		return -1;
+	}
 }
 
 int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
@@ -312,14 +326,27 @@ int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime,
 			collectibleInLocation->collect();
 			break;
 		case AMMO:
-
+			if (weapon != nullptr) {
+				weapon->replenishAmmo();
+			}
 			collectibleInLocation->collect();
 			break;
 
-		case WEAPON:
-			weapon = new MeleeWeapon()
+		case SWORD:
+			if (weapon != nullptr) {
+				delete weapon;
+			}
+			weapon = new MeleeWeapon();
 			collectibleInLocation->collect();
 			break;
+
+		case GUN:
+			if (weapon != nullptr) {
+				delete weapon;
+			}
+			weapon = new RangedWeapon();
+			ammo = 20;
+			collectibleInLocation->collect();
 
 		default:
 			break;

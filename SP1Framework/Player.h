@@ -19,6 +19,8 @@ class Player :
 	public Entity
 {
 private:
+	int ammo;
+	int maxAmmo;
 	bool dropping;
 	bool jumping;
 
@@ -36,6 +38,7 @@ public:
 	Player(int x, int y);
 	~Player();
 
+	int getAmmo();
 	
 	void renderPlayer(Console& console);
 	void touchEnemy(Enemy enemy, double g_dElapsedTime);

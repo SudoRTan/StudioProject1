@@ -4,6 +4,9 @@ MeleeWeapon::MeleeWeapon() {
 	setName("Melee");
 	setDamage(10);
 
+	maxAmmo = 0;
+	currentAmmo = 0;
+
 	useTime = 0.06;
 	lastUseTime = 0.00;
 

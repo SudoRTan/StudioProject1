@@ -4,6 +4,9 @@ RangedWeapon::RangedWeapon(){
 	setName("Ranged");
 	setDamage(1);
 
+	maxAmmo = 20;
+	currentAmmo = 20;
+
 	useTime = 0.06;
 	lastUseTime = 0.00;
 
@@ -75,9 +78,10 @@ void RangedWeapon::animate(Map& map, double elapsedTime, int direction, int x, i
 
 void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y) {
 
-	if (elapsedTime - lastUseTime > useTime) {
+	if ((elapsedTime - lastUseTime > useTime) && (currentAmmo != 0)) {
 		lastUseTime = elapsedTime;
 		currentAnimationPhase = 3;
+		currentAmmo--;
 
 		if (direction == LEFT) {
 			for (int i = 1; i < 15; i++) {

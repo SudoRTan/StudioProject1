@@ -7,7 +7,6 @@
 #include "Framework/console.h"
 #include "Map.h"
 #include "gameState.h"
-#include "HealthCollectible.h"
 #include "EnemyType1.h"
 #include "EnemyType2.h"
 #include "EnemyType3.h"

@@ -149,7 +149,8 @@ Map::Map(std::string fileName)
 					//If the item is a collectible
 				case HEALTH:
 				case AMMO:
-				case WEAPON:
+				case SWORD:
+				case GUN:
 					numberOfCollectible++;
 					break;
 
@@ -226,7 +227,8 @@ Map::Map(std::string fileName)
 					//Collectible is at location
 				case HEALTH:
 				case AMMO:
-				case WEAPON:
+				case SWORD:
+				case GUN:
 					collectibleTemplate[collectibleCounter]->postion.X = j;
 					collectibleTemplate[collectibleCounter]->postion.Y = i;
 					collectibleTemplate[collectibleCounter]->symbol = mapArray[i][j];

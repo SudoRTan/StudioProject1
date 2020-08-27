@@ -41,12 +41,13 @@ void UI::render(Console& console, Player& player/*,Weapons& weapons*/)
 
 
 	int currentHealth = player.getHealth() * 2;
-	//int currentAmmo = weapons.getAmmo() * 2;
+	int currentAmmo = player.getAmmo() * 2;
 	
 
-
 	console.writeToBuffer(1, 1, "Health: ", FG_WHITE);
-	console.writeToBuffer(1, 4, "Ammo: ", FG_WHITE);
+	if (currentAmmo != -2) {
+		console.writeToBuffer(1, 4, "Ammo: ", FG_WHITE);
+	}
 
 	for (int i = 0; i < 40; i++) {
 		if (i < currentHealth) {
@@ -56,12 +57,15 @@ void UI::render(Console& console, Player& player/*,Weapons& weapons*/)
 			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_GRAY);
 		}
 
-		/*if (i < currentAmmo) {
-			console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_YELLOW);
+		if (currentAmmo != -2)
+		{
+			if (i < currentAmmo) {
+				console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_YELLOW);
+			}
+			else {
+				console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_GRAY);
+			}
 		}
-		else {
-			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_GRAY);
-		}*/
 	}
 	
  };

@@ -11,6 +11,10 @@ private:
 	
 
 protected:
+
+	int currentAmmo;
+	int maxAmmo;
+
 	void setDamage(int damage);
 	void setName(std::string name);
 
@@ -35,6 +39,8 @@ public:
 	int getDamage();
 	std::string getName();
 
+	int getAmmo();
+	void replenishAmmo();
 
 	virtual void update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y, bool attacking);
 
