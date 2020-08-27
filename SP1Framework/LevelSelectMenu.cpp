@@ -20,54 +20,99 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 	
 	// If Stage is selected
 	if (selectedStage) {
-		if (KeyEvent[K_DOWN].keyOnce) {
-			increaseSelection();
+		// If up arrow is pressed
+		if (KeyEvent[K_UP].keyOnce) {
+			// Move cursor upwards if 4th option is currently selected
+			if (currentSelection == 4) {
+				currentSelection = 2;
+			}
+		}
+	
+		// If down arrow is pressed
+		else if (KeyEvent[K_DOWN].keyOnce) {
+			// Move cursor downwards if 1st to 3rd option is currently selected
+			if (currentSelection != 4) {
+				currentSelection = 4;
+			}
 		}
 
-
-		else if (KeyEvent[K_UP].keyOnce) {
+		// If left arrow is pressed
+		else if (KeyEvent[K_LEFT].keyOnce) {
+			// Move cursor left 
 			decreaseSelection();
+
 		}
 
+		// If right arrow is pressed
+		else if (KeyEvent[K_RIGHT].keyOnce) {
+			// Move cursor right
+			increaseSelection();
 
+		}
+
+		// If space is pressed
 		else if (KeyEvent[K_SPACE].keyOnce) {
+			// Sets selected stage and levels 
 			currStage = selectedStage;
 			currLevel = currentSelection;
+
+			// Resets the menu variables for next use
 			selectedStage = 0;
 			currentSelection = 1;
+
+			// Tell GameManager to load the selected level
 			gameState = LOAD_LEVEL;
 		}
+
+		// If escape is pressed
 		else if (KeyEvent[K_ESCAPE].keyOnce) {
+			// Return to stage select Menu
+			currentSelection = selectedStage;
 			selectedStage = 0;
-			currentSelection = 1;
 
 		}
 	}
 	// If Stage is not selected
 	else {
-		if (KeyEvent[K_DOWN].keyOnce) {
-			increaseSelection(totalStage);
+		// If up arrow is pressed
+		if (KeyEvent[K_UP].keyOnce) {
+			if (currentSelection > 3) {
+				currentSelection -= 3;
+			}
 		}
 
-		else if (KeyEvent[K_UP].keyOnce) {
+		// If down arrow is pressed
+		else if (KeyEvent[K_DOWN].keyOnce) {
+			if (currentSelection <= 3) {
+				currentSelection += 3;
+			}
+		}
+
+		// If left arrow is pressed
+		else if (KeyEvent[K_LEFT].keyOnce) {
 			decreaseSelection(totalStage);
+
 		}
 
+		// If right arrow is pressed
+		else if (KeyEvent[K_RIGHT].keyOnce) {
+			increaseSelection(totalStage);
+
+		}
+
+		// If space is pressed
 		else if (KeyEvent[K_SPACE].keyOnce) {
 			selectedStage = currentSelection;
 			currentSelection = 1;
 
 		}
 
+		// If escape is pressed
 		else if (KeyEvent[K_ESCAPE].keyOnce) {
 			gameState = START_MENU;
 
 		}
-		
 	}
-	
-
-
 }
 
 void LevelSelectMenu::render(Console& console) {
