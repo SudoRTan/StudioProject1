@@ -36,7 +36,7 @@ int BossStage1Fire::update(Map& map, double g_dElapsedTime, Player& player)
 {
 	updateNewPosition(map, position.getX(), position.getY());
 	if (contactPlayer(position.getX(), position.getY(), player) == true)
-		player.takeDamage(20);
+		player.takeDamage(getDamage());
 	return 0;
 }
 
@@ -45,19 +45,9 @@ bool BossStage1Fire::getCanSpawnLeft()
 	return canSpawnLeft;
 }
 
-void BossStage1Fire::setCanSpawnLeft(bool newBool)
-{
-	canSpawnLeft = newBool;
-}
-
 bool BossStage1Fire::getCanSpawnRight()
 {
 	return canSpawnRight;
-}
-
-void BossStage1Fire::setCanSpawnRight(bool newBool)
-{
-	canSpawnRight = newBool;
 }
 
 void BossStage1Fire::updateSpawnBool(Map* map)

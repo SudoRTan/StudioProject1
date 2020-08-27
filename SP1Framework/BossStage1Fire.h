@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 #include "Player.h"
 #include "Enemy.h"
 class BossStage1Fire :
@@ -15,6 +14,4 @@ public:
 private:
 	bool canSpawnLeft;
 	bool canSpawnRight;
-	void setCanSpawnLeft(bool newBool);
-	void setCanSpawnRight(bool newBool);
 };
