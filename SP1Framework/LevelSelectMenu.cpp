@@ -6,7 +6,7 @@ LevelSelectMenu::LevelSelectMenu() {
 	totalSelections = 4;
 
 
-	totalStage = 5;
+	totalStage = 6;
 
 
 	selectedStage = 0;
@@ -63,20 +63,20 @@ void LevelSelectMenu::render(Console& console) {
 
 	console.writeToBuffer(14, 9, "[Up/Down]Select Stage [Esc]Back to Title Screen", FG_WHITE);
 
-	std::string boxLine;
-	std::ifstream boxFile("boxMenu.txt");
-	int boxLinecount = 0;
-
-	if (boxFile.is_open()) {
-		while (std::getline(boxFile, boxLine)) {
-			console.writeToBuffer(4, 12 + boxLinecount, boxLine, FG_RED + BG_WHITE);
-			boxLinecount++;
-		}
-		boxFile.close();
-	}
-	boxLinecount = 0;
-
 	if (selectedStage) {
+
+		std::string boxLine;
+		std::ifstream boxFile("levelBoxes.txt");
+		int boxLinecount = 0;
+
+		if (boxFile.is_open()) {
+			while (std::getline(boxFile, boxLine)) {
+				console.writeToBuffer(4, 12 + boxLinecount, boxLine, FG_RED + BG_WHITE);
+				boxLinecount++;
+			}
+			boxFile.close();
+		}
+		boxLinecount = 0;
 
 		std::string line;
 		std::ifstream nameFile("levelMenu.txt");
@@ -103,17 +103,30 @@ void LevelSelectMenu::render(Console& console) {
 			}
 			else {
 				if (i + 1 == currentSelection) {
-					console.writeToBuffer(8 + ((i - 3) * 27), 20, "Level: " + std::to_string(i + 1), FG_RED);
+					console.writeToBuffer(35, 20, "Level: " + std::to_string(i + 1), FG_RED);
 				}
 
 				else {
-					console.writeToBuffer(8 + ((i - 3) * 27), 20, "Level: " + std::to_string(i + 1), FG_WHITE);
+					console.writeToBuffer(35, 20, "Level: " + std::to_string(i + 1), FG_WHITE);
 				}
 			}
 		}
 	}
 
 	else {
+
+		std::string boxLine;
+		std::ifstream boxFile("stageBoxes.txt");
+		int boxLinecount = 0;
+
+		if (boxFile.is_open()) {
+			while (std::getline(boxFile, boxLine)) {
+				console.writeToBuffer(4, 12 + boxLinecount, boxLine, FG_RED + BG_WHITE);
+				boxLinecount++;
+			}
+			boxFile.close();
+		}
+		boxLinecount = 0;
 
 		std::string line;
 		std::ifstream nameFile("stageMenu.txt");
