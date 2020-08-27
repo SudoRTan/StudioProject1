@@ -114,13 +114,23 @@ void GameManager::loadStage(double enlapsedTime) {
 	std::string test = ss.str();
 	
 	if (currLevel == 4) {
-		if (stage == nullptr) {
-			stage = new BossStage1(player, enlapsedTime);
-		}
-		else {
+		if (stage != nullptr) {
 			delete stage;
-			stage = new BossStage1(player, enlapsedTime);
 		}
+
+		switch (currStage) {
+		case 1:
+			stage = new BossStage1(player, enlapsedTime);
+			break;
+
+		case 2:
+			stage = new BossStage2(player);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 	else {
 		if (stage == nullptr) {

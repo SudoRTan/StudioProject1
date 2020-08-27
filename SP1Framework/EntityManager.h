@@ -30,7 +30,7 @@ public:
 	~EntityManager();
 	
 
-	void update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
+	void update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState, Enemy** overriddenEnemy = nullptr, int numberOfOverriddenEnemy = 0);
 	void loadEnemy(int sizeOfArray, EntityTemplate** enemyTemplate);
 
 	void loadCollectible(int sizeOfArray, EntityTemplate** collectibleTemplate);

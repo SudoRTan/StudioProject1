@@ -15,8 +15,16 @@ EntityManager::~EntityManager() {
 }
 
 
-void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
-	int playerReturnValue = player->update(map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies, collectible, numOfCollectibles);
+void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState, Enemy** overriddenEnemy, int numberOfOverriddenEnemy) {
+	int playerReturnValue = 0;
+	if (overriddenEnemy != nullptr && numberOfOverriddenEnemy != 0) {
+		playerReturnValue = player->update(map, KeyEvent, g_dElapsedTime, overriddenEnemy, numberOfOverriddenEnemy, collectible, numOfCollectibles);
+
+	}
+	else {
+		playerReturnValue = player->update(map, KeyEvent, g_dElapsedTime, enemy, numOfEnemies, collectible, numOfCollectibles);
+
+	}
 
 	if (playerReturnValue == PLAYER_GOT_HEALTH) {
 		player->resetHealth();
@@ -27,8 +35,23 @@ void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElap
 	if (player->getHealth() <= 0) {
 		gameState = PLAYER_DEATH;
 	}
-	
-	if (enemy != nullptr) {
+	if (overriddenEnemy != nullptr && numberOfOverriddenEnemy != 0) {
+		for (int i = 0; i < numberOfOverriddenEnemy; i++) {
+			if (overriddenEnemy[i] != nullptr) {
+				if (overriddenEnemy[i]->getHealth() <= 0) {
+					overriddenEnemy[i]->death(map);
+					delete overriddenEnemy[i];
+					overriddenEnemy[i] = nullptr;
+				}
+				else {
+					int enemyReturnValue = 0;
+					enemyReturnValue = overriddenEnemy[i]->update(map, g_dElapsedTime, *player);
+				}
+			}
+		}
+	}
+
+	else if (enemy != nullptr) {
 		for (int i = 0; i < numOfEnemies; i++) {
 			if (enemy[i] != nullptr) {
 				if (enemy[i]->getHealth() <= 0) {
@@ -43,6 +66,7 @@ void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElap
 			}
 		}
 	}
+
 	if (collectible != nullptr) {
 		for (int i = 0; i < numOfCollectibles; i++) {
 			if (collectible[i] != nullptr) {
