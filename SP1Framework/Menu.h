@@ -13,8 +13,8 @@ protected:
 	int currentSelection;
 	int totalSelections;
 
-	void increaseSelection();
-	void decreaseSelection();
+	void increaseSelection(int numberOfOptions = 0);
+	void decreaseSelection(int numberOfOptions = 0);
 
 public:
 

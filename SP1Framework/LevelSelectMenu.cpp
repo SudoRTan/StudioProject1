@@ -17,58 +17,100 @@ LevelSelectMenu::~LevelSelectMenu() {
 }
 
 void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
-	// checks if up/down arrow keys are pressed, if so then increment/decrement currentSelection var accordingly 
-	if (KeyEvent[K_DOWN].keyOnce) {
-		if (selectedStage) {
-			currentSelection++;
-			if (currentSelection > totalSelections) {
-				currentSelection = 1;
+	
+	// If Stage is selected
+	if (selectedStage) {
+		// If up arrow is pressed
+		if (KeyEvent[K_UP].keyOnce) {
+			// Move cursor upwards if 4th option is currently selected
+			if (currentSelection == 4) {
+				currentSelection = 2;
 			}
 		}
-		else {
-			currentSelection++;
-			if (currentSelection > totalStage) {
-				currentSelection = 1;
+	
+		// If down arrow is pressed
+		else if (KeyEvent[K_DOWN].keyOnce) {
+			// Move cursor downwards if 1st to 3rd option is currently selected
+			if (currentSelection != 4) {
+				currentSelection = 4;
 			}
 		}
 
-	}
-	else if (KeyEvent[K_UP].keyOnce) {
-		if (selectedStage) {
-			currentSelection--;
-			if (currentSelection == 0) {
-				currentSelection = totalSelections;
-			}
+		// If left arrow is pressed
+		else if (KeyEvent[K_LEFT].keyOnce) {
+			// Move cursor left 
+			decreaseSelection();
+
 		}
-		else {
-			currentSelection--;
-			if (currentSelection == 0) {
-				currentSelection = totalStage;
-			}
+
+		// If right arrow is pressed
+		else if (KeyEvent[K_RIGHT].keyOnce) {
+			// Move cursor right
+			increaseSelection();
+
 		}
-	}
-	// if space key is pressed, load menu/stage with corresponding highlighted text to indicate the option is "selected"
-	//if esc key is pressed, change gamestate accordingly, and move console back to initial starting screen
-	else if (KeyEvent[K_SPACE].keyOnce) {
-		if (selectedStage) {
+
+		// If space is pressed
+		else if (KeyEvent[K_SPACE].keyOnce) {
+			// Sets selected stage and levels 
 			currStage = selectedStage;
 			currLevel = currentSelection;
+
+			// Resets the menu variables for next use
 			selectedStage = 0;
 			currentSelection = 1;
+
+			// Tell GameManager to load the selected level
 			gameState = LOAD_LEVEL;
 		}
-		else {
-			selectedStage = currentSelection;
-			currentSelection = 1;
+
+		// If escape is pressed
+		else if (KeyEvent[K_ESCAPE].keyOnce) {
+			// Return to stage select Menu
+			currentSelection = selectedStage;
+			selectedStage = 0;
+
 		}
 	}
-	else if (KeyEvent[K_ESCAPE].keyOnce) {
-		if (selectedStage) {
-			selectedStage = 0;
-			currentSelection = 1;
+	// If Stage is not selected
+	else {
+		// If up arrow is pressed
+		if (KeyEvent[K_UP].keyOnce) {
+			if (currentSelection > 3) {
+				currentSelection -= 3;
+			}
 		}
-		else {
+
+		// If down arrow is pressed
+		else if (KeyEvent[K_DOWN].keyOnce) {
+			if (currentSelection <= 3) {
+				currentSelection += 3;
+			}
+		}
+
+		// If left arrow is pressed
+		else if (KeyEvent[K_LEFT].keyOnce) {
+			decreaseSelection(totalStage);
+
+		}
+
+		// If right arrow is pressed
+		else if (KeyEvent[K_RIGHT].keyOnce) {
+			increaseSelection(totalStage);
+
+		}
+
+		// If space is pressed
+		else if (KeyEvent[K_SPACE].keyOnce) {
+			selectedStage = currentSelection;
+			currentSelection = 1;
+
+		}
+
+		// If escape is pressed
+		else if (KeyEvent[K_ESCAPE].keyOnce) {
 			gameState = START_MENU;
+
 		}
 	}
 }
@@ -79,7 +121,6 @@ void LevelSelectMenu::render(Console& console) {
 
 	if (selectedStage) {
 
-		// prints out ascii boxes for level select menu by reading from text file
 		std::string boxLine;
 		std::ifstream boxFile("levelBoxes.txt");
 		int boxLinecount = 0;
@@ -93,7 +134,6 @@ void LevelSelectMenu::render(Console& console) {
 		}
 		boxLinecount = 0;
 
-		// prints out ascii art for level select menu by reading from text file
 		std::string line;
 		std::ifstream nameFile("levelMenu.txt");
 		int linecount = 0;
@@ -107,8 +147,6 @@ void LevelSelectMenu::render(Console& console) {
 		}
 		linecount = 0;
 
-		// checks for current selection from above code. Prints out text for levels over ascii boxes. 
-		//With current selection, highlight text in red to indicate it is selected. Else, display in normal white text.
 		for (int i = 0; i < totalSelections; i++) {
 			if (i < 3) {
 				if (i + 1 == currentSelection) {
@@ -132,7 +170,7 @@ void LevelSelectMenu::render(Console& console) {
 	}
 
 	else {
-		// prints out ascii boxes for stage select menu by reading from text file
+
 		std::string boxLine;
 		std::ifstream boxFile("stageBoxes.txt");
 		int boxLinecount = 0;
@@ -146,7 +184,6 @@ void LevelSelectMenu::render(Console& console) {
 		}
 		boxLinecount = 0;
 
-		// prints out ascii art for stage select menu by reading from text file
 		std::string line;
 		std::ifstream nameFile("stageMenu.txt");
 		int linecount = 0;
@@ -160,7 +197,6 @@ void LevelSelectMenu::render(Console& console) {
 		}
 		linecount = 0;
 
-		// same as above for printing out stage text and checking if text corresponds to current selection and highlighting in red or white.
 		for (int i = 0; i < totalStage; i++) {
 
 			if (i < 3) {
