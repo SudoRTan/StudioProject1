@@ -20,6 +20,9 @@ BossStage3Virus::BossStage3Virus()
 	symbolArray[2][0] = '„©';
 	symbolArray[2][1] = '„¨';
 	symbolArray[2][2] = '„©';
+	mode = 1 + 2 * (rand() % 2);
+	directionMoving = 0;
+	directionFacing = 1;
 }
 
 BossStage3Virus::~BossStage3Virus()
@@ -32,15 +35,6 @@ int BossStage3Virus::update(Map& map, double g_dElapsedTime, Player& player)
 	updateNewPosition(map, position.getX(), position.getY());
 	if (contactPlayer(position.getX(), position.getY(), player) == true)
 		player.takeDamage(getDamage());
-	switch (rand() % 3)
-	{
-	case 0:
-
-		break;
-	case 1:
-		break;
-	case 2:
-		break;
-	}
+	
 	return 0;
 }

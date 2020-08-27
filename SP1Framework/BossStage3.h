@@ -9,6 +9,6 @@ public:
     BossStage3(Player* player);
     ~BossStage3();
 private:
-    Entity** virus;
+    Enemy** virus;
     int numberOfVirus;
 };
