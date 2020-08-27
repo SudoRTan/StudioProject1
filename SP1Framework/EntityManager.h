@@ -14,6 +14,7 @@
 
 class EntityManager
 {
+private:
 	Player* player;
 
 
@@ -21,9 +22,9 @@ class EntityManager
 	int numOfCollectibles;
 
 	Collectible** collectible;
+	Enemy** enemy;
 
 public:
-	Enemy** enemy;
 
 
 	EntityManager(Player* player);
