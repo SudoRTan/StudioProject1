@@ -1,0 +1,6 @@
+https://freesound.org/people/Shades/sounds/37236/ gunFiring
+https://freesound.org/people/qubodup/sounds/184422/ swordSwinging
+https://freesound.org/people/broumbroum/sounds/50562/ menuConfirm
+https://freesound.org/people/Alderman2k/sounds/494767/ collectHealth
+https://freesound.org/people/Cabeeno%20Rossley/sounds/126413/ collectAmmo
+https://taira-komori.jpn.org/freesounden.html deathSound,damageTaken,menuSelect,playerMoving
