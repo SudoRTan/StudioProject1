@@ -4,11 +4,11 @@ static int fireCount = 0;
 BossStage1::BossStage1(Player* player, double g_dElapsedTime):Stage(player) //add spawning of water gun here
 {
 	playerOnFire = false;
-	lastSpawnTime = 0;
+	lastSpawnTime = g_dElapsedTime;
 	timer = g_dElapsedTime;
 	for (int i = 0; i < 5; i++)
 	{
-		fireVector.push_back(new BossStage1Fire);
+		fireVector.push_back(new BossStage1Fire(3 * (rand() % 24), 1 + 3 * i));
 	}
 }
 
@@ -19,8 +19,6 @@ BossStage1::~BossStage1()
 
 void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)
 {
-	//int playerReturnValue = player->update(*map, KeyEvent, g_dElapsedTime, entityManager.enemy, numOfEnemies);
-
 	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState);
 
 	if (fireVector.empty() == true)
@@ -31,6 +29,7 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 	{
 		gameState = PLAYER_DEATH;
 	}
+
 	for (int i = 0; i < fireVector.size(); i++) //require testing if vector resizes after delete
 	{
 		if (fireVector.at(i)->getHealth() <= 0)
@@ -44,25 +43,39 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 			fireVector.at(i)->update(*map, g_dElapsedTime, *player);
 		}
 	}
-	spawnFire(g_dElapsedTime);
-}
-
-void BossStage1::spawnFire(double g_dElapsedTime)
-{
 	if (g_dElapsedTime - lastSpawnTime > 5)
 	{
-		lastSpawnTime = g_dElapsedTime;
-		if (fireVector.size() < 120)
+		int numberOfFire = fireVector.size();
+		for (int i = 0; i < numberOfFire; i++)
 		{
-			int firePresent = fireVector.size();
-			for (int i = 0; i < firePresent; i++)
+			if (fireVector.at(i)->getCanSpawnLeft() == true && fireVector.at(i)->getCanSpawnRight() == true)
+				switch (rand() % 2)
+				{
+				case 0:
+					fireVector.push_back(new BossStage1Fire(fireVector.at(i)->getPositionX() - 3, fireVector.at(i)->getPositionY()));
+					lastSpawnTime = g_dElapsedTime;
+					break;
+				case 1:
+					fireVector.push_back(new BossStage1Fire(fireVector.at(i)->getPositionX() + 3, fireVector.at(i)->getPositionY()));
+					lastSpawnTime = g_dElapsedTime;
+					break;
+				}
+			else if (fireVector.at(i)->getCanSpawnLeft() == true && fireVector.at(i)->getCanSpawnRight() == false)
 			{
-				fireVector.push_back(new BossStage1Fire(fireVector));
+				fireVector.push_back(new BossStage1Fire(fireVector.at(i)->getPositionX() - 3, fireVector.at(i)->getPositionY()));
+				lastSpawnTime = g_dElapsedTime;
+			}
+			else if (fireVector.at(i)->getCanSpawnLeft() == false && fireVector.at(i)->getCanSpawnRight() == true)
+			{
+				fireVector.push_back(new BossStage1Fire(fireVector.at(i)->getPositionX() + 3, fireVector.at(i)->getPositionY()));
+				lastSpawnTime = g_dElapsedTime;
 			}
 		}
 	}
+	for (int i = 0; i < fireVector.size(); i++)
+		fireVector.at(i)->updateSpawnBool(map);
 }
-
+/*
 void BossStage1::checkPlayerPosition(Player player, double g_dElapsedTime)
 {
 	for (int i = 0; i < fireVector.size(); i++)
@@ -77,3 +90,4 @@ void BossStage1::checkPlayerPosition(Player player, double g_dElapsedTime)
 		}
 	}
 }
+*/
