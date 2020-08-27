@@ -45,19 +45,9 @@ bool BossStage1Fire::getCanSpawnLeft()
 	return canSpawnLeft;
 }
 
-void BossStage1Fire::setCanSpawnLeft(bool newBool)
-{
-	canSpawnLeft = newBool;
-}
-
 bool BossStage1Fire::getCanSpawnRight()
 {
 	return canSpawnRight;
-}
-
-void BossStage1Fire::setCanSpawnRight(bool newBool)
-{
-	canSpawnRight = newBool;
 }
 
 void BossStage1Fire::updateSpawnBool(Map* map)

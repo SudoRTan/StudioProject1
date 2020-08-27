@@ -14,6 +14,4 @@ public:
 private:
 	bool canSpawnLeft;
 	bool canSpawnRight;
-	void setCanSpawnLeft(bool newBool);
-	void setCanSpawnRight(bool newBool);
 };
