@@ -8,6 +8,7 @@
 
 #include "Stage.h"
 #include "BossStage1.h"
+#include "BossStage2.h"
 
 class GameManager
 {
