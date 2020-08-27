@@ -17,46 +17,57 @@ LevelSelectMenu::~LevelSelectMenu() {
 }
 
 void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
-	if (KeyEvent[K_DOWN].keyOnce) {
-		if (selectedStage) {
+	
+	// If Stage is selected
+	if (selectedStage) {
+		if (KeyEvent[K_DOWN].keyOnce) {
 			increaseSelection();
 		}
-		else {
-			increaseSelection(totalStage);
-		}
 
-	}
-	else if (KeyEvent[K_UP].keyOnce) {
-		if (selectedStage) {
+
+		else if (KeyEvent[K_UP].keyOnce) {
 			decreaseSelection();
+		}
 
-		}
-		else {
-			decreaseSelection(totalStage);
-		}
-	}
-	else if (KeyEvent[K_SPACE].keyOnce) {
-		if (selectedStage) {
+
+		else if (KeyEvent[K_SPACE].keyOnce) {
 			currStage = selectedStage;
 			currLevel = currentSelection;
 			selectedStage = 0;
 			currentSelection = 1;
 			gameState = LOAD_LEVEL;
 		}
-		else {
-			selectedStage = currentSelection;
-			currentSelection = 1;
-		}
-	}
-	else if (KeyEvent[K_ESCAPE].keyOnce) {
-		if (selectedStage) {
+		else if (KeyEvent[K_ESCAPE].keyOnce) {
 			selectedStage = 0;
 			currentSelection = 1;
-		}
-		else {
-			gameState = START_MENU;
+
 		}
 	}
+	// If Stage is not selected
+	else {
+		if (KeyEvent[K_DOWN].keyOnce) {
+			increaseSelection(totalStage);
+		}
+
+		else if (KeyEvent[K_UP].keyOnce) {
+			decreaseSelection(totalStage);
+		}
+
+		else if (KeyEvent[K_SPACE].keyOnce) {
+			selectedStage = currentSelection;
+			currentSelection = 1;
+
+		}
+
+		else if (KeyEvent[K_ESCAPE].keyOnce) {
+			gameState = START_MENU;
+
+		}
+		
+	}
+	
+
+
 }
 
 void LevelSelectMenu::render(Console& console) {
