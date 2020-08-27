@@ -316,7 +316,18 @@ int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime,
 		}
 	}
 
-	Collectible* collectibleInLocation = getCollectible(position.getX(), position.getY(), collectibleArray, collectibleArraySize);
+	Collectible* collectibleInLocation = nullptr;
+	
+	getCollectible(position.getX(), position.getY(), collectibleArray, collectibleArraySize);
+
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			if (collectibleInLocation == nullptr) {
+				collectibleInLocation = getCollectible(position.getX() + i, position.getY() + j, collectibleArray, collectibleArraySize);
+			}
+		}
+	}
+
 
 	if (collectibleInLocation != nullptr) {
 		int collectibleType = collectibleInLocation->getType();
