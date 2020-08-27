@@ -117,15 +117,6 @@
     <ClCompile Include="EnemyType3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AmmoCollectible.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthCollectible.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponCollectible.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LevelCompleteMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -231,15 +222,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyType3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AmmoCollectible.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthCollectible.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponCollectible.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EntityTemplate.h">

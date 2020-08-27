@@ -11,7 +11,7 @@ protected:
 	bool collected;
 
 public:
-	Collectible(int x, int y);
+	Collectible(int x, int y, int collectibleType);
 	virtual ~Collectible();
 	//void PlayerCollect(Position playerpos); // use playerpos obj in Player.h as parameter for comparing when player's position is the same as collectible's position
 	

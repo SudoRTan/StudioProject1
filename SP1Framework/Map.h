@@ -27,6 +27,8 @@ enum ENEMY_TYPES {
 
 enum COLLECTIBLE_TYPES {
 	HEALTH = 'H',
+	AMMO = 'A',
+	WEAPON = 'W'
 };
 
 class Map
@@ -78,11 +80,6 @@ public:
 	void setDefaultItem(int x, int y);
 	
 	void setTempItem(int x, int y, char symbol);
-
-	//Read map stage from .txt file
-	void loadMap(std::string filename, Console& console);
-
-
 
 	int getNumberOfEnemies();
 

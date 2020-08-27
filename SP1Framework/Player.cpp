@@ -23,7 +23,7 @@ Player::Player()
 
 	direction = RIGHT;
 
-	weapon = new RangedWeapon;
+	weapon = nullptr;
 
 
 	height = 3;
@@ -142,10 +142,10 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 		else if (map.getDefaultItem(newX, newY) == 'D') {
 			return PLAYER_REACHED_DOOR;
 		}
-		else if (map.getItem(newX, newY) == 'H') {
-			map.setItem(newX, newY, EMPTY);
-			return PLAYER_GOT_HEALTH;
-		}
+		//else if (map.getItem(newX, newY) == 'H') {
+		//	map.setItem(newX, newY, EMPTY);
+		//	return PLAYER_GOT_HEALTH;
+		//}
 	}
 
 	
@@ -205,9 +205,9 @@ int Player::updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, in
 			}
 		}
 	}
-	else if (map.getItem(newX, newY - 1) == HEALTH_COLLECTIBLE) {
+	/*else if (map.getItem(newX, newY - 1) == HEALTH_COLLECTIBLE) {
 		return PLAYER_GOT_HEALTH;
-	}
+	}*/
 
 	switch (getItemBelow(map)) {
 	case DOOR:
@@ -309,6 +309,15 @@ int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime,
 		switch (collectibleType) {
 		case HEALTH:
 			resetHealth();
+			collectibleInLocation->collect();
+			break;
+		case AMMO:
+
+			collectibleInLocation->collect();
+			break;
+
+		case WEAPON:
+			weapon = new MeleeWeapon()
 			collectibleInLocation->collect();
 			break;
 

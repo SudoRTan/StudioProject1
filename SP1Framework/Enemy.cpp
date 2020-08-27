@@ -5,6 +5,8 @@
 Enemy::Enemy()
 {
 	// test spawning of enemies on map using (5,4) as test case
+	// default constructor will create an enemy of 2x2 size with 2 health.
+	// this block of code is called if the symbol on the text file is an 'E'.
 	lastMovementTime = 0.00;
 	updateDelay = 0.8;
 	direction = 0;
@@ -24,6 +26,7 @@ Enemy::Enemy()
 
 Enemy::Enemy(int x, int y)
 {
+	//overload default constructor to pass in x and y values to precisely place position of enemy at specific positions on map
 	position.setX(x);
 	position.setY(y);
 
@@ -59,6 +62,7 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 		int newX = position.getX();
 		int newY = position.getY();
 
+		// have enemy continually move in 1 direction until unable to
 		switch (direction) {
 		case 0:
 			newX--;
@@ -71,9 +75,12 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 		default:
 			break;
 		}
-
+		// calls bool function to check if adjacent cells are empty for enemy to move to
 		bool validMove = canEntityMove(map, newX, newY);
+		// calls bool function to check if cell below enemy is valid to move to
 		bool solidFloor = onSolidFloor(map, newX, newY);
+		// if both bool functions return true, execute code to check if enemy collides with player.
+		// if there is collision, call function to make player take damage. Else, move enemy on map normally.
 		if (validMove && solidFloor) {
 			lastMovementTime = g_dElapsedTime;
 			if (contactPlayer(newX, newY, player)) {
@@ -83,6 +90,7 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 				updateNewPosition(map, newX, newY);
 			}
 		}
+		// if either of the bool function checks return false, change direction and execute above switch statement again
 		else {
 			direction = !direction;
 		}
@@ -92,6 +100,7 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 
 void Enemy::random(Map& map, double g_dElapsedTime)
 {
+	// same code as patrol movement above
 	if (g_dElapsedTime - lastMovementTime > updateDelay) {
 		lastJumpTime = g_dElapsedTime;
 

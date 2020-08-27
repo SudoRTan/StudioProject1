@@ -148,6 +148,8 @@ Map::Map(std::string fileName)
 
 					//If the item is a collectible
 				case HEALTH:
+				case AMMO:
+				case WEAPON:
 					numberOfCollectible++;
 					break;
 
@@ -223,6 +225,8 @@ Map::Map(std::string fileName)
 
 					//Collectible is at location
 				case HEALTH:
+				case AMMO:
+				case WEAPON:
 					collectibleTemplate[collectibleCounter]->postion.X = j;
 					collectibleTemplate[collectibleCounter]->postion.Y = i;
 					collectibleTemplate[collectibleCounter]->symbol = mapArray[i][j];
@@ -246,6 +250,7 @@ Map::Map(std::string fileName)
 
 Map::~Map()
 {
+	// deletes values in map arrays when level is complete and default destructor is called
 	for (int i = 0; i < height; i++)
 	{
 		delete[] mapArray[i];
@@ -272,6 +277,7 @@ Map::~Map()
 
 void Map::renderMap(Console& console)
 {
+	// displays map on bottom half of console, 80 cells long and 16 cells high.
 	const int yOffset = 9;
 
 	for (int i = 0; i < 16; i++)
@@ -340,6 +346,7 @@ char Map::getItem(int x, int y)
 }
 
 void Map::setItem(int x, int y, char symbol) {
+	// sets value in maparray to be the character put in level text file
 	if (x < 0 || y < 0 || x >= length || y >= height) {
 		return;
 	}
@@ -361,6 +368,7 @@ char Map::getDefaultItem(int x, int y)
 
 
 void Map::setDefaultItem(int x, int y) {
+	// sets maparray specific value to default template containing blank space
 	if (x < 0 || y < 0 || x >= length || y >= height) {
 		return;
 	}
@@ -375,89 +383,6 @@ void Map::setTempItem(int x, int y, char symbol) {
 	}
 	else {
 		tempMapArray[y][x] = symbol;
-	}
-}
-
-void Map::loadMap(std::string filename, Console& console)
-{
-	/*
-This code consists of 2 sections in test2 which are seperately functional.
-The 1st section pertains to reading the .txt file and getting the length & height of the level from there.
-*/
-
-	char map[20][20]; // map double array values TBD. Have not tested with larger maps yet. this was a 1am grind btw lolol
-	int textlength = 10;
-	int textheight = 10;
-
-	std::ifstream textfile("./oopMapTest.txt");
-
-	//if (!textfile)
-	//{
-	//	std::cout << "Could not open oopMapTest" << std::endl;
-	//}
-	//else
-	//{
-	//	std::cout << "Height of map before reading text file: " << textheight << std::endl;
-	//	std::cout << "Length of map before reading text file: " << textlength << std::endl;
-
-	//	for (int height = 0; height < 10; height++)
-	//	{
-	//		std::string line;
-	//		if (std::getline(textfile, line).eof()) // calculate for height of map
-	//		{
-	//			textheight = height + 1;
-	//		}
-	//		std::string line2;
-	//		if (std::getline(textfile, line2)) // calculate for length of map
-	//		{
-	//			textlength = line2.length();
-	//		}
-	//	}
-	//	std::cout << "Height of map after reading text file: " << textheight << std::endl;
-	//	std::cout << "Length of map after reading text file: " << textlength << std::endl;
-	//}
-
-	/*
-	However, when coming to section 2 below, the code for updating each cell on the map from .txt to console, it breaks.
-	Specifically, it prints out a map that seems to contain no empty space.
-	It could potentially be something to do with the above code's std::getline(textfile, line) or something else messing with the ifstream textfile on line 47?
-	I have tested the values of textlength and textheight, and they both function properly and carry over the dimensions of the map in .txt file.
-	Hence, the problem does not come from textlength or textheight when used as variables in section 2.
-	Currently for testing purposes, have '0' in .txt be updated to blank space, and everything else to be updated as '@'. Symbols can be changed as per requirement.
-	*/
-
-	for (int row = 0; row < textlength; row++)
-	{
-		for (int col = 0; col < textheight; col++)
-		{
-			textfile >> map[row][col];
-			switch (map[row][col])
-			{
-			case '0':
-			{
-				map[row][col] = ' ';
-				break;
-			}
-			case '1':
-			{
-				map[row][col] = '@';
-				break;
-			}
-			// add more cases in future to 'render' other symbols on map like Enemy or Collectible to use values aside from 0 and 1
-			}
-		}
-	}
-
-	textfile.close(); // closes off access to textfile "oopMapTest.txt" at end of program.
-
-	const int yOffset = 9;
-
-	for (int h = 0; h < textheight; h++) 
-	{
-		for (int l = 0; l < textlength; l++) 
-		{
-			console.writeToBuffer(l, h + yOffset, mapArray[h][l], BG_CYAN + FG_LIGHTMAGENTA);
-		}
 	}
 }
 

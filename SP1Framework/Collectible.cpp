@@ -1,10 +1,16 @@
 #include "Collectible.h"
 
-Collectible::Collectible(int x, int y)
+Collectible::Collectible(int x, int y, int collectibleType)
 {
-	//isCollected = false;
-	
-	
+	type = collectibleType;
+
+	height = 1;
+	width = 1;
+
+	symbolArray = createArray(height, width);
+
+	symbolArray[0][0] = collectibleType;
+
 	position.setX(x); // set collectible's position on map to (7,7) for testing purposes
 	position.setY(y);
 
@@ -33,7 +39,7 @@ void Collectible::PlayerCollect(Position playerpos) // pass in player's position
 */
 
 void Collectible::update(Map& map) {
-	map.setTempItem(position.getX(), position.getY(), 'C');
+	map.setTempItem(position.getX(), position.getY(), type);
 }
 
 
