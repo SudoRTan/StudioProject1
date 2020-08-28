@@ -1,10 +1,12 @@
 #include "BossStage1Fire.h"
 
+int BossStage1Fire::currNumberOfFires = 0;
+
 BossStage1Fire::BossStage1Fire(int x, int y)
 {
 	position.setX(x);
 	position.setY(y);
-	setHealth(3);
+	setHealth(2);
 	setDamage(20);
 	damageDelay = 0.1;
 	cleanUp();
@@ -17,6 +19,8 @@ BossStage1Fire::BossStage1Fire(int x, int y)
 	symbolArray[1][0] = ' ';
 	symbolArray[1][1] = ')';
 	symbolArray[1][2] = ' ';
+
+
 	if (position.getX() != 1)
 		canSpawnLeft = true;
 	else
@@ -25,10 +29,13 @@ BossStage1Fire::BossStage1Fire(int x, int y)
 		canSpawnRight = true;
 	else
 		canSpawnRight = false;
+
+	currNumberOfFires++;
 }
 
 BossStage1Fire::~BossStage1Fire()
 {
+	currNumberOfFires--;
 	cleanUp();
 }
 
@@ -60,4 +67,8 @@ void BossStage1Fire::updateSpawnBool(Map* map)
 		canSpawnRight = true;
 	else
 		canSpawnRight = false;
+}
+
+int BossStage1Fire::getNumberOfFires() {
+	return currNumberOfFires;
 }

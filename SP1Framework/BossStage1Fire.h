@@ -4,6 +4,13 @@
 class BossStage1Fire :
 	public Enemy
 {
+
+private:
+	bool canSpawnLeft;
+	bool canSpawnRight;
+
+	static int currNumberOfFires;
+
 public:
 	BossStage1Fire(int x, int y);
 	~BossStage1Fire();
@@ -11,7 +18,6 @@ public:
 	bool getCanSpawnLeft();
 	bool getCanSpawnRight();
 	void updateSpawnBool(Map* map);
-private:
-	bool canSpawnLeft;
-	bool canSpawnRight;
+
+	static int getNumberOfFires();
 };
