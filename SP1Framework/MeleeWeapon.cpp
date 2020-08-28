@@ -2,7 +2,7 @@
 
 MeleeWeapon::MeleeWeapon() {
 	setName("Melee");
-	setDamage(10);
+	setDamage(1);
 
 	maxAmmo = 0;
 	currentAmmo = 0;

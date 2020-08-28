@@ -4,8 +4,8 @@ BossStage5Alien::BossStage5Alien()
 {
 	position.setX(rand() % 120);
 	position.setY(1 + 3 * (rand() % 5));
-	health = 2;
-	updateDelay = 0.07;
+	health = 4;
+	updateDelay = 0.7;
 	setDamage(5);
 	direction = rand() % 2;
 }
