@@ -75,6 +75,13 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			selectedStage = 0;
 			PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
+
+		if (selectedStage == unlockedStage) {
+			if (currentSelection > unlockedLevel) {
+				currentSelection = unlockedLevel;
+			}
+		}
+
 	}
 	// If Stage is not selected
 	else {
@@ -117,6 +124,10 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 		else if (KeyEvent[K_ESCAPE].keyOnce) {
 			gameState = START_MENU;
 			PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		}
+
+		if (currentSelection > unlockedStage) {
+			currentSelection = unlockedStage;
 		}
 	}
 }
