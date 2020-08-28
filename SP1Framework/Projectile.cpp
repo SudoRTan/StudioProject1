@@ -15,7 +15,24 @@ Projectile::Projectile(int x, int y, int direction) {
 	updateDelay = 0.5;
 	health = 1;
 
+	damage = 2;
+
 }
+
+	
+Projectile::Projectile(int x, int y, int direction, int damage) :Projectile(x, y, direction) {
+	this->damage = damage;
+}
+
+
+Projectile::Projectile(int x, int y, int direction, int damage, char projectileSymbol, double speed) :Projectile(x, y, direction) {
+	this->damage = damage;
+	symbolArray[0][0] = projectileSymbol;
+	updateDelay = speed;
+
+}
+
+
 
 Projectile::~Projectile() {
 	cleanUp();
@@ -34,6 +51,14 @@ void Projectile::update(Map& map, double elapsedTime) {
 
 		case RIGHT:
 			newX++;
+			break;
+
+		case UP:
+			newY++;
+			break;
+
+		case DOWN:
+			newY--;
 			break;
 
 		default:
