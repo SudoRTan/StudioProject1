@@ -273,16 +273,23 @@ Map::~Map()
 		delete[] mapArray;
 		delete[] mapTemplate;
 		delete[] tempMapArray;
+		mapArray = nullptr;
+		mapTemplate = nullptr;
+		tempMapArray = nullptr;
+
 	}
 	
 	if (enemyTemplate != nullptr) {
 		for (int i = 0; i < numberOfEnemies; i++) {
 			if (enemyTemplate[i] != nullptr) {
 				delete enemyTemplate[i];
+				enemyTemplate[i] = nullptr;
+
 			}
 		}
 
 		delete[] enemyTemplate;
+		enemyTemplate = nullptr;
 	}
 
 
@@ -290,10 +297,13 @@ Map::~Map()
 		for (int i = 0; i < numberOfCollectible; i++) {
 			if (collectibleTemplate[i] != nullptr) {
 				delete collectibleTemplate[i];
+				collectibleTemplate[i] = nullptr;
+
 			}
 		}
 
 		delete[] collectibleTemplate;
+		collectibleTemplate = nullptr;
 	}
 
 	

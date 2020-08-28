@@ -13,7 +13,7 @@ private:
 public:
 	Enemy();
 	Enemy(int x, int y);
-	~Enemy();
+	virtual ~Enemy();
 	int patrol(Map& map, double g_dElapsedTime, Player& player); // for enemies on land moving left and right
 	
 	void random(Map& map, double g_dElapsedTime);

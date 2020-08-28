@@ -183,9 +183,16 @@ void Entity::resetHealth() {
 }
 
 void Entity::cleanUp() {
-	for (int i = 0; i < width; i++) {
-		delete[] symbolArray[i];
+	if (symbolArray != nullptr) {
+		for (int i = 0; i < height; i++) {
+			if (symbolArray != nullptr) {
+				delete[] symbolArray[i];
+				symbolArray[i] = nullptr;
+			}
+		}
+		delete[] symbolArray;
+		symbolArray = nullptr;
 	}
+	
 
-	delete[] symbolArray;
 }
