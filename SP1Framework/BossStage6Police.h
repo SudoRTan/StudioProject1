@@ -6,9 +6,11 @@ class BossStage6Police
 {
 private:
 	static int numberOfCops;
+	static int rowcount;
+	static int colcount;
 
 public:
-	BossStage6Police(int xpos, int ycount);
+	BossStage6Police();
 	~BossStage6Police();
 
 	int update(Map& map, double g_dElapsedTime, Player& player);
