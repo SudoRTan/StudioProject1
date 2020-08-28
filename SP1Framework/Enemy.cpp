@@ -57,7 +57,6 @@ Enemy::~Enemy()
 int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 {
 	if (g_dElapsedTime - lastMovementTime > updateDelay) {
-		lastJumpTime = g_dElapsedTime;
 
 		int newX = position.getX();
 		int newY = position.getY();
@@ -109,7 +108,6 @@ void Enemy::random(Map& map, double g_dElapsedTime, Player& player)
 {
 	// same code as patrol movement above
 	if (g_dElapsedTime - lastMovementTime > updateDelay) {
-		lastJumpTime = g_dElapsedTime;
 
 		int newX = position.getX();
 		int newY = position.getY();
