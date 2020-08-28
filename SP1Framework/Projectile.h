@@ -2,6 +2,8 @@
 #include "Entity.h"
 #include "Enemy.h"
 
+class Player;
+
 class Projectile :
 	public Entity
 {
@@ -16,7 +18,9 @@ public:
 	Projectile(int x, int y, int direction, int damage, char projectileSymbol, double speed);
 	~Projectile();
 
-	void update(Map& map, double elapsedTime);
+
+	void update(Map& map, double elapsedTime, Player* player);
+	void update(Map& map, double elapsedTime, Enemy** enemyArray, int enemyArraySize);
 
 };
 

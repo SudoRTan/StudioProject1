@@ -120,7 +120,7 @@ void RangedWeapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, doub
 			bullet = nullptr;
 		}
 		else {
-			bullet->update(map, elapsedTime);
+			bullet->update(map, elapsedTime, enemyArray, enemyArraySize);
 		}
 	}
 	animate(map, elapsedTime, direction, x, y);

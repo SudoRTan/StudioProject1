@@ -1,5 +1,5 @@
 #include "Projectile.h"
-
+#include "Player.h"
 
 Projectile::Projectile(int x, int y, int direction) {
 	position.setX(x);
@@ -39,7 +39,7 @@ Projectile::~Projectile() {
 
 }
 
-void Projectile::update(Map& map, double elapsedTime) {
+void Projectile::update(Map& map, double elapsedTime, Player* player) {
 	if (elapsedTime - lastMovementTime > updateDelay) {
 		int newX = position.getX();
 		int newY = position.getY();
@@ -64,8 +64,54 @@ void Projectile::update(Map& map, double elapsedTime) {
 		default:
 			break;
 		}
+		if (player->isLocatedAt(newX, newY)) {
+			player->takeDamage(damage);
+			health = 0;
+		}
 
-		if (canEntityMove(map, newX, newY)) {
+		else if (canEntityMove(map, newX, newY)) {
+			updateNewPosition(map, newX, newY);
+		}
+		else {
+			map.setDefaultItem(position.getX(), position.getY());
+			health = 0;
+		}
+	}
+}
+
+void Projectile::update(Map& map, double elapsedTime, Enemy** enemyArray, int enemyArraySize) {
+	if (elapsedTime - lastMovementTime > updateDelay) {
+		int newX = position.getX();
+		int newY = position.getY();
+
+		switch (direction) {
+		case LEFT:
+			newX--;
+			break;
+
+		case RIGHT:
+			newX++;
+			break;
+
+		case UP:
+			newY++;
+			break;
+
+		case DOWN:
+			newY--;
+			break;
+
+		default:
+			break;
+		}
+
+		Enemy* enemyAtNewLocation = getEnemy(newX, newY, enemyArray, enemyArraySize);
+
+		if (enemyAtNewLocation != nullptr) {
+			enemyAtNewLocation->takeDamage(damage);
+			health = 0;
+		}
+		else if (canEntityMove(map, newX, newY)) {
 			updateNewPosition(map, newX, newY);
 		}
 		else {
