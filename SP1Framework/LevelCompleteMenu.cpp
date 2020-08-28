@@ -24,7 +24,7 @@ void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int&
 
 	else if (KeyEvent[K_SPACE].keyOnce) {
 		if (currentSelection == 1) {
-			gameState = FINISHED_LEVEL;
+			gameState = NEXT_LEVEL;
 			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 		else {

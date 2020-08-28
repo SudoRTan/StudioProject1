@@ -30,7 +30,7 @@ void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElap
 		player->resetHealth();
 	}
 	if (playerReturnValue == PLAYER_REACHED_DOOR) {
-		gameState = LEVEL_COMPLETE_MENU;
+		gameState = FINISHED_LEVEL;
 	}
 	if (player->getHealth() <= 0) {
 		gameState = PLAYER_DEATH;
