@@ -1,6 +1,6 @@
 #include "UI.h"
 #include "Entity.h"
-#include <iostream>
+
 
 UI::UI()
 {
@@ -29,7 +29,7 @@ void UI::splashScreen(Console& console)
 	console.writeToBuffer(35, 14, "Level Select", FG_WHITE);
 };
 
-void UI::render(Console& console, Player& player)
+void UI::render(Console& console, Player& player, int currStage, int currLevel)
 {
 
 	
@@ -71,10 +71,18 @@ void UI::render(Console& console, Player& player)
 	std::string weaponName = player.getWeaponName();
 
 	if (weaponName != "") {
-		console.writeToBuffer(50, 4, "Weapon: ", FG_YELLOW);
-		console.writeToBuffer(50, 5, weaponName, FG_YELLOW);
+		console.writeToBuffer(50, 4, "Weapon: ", FG_WHITE);
+		console.writeToBuffer(50, 5, weaponName, FG_WHITE);
 
 	}
+
+	std::stringstream ss;
+
+	ss << currStage << '-' << currLevel;
+
+	console.writeToBuffer(50, 1, "Stage: ", FG_WHITE);
+	console.writeToBuffer(50, 2, ss.str(), FG_WHITE);
+
 	
  };
 

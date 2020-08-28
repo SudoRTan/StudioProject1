@@ -106,6 +106,7 @@ void GameManager::render(Console& console) {
 }
 
 void GameManager::loadStage(double enlapsedTime) {
+	//If selected stage is a boss stage
 	if (currLevel == 4) {
 		if (stage != nullptr) {
 			delete stage;
@@ -141,6 +142,7 @@ void GameManager::loadStage(double enlapsedTime) {
 		}
 		
 	}
+	// If selected stage is a normal stage
 	else {
 		if (stage == nullptr) {
 			stage = new Stage(player);

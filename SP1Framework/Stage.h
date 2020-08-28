@@ -19,7 +19,6 @@ protected:
 	int stageNumber;
 	int levelNumber;
 	UI ui;
-	std::string currentStage;
 
 	std::string type;
 
