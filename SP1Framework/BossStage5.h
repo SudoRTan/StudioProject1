@@ -10,6 +10,7 @@ private:
 	int numberOfAliens;
 	int aliensLeft;
 
+
 public:
 	BossStage5(Player* player);
 	~BossStage5();

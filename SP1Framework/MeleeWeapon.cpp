@@ -2,7 +2,7 @@
 
 MeleeWeapon::MeleeWeapon() {
 	setName("Melee");
-	setDamage(10);
+	setDamage(1);
 
 	maxAmmo = 0;
 	currentAmmo = 0;
@@ -144,7 +144,7 @@ void MeleeWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double e
 			}
 		}
 	}
-	PlaySound(TEXT("./Sounds/swordSwinging.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
+	PlaySound(TEXT("./Sounds/swordSwinging.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void MeleeWeapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y, bool attacking) {
