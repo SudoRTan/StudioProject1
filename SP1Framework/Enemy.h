@@ -16,7 +16,7 @@ public:
 	virtual ~Enemy();
 	int patrol(Map& map, double g_dElapsedTime, Player& player); // for enemies on land moving left and right
 	
-	void random(Map& map, double g_dElapsedTime);
+	void random(Map& map, double g_dElapsedTime, Player& player);
 
 	virtual int update(Map& map, double g_dElapsedTime, Player& player);
 
