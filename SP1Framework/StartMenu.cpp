@@ -12,6 +12,7 @@ StartMenu::~StartMenu() {
 void StartMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
 	if (KeyEvent[K_SPACE].keyOnce) {
 		gameState = LEVEL_SELECT;
+		PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 }
 

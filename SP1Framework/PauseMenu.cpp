@@ -13,23 +13,28 @@ PauseMenu::~PauseMenu() {
 void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
 	if (KeyEvent[K_UP].keyOnce || KeyEvent[K_LEFT].keyOnce) {
 		decreaseSelection();
+		PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 
 	else if (KeyEvent[K_DOWN].keyOnce || KeyEvent[K_RIGHT].keyOnce) {
 		increaseSelection();
+		PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 	
 	else if (KeyEvent[K_SPACE].keyOnce) {
 		if (currentSelection == 1) {
 			gameState = RESUME_LEVEL;
+			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 		else {
 			currentSelection = 1;
 			gameState = START_MENU;
+			PlaySound(TEXT("./Sounds/menuconfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 	}
 	else if (KeyEvent[K_ESCAPE].keyOnce) {
 		gameState = RESUME_LEVEL;
+		PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 	}
 }

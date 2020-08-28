@@ -10,6 +10,8 @@
 #include "BossStage1.h"
 #include "BossStage2.h"
 
+#include "BossStage5.h"
+
 class GameManager
 {
 private:

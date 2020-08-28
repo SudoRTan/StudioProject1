@@ -13,7 +13,9 @@ enum ENTITY_STATE {
 
 enum DIRECTION {
 	LEFT,
-	RIGHT
+	RIGHT,
+	UP,
+	DOWN
 };
 
 class Entity

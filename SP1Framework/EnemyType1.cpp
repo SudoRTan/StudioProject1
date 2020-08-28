@@ -2,12 +2,13 @@
 
 EnemyType1::EnemyType1()
 {
-	height = 1;
+	height = 2;
 	width = 1;
 
 	symbolArray = createArray(width, height);
 
 	symbolArray[0][0] = 'E';
+	symbolArray[1][0] = 'E';
 
 	setHealth(2);
 }
@@ -22,12 +23,13 @@ EnemyType1::EnemyType1(int x, int y)
 	direction = 0;
 	setDamage(1);
 
-	height = 1;
+	height = 2;
 	width = 1;
 
 	symbolArray = createArray(width, height);
 
 	symbolArray[0][0] = 'E';
+	symbolArray[1][0] = 'E';
 
 	setHealth(2);
 
