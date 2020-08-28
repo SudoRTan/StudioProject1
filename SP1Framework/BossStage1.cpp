@@ -48,63 +48,11 @@ BossStage1::~BossStage1()
 
 void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)
 {
+	//Update Entitys on the map
 	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState, fire, maxNumberOfFires);
-	/*
-	for (int i = 0; i < 5; i++) {
-		fire[i]->update(*map, g_dElapsedTime, *player);
-	}
-	*/
-	int numberOfFires = BossStage1Fire::getNumberOfFires();
-	if (g_dElapsedTime - lastSpawnTime > 5) {
 
-		for (int i = 0; i < numberOfFires; i++) {
-			if (fire[i] != nullptr) {
 
-				Enemy* enemyOnTheLeft = getEnemy(fire[i]->getPositionX() - 3, fire[i]->getPositionY(), fire, 200);
-				Enemy* enemyOnTheRight = getEnemy(fire[i]->getPositionX() + 3, fire[i]->getPositionY(), fire, 200);
-
-				if (enemyOnTheLeft == nullptr && fire[i]->getPositionX() - 3 > 0) {
-					int j = 0;
-					while (true) {
-						if (fire[j] == nullptr) {
-							fire[j] = new BossStage1Fire(fire[i]->getPositionX() - 3, fire[i]->getPositionY());
-							break;
-						}
-						else if (j == 200){
-							break;
-						}
-						else {
-							j++;
-						}
-					}
-
-					//fire[BossStage1Fire::getNumberOfFires()] = new BossStage1Fire(fire[i]->getPositionX() - 3, fire[i]->getPositionY());
-				}
-				if (enemyOnTheRight == nullptr && fire[i]->getPositionX() + 3 < 118) {
-					int j = 0;
-					while (true) {
-						if (fire[j] == nullptr) {
-							fire[j] = new BossStage1Fire(fire[i]->getPositionX() + 3, fire[i]->getPositionY());
-							break;
-						}
-						else if (j == 200) {
-							break;
-						}
-						else {
-							j++;
-						}
-					}
-
-					//fire[BossStage1Fire::getNumberOfFires()] = new BossStage1Fire(fire[i]->getPositionX() + 3, fire[i]->getPositionY());
-				}
-			}
-		}
-	}
-	if (BossStage1Fire::getNumberOfFires() != numberOfFires) {
-		lastSpawnTime = g_dElapsedTime;
-
-	}
-
+	// Move all the elements in the array to the start
 	for (int i = 0; i < maxNumberOfFires; i++) {
 		if (fire[i] == nullptr) {
 			for (int j = i; j < maxNumberOfFires - 1; j++) {
@@ -114,76 +62,73 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 		}
 	}
 
-	
-	/*
-	if (fireVector.empty() == true)
-	{
-		gameState = FINISHED_LEVEL;
+	//Gets current amount of fires
+	int numberOfFires = BossStage1Fire::getNumberOfFires();
+
+
+
+	// If it was 5 sec since last spawn 
+	if (g_dElapsedTime - lastSpawnTime > 5) {
+
+		// Loops through all current fires
+		for (int i = 0; i < numberOfFires; i++) {
+			// double check that current fire[i] is not a nullptr
+			if (fire[i] != nullptr) {
+				//Get location of fire
+				int currX = fire[i]->getPositionX();
+				int currY = fire[i]->getPositionY();
+
+				//Check if any enemies on the left or right of the current fire
+				Enemy* enemyOnTheLeft = getEnemy(currX - 3, currY, fire, 200);
+				Enemy* enemyOnTheRight = getEnemy(currX + 3, currY, fire, 200);
+
+				// If no enemies on the left + theres space on the left
+				if (enemyOnTheLeft == nullptr && currX - 3 > 0) {
+
+					//Loop through the fire array to spawn a new fire
+					int j = 0;
+					while (true) {
+						//Check to make sure that array does not go out of index
+						if (j == maxNumberOfFires) {
+							break;
+						}
+						else if (fire[j] == nullptr) {
+							fire[j] = new BossStage1Fire(currX - 3, currY);
+							break;
+						}
+						else {
+							j++;
+						}
+					}
+				}
+
+				// If no enemies on the right + theres space on the left
+				if (enemyOnTheRight == nullptr && currX + 3 < 118) {
+
+					//Loop through the fire array to spawn a new fire
+					int j = 0;
+					while (true) {
+						//Check to make sure that array does not go out of index
+						if (j == maxNumberOfFires) {
+							break;
+						}
+						else if (fire[j] == nullptr) {
+							fire[j] = new BossStage1Fire(currX + 3, currY);
+							break;
+						}
+						else {
+							j++;
+						}
+					}
+				}
+			}
+		}
 	}
-	if (player->getHealth() <= 0 || g_dElapsedTime - timer > 180)
-	{
-		gameState = PLAYER_DEATH;
+	// If more fires are spawned
+	if (BossStage1Fire::getNumberOfFires() != numberOfFires) {
+		//Reset last spawn time;
+		lastSpawnTime = g_dElapsedTime;
+
 	}
 
-	for (int i = 0; i < fireVector.size(); i++) //require testing if vector resizes after delete
-	{
-		if (fireVector.at(i)->getHealth() <= 0)
-		{
-			fireVector.at(i)->death(*map);
-			delete fireVector.at(i);
-			fireVector.at(i) = nullptr;
-			//fireVector.pop_back(); uncomment if doesnt resize, also require testing
-		}
-		else {
-			fireVector.at(i)->update(*map, g_dElapsedTime, *player);
-		}
-	}
-	if (g_dElapsedTime - lastSpawnTime > 5)
-	{
-		int numberOfFire = fireVector.size();
-		for (int i = 0; i < numberOfFire; i++)
-		{
-			if (fireVector.at(i)->getCanSpawnLeft() == true && fireVector.at(i)->getCanSpawnRight() == true)
-				switch (rand() % 2)
-				{
-				case 0:
-					fireVector.push_back(new BossStage1Fire(fireVector.at(i)->getPositionX() - 3, fireVector.at(i)->getPositionY()));
-					lastSpawnTime = g_dElapsedTime;
-					break;
-				case 1:
-					fireVector.push_back(new BossStage1Fire(fireVector.at(i)->getPositionX() + 3, fireVector.at(i)->getPositionY()));
-					lastSpawnTime = g_dElapsedTime;
-					break;
-				}
-			else if (fireVector.at(i)->getCanSpawnLeft() == true && fireVector.at(i)->getCanSpawnRight() == false)
-			{
-				fireVector.push_back(new BossStage1Fire(fireVector.at(i)->getPositionX() - 3, fireVector.at(i)->getPositionY()));
-				lastSpawnTime = g_dElapsedTime;
-			}
-			else if (fireVector.at(i)->getCanSpawnLeft() == false && fireVector.at(i)->getCanSpawnRight() == true)
-			{
-				fireVector.push_back(new BossStage1Fire(fireVector.at(i)->getPositionX() + 3, fireVector.at(i)->getPositionY()));
-				lastSpawnTime = g_dElapsedTime;
-			}
-		}
-	}
-	for (int i = 0; i < fireVector.size(); i++)
-		fireVector.at(i)->updateSpawnBool(map);
-		*/
 }
-/*
-void BossStage1::checkPlayerPosition(Player player, double g_dElapsedTime)
-{
-	for (int i = 0; i < fireVector.size(); i++)
-	{
-		if (fireVector.at(i)->getPositionX() == player.getPositionX() && fireVector.at(i)->getPositionY() == player.getPositionY())
-		{
-			playerOnFire = true;
-		}
-		else if (fireVector.at(i)->getPositionX() - player.getPositionX() > -5 && fireVector.at(i)->getPositionX() - player.getPositionX() < 5 && fireVector.at(i)->getPositionY() == player.getPositionY())
-		{ //change to normal weapon fire detection
-			fireVector.at(i)->takeDamage(1, g_dElapsedTime);
-		}
-	}
-}
-*/
