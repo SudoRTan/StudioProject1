@@ -120,3 +120,7 @@ void Projectile::update(Map& map, double elapsedTime, Enemy** enemyArray, int en
 		}
 	}
 }
+
+void Projectile::death(Map& map) {
+	map.setDefaultItem(position.getX(), position.getY());
+}

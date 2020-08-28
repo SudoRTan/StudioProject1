@@ -116,6 +116,7 @@ void RangedWeapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, doub
 	}
 	if (bullet != nullptr) {
 		if (bullet->getHealth() == 0) {
+			bullet->death(map);
 			delete bullet;
 			bullet = nullptr;
 		}

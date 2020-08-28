@@ -22,5 +22,6 @@ public:
 	void update(Map& map, double elapsedTime, Player* player);
 	void update(Map& map, double elapsedTime, Enemy** enemyArray, int enemyArraySize);
 
+	void death(Map& map);
 };
 
