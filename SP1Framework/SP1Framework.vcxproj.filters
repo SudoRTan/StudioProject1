@@ -132,10 +132,10 @@
     <ClCompile Include="BossStage5Alien.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BossStage6.cpp">
+    <ClCompile Include="BossStage4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BossStage6Police.cpp">
+    <ClCompile Include="BossStage4People.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -257,10 +257,10 @@
     <ClInclude Include="BossStage5Alien.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BossStage6.h">
+    <ClInclude Include="BossStage4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BossStage6Police.h">
+    <ClInclude Include="BossStage4People.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

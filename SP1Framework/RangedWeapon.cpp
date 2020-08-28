@@ -91,7 +91,6 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 				}
 				
 			}
-			PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		else if (direction == RIGHT) {
@@ -101,13 +100,14 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 					enemyInRange->takeDamage(getDamage());
 				}
 			}  
-			PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
-		}
+			
 
 		if (bullet == nullptr) {
 			bullet = new Projectile(x, y, direction);
 		}
 		
+	}
+		PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 }
 
@@ -117,11 +117,12 @@ void RangedWeapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, doub
 	}
 	if (bullet != nullptr) {
 		if (bullet->getHealth() == 0) {
+			bullet->death(map);
 			delete bullet;
 			bullet = nullptr;
 		}
 		else {
-			bullet->update(map, elapsedTime);
+			bullet->update(map, elapsedTime, enemyArray, enemyArraySize);
 		}
 	}
 	animate(map, elapsedTime, direction, x, y);

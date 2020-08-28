@@ -72,4 +72,5 @@ public:
 	void resetHealth();
 
 	void cleanUp();
+	virtual void death(Map& map);
 };
