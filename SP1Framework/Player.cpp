@@ -25,7 +25,7 @@ Player::Player()
 
 	direction = RIGHT;
 
-	weapon = nullptr;
+	weapon = new RangedWeapon;
 
 
 	height = 3;
@@ -110,7 +110,6 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 	{
 		direction = RIGHT;
 		newX++;
-
 	}
 	/*
 	if (KeyEvent[K_UP].keyOnce && map.getItem(position.getX(), position.getY() - 1) != EMPTY)
@@ -125,6 +124,7 @@ int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, E
 	{
 		jumping = true;
 		canJump = 3;
+		
 	}
 
 	if (KeyEvent[K_DOWN].keyTwice) {
@@ -279,12 +279,14 @@ void Player::touchEnemy(Enemy enemy, double g_dElapsedTime)
 	{
 		health = health - enemy.getDamage();
 		lastDamageTime = g_dElapsedTime;
+		PlaySound(TEXT("./Sounds/damageTaken.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		//insert duck noises
 	}
 	else if ((enemy.getPositionY() - position.getY() == 1 || enemy.getPositionY() - position.getY() == -1) && lastDamageTime > 0.5)
 	{
 		health = health - enemy.getDamage();
 		lastDamageTime = g_dElapsedTime;
+		PlaySound(TEXT("./Sounds/damageTaken.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		//insert goose noises
 	}
 }
@@ -335,12 +337,14 @@ int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime,
 		case HEALTH:
 			resetHealth();
 			collectibleInLocation->collect();
+			PlaySound(TEXT("./Sounds/collectHealth.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			break;
 		case AMMO:
 			if (weapon != nullptr) {
 				weapon->replenishAmmo();
 			}
 			collectibleInLocation->collect();
+			PlaySound(TEXT("./Sounds/collectAmmo.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			break;
 
 		case SWORD:

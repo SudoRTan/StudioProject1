@@ -6,14 +6,19 @@
 class BossStage1 :
     public Stage
 {
-public:
-    BossStage1(Player* player, double g_dElapsedTime);
-    ~BossStage1();
-    void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
 private:
-    std::vector<BossStage1Fire*> fireVector;
     bool playerOnFire;
     double lastSpawnTime;
     double timer;
-    //void checkPlayerPosition(Player player, double g_dElapsedTime);
+
+    Enemy** fire;
+
+    int maxNumberOfFires;
+
+public:
+    BossStage1(Player* player, double g_dElapsedTime);
+    ~BossStage1();
+
+    void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
+
 };

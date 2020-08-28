@@ -3,10 +3,17 @@
 #include "Player.h"
 #include "Projectile.h"
 
-enum VIRUS_MODE_ENUM {
+enum VIRUS_MODE_ENUM
+{
 	SHOOTING,
 	MOVING, 
 	CHARGING
+};
+
+enum MOVEMENT_CASE
+{
+	SHOOT_LOOP,
+	CHARGE_LOOP
 };
 
 class BossStage3Virus :
@@ -18,10 +25,13 @@ public:
 	int update(Map& map, double g_dElapsedTime, Player& player);
 private:
 	int mode;
-	int moves;
+	int caseLoop;
+	int shootLoopCount;
+	double lastShootTime;
 	bool completedAction;
+	Projectile* projectileArray[3];
 	void move(Player player);
-	void shoot();
+	void shoot(double g_dElapsedTime);
 	void charge();
 };
 
