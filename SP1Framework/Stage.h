@@ -35,7 +35,7 @@ public:
 	std::string getStage(void);
 
 
-	void loadMap(std::string fileName);
+	void loadMap(int stageToLoad, int levelToLoad);
 
 	virtual void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
 

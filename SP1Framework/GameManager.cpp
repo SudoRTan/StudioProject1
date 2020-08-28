@@ -106,13 +106,6 @@ void GameManager::render(Console& console) {
 }
 
 void GameManager::loadStage(double enlapsedTime) {
-	std::stringstream ss;
-
-	
-	ss << "stage" << currStage << "_" << currLevel << ".txt";
-
-	std::string test = ss.str();
-	
 	if (currLevel == 4) {
 		if (stage != nullptr) {
 			delete stage;
@@ -157,6 +150,6 @@ void GameManager::loadStage(double enlapsedTime) {
 			stage = new Stage(player);
 		}
 	}
-	stage->loadMap(ss.str());
+	stage->loadMap(currStage, currLevel);
 	
 }
