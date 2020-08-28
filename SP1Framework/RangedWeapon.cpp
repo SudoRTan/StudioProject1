@@ -83,31 +83,22 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 		currentAnimationPhase = 3;
 		currentAmmo--;
 
-		if (direction == LEFT) {
-			for (int i = 1; i < 15; i++) {
-				Enemy* enemyInRange = getEnemy(x - i, y + 1, enemyArray, enemyArraySize);
-				if (enemyInRange != nullptr) {
-					enemyInRange->takeDamage(getDamage());
-				}
-				
-			}
-		}
+		switch (direction) {
+		case LEFT:
+			x--;
+			break;
+		case RIGHT:
+			x++;
+			break;
 
-		else if (direction == RIGHT) {
-			for (int i = 1; i < 15; i++) {
-				Enemy* enemyInRange = getEnemy(x + i, y + 1, enemyArray, enemyArraySize);
-				if (enemyInRange != nullptr) {
-					enemyInRange->takeDamage(getDamage());
-				}
-			} 
-			
+		default:
+			break;
 		}
-
 		if (bullet == nullptr) {
 			bullet = new Projectile(x, y+1, direction);
+			PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
-		PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 }
 
