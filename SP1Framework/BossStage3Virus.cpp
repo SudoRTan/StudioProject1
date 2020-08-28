@@ -30,7 +30,7 @@ BossStage3Virus::BossStage3Virus() : projectileArray{nullptr}
 
 BossStage3Virus::~BossStage3Virus()
 {
-	
+	cleanUp();
 }
 
 int BossStage3Virus::update(Map& map, double g_dElapsedTime, Player& player)
@@ -91,7 +91,7 @@ int BossStage3Virus::update(Map& map, double g_dElapsedTime, Player& player)
 	}
 	for (int i = 0; i < 3; i++)
 		if (projectileArray[i] != nullptr)
-			projectileArray[i]->update(map, g_dElapsedTime);
+			projectileArray[i]->update(map, g_dElapsedTime, &player);
 	return NO_CHANGE;
 }
 
@@ -120,27 +120,27 @@ void BossStage3Virus::shoot(double g_dElapsedTime)
 		if (projectileArray[0] == nullptr)
 		{
 			if (direction == LEFT)
-				projectileArray[0] = new Projectile(position.getX() - 1, position.getY(), direction);
+				projectileArray[0] = new Projectile(position.getX() - 1, position.getY(), direction, 3, (char)254, 0.07);
 			else if (direction == RIGHT)
-				projectileArray[0] = new Projectile(position.getX() + 1, position.getY(), direction);
+				projectileArray[0] = new Projectile(position.getX() + 1, position.getY(), direction, 3, (char)254, 0.07);
 			lastShootTime = g_dElapsedTime;
 			completedAction = true;
 		}
 		else if (projectileArray[1] == nullptr)
 		{
 			if (direction == LEFT)
-				projectileArray[1] = new Projectile(position.getX() - 1, position.getY(), direction);
+				projectileArray[1] = new Projectile(position.getX() - 1, position.getY(), direction, 3, (char)254, 0.07);
 			else if (direction == RIGHT)
-				projectileArray[1] = new Projectile(position.getX() + 1, position.getY(), direction);
+				projectileArray[1] = new Projectile(position.getX() + 1, position.getY(), direction, 3, (char)254, 0.07);
 			lastShootTime = g_dElapsedTime;
 			completedAction = true;
 		}
 		else if (projectileArray[2] == nullptr)
 		{
 			if (direction == LEFT)
-				projectileArray[2] = new Projectile(position.getX() - 1, position.getY(), direction);
+				projectileArray[2] = new Projectile(position.getX() - 1, position.getY(), direction, 3, (char)254, 0.07);
 			else if (direction == RIGHT)
-				projectileArray[2] = new Projectile(position.getX() + 1, position.getY(), direction);
+				projectileArray[2] = new Projectile(position.getX() + 1, position.getY(), direction, 3, (char)254, 0.07);
 			lastShootTime = g_dElapsedTime;
 			completedAction = true;
 		}

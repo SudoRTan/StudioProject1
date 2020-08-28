@@ -84,6 +84,8 @@
     <ClCompile Include="BossStage2Locust.cpp" />
     <ClCompile Include="BossStage3.cpp" />
     <ClCompile Include="BossStage3Virus.cpp" />
+    <ClCompile Include="BossStage4.cpp" />
+    <ClCompile Include="BossStage4People.cpp" />
     <ClCompile Include="BossStage5.cpp" />
     <ClCompile Include="BossStage5Alien.cpp" />
     <ClCompile Include="Collectible.cpp" />
@@ -123,6 +125,8 @@
     <ClInclude Include="BossStage2Locust.h" />
     <ClInclude Include="BossStage3.h" />
     <ClInclude Include="BossStage3Virus.h" />
+    <ClInclude Include="BossStage4.h" />
+    <ClInclude Include="BossStage4People.h" />
     <ClInclude Include="BossStage5.h" />
     <ClInclude Include="BossStage5Alien.h" />
     <ClInclude Include="Collectible.h" />
