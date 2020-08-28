@@ -2,7 +2,7 @@
 
 BossStage5::BossStage5(Player* player) :Stage(player)
 {
-	numberOfAliens = 20;
+	numberOfAliens = 25;
 	aliens = new Enemy* [numberOfAliens];
 
 	for (int i = 0; i < numberOfAliens; i++) {

@@ -1,6 +1,6 @@
 #include "BossStage3Virus.h"
 
-BossStage3Virus::BossStage3Virus()
+BossStage3Virus::BossStage3Virus() : projectileArray{nullptr}
 {
 	position.setX(118);
 	position.setY(2);
@@ -22,7 +22,9 @@ BossStage3Virus::BossStage3Virus()
 	symbolArray[2][1] = (char)193;
 	symbolArray[2][2] = (char)197;
 	mode = MOVING;
-	moves = 0;
+	caseLoop = SHOOT_LOOP;
+	shootLoopCount = 0;
+	lastShootTime = 0;
 	completedAction = false;
 }
 
@@ -36,14 +38,67 @@ int BossStage3Virus::update(Map& map, double g_dElapsedTime, Player& player)
 	updateNewPosition(map, position.getX(), position.getY());
 	if (contactPlayer(position.getX(), position.getY(), player) == true)
 		player.takeDamage(getDamage());
-	moves++;
-	return 0;
+	if (caseLoop == SHOOT_LOOP)
+	{
+		if (mode == MOVING)
+		{
+			move(player);
+			if (completedAction == true)
+				mode = SHOOTING;
+		}
+		else if (mode == SHOOTING)
+		{
+			shoot(g_dElapsedTime);
+			if (completedAction == true)
+			{
+				mode = MOVING;
+				shootLoopCount++;
+			}
+			if (shootLoopCount == 3)
+				switch (rand() % 2)
+				{
+				case 0:
+					caseLoop = SHOOT_LOOP;
+					break;
+				case 1:
+					caseLoop = CHARGE_LOOP;
+					break;
+				}
+		}
+	}
+	else if (caseLoop == CHARGE_LOOP)
+	{
+		if (mode == MOVING)
+		{
+			move(player);
+			if (completedAction == true)
+				mode = CHARGING;
+		}
+		else if (mode == CHARGING)
+		{
+			charge();
+			if (completedAction == true)
+				switch (rand() % 2)
+				{
+				case 0:
+					caseLoop = SHOOT_LOOP;
+					break;
+				case 1:
+					caseLoop = CHARGE_LOOP;
+					break;
+				}
+		}
+	}
+	for (int i = 0; i < 3; i++)
+		if (projectileArray[i] != nullptr)
+			projectileArray[i]->update(map, g_dElapsedTime);
+	return NO_CHANGE;
 }
 
 void BossStage3Virus::move(Player player)
 {
 	completedAction = false;
-	if (position.getY() - player.getPositionY() < 0)
+	if (position.getY() - player.getPositionY() < 0) //require testing to see if possible to shoot boss while constantly moving to keep boss in infinite move loop
 	{
 		position.setY(position.getY() + 1);
 	}
@@ -57,9 +112,39 @@ void BossStage3Virus::move(Player player)
 	}
 }
 
-void BossStage3Virus::shoot()
+void BossStage3Virus::shoot(double g_dElapsedTime)
 {
-	//shoot
+	completedAction = false;
+	if (g_dElapsedTime - lastShootTime > 0.7)
+	{
+		if (projectileArray[0] == nullptr)
+		{
+			if (direction == LEFT)
+				projectileArray[0] = new Projectile(position.getX() - 1, position.getY(), direction);
+			else if (direction == RIGHT)
+				projectileArray[0] = new Projectile(position.getX() + 1, position.getY(), direction);
+			lastShootTime = g_dElapsedTime;
+			completedAction = true;
+		}
+		else if (projectileArray[1] == nullptr)
+		{
+			if (direction == LEFT)
+				projectileArray[1] = new Projectile(position.getX() - 1, position.getY(), direction);
+			else if (direction == RIGHT)
+				projectileArray[1] = new Projectile(position.getX() + 1, position.getY(), direction);
+			lastShootTime = g_dElapsedTime;
+			completedAction = true;
+		}
+		else if (projectileArray[2] == nullptr)
+		{
+			if (direction == LEFT)
+				projectileArray[2] = new Projectile(position.getX() - 1, position.getY(), direction);
+			else if (direction == RIGHT)
+				projectileArray[2] = new Projectile(position.getX() + 1, position.getY(), direction);
+			lastShootTime = g_dElapsedTime;
+			completedAction = true;
+		}
+	}
 }
 
 void BossStage3Virus::charge()
