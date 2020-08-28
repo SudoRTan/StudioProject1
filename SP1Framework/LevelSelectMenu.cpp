@@ -16,7 +16,7 @@ LevelSelectMenu::~LevelSelectMenu() {
 
 }
 
-void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
+void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) {
 	
 	// If Stage is selected
 	if (selectedStage) {

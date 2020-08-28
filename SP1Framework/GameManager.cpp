@@ -67,7 +67,7 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
 	case START_MENU:
 		player->resetHealth();
 	default:
-		menu.update(currGameState, KeyEvent, currStage, currLevel);
+		menu.update(currGameState, KeyEvent, currStage, currLevel, currStage, currLevel);
 		break;
 	}
 

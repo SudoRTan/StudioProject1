@@ -12,7 +12,7 @@ LevelCompleteMenu::~LevelCompleteMenu() {
 
 }
 
-void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
+void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) {
 	if (KeyEvent[K_UP].keyOnce || KeyEvent[K_LEFT].keyOnce) {
 		decreaseSelection();
 	}
