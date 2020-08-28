@@ -29,7 +29,7 @@ void UI::splashScreen(Console& console)
 	console.writeToBuffer(35, 14, "Level Select", FG_WHITE);
 };
 
-void UI::render(Console& console, Player& player/*,Weapons& weapons*/)
+void UI::render(Console& console, Player& player)
 {
 
 	
@@ -66,6 +66,14 @@ void UI::render(Console& console, Player& player/*,Weapons& weapons*/)
 				console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_GRAY);
 			}
 		}
+	}
+
+	std::string weaponName = player.getWeaponName();
+
+	if (weaponName != "") {
+		console.writeToBuffer(50, 4, "Weapon: ", FG_YELLOW);
+		console.writeToBuffer(50, 5, weaponName, FG_YELLOW);
+
 	}
 	
  };
