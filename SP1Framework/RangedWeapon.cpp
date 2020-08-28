@@ -99,14 +99,14 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 				if (enemyInRange != nullptr) {
 					enemyInRange->takeDamage(getDamage());
 				}
-			}  
+			} 
 			
+		}
 
 		if (bullet == nullptr) {
-			bullet = new Projectile(x, y, direction);
+			bullet = new Projectile(x, y+1, direction);
 		}
-		
-	}
+
 		PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 }
