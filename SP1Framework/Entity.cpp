@@ -196,3 +196,7 @@ void Entity::cleanUp() {
 	
 
 }
+
+void Entity::death(Map& map) {
+
+}
