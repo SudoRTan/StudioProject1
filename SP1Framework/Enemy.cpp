@@ -57,7 +57,6 @@ Enemy::~Enemy()
 int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 {
 	if (g_dElapsedTime - lastMovementTime > updateDelay) {
-		lastJumpTime = g_dElapsedTime;
 
 		int newX = position.getX();
 		int newY = position.getY();
@@ -75,22 +74,29 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 		default:
 			break;
 		}
-		// calls bool function to check if adjacent cells are empty for enemy to move to
+		// Checks if the new location has space for the enemy to move into
 		bool validMove = canEntityMove(map, newX, newY);
-		// calls bool function to check if cell below enemy is valid to move to
+		
+		// Checks if the new location has a solid floor / platform for the player to stand on
 		bool solidFloor = onSolidFloor(map, newX, newY);
+
 		// if both bool functions return true, execute code to check if enemy collides with player.
-		// if there is collision, call function to make player take damage. Else, move enemy on map normally.
 		if (validMove && solidFloor) {
+			// Resets the last movement time to current time
 			lastMovementTime = g_dElapsedTime;
+			
+			//Check if new location has a player
 			if (contactPlayer(newX, newY, player)) {
+				//Cause the player to take damamge if it contacts
 				player.takeDamage(getDamage(), g_dElapsedTime);
 			}
+			//Spot is empty and avaliable to move to 
 			else{
+				//Clear current map location and move to new location
 				updateNewPosition(map, newX, newY);
 			}
 		}
-		// if either of the bool function checks return false, change direction and execute above switch statement again
+		// if either of the bool function checks return false, reverse the direction that the enemy is facing
 		else {
 			direction = !direction;
 		}
@@ -98,11 +104,10 @@ int Enemy::patrol(Map& map, double g_dElapsedTime, Player& player)
 	return NO_CHANGE;
 }
 
-void Enemy::random(Map& map, double g_dElapsedTime)
+void Enemy::random(Map& map, double g_dElapsedTime, Player& player)
 {
 	// same code as patrol movement above
 	if (g_dElapsedTime - lastMovementTime > updateDelay) {
-		lastJumpTime = g_dElapsedTime;
 
 		int newX = position.getX();
 		int newY = position.getY();
@@ -120,15 +125,27 @@ void Enemy::random(Map& map, double g_dElapsedTime)
 			break;
 		}
 
-		if (map.getItem(newX, newY) == EMPTY) {
+		// Checks if the new location has space for the enemy to move into
+		bool validMove = canEntityMove(map, newX, newY);
+
+		// Checks if the new location has a solid floor / platform for the player to stand on
+		bool solidFloor = onSolidFloor(map, newX, newY);
+
+		// if both bool functions return true, execute code to check if enemy collides with player.
+		if (validMove && solidFloor) {
+			// Resets the last movement time to current time
 			lastMovementTime = g_dElapsedTime;
 
-			map.setDefaultItem(position.getX(), position.getY());
-
-			position.setX(newX);
-			position.setY(newY);
-
-			map.setItem(position.getX(), position.getY(), 'E');
+			//Check if new location has a player
+			if (contactPlayer(newX, newY, player)) {
+				//Cause the player to take damamge if it contacts
+				player.takeDamage(getDamage(), g_dElapsedTime);
+			}
+			//Spot is empty and avaliable to move to 
+			else {
+				//Clear current map location and move to new location
+				updateNewPosition(map, newX, newY);
+			}
 		}
 	}
 

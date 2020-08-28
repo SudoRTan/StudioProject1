@@ -38,6 +38,7 @@ public:
 	Player(int x, int y);
 	~Player();
 
+	std::string getWeaponName();
 	int getAmmo();
 	
 	void renderPlayer(Console& console);
