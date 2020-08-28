@@ -131,4 +131,9 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 
 	}
 
+	// If no more fires are left on the screen
+	if (numberOfFires == 0) {
+		gameState = LEVEL_COMPLETE_MENU;
+	}
+
 }
