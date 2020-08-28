@@ -5,13 +5,6 @@
 
 enum VIRUS_MODE_ENUM
 {
-	SHOOTING,
-	MOVING, 
-	CHARGING
-};
-
-enum MOVEMENT_CASE
-{
 	SHOOT_LOOP,
 	CHARGE_LOOP
 };
@@ -25,13 +18,13 @@ public:
 	int update(Map& map, double g_dElapsedTime, Player& player);
 private:
 	int mode;
-	int caseLoop;
-	int shootLoopCount;
+	int loopPart;
+	int toX;
+	int toY;
 	double lastShootTime;
-	bool completedAction;
 	Projectile* projectileArray[3];
-	void move(Player player);
+	void move(Map map);
 	void shoot(double g_dElapsedTime);
-	void charge();
+	void charge(Map map);
 };
 
