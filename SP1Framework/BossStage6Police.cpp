@@ -1,17 +1,24 @@
 #include "BossStage6Police.h"
 
 int BossStage6Police::numberOfCops = 0;
+int BossStage6Police::colcount = 0;
+int BossStage6Police::rowcount = 0;
 
-BossStage6Police::BossStage6Police(int xpos, int ycount) 
+BossStage6Police::BossStage6Police() 
 {
-	position.setX(xpos);
-	position.setY(1 + 3 * ycount);
+	if (rowcount >= 5)
+	{
+		colcount += 10;
+		rowcount = 0;
+	}
+	position.setX(80 + colcount);
+	position.setY(1 + 3 * rowcount);
 	health = 2;
-	updateDelay = 0.5;
+	updateDelay = 0.07 ;
 	setDamage(8);
 	direction = 0;
-	ycount++;
-
+	rowcount++;
+	numberOfCops++;
 }
 
 BossStage6Police::~BossStage6Police() 
