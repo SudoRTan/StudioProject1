@@ -1,13 +1,22 @@
 #include "BossStage2Locust.h"
 
+int BossStage2Locust::numberOfLocusts = 0;
+
 BossStage2Locust:: BossStage2Locust()
 {
-	position.setX(rand() % 120);
-	position.setY(1 + 3 * (rand() % 5));
+	position.setX(119 * (rand() % 2));
+	position.setY(2 + 3 * (rand() % 5));
 	health = 2;
-	updateDelay = 0.1;
+	updateDelay = 0.01;
 	setDamage(10);
-	direction = rand() % 2;
+	if (position.getX() == 0)
+	{
+		direction = RIGHT;
+	}
+	else if (position.getX() == 119)
+	{
+		direction = LEFT;
+	}	
 
 	currentState = LOCUST_WAITING;
 
@@ -16,11 +25,19 @@ BossStage2Locust:: BossStage2Locust()
 	futureX = position.getX();
 	futureY = position.getY();
 
+	cleanUp();
+	height = 1;
+	width = 1;
+	symbolArray = createArray(width, height);
+	symbolArray[0][0] = (char)236;
+
+	numberOfLocusts++;
 }
 
 BossStage2Locust::~BossStage2Locust()
 {
-
+	cleanUp();
+	numberOfLocusts--;
 }
 
 
@@ -80,6 +97,11 @@ int BossStage2Locust::update(Map& map, double g_dElapsedTime, Player& player) {
 	
 	//patrol(map, g_dElapsedTime, player);
 	return 0;
+}
+
+int BossStage2Locust::getNumberOfLocusts()
+{
+	return numberOfLocusts;
 }
 
 /*

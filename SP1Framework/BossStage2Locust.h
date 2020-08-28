@@ -17,13 +17,14 @@ private:
     int futureX;
     int futureY;
 
+    static int numberOfLocusts;
 
 public:
     BossStage2Locust();
     ~BossStage2Locust();
-
-
+    
     int update(Map& map, double g_dElapsedTime, Player& player);
+    static int getNumberOfLocusts();
 
    // void death(Map& map);
 
