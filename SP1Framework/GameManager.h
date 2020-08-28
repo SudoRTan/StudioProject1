@@ -12,6 +12,7 @@
 #include "BossStage3.h"
 
 #include "BossStage5.h"
+#include "BossStage6.h"
 
 class GameManager
 {
