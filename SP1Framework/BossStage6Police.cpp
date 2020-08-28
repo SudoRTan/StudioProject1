@@ -1,5 +1,7 @@
 #include "BossStage6Police.h"
 
+int BossStage6Police::numberOfCops = 0;
+
 BossStage6Police::BossStage6Police(int xpos, int ycount) 
 {
 	position.setX(xpos);
@@ -14,11 +16,18 @@ BossStage6Police::BossStage6Police(int xpos, int ycount)
 
 BossStage6Police::~BossStage6Police() 
 {
-
+	cleanUp();
+	numberOfCops--;
 }
+
 
 int BossStage6Police::update(Map& map, double g_dElapsedTime, Player& player)
 {
 	patrol(map, g_dElapsedTime, player);
 	return 0;
+}
+
+int BossStage6Police::getNumberOfCops()
+{
+	return numberOfCops;
 }
