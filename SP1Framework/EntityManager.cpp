@@ -34,6 +34,7 @@ void EntityManager::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElap
 	}
 	if (player->getHealth() <= 0) {
 		gameState = PLAYER_DEATH;
+		PlaySound(TEXT("./Sounds/deathSound.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 	if (overriddenEnemy != nullptr && numberOfOverriddenEnemy != 0) {
 		for (int i = 0; i < numberOfOverriddenEnemy; i++) {

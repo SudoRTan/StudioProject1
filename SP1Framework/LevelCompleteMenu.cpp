@@ -19,19 +19,23 @@ void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int&
 
 	else if (KeyEvent[K_DOWN].keyOnce || KeyEvent[K_RIGHT].keyOnce) {
 		increaseSelection();
+		PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 
 	else if (KeyEvent[K_SPACE].keyOnce) {
 		if (currentSelection == 1) {
 			gameState = FINISHED_LEVEL;
+			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 		else {
 			currentSelection = 1;
 			gameState = START_MENU;
+			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 	}
 	else if (KeyEvent[K_ESCAPE].keyOnce) {
 		gameState = START_MENU;
+		PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 	}
 }

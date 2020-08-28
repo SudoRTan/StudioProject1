@@ -26,6 +26,7 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			if (currentSelection == 4) {
 				currentSelection = 2;
 			}
+			PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 	
 		// If down arrow is pressed
@@ -34,20 +35,21 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			if (currentSelection != 4) {
 				currentSelection = 4;
 			}
+			PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		// If left arrow is pressed
 		else if (KeyEvent[K_LEFT].keyOnce) {
 			// Move cursor left 
 			decreaseSelection();
-
+			PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		// If right arrow is pressed
 		else if (KeyEvent[K_RIGHT].keyOnce) {
 			// Move cursor right
 			increaseSelection();
-
+			PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		// If space is pressed
@@ -55,6 +57,7 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			// Sets selected stage and levels 
 			currStage = selectedStage;
 			currLevel = currentSelection;
+			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 			// Resets the menu variables for next use
 			selectedStage = 0;
@@ -62,6 +65,7 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 
 			// Tell GameManager to load the selected level
 			gameState = LOAD_LEVEL;
+			
 		}
 
 		// If escape is pressed
@@ -69,7 +73,7 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			// Return to stage select Menu
 			currentSelection = selectedStage;
 			selectedStage = 0;
-
+			PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 	}
 	// If Stage is not selected
@@ -79,6 +83,7 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			if (currentSelection > 3) {
 				currentSelection -= 3;
 			}
+			PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		// If down arrow is pressed
@@ -86,31 +91,32 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			if (currentSelection <= 3) {
 				currentSelection += 3;
 			}
+			PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		// If left arrow is pressed
 		else if (KeyEvent[K_LEFT].keyOnce) {
 			decreaseSelection(totalStage);
-
+			PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		// If right arrow is pressed
 		else if (KeyEvent[K_RIGHT].keyOnce) {
 			increaseSelection(totalStage);
-
+			PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		// If space is pressed
 		else if (KeyEvent[K_SPACE].keyOnce) {
 			selectedStage = currentSelection;
 			currentSelection = 1;
-
+			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 
 		// If escape is pressed
 		else if (KeyEvent[K_ESCAPE].keyOnce) {
 			gameState = START_MENU;
-
+			PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 	}
 }
