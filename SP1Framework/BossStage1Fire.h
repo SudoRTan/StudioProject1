@@ -6,18 +6,12 @@ class BossStage1Fire :
 {
 
 private:
-	bool canSpawnLeft;
-	bool canSpawnRight;
-
 	static int currNumberOfFires;
 
 public:
 	BossStage1Fire(int x, int y);
 	~BossStage1Fire();
-	int update(Map& map, double g_dElapsedTime, Player& player);
-	bool getCanSpawnLeft();
-	bool getCanSpawnRight();
-	void updateSpawnBool(Map* map);
 
+	int update(Map& map, double g_dElapsedTime, Player& player);
 	static int getNumberOfFires();
 };

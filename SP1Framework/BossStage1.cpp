@@ -6,16 +6,7 @@ BossStage1::BossStage1(Player* player, double g_dElapsedTime):Stage(player) //ad
 	playerOnFire = false;
 	lastSpawnTime = g_dElapsedTime;
 	timer = g_dElapsedTime;
-	/**
-	for (int i = 0; i < 5; i++)
-	{
-		fireVector.push_back(new BossStage1Fire(3 * (rand() % 24), 1 + 3 * i));
-	}
-	*/
 
-
-
-	//currNumberOfFires = 5;
 
 	maxNumberOfFires = 200;
 	
