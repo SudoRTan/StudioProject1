@@ -2,7 +2,7 @@
 
 BossStage2::BossStage2(Player* player) :Stage(player)
 {
-	numberOfLocusts = 5;
+	numberOfLocusts = 15;
 	locusts = new Enemy* [numberOfLocusts];
 	
 	//Gets player spawn position

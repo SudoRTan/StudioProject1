@@ -5,9 +5,8 @@ BossStage3Virus::BossStage3Virus() : projectileArray{nullptr,nullptr,nullptr}
 	//Sets initial enemy health/locatiom/contact damage
 	position.setX(77);
 	position.setY(1);
-	setHealth(50);
+	setHealth(20);
 	setDamage(20);
-
 
 	cleanUp();
 
@@ -40,11 +39,11 @@ BossStage3Virus::BossStage3Virus() : projectileArray{nullptr,nullptr,nullptr}
 	lastShootTime = 0;
 
 	//Variables to track charge time
-	chargeDelay = 0.3;
+	chargeDelay = 0.4;
 	lastChargeTime = 0;
 
 	//Variables to track move time
-	updateDelay = 0.2;
+	updateDelay = 0.7;
 	lastMovementTime = 0;
 
 }
@@ -56,7 +55,6 @@ BossStage3Virus::~BossStage3Virus()
 
 int BossStage3Virus::update(Map& map, double elapsedTime, Player& player)
 {
-
 	switch (mode) {
 	case SHOOT_LOOP:
 		shoot(elapsedTime);
@@ -74,9 +72,6 @@ int BossStage3Virus::update(Map& map, double elapsedTime, Player& player)
 		break;
 	}
 	
-
-
-
 	for (int i = 0; i < 3; i++) {
 		if (projectileArray[i] != nullptr) {
 			if (projectileArray[i]->getHealth() == 0) {

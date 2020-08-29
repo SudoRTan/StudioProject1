@@ -7,26 +7,32 @@ BossStage1::BossStage1(Player* player, double g_dElapsedTime):Stage(player) //ad
 	lastSpawnTime = g_dElapsedTime;
 	timer = g_dElapsedTime;
 
-
-	maxNumberOfFires = 200;
+	maxNumberOfFires = 150;
 	
 	fire = new Enemy * [maxNumberOfFires];
 	
-	for (int i = 0; i < maxNumberOfFires; i++) {
+	for (int i = 0; i < maxNumberOfFires; i++)
+	{
 		fire[i] = nullptr;
 	}
 
-	for (int i = 0; i < 5; i++) {
-		fire[i] = new BossStage1Fire(rand() % 118, 1 + 3 * i);
+	for (int i = 0; i < 5; i++)
+	{
+		if (i == 0)
+			fire[i] = new BossStage1Fire(3 + 3 * (rand() % 29), 1 + 3 * i);
+		else
+			fire[i] = new BossStage1Fire(3 * (rand() % 30), 1 + 3 * i);
 	}
-
 }
 
 BossStage1::~BossStage1()
 {
-	if (fire != nullptr) {
-		for (int i = 0; i < maxNumberOfFires; i++) {
-			if (fire[i] != nullptr) {
+	if (fire != nullptr)
+	{
+		for (int i = 0; i < maxNumberOfFires; i++)
+		{
+			if (fire[i] != nullptr)
+			{
 				delete fire[i];
 				fire[i] = nullptr;
 			}
@@ -34,14 +40,12 @@ BossStage1::~BossStage1()
 		delete[] fire;
 		fire = nullptr;
 	}
-	
 }
 
 void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)
 {
 	//Update Entitys on the map
 	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState, fire, maxNumberOfFires);
-
 
 	// Move all the elements in the array to the start
 	for (int i = 0; i < maxNumberOfFires; i++) {
@@ -56,10 +60,8 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 	//Gets current amount of fires
 	int numberOfFires = BossStage1Fire::getNumberOfFires();
 
-
-
 	// If it was 5 sec since last spawn 
-	if (g_dElapsedTime - lastSpawnTime > 5) {
+	if (g_dElapsedTime - lastSpawnTime > 3) {
 
 		// Loops through all current fires
 		for (int i = 0; i < numberOfFires; i++) {
@@ -70,12 +72,11 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 				int currY = fire[i]->getPositionY();
 
 				//Check if any enemies on the left or right of the current fire
-				Enemy* enemyOnTheLeft = getEnemy(currX - 3, currY, fire, 200);
-				Enemy* enemyOnTheRight = getEnemy(currX + 3, currY, fire, 200);
+				Enemy* enemyOnTheLeft = getEnemy(currX - 3, currY, fire, 150);
+				Enemy* enemyOnTheRight = getEnemy(currX + 3, currY, fire, 150);
 
 				// If no enemies on the left + theres space on the left
-				if (enemyOnTheLeft == nullptr && currX - 3 > 0) {
-
+				if (enemyOnTheLeft == nullptr && currX > 0) {
 					//Loop through the fire array to spawn a new fire
 					int j = 0;
 					while (true) {
@@ -94,8 +95,7 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 				}
 
 				// If no enemies on the right + theres space on the left
-				if (enemyOnTheRight == nullptr && currX + 3 < 118) {
-
+				if (enemyOnTheRight == nullptr && currX + 3 < 88) {\
 					//Loop through the fire array to spawn a new fire
 					int j = 0;
 					while (true) {
@@ -115,6 +115,7 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 			}
 		}
 	}
+
 	// If more fires are spawned
 	if (BossStage1Fire::getNumberOfFires() != numberOfFires) {
 		//Reset last spawn time;
@@ -125,6 +126,5 @@ void BossStage1::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 	// If no more fires are left on the screen
 	if (numberOfFires == 0) {
 		gameState = FINISHED_LEVEL;
-	}
-
+	}	
 }
