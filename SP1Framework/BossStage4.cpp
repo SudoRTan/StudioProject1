@@ -19,7 +19,7 @@ BossStage4::~BossStage4()
 
 void BossStage4::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)
 {
-	while (player->getHealth() != 0)
+	if (player->getHealth() != 0)
 	{
 		for (int i = 0; i < 2; i++)
 		{

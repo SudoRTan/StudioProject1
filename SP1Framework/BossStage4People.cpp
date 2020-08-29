@@ -26,7 +26,7 @@ BossStage4People::BossStage4People() : projectile{0}
 		symbolArray[1][2] = (char)32;
 		break;
 	case KNIFEMAN:
-		position.setX(79);
+		position.setX(77);
 		position.setY(1);
 		setDamage(10);
 		lastMoveTime = 1000;
