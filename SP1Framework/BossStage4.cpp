@@ -11,6 +11,7 @@ BossStage4::~BossStage4()
 {
 	for (int i = 0; i < 2; i++)
 	{
+		enemies[i]->cleanUp();
 		delete enemies[i];
 		enemies[i] = nullptr;
 	}
