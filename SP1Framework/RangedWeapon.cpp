@@ -1,7 +1,7 @@
 #include "RangedWeapon.h"
 
 RangedWeapon::RangedWeapon(){
-	setName("Ranged");
+	setName("Gun");
 	setDamage(1);
 
 	maxAmmo = 20;

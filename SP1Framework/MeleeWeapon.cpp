@@ -1,7 +1,7 @@
 #include "MeleeWeapon.h"
 
 MeleeWeapon::MeleeWeapon() {
-	setName("Melee");
+	setName("Sword");
 	setDamage(1);
 
 	maxAmmo = 0;
