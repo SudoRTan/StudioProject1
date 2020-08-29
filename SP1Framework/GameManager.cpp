@@ -48,9 +48,7 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
 			currStage++;
 		}
 		currLevel++;
-		//stage->loadMap("stage" + std::to_string(currStage) + "_" + std::to_string(currLevel) + ".txt");
-		loadStage(enlapsedTime);
-		currGameState = IN_LEVEL;
+		currGameState = LOAD_LEVEL;
 		break;
 	
 	case RESUME_LEVEL:
