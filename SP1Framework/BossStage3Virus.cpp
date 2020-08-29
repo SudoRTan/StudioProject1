@@ -1,14 +1,17 @@
 #include "BossStage3Virus.h"
 
-BossStage3Virus::BossStage3Virus() : projectileArray{nullptr}
+BossStage3Virus::BossStage3Virus() : projectileArray{nullptr,nullptr,nullptr}
 {
-	position.setX(118);
-	position.setY(2);
+	//Sets initial enemy health/locatiom/contact damage
+	position.setX(77);
+	position.setY(1);
 	setHealth(50);
 	setDamage(20);
-	updateDelay = 0.07;
-	damageDelay = 0.3;
+
+
 	cleanUp();
+
+	// Initilize symbol array
 	height = 3;
 	width = 3;
 	symbolArray = createArray(width, height);
@@ -21,153 +24,213 @@ BossStage3Virus::BossStage3Virus() : projectileArray{nullptr}
 	symbolArray[2][0] = (char)197;
 	symbolArray[2][1] = (char)193;
 	symbolArray[2][2] = (char)197;
-	mode = MOVING;
-	caseLoop = SHOOT_LOOP;
-	shootLoopCount = 0;
+
+	//Initialze boss variables
+
+	//Sets initial attack state
+	mode = MOVING_LOOP;
+	loopPart = 0;
+
+	// future locations to move to 
+	toX = 77;
+	toY = 1;
+
+	//Variables to track attack time
+	shootDelay = 0.5;
 	lastShootTime = 0;
-	completedAction = false;
+
+	//Variables to track charge time
+	chargeDelay = 0.3;
+	lastChargeTime = 0;
+
+	//Variables to track move time
+	updateDelay = 0.2;
+	lastMovementTime = 0;
+
 }
 
 BossStage3Virus::~BossStage3Virus()
 {
+	cleanUp();
+}
+
+int BossStage3Virus::update(Map& map, double elapsedTime, Player& player)
+{
+
+	switch (mode) {
+	case SHOOT_LOOP:
+		shoot(elapsedTime);
+		break;
+
+	case CHARGE_LOOP:
+		charge(map, player, elapsedTime);
+		break;
+
+	case MOVING_LOOP:
+		move(map, player, elapsedTime);
+		break;
+
+	default:
+		break;
+	}
 	
-}
 
-int BossStage3Virus::update(Map& map, double g_dElapsedTime, Player& player)
-{
-	updateNewPosition(map, position.getX(), position.getY());
-	if (contactPlayer(position.getX(), position.getY(), player) == true)
-		player.takeDamage(getDamage());
-	if (caseLoop == SHOOT_LOOP)
-	{
-		if (mode == MOVING)
-		{
-			move(player);
-			if (completedAction == true)
-				mode = SHOOTING;
-		}
-		else if (mode == SHOOTING)
-		{
-			shoot(g_dElapsedTime);
-			if (completedAction == true)
-			{
-				mode = MOVING;
-				shootLoopCount++;
+
+
+	for (int i = 0; i < 3; i++) {
+		if (projectileArray[i] != nullptr) {
+			if (projectileArray[i]->getHealth() == 0) {
+				projectileArray[i]->death(map);
+				delete projectileArray[i];
+				projectileArray[i] = nullptr;
 			}
-			if (shootLoopCount == 3)
-				switch (rand() % 2)
-				{
-				case 0:
-					caseLoop = SHOOT_LOOP;
+			else {
+				projectileArray[i]->update(map, elapsedTime, &player);
+			}
+		}
+	}
+
+	return 0;
+}
+
+void BossStage3Virus::move(Map& map, Player& player, double elapsedTime)
+{
+	if (elapsedTime - lastMovementTime > updateDelay) {
+		lastMovementTime = elapsedTime;
+		int newX = position.getX();
+		int newY = position.getY();
+
+		// Check to see where the player is
+		if (newY < toY)
+		{
+			newY++;
+		}
+		else if (newY > toY)
+		{
+			newY--;
+		}
+		else {
+			mode = SHOOT_LOOP;
+		}
+
+		// Checks if the new location has space for the enemy to move into
+		bool validMove = canEntityMove(map, newX, newY);
+
+
+		if (validMove) {
+			if (contactPlayer(newX, newY, player)) {
+				//Cause the player to take damamge if it contacts
+				player.takeDamage(getDamage(), elapsedTime);
+			}
+			//Spot is empty and avaliable to move to 
+			else {
+				//Clear current map location and move to new location
+				updateNewPosition(map, newX, newY);
+			}
+		}
+		else {
+			mode = SHOOT_LOOP;
+		}
+	}
+
+}
+
+void BossStage3Virus::shoot(double elapsedTime){
+
+	if (elapsedTime - lastShootTime > shootDelay) {
+		lastShootTime = elapsedTime;
+
+		int i = 0;
+		//Loop through everything in the projectileArray array until it finds a nullptr
+		while (i < 3) {
+			if (projectileArray[i] == nullptr) {
+				// Spawn projectile based on direction facing
+				switch (direction) {
+				case LEFT:
+					projectileArray[i] = new Projectile(position.getX() - 1, position.getY() + 1, direction, 5, (char)254, 0.5);
 					break;
-				case 1:
-					caseLoop = CHARGE_LOOP;
+
+				case RIGHT:
+					projectileArray[0] = new Projectile(position.getX() + 3, position.getY() + 1, direction, 5, (char)254, 0.5);
+					break;
+
+				default:
 					break;
 				}
+				// Move to a new Y location
+				lastShootTime = elapsedTime;
+				toY = 1 + 3 * (rand() % 5);
+				loopPart++;
+
+				mode = MOVING_LOOP;
+				break;
+			}
+			i++;
+		}
+		// If its the third time shooting
+		if (loopPart == 3) {
+			// Based on direction move to new X coordinate
+			switch(direction) {
+			case LEFT:
+				toX = 0;
+				break;
+
+			case RIGHT:
+				toX = 77;
+				break;
+
+			default:
+				break;
+			}
+			mode = CHARGE_LOOP;
+			loopPart = 0;
 		}
 	}
-	else if (caseLoop == CHARGE_LOOP)
-	{
-		if (mode == MOVING)
-		{
-			move(player);
-			if (completedAction == true)
-				mode = CHARGING;
-		}
-		else if (mode == CHARGING)
-		{
-			charge();
-			if (completedAction == true)
-				switch (rand() % 2)
-				{
-				case 0:
-					caseLoop = SHOOT_LOOP;
-					break;
-				case 1:
-					caseLoop = CHARGE_LOOP;
-					break;
-				}
-		}
-	}
-	for (int i = 0; i < 3; i++)
-		if (projectileArray[i] != nullptr)
-			projectileArray[i]->update(map, g_dElapsedTime);
-	return NO_CHANGE;
+
 }
 
-void BossStage3Virus::move(Player player)
+void BossStage3Virus::charge(Map& map, Player& player, double elapsedTime)
 {
-	completedAction = false;
-	if (position.getY() - player.getPositionY() < 0) //require testing to see if possible to shoot boss while constantly moving to keep boss in infinite move loop
-	{
-		position.setY(position.getY() + 1);
-	}
-	else if (position.getY() - player.getPositionY() > 0)
-	{
-		position.setY(position.getY() - 1);
-	}
-	else
-	{
-		completedAction = true;
-	}
-}
+	if (elapsedTime - lastChargeTime > chargeDelay) {
+		lastMovementTime = elapsedTime;
+		int newX = position.getX();
+		int newY = position.getY();
 
-void BossStage3Virus::shoot(double g_dElapsedTime)
-{
-	completedAction = false;
-	if (g_dElapsedTime - lastShootTime > 0.7)
-	{
-		if (projectileArray[0] == nullptr)
+		// Check to see where the player is
+		if (newX < toX)
 		{
-			if (direction == LEFT)
-				projectileArray[0] = new Projectile(position.getX() - 1, position.getY(), direction);
-			else if (direction == RIGHT)
-				projectileArray[0] = new Projectile(position.getX() + 1, position.getY(), direction);
-			lastShootTime = g_dElapsedTime;
-			completedAction = true;
+			newX++;
 		}
-		else if (projectileArray[1] == nullptr)
+		else if (newX > toX)
 		{
-			if (direction == LEFT)
-				projectileArray[1] = new Projectile(position.getX() - 1, position.getY(), direction);
-			else if (direction == RIGHT)
-				projectileArray[1] = new Projectile(position.getX() + 1, position.getY(), direction);
-			lastShootTime = g_dElapsedTime;
-			completedAction = true;
+			newX--;
 		}
-		else if (projectileArray[2] == nullptr)
-		{
-			if (direction == LEFT)
-				projectileArray[2] = new Projectile(position.getX() - 1, position.getY(), direction);
-			else if (direction == RIGHT)
-				projectileArray[2] = new Projectile(position.getX() + 1, position.getY(), direction);
-			lastShootTime = g_dElapsedTime;
-			completedAction = true;
+		else {
+			// Inverse direction and set stage back to shooting
+			direction = !direction;
+			mode = SHOOT_LOOP;
 		}
-	}
-}
 
-void BossStage3Virus::charge()
-{
-	completedAction = false;
-	if (direction == LEFT)
-	{
-		if (position.getX() != 2)
-			position.setX(position.getX() - 1);
-		else
-		{
-			direction = RIGHT;
-			completedAction = true;
+		// Checks if the new location has space for the enemy to move into
+		bool validMove = canEntityMove(map, newX, newY);
+
+
+		if (validMove) {
+			if (contactPlayer(newX, newY, player)) {
+				//Cause the player to take damamge if it contacts
+				player.takeDamage(getDamage(), elapsedTime);
+			}
+			//Spot is empty and avaliable to move to 
+			else {
+				//Clear current map location and move to new location
+				updateNewPosition(map, newX, newY);
+			}
+		}
+		else {
+			// Inverse direction and set stage back to shooting
+			direction = !direction;
+			mode = SHOOT_LOOP;
 		}
 	}
-	if (direction == RIGHT)
-	{
-		if (position.getX() != 117)
-			position.setX(position.getX() + 1);
-		else
-		{
-			direction = LEFT;
-			completedAction = true;
-		}
-	}
+	
 }

@@ -16,11 +16,11 @@ public:
 	virtual ~Enemy();
 	int patrol(Map& map, double g_dElapsedTime, Player& player); // for enemies on land moving left and right
 	
-	void random(Map& map, double g_dElapsedTime);
+	void random(Map& map, double g_dElapsedTime, Player& player);
 
 	virtual int update(Map& map, double g_dElapsedTime, Player& player);
 
-	virtual void death(Map& map);
+	void death(Map& map);
 
 	bool contactPlayer(int x, int y, Player& player);
 

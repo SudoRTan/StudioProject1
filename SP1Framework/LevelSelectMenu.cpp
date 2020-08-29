@@ -16,7 +16,7 @@ LevelSelectMenu::~LevelSelectMenu() {
 
 }
 
-void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
+void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) {
 	
 	// If Stage is selected
 	if (selectedStage) {
@@ -75,6 +75,13 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			selectedStage = 0;
 			PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
+
+		if (selectedStage == unlockedStage) {
+			if (currentSelection > unlockedLevel) {
+				currentSelection = unlockedLevel;
+			}
+		}
+
 	}
 	// If Stage is not selected
 	else {
@@ -118,6 +125,10 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 			gameState = START_MENU;
 			PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
+
+		if (currentSelection > unlockedStage) {
+			currentSelection = unlockedStage;
+		}
 	}
 }
 
@@ -128,7 +139,7 @@ void LevelSelectMenu::render(Console& console) {
 	if (selectedStage) {
 
 		std::string boxLine;
-		std::ifstream boxFile("levelBoxes.txt");
+		std::ifstream boxFile("ASCIIArt\\levelBoxes.txt");
 		int boxLinecount = 0;
 
 		if (boxFile.is_open()) {
@@ -141,7 +152,7 @@ void LevelSelectMenu::render(Console& console) {
 		boxLinecount = 0;
 
 		std::string line;
-		std::ifstream nameFile("levelMenu.txt");
+		std::ifstream nameFile("ASCIIArt\\levelMenu.txt");
 		int linecount = 0;
 
 		if (nameFile.is_open()) {
@@ -178,7 +189,7 @@ void LevelSelectMenu::render(Console& console) {
 	else {
 
 		std::string boxLine;
-		std::ifstream boxFile("stageBoxes.txt");
+		std::ifstream boxFile("ASCIIArt\\stageBoxes.txt");
 		int boxLinecount = 0;
 
 		if (boxFile.is_open()) {
@@ -191,7 +202,7 @@ void LevelSelectMenu::render(Console& console) {
 		boxLinecount = 0;
 
 		std::string line;
-		std::ifstream nameFile("stageMenu.txt");
+		std::ifstream nameFile("ASCIIArt\\stageMenu.txt");
 		int linecount = 0;
 
 		if (nameFile.is_open()) {

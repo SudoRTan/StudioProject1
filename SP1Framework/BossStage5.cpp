@@ -21,6 +21,7 @@ BossStage5::~BossStage5()
 
 }
 
-void BossStage5::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
+void BossStage5::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) 
+{
 	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState, aliens, numberOfAliens);
 }

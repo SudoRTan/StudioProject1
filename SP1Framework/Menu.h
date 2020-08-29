@@ -23,7 +23,7 @@ public:
 	~Menu();
 
 	// Pure virtual functions
-	virtual void update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) = 0;
+	virtual void update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) = 0;
 
 	virtual void render(Console& console) = 0;
 };

@@ -23,4 +23,9 @@ BossStage2::~BossStage2()
 
 void BossStage2::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
 	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState, locusts, numberOfLocusts);
+
+	if (BossStage2Locust::getNumberOfLocusts() == 0)
+	{
+		gameState = LEVEL_COMPLETE_MENU;
+	}
 }

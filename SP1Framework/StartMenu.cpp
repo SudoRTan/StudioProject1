@@ -9,7 +9,7 @@ StartMenu::~StartMenu() {
 
 }
 
-void StartMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
+void StartMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) {
 	if (KeyEvent[K_SPACE].keyOnce) {
 		gameState = LEVEL_SELECT;
 		PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -18,7 +18,7 @@ void StartMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 
 void StartMenu::render(Console& console) {
 	std::string line;
-	std::ifstream nameFile("startMenu.txt");
+	std::ifstream nameFile("ASCIIArt\\startMenu.txt");
 	int linecount = 0;
 
 	if (nameFile.is_open()) {
@@ -30,7 +30,7 @@ void StartMenu::render(Console& console) {
 	}
 	linecount = 0;
 
-	std::ifstream startButtonFile("startButton.txt");
+	std::ifstream startButtonFile("ASCIIArt\\startButton.txt");
 
 	if (startButtonFile.is_open()) {
 		while (std::getline(startButtonFile, line)) {

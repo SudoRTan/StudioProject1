@@ -1,7 +1,7 @@
 #include "RangedWeapon.h"
 
 RangedWeapon::RangedWeapon(){
-	setName("Ranged");
+	setName("Gun");
 	setDamage(1);
 
 	maxAmmo = 20;
@@ -79,35 +79,27 @@ void RangedWeapon::animate(Map& map, double elapsedTime, int direction, int x, i
 void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y) {
 
 	if ((elapsedTime - lastUseTime > useTime) && (currentAmmo != 0)) {
-		lastUseTime = elapsedTime;
-		currentAnimationPhase = 3;
-		currentAmmo--;
 
-		if (direction == LEFT) {
-			for (int i = 1; i < 15; i++) {
-				Enemy* enemyInRange = getEnemy(x - i, y + 1, enemyArray, enemyArraySize);
-				if (enemyInRange != nullptr) {
-					enemyInRange->takeDamage(getDamage());
-				}
-				
-			}
+		switch (direction) {
+		case LEFT:
+			x--;
+			break;
+		case RIGHT:
+			x++;
+			break;
+
+		default:
+			break;
 		}
-
-		else if (direction == RIGHT) {
-			for (int i = 1; i < 15; i++) {
-				Enemy* enemyInRange = getEnemy(x + i, y + 1, enemyArray, enemyArraySize);
-				if (enemyInRange != nullptr) {
-					enemyInRange->takeDamage(getDamage());
-				}
-			}  
-			
-
 		if (bullet == nullptr) {
-			bullet = new Projectile(x, y, direction);
+			lastUseTime = elapsedTime;
+			currentAnimationPhase = 3;
+			currentAmmo--;
+
+			bullet = new Projectile(x, y+1, direction);
+			PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
-		
-	}
-		PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
 	}
 }
 
@@ -117,11 +109,12 @@ void RangedWeapon::update(Map& map, Enemy** enemyArray, int enemyArraySize, doub
 	}
 	if (bullet != nullptr) {
 		if (bullet->getHealth() == 0) {
+			bullet->death(map);
 			delete bullet;
 			bullet = nullptr;
 		}
 		else {
-			bullet->update(map, elapsedTime);
+			bullet->update(map, elapsedTime, enemyArray, enemyArraySize);
 		}
 	}
 	animate(map, elapsedTime, direction, x, y);

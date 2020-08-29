@@ -79,6 +79,7 @@ Player::~Player()
 {
 	cleanUp();
 	delete weapon;
+	weapon = nullptr;
 }
 
 int Player::getAmmo()
@@ -92,6 +93,18 @@ int Player::getAmmo()
 		return -1;
 	}
 }
+
+std::string Player::getWeaponName() {
+	if (weapon != nullptr)
+	{
+		return weapon->getName();
+	}
+	else
+	{
+		return "";
+	}
+}
+
 
 int Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize)
 {	
@@ -299,6 +312,15 @@ char Player::getItemBelow(Map& map) {
 void Player::setPosition(int x, int y) {
 	position.setX(x);
 	position.setY(y);
+}
+
+void Player::resetWeapon()
+{
+	if (weapon != nullptr)
+	{
+		delete weapon;
+		weapon = nullptr;
+	}
 }
 
 COORD Player::getEnemyLocation() {

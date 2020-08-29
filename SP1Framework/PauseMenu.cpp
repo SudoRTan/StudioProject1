@@ -10,7 +10,7 @@ PauseMenu::~PauseMenu() {
 
 }
 
-void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
+void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) {
 	if (KeyEvent[K_UP].keyOnce || KeyEvent[K_LEFT].keyOnce) {
 		decreaseSelection();
 		PlaySound(TEXT("./Sounds/menuSelect.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -75,7 +75,7 @@ void PauseMenu::render(Console& console)
 {
 	// Initialize variables to load pause button box
 	std::string boxLine;
-	std::ifstream boxFile("pauseMenuBox.txt");
+	std::ifstream boxFile("ASCIIArt\\pauseMenuBox.txt");
 	int boxLinecount = 0;
 	
 	//Load pause button box
@@ -91,7 +91,7 @@ void PauseMenu::render(Console& console)
 
 	// Initialize variables to load pause button
 	std::string pauseButtonLine;
-	std::ifstream pauseButtonFile("pauseButton.txt");
+	std::ifstream pauseButtonFile("ASCIIArt\\pauseButton.txt");
 	int pauseButtonLineCount = 0;
 
 	//Load pause button

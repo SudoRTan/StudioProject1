@@ -5,13 +5,7 @@
 
 enum VIRUS_MODE_ENUM
 {
-	SHOOTING,
-	MOVING, 
-	CHARGING
-};
-
-enum MOVEMENT_CASE
-{
+	MOVING_LOOP,
 	SHOOT_LOOP,
 	CHARGE_LOOP
 };
@@ -22,16 +16,30 @@ class BossStage3Virus :
 public:
 	BossStage3Virus();
 	~BossStage3Virus();
-	int update(Map& map, double g_dElapsedTime, Player& player);
+	int update(Map& map, double elapsedTime, Player& player);
+
+
 private:
 	int mode;
-	int caseLoop;
-	int shootLoopCount;
+	int loopPart;
+	int toX;
+	int toY;
+	
+	
+	double shootDelay;
 	double lastShootTime;
-	bool completedAction;
+	
+	double chargeDelay;
+	double lastChargeTime;
+
+
+
 	Projectile* projectileArray[3];
-	void move(Player player);
-	void shoot(double g_dElapsedTime);
-	void charge();
+	
+	
+	void move(Map& map, Player& player, double elapsedTime);
+	void shoot(double elapsedTime);
+	void charge(Map& map, Player& player, double elapsedTime);
+
 };
 

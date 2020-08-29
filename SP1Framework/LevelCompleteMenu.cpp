@@ -12,7 +12,7 @@ LevelCompleteMenu::~LevelCompleteMenu() {
 
 }
 
-void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
+void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) {
 	if (KeyEvent[K_UP].keyOnce || KeyEvent[K_LEFT].keyOnce) {
 		decreaseSelection();
 	}
@@ -24,7 +24,7 @@ void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int&
 
 	else if (KeyEvent[K_SPACE].keyOnce) {
 		if (currentSelection == 1) {
-			gameState = FINISHED_LEVEL;
+			gameState = NEXT_LEVEL;
 			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 		else {
@@ -42,7 +42,7 @@ void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int&
 
 void LevelCompleteMenu::render(Console& console) {
 	std::string boxLine;
-	std::ifstream boxFile("levelCompleteMenuBox.txt");
+	std::ifstream boxFile("ASCIIArt\\levelCompleteMenuBox.txt");
 	int boxLinecount = 0;
 
 	if (boxFile.is_open()) {
@@ -55,7 +55,7 @@ void LevelCompleteMenu::render(Console& console) {
 	boxLinecount = 0;
 
 	std::string pauseButtonLine;
-	std::ifstream pauseButtonFile("levelComplete.txt");
+	std::ifstream pauseButtonFile("ASCIIArt\\levelComplete.txt");
 	int pauseButtonLineCount = 0;
 
 	if (pauseButtonFile.is_open()) {

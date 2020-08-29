@@ -8,7 +8,6 @@ class BossStage2 :
 private:
     Enemy** locusts;
     int numberOfLocusts;
-    int locustLeft;
 
 public:
     BossStage2(Player* player);

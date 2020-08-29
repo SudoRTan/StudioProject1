@@ -10,8 +10,9 @@
 #include "BossStage1.h"
 #include "BossStage2.h"
 #include "BossStage3.h"
-
+//#include "BossStage4.h"
 #include "BossStage5.h"
+#include "BossStage6.h"
 
 class GameManager
 {
@@ -23,14 +24,20 @@ private:
 
 
 	int currGameState;
-	
+
+	//Variables to store user current stage
 	int currStage;
 	int currLevel;
+
+	// Variables to store user unlocked stage
+	int unlockedStage;
+	int unlockedLevel;
+
 
 	double gameTime;
 	double pauseTime;
 	double timeEnlapsedSincePause;
-	
+
 
 public:
 	GameManager();

@@ -38,6 +38,7 @@ public:
 	Player(int x, int y);
 	~Player();
 
+	std::string getWeaponName();
 	int getAmmo();
 	
 	void renderPlayer(Console& console);
@@ -48,6 +49,8 @@ public:
 	char getItemBelow(Map& map);
 
 	void setPosition(int x, int y);
+
+	void resetWeapon();
 
 	COORD getEnemyLocation();
 

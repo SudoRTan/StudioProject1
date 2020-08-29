@@ -84,8 +84,12 @@
     <ClCompile Include="BossStage2Locust.cpp" />
     <ClCompile Include="BossStage3.cpp" />
     <ClCompile Include="BossStage3Virus.cpp" />
+    <ClCompile Include="BossStage4.cpp" />
+    <ClCompile Include="BossStage4People.cpp" />
     <ClCompile Include="BossStage5.cpp" />
     <ClCompile Include="BossStage5Alien.cpp" />
+    <ClCompile Include="BossStage6.cpp" />
+    <ClCompile Include="BossStage6Police.cpp" />
     <ClCompile Include="Collectible.cpp" />
     <ClCompile Include="DeathMenu.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -124,8 +128,12 @@
     <ClInclude Include="BossStage2Locust.h" />
     <ClInclude Include="BossStage3.h" />
     <ClInclude Include="BossStage3Virus.h" />
+    <ClInclude Include="BossStage4.h" />
+    <ClInclude Include="BossStage4People.h" />
     <ClInclude Include="BossStage5.h" />
     <ClInclude Include="BossStage5Alien.h" />
+    <ClInclude Include="BossStage6.h" />
+    <ClInclude Include="BossStage6Police.h" />
     <ClInclude Include="Collectible.h" />
     <ClInclude Include="createArray.h" />
     <ClInclude Include="DeathMenu.h" />
