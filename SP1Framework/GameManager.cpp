@@ -59,6 +59,7 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
 		player->resetHealth();
 
 	case LOAD_LEVEL:
+		player->resetWeapon();
 		loadStage(enlapsedTime);
 		currGameState = IN_LEVEL;
 		break;
