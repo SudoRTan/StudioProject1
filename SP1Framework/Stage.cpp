@@ -8,7 +8,6 @@ Stage::Stage(Player* player) : entityManager(player) {
 	numOfEnemies = 0;
 	stageNumber = 1; // player starts game at stage1_1
 	levelNumber = 1;
-	currentStage = "stage1_1.txt";
 
 	type = "Stage";
 }
@@ -28,36 +27,17 @@ void Stage::cleanUp(void) {
 
 }
 
-std::string Stage::getStage(void)
-{
-	return currentStage;
-}
-
-
-void Stage::loadMap(std::string fileName) {
-	/*
-	if (player->reachDoor() == true)
-	{
-		levelNumber++;
-		if (levelNumber == 4)
-		{
-
-		}
-		else
-		{
-
-		}
-	}
-	if (levelNumber == 4)
-	{
-		stageNumber++;
-		levelNumber = 0;
-	}
-	*/
-
+void Stage::loadMap(int stageToLoad, int levelToLoad) {
 	cleanUp();
+
+	stageNumber = stageToLoad;
+	levelNumber = levelToLoad;
+
+	std::stringstream ss;
+
+	ss << "stage" << stageToLoad << "_" << levelToLoad << ".txt";
 	
-	map = new Map(fileName);
+	map = new Map(ss.str());
 
 	EntityTemplate**  enemyPositions = map->getEnemyTemplate();
 	EntityTemplate** collectiblePositions = map->getCollectibleTemplate();
@@ -101,7 +81,7 @@ void Stage::loadMap(std::string fileName) {
 }
 
 void Stage::render(Console& console) {
-	ui.render(console, *player);
+	ui.render(console, *player, stageNumber, levelNumber);
 	map->renderMap(console, player->getPositionX(), player->getPositionY());
 }
 

@@ -23,8 +23,8 @@ MenuManager::~MenuManager() {
 	delete[] menus;
 }
 
-void MenuManager::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
-	menus[gameState]->update(gameState, KeyEvent, currStage, currLevel);
+void MenuManager::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) {
+	menus[gameState]->update(gameState, KeyEvent, currStage, currLevel, unlockedStage, unlockedLevel);
 
 }
 

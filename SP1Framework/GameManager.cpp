@@ -68,7 +68,7 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
 	case START_MENU:
 		player->resetHealth();
 	default:
-		menu.update(currGameState, KeyEvent, currStage, currLevel);
+		menu.update(currGameState, KeyEvent, currStage, currLevel, currStage, currLevel);
 		break;
 	}
 
@@ -107,13 +107,7 @@ void GameManager::render(Console& console) {
 }
 
 void GameManager::loadStage(double enlapsedTime) {
-	std::stringstream ss;
-
-	
-	ss << "stage" << currStage << "_" << currLevel << ".txt";
-
-	std::string test = ss.str();
-	
+	//If selected stage is a boss stage
 	if (currLevel == 4) {
 		if (stage != nullptr) {
 			delete stage;
@@ -149,6 +143,7 @@ void GameManager::loadStage(double enlapsedTime) {
 		}
 		
 	}
+	// If selected stage is a normal stage
 	else {
 		if (stage == nullptr) {
 			stage = new Stage(player);
@@ -158,6 +153,6 @@ void GameManager::loadStage(double enlapsedTime) {
 			stage = new Stage(player);
 		}
 	}
-	stage->loadMap(ss.str());
+	stage->loadMap(currStage, currLevel);
 	
 }
