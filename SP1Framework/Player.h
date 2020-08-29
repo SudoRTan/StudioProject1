@@ -19,8 +19,6 @@ class Player :
 	public Entity
 {
 private:
-	int ammo;
-	int maxAmmo;
 	bool dropping;
 	bool jumping;
 

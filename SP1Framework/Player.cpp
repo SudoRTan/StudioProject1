@@ -6,8 +6,8 @@ Player::Player()
 	position.setY(1);
 	health = 20;
 	maxHealth = 20;
-	ammo = 0;
-	maxAmmo = 20;
+
+
 	canJump = 0;
 	lastJumpTime = 0.0;
 	lastMovementTime = 0.0;
@@ -375,7 +375,6 @@ int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime,
 				delete weapon;
 			}
 			weapon = new RangedWeapon();
-			ammo = 20;
 			collectibleInLocation->collect();
 
 		default:
