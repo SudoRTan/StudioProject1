@@ -33,11 +33,13 @@ void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 		}
 
 		else {
+			currentSelection = 1;
 			gameState = START_MENU;
-			PlaySound(TEXT("./Sounds/menuconfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
 	}
 	else if (KeyEvent[K_ESCAPE].keyOnce) {
+		currentSelection = 1;
 		gameState = RESUME_LEVEL;
 		PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
