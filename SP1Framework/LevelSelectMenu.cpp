@@ -134,7 +134,7 @@ void LevelSelectMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& c
 
 void LevelSelectMenu::render(Console& console) {
 
-	console.writeToBuffer(14, 9, "[Up/Down]Select Stage [Esc]Back to Title Screen", FG_WHITE);
+	console.writeToBuffer(14, 9, "[Arrow Keys]Select Stage [Esc]Back to Title Screen", FG_WHITE);
 
 	if (selectedStage) {
 

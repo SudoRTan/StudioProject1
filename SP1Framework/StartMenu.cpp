@@ -25,8 +25,7 @@ void StartMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 			gameState = LEVEL_SELECT;
 			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
-		else {
-			currentSelection = 1;
+		if (currentSelection == 2){
 			gameState = EXIT_GAME;
 			PlaySound(TEXT("./Sounds/menuconfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
@@ -66,4 +65,17 @@ void StartMenu::render(Console& console) {
 		}
 		startButtonFile.close();
 	}
+
+	
+	if (currentSelection == 1) {
+		console.writeToBuffer(15, 16, "", FG_RED);
+		console.writeToBuffer(37,23, "EXIT", FG_WHITE);
+	}
+
+	
+	if (currentSelection == 2) {
+		console.writeToBuffer(15, 16, "", FG_WHITE);
+		console.writeToBuffer(37,23, "EXIT", FG_RED);
+	}
+	
 }
