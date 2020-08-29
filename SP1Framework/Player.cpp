@@ -314,6 +314,15 @@ void Player::setPosition(int x, int y) {
 	position.setY(y);
 }
 
+void Player::resetWeapon()
+{
+	if (weapon != nullptr)
+	{
+		delete weapon;
+		weapon = nullptr;
+	}
+}
+
 COORD Player::getEnemyLocation() {
 	return enemyLocation;
 }

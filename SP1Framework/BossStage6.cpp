@@ -25,8 +25,8 @@ void BossStage6::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 {
 	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState, cops, numberOfCops);
 
-	//if ((BossStage6Police::getNumberOfCops() == 0))
-	//{
-	//	gameState = LEVEL_COMPLETE_MENU;
-	//}
+	if ((BossStage6Police::getNumberOfCops() == 0))
+	{
+		gameState = LEVEL_COMPLETE_MENU;
+	}
 }

@@ -50,6 +50,8 @@ public:
 
 	void setPosition(int x, int y);
 
+	void resetWeapon();
+
 	COORD getEnemyLocation();
 
 };
