@@ -5,6 +5,8 @@ EntityManager::EntityManager(Player* player) {
 	this->player = player;
 	enemy = nullptr;
 	collectible = nullptr;
+	numOfEnemies = 0;
+	numOfCollectibles = 0;
 
 }
 
