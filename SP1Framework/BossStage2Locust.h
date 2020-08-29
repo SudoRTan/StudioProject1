@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "Player.h"
 
 enum LOCUST_GAME_STATE {
     LOCUST_MOVING,
@@ -20,12 +21,13 @@ private:
     static int numberOfLocusts;
 
 public:
-    BossStage2Locust();
+    BossStage2Locust(int x, int y);
     ~BossStage2Locust();
     
-    int update(Map& map, double g_dElapsedTime, Player& player);
+    int update(Map& map, double elapsedTime, Player& player);
     static int getNumberOfLocusts();
 
-   // void death(Map& map);
+    void move(Map& map, double elapsedTime, Player& player);
 
+    void wait(double elapsedTime);
 };
