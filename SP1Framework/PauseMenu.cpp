@@ -70,7 +70,7 @@ void PauseMenu::render(Console& console)
 {
 	// Initialize variables to load pause button box
 	std::string boxLine;
-	std::ifstream boxFile("pauseMenuBox.txt");
+	std::ifstream boxFile("ASCIIArt\\pauseMenuBox.txt");
 	int boxLinecount = 0;
 	
 	//Load pause button box
@@ -86,7 +86,7 @@ void PauseMenu::render(Console& console)
 
 	// Initialize variables to load pause button
 	std::string pauseButtonLine;
-	std::ifstream pauseButtonFile("pauseButton.txt");
+	std::ifstream pauseButtonFile("ASCIIArt\\pauseButton.txt");
 	int pauseButtonLineCount = 0;
 
 	//Load pause button

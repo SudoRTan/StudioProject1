@@ -74,7 +74,7 @@ void DeathMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 void DeathMenu::render(Console& console) {
 
 	std::string boxLine;
-	std::ifstream boxFile("deathMenuBox.txt");
+	std::ifstream boxFile("ASCIIArt\\deathMenuBox.txt");
 	int boxLinecount = 0;
 
 	if (boxFile.is_open()) {
@@ -87,7 +87,7 @@ void DeathMenu::render(Console& console) {
 	boxLinecount = 0;
 
 	std::string pauseButtonLine;
-	std::ifstream pauseButtonFile("deathScreen.txt");
+	std::ifstream pauseButtonFile("ASCIIArt\\deathScreen.txt");
 	int pauseButtonLineCount = 0;
 
 	if (pauseButtonFile.is_open()) {

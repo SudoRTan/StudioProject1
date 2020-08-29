@@ -139,7 +139,7 @@ void LevelSelectMenu::render(Console& console) {
 	if (selectedStage) {
 
 		std::string boxLine;
-		std::ifstream boxFile("levelBoxes.txt");
+		std::ifstream boxFile("ASCIIArt\\levelBoxes.txt");
 		int boxLinecount = 0;
 
 		if (boxFile.is_open()) {
@@ -152,7 +152,7 @@ void LevelSelectMenu::render(Console& console) {
 		boxLinecount = 0;
 
 		std::string line;
-		std::ifstream nameFile("levelMenu.txt");
+		std::ifstream nameFile("ASCIIArt\\levelMenu.txt");
 		int linecount = 0;
 
 		if (nameFile.is_open()) {
@@ -189,7 +189,7 @@ void LevelSelectMenu::render(Console& console) {
 	else {
 
 		std::string boxLine;
-		std::ifstream boxFile("stageBoxes.txt");
+		std::ifstream boxFile("ASCIIArt\\stageBoxes.txt");
 		int boxLinecount = 0;
 
 		if (boxFile.is_open()) {
@@ -202,7 +202,7 @@ void LevelSelectMenu::render(Console& console) {
 		boxLinecount = 0;
 
 		std::string line;
-		std::ifstream nameFile("stageMenu.txt");
+		std::ifstream nameFile("ASCIIArt\\stageMenu.txt");
 		int linecount = 0;
 
 		if (nameFile.is_open()) {

@@ -42,7 +42,7 @@ void LevelCompleteMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int&
 
 void LevelCompleteMenu::render(Console& console) {
 	std::string boxLine;
-	std::ifstream boxFile("levelCompleteMenuBox.txt");
+	std::ifstream boxFile("ASCIIArt\\levelCompleteMenuBox.txt");
 	int boxLinecount = 0;
 
 	if (boxFile.is_open()) {
@@ -55,7 +55,7 @@ void LevelCompleteMenu::render(Console& console) {
 	boxLinecount = 0;
 
 	std::string pauseButtonLine;
-	std::ifstream pauseButtonFile("levelComplete.txt");
+	std::ifstream pauseButtonFile("ASCIIArt\\levelComplete.txt");
 	int pauseButtonLineCount = 0;
 
 	if (pauseButtonFile.is_open()) {

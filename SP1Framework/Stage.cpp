@@ -35,7 +35,7 @@ void Stage::loadMap(int stageToLoad, int levelToLoad) {
 
 	std::stringstream ss;
 
-	ss << "stage" << stageToLoad << "_" << levelToLoad << ".txt";
+	ss << "Levels\\stage" << stageToLoad << "_" << levelToLoad << ".txt";
 	
 	map = new Map(ss.str());
 
