@@ -6,7 +6,7 @@ GameManager::GameManager(){
 	currStage = 1;
 	currLevel = 1;
 
-	unlockedStage = 1;
+	unlockedStage = 7;
 	unlockedLevel = 1;
 
 	pauseTime = 0.0;
