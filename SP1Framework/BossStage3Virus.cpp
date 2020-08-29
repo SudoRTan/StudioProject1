@@ -1,6 +1,6 @@
 #include "BossStage3Virus.h"
 
-BossStage3Virus::BossStage3Virus() : projectileArray{nullptr}
+BossStage3Virus::BossStage3Virus() : projectileArray{nullptr,nullptr,nullptr}
 {
 	//Sets initial enemy health/locatiom/contact damage
 	position.setX(77);
@@ -90,71 +90,6 @@ int BossStage3Virus::update(Map& map, double elapsedTime, Player& player)
 		}
 	}
 
-
-	/*for (int i = 0; i < 3; i++)
-		if (projectileArray[i] != nullptr)
-			if (player.isLocatedAt(projectileArray[i]->getPositionX(), projectileArray[i]->getPositionY()))
-				player.takeDamage(projectileArray[i]->getDamage());
-
-	if (contactPlayer(position.getX(), position.getY(), player) == true)
-		player.takeDamage(getDamage());
-
-	if (mode == SHOOT_LOOP)
-	{
-		switch (loopPart)
-		{
-		case 0:
-			toY = 1 + 3 * (rand() % 5);
-			break;
-		case 1:
-		case 3:
-		case 5:
-			move(map);
-			break;
-		case 2:
-		case 4:
-		case 6:
-			shoot(g_dElapsedTime);
-			break;
-		}
-		if (loopPart == 6)
-		{
-			loopPart = 0;
-			mode = CHARGE_LOOP;
-		}
-	}
-	else if (mode == CHARGE_LOOP)
-	{
-		switch (loopPart)
-		{
-		case 0:
-			switch (position.getX())
-			{
-			case 0:
-				toX = 67;
-				break;
-			case 67:
-				toX = 0;
-				break;
-			}
-			toY = 1 + 3 * (rand() % 5);
-			break;
-		case 1:
-			move(map);
-			break;
-		case 2:
-			charge(map);
-			break;
-		}
-		if (loopPart == 2)
-		{
-			loopPart = 0;
-			mode = SHOOT_LOOP;
-			updateDelay = 0.07;
-		}
-	}
-	return NO_CHANGE;
-	*/
 	return 0;
 }
 
@@ -206,9 +141,10 @@ void BossStage3Virus::shoot(double elapsedTime){
 		lastShootTime = elapsedTime;
 
 		int i = 0;
-
+		//Loop through everything in the projectileArray array until it finds a nullptr
 		while (i < 3) {
 			if (projectileArray[i] == nullptr) {
+				// Spawn projectile based on direction facing
 				switch (direction) {
 				case LEFT:
 					projectileArray[i] = new Projectile(position.getX() - 1, position.getY() + 1, direction, 5, (char)254, 0.5);
@@ -221,6 +157,7 @@ void BossStage3Virus::shoot(double elapsedTime){
 				default:
 					break;
 				}
+				// Move to a new Y location
 				lastShootTime = elapsedTime;
 				toY = 1 + 3 * (rand() % 5);
 				loopPart++;
@@ -230,7 +167,9 @@ void BossStage3Virus::shoot(double elapsedTime){
 			}
 			i++;
 		}
+		// If its the third time shooting
 		if (loopPart == 3) {
+			// Based on direction move to new X coordinate
 			switch(direction) {
 			case LEFT:
 				toX = 0;
@@ -247,55 +186,6 @@ void BossStage3Virus::shoot(double elapsedTime){
 			loopPart = 0;
 		}
 	}
-
-		/*if (projectileArray[0] == nullptr)
-		{
-			if (direction == LEFT)
-			{
-				projectileArray[0] = new Projectile(position.getX() - 1, position.getY() + 1, direction, 5, (char)254, 0.5);
-				lastShootTime = g_dElapsedTime;
-				loopPart++;
-			}
-			else
-			{
-				projectileArray[0] = new Projectile(position.getX() + 3, position.getY() + 1, direction, 5, (char)254, 0.5);
-				lastShootTime = g_dElapsedTime;
-				loopPart++;
-			}
-		}
-		else if (projectileArray[1] == nullptr)
-		{
-			if (direction == LEFT)
-			{
-				projectileArray[1] = new Projectile(position.getX() - 1, position.getY() + 1, direction, 5, (char)254, 0.5);
-				lastShootTime = g_dElapsedTime;
-				loopPart++;
-			}
-			else
-			{
-				projectileArray[1] = new Projectile(position.getX() + 3, position.getY() + 1, direction, 5, (char)254, 0.5);
-				lastShootTime = g_dElapsedTime;
-				loopPart++;
-			}
-		}
-		else if (projectileArray[2] == nullptr)
-		{
-			if (direction == LEFT)
-			{
-				projectileArray[2] = new Projectile(position.getX() - 1, position.getY() + 1, direction, 5, (char)254, 0.5);
-				lastShootTime = g_dElapsedTime;
-				loopPart++;
-			}
-			else
-			{
-				projectileArray[2] = new Projectile(position.getX() + 3, position.getY() + 1, direction, 5, (char)254, 0.5);
-				lastShootTime = g_dElapsedTime;
-				loopPart++;
-			}
-		}
-	mode = MOVING_LOOP;
-	toY = 1 + 3 * (rand() % 5);
-	*/
 
 }
 
@@ -316,6 +206,7 @@ void BossStage3Virus::charge(Map& map, Player& player, double elapsedTime)
 			newX--;
 		}
 		else {
+			// Inverse direction and set stage back to shooting
 			direction = !direction;
 			mode = SHOOT_LOOP;
 		}
@@ -336,22 +227,10 @@ void BossStage3Virus::charge(Map& map, Player& player, double elapsedTime)
 			}
 		}
 		else {
+			// Inverse direction and set stage back to shooting
 			direction = !direction;
 			mode = SHOOT_LOOP;
 		}
 	}
-	/*
-	if (position.getX() < toX)
-	{
-		updateNewPosition(map, position.getX() + 1, position.getY());
-	}
-	else if (position.getX() > toX)
-	{
-		updateNewPosition(map, position.getX() - 1, position.getY());
-	}
-	else
-	{
-		loopPart++;
-	}
-	*/
+	
 }

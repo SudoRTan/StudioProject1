@@ -9,8 +9,8 @@ public:
     BossStage3(Player* player);
     ~BossStage3();
     void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
+
 private:
     Enemy** virus;
-    int numberOfVirus;
     int maxNumberOfVirus;
 };
