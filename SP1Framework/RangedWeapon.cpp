@@ -79,9 +79,6 @@ void RangedWeapon::animate(Map& map, double elapsedTime, int direction, int x, i
 void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double elapsedTime, int direction, int x, int y) {
 
 	if ((elapsedTime - lastUseTime > useTime) && (currentAmmo != 0)) {
-		lastUseTime = elapsedTime;
-		currentAnimationPhase = 3;
-		currentAmmo--;
 
 		switch (direction) {
 		case LEFT:
@@ -95,6 +92,10 @@ void RangedWeapon::use(Map& map, Enemy** enemyArray, int enemyArraySize, double 
 			break;
 		}
 		if (bullet == nullptr) {
+			lastUseTime = elapsedTime;
+			currentAnimationPhase = 3;
+			currentAmmo--;
+
 			bullet = new Projectile(x, y+1, direction);
 			PlaySound(TEXT("./Sounds/gunFiring.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
