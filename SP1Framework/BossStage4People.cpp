@@ -57,7 +57,7 @@ int BossStage4People::update(Map& map, double g_dElapsedTime, Player& player)
 	updateNewPosition(map, position.getX(), position.getY());
 	if (personType == GUNMAN)
 	{
-		if (g_dElapsedTime - lastMoveTime > 1)
+		if (g_dElapsedTime - lastMoveTime > 3)
 		{
 			if (shotsFired == 0)
 			{
