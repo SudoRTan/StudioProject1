@@ -41,6 +41,6 @@ void BossStage2::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 	// Player wins
  	if (BossStage2Locust::getNumberOfLocusts() == 0)
 	{
-		gameState = LEVEL_COMPLETE_MENU;
+		gameState = FINISHED_LEVEL;
 	}
 }
