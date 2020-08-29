@@ -6,6 +6,9 @@ GameManager::GameManager(){
 	currStage = 1;
 	currLevel = 1;
 
+	unlockedStage = 1;
+	unlockedLevel = 1;
+
 	pauseTime = 0.0;
 	timeEnlapsedSincePause = 0.0;
 	gameTime = 0.0;
@@ -39,7 +42,7 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
 		stage->update(KeyEvent, gameTime,  currGameState);
 		break;
 
-	case FINISHED_LEVEL:
+	case NEXT_LEVEL:
 		if (currLevel == 4) {
 			currLevel = 1;
 			currStage++;
@@ -64,14 +67,32 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
 		currGameState = IN_LEVEL;
 		break;
 
+	case FINISHED_LEVEL:
+		if (currStage == 6 && currLevel == 4) {
+			currGameState = START_MENU;
+		}
+		else if (currLevel == 4 && unlockedStage == currStage) {
+			unlockedStage++;
+			unlockedLevel = 1;
+			currGameState = LEVEL_COMPLETE_MENU;
+		}
+		else if (unlockedStage == currStage && unlockedLevel == currLevel) {
+			unlockedLevel++;
+			currGameState = LEVEL_COMPLETE_MENU;
+		}
+		else {
+			currGameState = LEVEL_COMPLETE_MENU;
+		}
+		break;
 
 	case START_MENU:
 		player->resetHealth();
 	default:
-		menu.update(currGameState, KeyEvent, currStage, currLevel, currStage, currLevel);
+		menu.update(currGameState, KeyEvent, currStage, currLevel, unlockedStage, unlockedLevel);
 		break;
 	}
 
+	// Enters the pause menu if esc key is pressed when in level
 	if (KeyEvent[K_ESCAPE].keyOnce) {
 		switch (currGameState) {
 		case IN_LEVEL:
@@ -92,15 +113,19 @@ void GameManager::render(Console& console) {
 		stage->render(console);
 		break;
 
-	case FINISHED_LEVEL:
+	case START_MENU:
+	case PAUSE_MENU:
+	case LEVEL_SELECT:
+	case PLAYER_DEATH:
+	case LEVEL_COMPLETE_MENU:
+		menu.render(currGameState, console);
+		break;
+
+	case NEXT_LEVEL:
 	case LOAD_LEVEL:
 	case RELOAD_LEVEL:
 	case RESUME_LEVEL:
-		break;
-
-	case PLAYER_DEATH:
 	default:
-		menu.render(currGameState, console);
 		break;
 	}
 	
