@@ -41,7 +41,7 @@ BossStage4People::BossStage4People() : projectile{0}
 		symbolArray[1][2] = (char)180;
 		symbolArray[2][0] = (char)32;
 		symbolArray[2][1] = (char)32;
-		symbolArray[2][2] = (char);
+		symbolArray[2][2] = (char)79;
 		break;
 	}
 	personCount++;
@@ -78,7 +78,7 @@ int BossStage4People::update(Map& map, double g_dElapsedTime, Player& player)
 				{
 					player.takeDamage(projectile[i]->getDamage());
 					delete projectile[i];
-					projectile[i] == nullptr;
+					projectile[i] = nullptr;
 				}
 				else
 					projectile[i]->update(map, g_dElapsedTime, &player);
