@@ -12,7 +12,8 @@ class BossStage2Locust :
     public Enemy
 {
 private:
-    int timeStartedWaiting;
+
+    double timeStartedWaiting;
     int currentState;
 
     int futureX;
