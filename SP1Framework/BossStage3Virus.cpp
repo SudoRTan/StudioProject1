@@ -5,7 +5,7 @@ BossStage3Virus::BossStage3Virus() : projectileArray{nullptr,nullptr,nullptr}
 	//Sets initial enemy health/locatiom/contact damage
 	position.setX(77);
 	position.setY(1);
-	setHealth(20);
+	setHealth(30);
 	setDamage(30);
 
 	cleanUp();
