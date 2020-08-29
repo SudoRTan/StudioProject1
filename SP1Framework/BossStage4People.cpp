@@ -4,8 +4,9 @@ int BossStage4People::personCount = 0;
 
 BossStage4People::BossStage4People() : projectile{0}
 {
-	updateDelay = 1;
+	updateDelay = 3;
 	lastMoveTime = 0;
+	shotsFired = 0;
 	cleanUp();
 	personType = personCount;
 	switch (personType)
@@ -56,23 +57,29 @@ int BossStage4People::update(Map& map, double g_dElapsedTime, Player& player)
 	updateNewPosition(map, position.getX(), position.getY());
 	if (personType == GUNMAN)
 	{
-		if (g_dElapsedTime - lastMoveTime > 1)
+		if (g_dElapsedTime - lastMoveTime > 3)
 		{
-			if (projectile[0] == nullptr)
+			if (shotsFired == 0)
 			{
 				projectile[0] = new Projectile(position.getX() + 1, position.getY(), RIGHT, 5, (char)254, 0.05);
 				lastMoveTime = g_dElapsedTime;
+				shotsFired++;
 			}
-			else if (projectile[1] == nullptr)
+			else if (shotsFired == 1)
 			{
 				projectile[1] = new Projectile(position.getX() + 1, position.getY(), RIGHT, 5, (char)254, 0.05);
 				lastMoveTime = g_dElapsedTime;
+				shotsFired++;
 			}
 		}
 		for (int i = 0; i < 2; i++)
 			if (projectile[i] != nullptr)
 				if (player.isLocatedAt(projectile[i]->getPositionX(), projectile[i]->getPositionY()))
+				{
 					player.takeDamage(projectile[i]->getDamage());
+					delete projectile[i];
+					projectile[i] == nullptr;
+				}
 				else
 					projectile[i]->update(map, g_dElapsedTime, &player);
 	}
@@ -84,8 +91,9 @@ int BossStage4People::update(Map& map, double g_dElapsedTime, Player& player)
 		}
 		if (g_dElapsedTime - lastMoveTime > updateDelay)
 		{
-			updateNewPosition(map, position.getX() - 1, position.getY());
 			updateDelay = 0.03;
+			if (position.getX() > 0)
+				updateNewPosition(map, position.getX() - 1, position.getY());
 		}
 	}
 	return NO_CHANGE;

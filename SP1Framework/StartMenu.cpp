@@ -58,23 +58,26 @@ void StartMenu::render(Console& console) {
 
 	std::ifstream startButtonFile("ASCIIArt\\startButton.txt");
 
-	if (startButtonFile.is_open()) {
-		while (std::getline(startButtonFile, line)) {
-			console.writeToBuffer(15, 16 + linecount, line);
-			linecount++;
-		}
-		startButtonFile.close();
-	}
-
-	
 	if (currentSelection == 1) {
-		console.writeToBuffer(15, 16, "", FG_RED);
+		if (startButtonFile.is_open()) {
+			while (std::getline(startButtonFile, line)) {
+				console.writeToBuffer(15, 16 + linecount, line, FG_RED);
+				linecount++;
+			}
+			startButtonFile.close();
+		}
 		console.writeToBuffer(37,23, "EXIT", FG_WHITE);
 	}
 
 	
 	if (currentSelection == 2) {
-		console.writeToBuffer(15, 16, "", FG_WHITE);
+		if (startButtonFile.is_open()) {
+			while (std::getline(startButtonFile, line)) {
+				console.writeToBuffer(15, 16 + linecount, line, FG_WHITE);
+				linecount++;
+			}
+			startButtonFile.close();
+		}
 		console.writeToBuffer(37,23, "EXIT", FG_RED);
 	}
 	

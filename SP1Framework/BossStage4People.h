@@ -19,6 +19,7 @@ public:
 private:
     static int personCount;
     int personType;
+    int shotsFired;
     Projectile* projectile[2];
     double lastMoveTime;
 };
