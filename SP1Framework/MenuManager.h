@@ -11,6 +11,7 @@
 #include "LevelSelectMenu.h"
 #include "DeathMenu.h"
 #include "LevelCompleteMenu.h"
+#include "HelpMenu.h"
 
 class MenuManager
 {

@@ -118,6 +118,7 @@ void GameManager::render(Console& console) {
 	case LEVEL_SELECT:
 	case PLAYER_DEATH:
 	case LEVEL_COMPLETE_MENU:
+	case HELP_MENU:
 		menu.render(currGameState, console);
 		break;
 

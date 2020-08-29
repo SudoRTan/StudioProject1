@@ -3,7 +3,7 @@
 
 
 MenuManager::MenuManager() {
-	menus = new Menu* [TOTAL_EVENTS];
+	menus = new Menu * [TOTAL_EVENTS];
 	for (int i = 0; i < TOTAL_EVENTS; i++) {
 		menus[i] = nullptr;
 	}
@@ -13,11 +13,14 @@ MenuManager::MenuManager() {
 	menus[LEVEL_SELECT] = new LevelSelectMenu;
 	menus[PLAYER_DEATH] = new DeathMenu;
 	menus[LEVEL_COMPLETE_MENU] = new LevelCompleteMenu;
+	menus[HELP_MENU] = new HelpMenu;
 }
 
 MenuManager::~MenuManager() {
 	for (int i = 0; i < TOTAL_EVENTS; i++) {
-		delete menus[i];
+		if (menus[i] != nullptr) {
+			delete menus[i];
+		}
 	}
 
 	delete[] menus;

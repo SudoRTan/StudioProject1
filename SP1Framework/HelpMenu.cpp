@@ -8,9 +8,9 @@ HelpMenu::~HelpMenu() {
 	
 }
 
-void HelpMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel) {
+void HelpMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStage, int& currLevel, int unlockedStage, int unlockedLevel) {
 	 if (KeyEvent[K_ESCAPE].keyOnce) {
-		gameState = RESUME_LEVEL;
+		gameState = PAUSE_MENU;
 		PlaySound(TEXT("./Sounds/menuEscape.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	}
 }
@@ -18,7 +18,7 @@ void HelpMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currStag
 void HelpMenu::render(Console& console)
 {
 	std::string boxLine;
-	std::ifstream boxFile("HelpMenuText.txt");
+	std::ifstream boxFile("./ASCIIArt/helpMenuText.txt");
 	int boxLinecount = 0;
 
 	if (boxFile.is_open()) {

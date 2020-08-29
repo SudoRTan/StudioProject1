@@ -26,13 +26,13 @@ void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 			gameState = RESUME_LEVEL;
 			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
-		/*if (currentSelection == 2) {
-			gamestate =  ;
-			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
-			
-		}*/
+
+		else if (currentSelection == 2) {
+			gameState = HELP_MENU;
+			PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);	
+		}
+
 		else {
-			currentSelection = 3;
 			gameState = START_MENU;
 			PlaySound(TEXT("./Sounds/menuconfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		}
