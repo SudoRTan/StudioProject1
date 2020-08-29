@@ -6,7 +6,7 @@ BossStage3Virus::BossStage3Virus() : projectileArray{nullptr,nullptr,nullptr}
 	position.setX(77);
 	position.setY(1);
 	setHealth(20);
-	setDamage(20);
+	setDamage(30);
 
 	cleanUp();
 
@@ -39,11 +39,11 @@ BossStage3Virus::BossStage3Virus() : projectileArray{nullptr,nullptr,nullptr}
 	lastShootTime = 0;
 
 	//Variables to track charge time
-	chargeDelay = 0.4;
+	chargeDelay = 0.3;
 	lastChargeTime = 0;
 
 	//Variables to track move time
-	updateDelay = 0.7;
+	updateDelay = 0.5;
 	lastMovementTime = 0;
 
 }
