@@ -20,8 +20,6 @@ Player::Player()
 	lastDamageTime = 0.0;
 	damageDelay = 0.3;
 
-	enemyLocation.X = 0;
-	enemyLocation.Y = 0;
 
 	direction = RIGHT;
 
@@ -55,9 +53,7 @@ Player::Player(int x, int y) {
 
 	lastDamageTime = 0.0;
 	damageDelay = 0.3;
-	
-	enemyLocation.X = 0;
-	enemyLocation.Y = 0;
+
 
 	direction = RIGHT;
 
@@ -323,9 +319,6 @@ void Player::resetWeapon()
 	}
 }
 
-COORD Player::getEnemyLocation() {
-	return enemyLocation;
-}
 
 
 int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize, Collectible** collectibleArray, int collectibleArraySize) {
@@ -392,4 +385,10 @@ int Player::update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime,
 
 	return playerUpdateValue;
 	
+}
+
+void Player::replenishAmmo() {
+	if (weapon != nullptr) {
+		weapon->replenishAmmo();
+	}
 }

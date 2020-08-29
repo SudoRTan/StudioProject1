@@ -26,7 +26,6 @@ private:
 
 	double updateHeightDelay;
 
-	COORD enemyLocation;
 	Weapon* weapon;
 
 	int move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
@@ -51,7 +50,7 @@ public:
 	void setPosition(int x, int y);
 
 	void resetWeapon();
+	void replenishAmmo();
 
-	COORD getEnemyLocation();
 
 };
