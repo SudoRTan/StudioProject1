@@ -198,5 +198,17 @@ void Entity::cleanUp() {
 }
 
 void Entity::death(Map& map) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setDefaultItem(position.getX() + i, position.getY() + j);
+		}
+	}
+}
 
+void Entity::init(Map& map) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setItem(position.getX() + i, position.getY() + j, symbolArray[j][i]);
+		}
+	}
 }

@@ -163,3 +163,24 @@ void EntityManager::cleanUp() {
 	}
 
 }
+
+void EntityManager::init(Map& map) {
+	if (enemy != nullptr) {
+		for (int i = 0; i < numOfEnemies; i++) {
+			if (enemy[i] != nullptr) {
+				enemy[i]->init(map);
+			}
+		}
+	}
+	if (collectible != nullptr) {
+		for (int i = 0; i < numOfCollectibles; i++) {
+			if (collectible[i] != nullptr) {
+				collectible[i]->init(map);
+			}
+		}
+	}
+	if (player != nullptr) {
+		player->init(map);
+	}
+
+}

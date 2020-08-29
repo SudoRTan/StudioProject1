@@ -73,4 +73,6 @@ public:
 
 	void cleanUp();
 	virtual void death(Map& map);
+
+	void init(Map& map);
 };
