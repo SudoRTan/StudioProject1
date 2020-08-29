@@ -5,7 +5,6 @@ class LevelSelectMenu :
 {
 private:
 	int totalStage;
-	int highLightedStage;
 
 	int selectedStage;
 

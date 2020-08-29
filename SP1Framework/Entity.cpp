@@ -4,6 +4,8 @@
 
 Entity::Entity(): health{0}, damage{0}, canJump{0}, lastJumpTime{0}
 {
+	maxHealth = 0;
+	direction = 0;
 	damage = 0;
 	damageDelay = 0;
 	height = 0;

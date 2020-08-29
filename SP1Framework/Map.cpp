@@ -18,6 +18,18 @@ Map::Map()
 	playerStartingPos.X = 0;
 	playerStartingPos.Y = 1;
 
+	// Sets default values for mapArrays
+	numberOfEnemies = 0;
+	numberOfCollectible = 0;
+
+	enemyTemplate = nullptr;
+	collectibleTemplate = nullptr;
+
+	mapArray = nullptr;
+	mapTemplate = nullptr;
+
+	tempMapArray = nullptr;
+
 
 	mapArray = new char* [height];
 	for (int i = 0; i < height; i++)
@@ -47,6 +59,17 @@ Map::Map(int height, int length)
 	playerStartingPos.X = 0;
 	playerStartingPos.Y = 1;
 
+	// Sets default values for mapArrays
+	numberOfEnemies = 0;
+	numberOfCollectible = 0;
+
+	enemyTemplate = nullptr;
+	collectibleTemplate = nullptr;
+
+	mapArray = nullptr;
+	mapTemplate = nullptr;
+
+	tempMapArray = nullptr;
 
 
 	mapArray = new char* [height];
@@ -68,20 +91,6 @@ Map::Map(int height, int length)
 			mapArray[0][i] = (char)FLOOR + 1;
 		}
 	}
-	setItem(3, 1, (char)FLOOR);
-	setItem(4, 1, (char)FLOOR);
-	setItem(5, 3, (char)FLOOR);
-	setItem(6, 3, (char)FLOOR);
-	setItem(7, 3, (char)FLOOR);
-	setItem(8, 5, (char)FLOOR);
-	setItem(9, 5, (char)FLOOR);
-	setItem(10, 5, (char)FLOOR);
-
-	setItem(15, 1, (char)FLOOR);
-	setItem(15, 2, (char)FLOOR);
-	setItem(15, 3, (char)FLOOR);
-	setItem(15, 4, (char)FLOOR);
-	setItem(15, 5, (char)FLOOR);
 
 }
 
@@ -169,15 +178,6 @@ Map::Map(std::string fileName)
 				}
 
 			}
-			/*
-			if (lengthOfLine != length) {
-				for (int i = lengthOfLine; i < length; i++) {
-					mapArray[readingLine][i] = (char)EMPTY;
-					mapTemplate[readingLine][i] = (char)EMPTY;
-
-				}
-			}
-			*/
 			readingLine--;
 		}
 
