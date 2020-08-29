@@ -23,7 +23,7 @@ void HelpMenu::render(Console& console)
 
 	if (boxFile.is_open()) {
 		while (std::getline(boxFile, boxLine)) {
-			console.writeToBuffer(4, 12 + boxLinecount, boxLine, FG_RED + BG_WHITE);
+			console.writeToBuffer(12, 5 + boxLinecount, boxLine, FG_RED + BG_WHITE);
 			boxLinecount++;
 		}
 		boxFile.close();
