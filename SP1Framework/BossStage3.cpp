@@ -23,6 +23,6 @@ void BossStage3::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 	
 	// End level if virus is dead.
 	if (virus[0] == nullptr) {
-		gameState = LEVEL_COMPLETE_MENU;
+		gameState = FINISHED_LEVEL;
 	}
 }
