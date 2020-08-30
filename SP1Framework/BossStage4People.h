@@ -19,6 +19,5 @@ public:
 
 private:
     int personType;
-    int shotsFired;
     Projectile* projectile;
 };

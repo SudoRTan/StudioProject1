@@ -4,6 +4,7 @@
 
 BossStage4People::BossStage4People(int type) : Enemy()
 {
+
 	updateDelay = 3;
 	cleanUp();
 	personType = type;

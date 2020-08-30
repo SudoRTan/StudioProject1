@@ -4,7 +4,7 @@ int BossStage6Police::numOfPoliceLeft = 0;
 
 BossStage6Police::BossStage6Police(int x, int y, int direction) {
 	cleanUp();
-
+	lastMovementTime = 0;
 	state = POLICE_SHOOTING;
 
 	position.setX(x);
