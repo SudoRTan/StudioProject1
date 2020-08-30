@@ -333,11 +333,11 @@ void Map::renderMap(Console& console, int x, int y) {
 		break;
 
 	case 4:
-		colorScheme = BG_CYAN + BG_OLIVE;
+		colorScheme = BG_MAGENTA + BG_OLIVE;
 		break;
 		
 	case 5:
-		colorScheme = BG_CYAN + FG_GREEN;
+		colorScheme = BG_CYAN;
 		break;
 
 	case 6:
