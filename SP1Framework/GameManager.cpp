@@ -6,7 +6,7 @@ GameManager::GameManager(){
 	currStage = 1;
 	currLevel = 1;
 
-	unlockedStage = 7;
+	unlockedStage = 1;
 	unlockedLevel = 1;
 
 	pauseTime = 0.0;
@@ -16,6 +16,7 @@ GameManager::GameManager(){
 	currGameState = START_MENU;
 
 	player = new Player;
+	stage5Player = new BossStage5Player();
 
 	stage = nullptr;
 
@@ -162,7 +163,7 @@ void GameManager::loadStage(double enlapsedTime) {
 			break;
 
 		case 5:
-			stage = new BossStage5();
+			stage = new BossStage5(stage5Player);
 			break;
 
 		case 6:
