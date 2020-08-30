@@ -8,20 +8,20 @@ BossStage5UFO::BossStage5UFO(int x, int y) {
 
 	symbolArray = createArray(width, height);
 
-	symbolArray[0][0] = '(';
-	symbolArray[0][1] = '_';
-	symbolArray[0][2] = ')';
-	symbolArray[1][0] = ' ';
-	symbolArray[1][1] = '^';
-	symbolArray[1][2] = ' ';
+	symbolArray[0][0] = (char)60;
+	symbolArray[0][1] = (char)61;
+	symbolArray[0][2] = (char)62;
+	symbolArray[1][0] = (char)32;
+	symbolArray[1][1] = (char)239;
+	symbolArray[1][2] = (char)32;
 
 	position.setX(x);
 	position.setY(y);
 	
-	updateDelay = 0.1;
+	updateDelay = 0.3;
 
 	panicStartTime = 0;
-	panicDelay = 0.05;
+	panicDelay = 0.1;
 
 	panicDuration = 5;
 
@@ -37,9 +37,7 @@ BossStage5UFO::BossStage5UFO(int x, int y) {
 	}
 
 	lastFireTime = 0;
-	fireDelay = 0.5;
-
-
+	fireDelay = 0.7;
 }
 
 BossStage5UFO::~BossStage5UFO() {
@@ -203,7 +201,7 @@ void BossStage5UFO::fire(double elapsedTime, bool panic) {
 		//Loop through everything in the bullets array until it finds a nullptr
 		while (i < numberOfBullets) {
 			if (bullets[i] == nullptr) {
-				bullets[i] = new Projectile(position.getX() + 1, position.getY(), DOWN, 5, (char)254, 0.5);
+				bullets[i] = new Projectile(position.getX() + 1, position.getY(), DOWN, 5, (char)179, 0.7);
 				lastFireTime = elapsedTime;
 				break;
 			}
