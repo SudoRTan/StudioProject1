@@ -70,5 +70,21 @@ int BossStage5AlienBoss::update(Map& map, double g_dElapsedTime, Player& player)
 	if (position.getY() == toY)
 		projectile.push_back(new Projectile(position.getX() - 1, position.getY() + 1, LEFT, 4, (char)196, 0.05));
 
+	//check projectile location and update or delete accordingly
+	for (int i = 0; i < projectile.size(); i++)
+		if (player.isLocatedAt(projectile.at(i)->getPositionX(), projectile.at(i)->getPositionY()))
+		{
+			player.takeDamage(projectile.at(i)->getDamage());
+			delete projectile.at(i);
+			projectile.at(i) = nullptr;
+		}
+		else if (projectile.at(i)->getPositionX() == 0)
+		{
+			delete projectile.at(i);
+			projectile.at(i) = nullptr;
+		}
+		else
+			projectile.at(i)->update(map, g_dElapsedTime, &player);
+
 	return NO_CHANGE;
 }

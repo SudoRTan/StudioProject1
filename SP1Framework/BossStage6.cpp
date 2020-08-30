@@ -4,20 +4,17 @@ BossStage6::BossStage6(Player* player) :Stage(player)
 {
 	numberOfCops = 20;
 	cops = new Enemy * [numberOfCops];
-
-	for (int i = 0; i < numberOfCops; i++) {
-		cops[i] = new BossStage6Police();
-	}
 }
 
-BossStage6::~BossStage6() {
-	
-	for (int i = 0; i < numberOfCops; i++) {
-		if (cops[i] != nullptr) {
+BossStage6::~BossStage6()
+{
+	for (int i = 0; i < numberOfCops; i++)
+	{
+		if (cops[i] != nullptr)
+		{
 			delete cops[i];
 			cops[i] = nullptr;
 		}
-
 	}
 }
 
