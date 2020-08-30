@@ -30,6 +30,9 @@ Map::Map()
 
 	tempMapArray = nullptr;
 
+	currStage = 1;
+
+	currLevel = 1;
 
 	mapArray = new char* [height];
 	for (int i = 0; i < height; i++)
