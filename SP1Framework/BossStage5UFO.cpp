@@ -39,7 +39,7 @@ BossStage5UFO::BossStage5UFO(int x, int y) {
 	lastFireTime = 0;
 	fireDelay = 0.5;
 
-
+	state = UFO_NORMAL;
 }
 
 BossStage5UFO::~BossStage5UFO() {

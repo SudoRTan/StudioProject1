@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AprilFoolsMenu.cpp" />
     <ClCompile Include="BossStage1.cpp" />
     <ClCompile Include="BossStage1Fire.cpp" />
     <ClCompile Include="BossStage2.cpp" />
@@ -122,6 +123,7 @@
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AprilFoolsMenu.h" />
     <ClInclude Include="BossStage1.h" />
     <ClInclude Include="BossStage1Fire.h" />
     <ClInclude Include="BossStage2.h" />
