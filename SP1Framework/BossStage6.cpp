@@ -50,8 +50,6 @@ void BossStage6::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 		}
 	}
 	
-	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState, police, maxNumberOfPolice) ;
-
-
-	
+	entityManager.update(*map, KeyEvent, g_dElapsedTime, gameState, police, maxNumberOfPolice) ;	
 }
+

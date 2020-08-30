@@ -34,6 +34,7 @@ public:
 
 	int update(Map& map, double elapsedTime, Player& player);
 
+	void death(Map& map);
 
 };
 

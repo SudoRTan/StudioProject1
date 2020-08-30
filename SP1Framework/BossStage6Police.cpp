@@ -138,3 +138,17 @@ void BossStage6Police::move(Map& map, Player& player, double elapsedTime)
 	}
 
 }
+
+void BossStage6Police::death(Map& map) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setDefaultItem(position.getX() + i, position.getY() + j);
+		}
+	}
+	if (bullet != nullptr) {
+		bullet->death(map);
+		delete bullet;
+		bullet = nullptr;
+	}
+
+}
