@@ -1,5 +1,6 @@
 #include "BossStage6Police.h"
 
+int BossStage6Police::numOfPoliceLeft = 0;
 
 BossStage6Police::BossStage6Police(int x, int y, int direction) {
 	cleanUp();
@@ -43,7 +44,7 @@ BossStage6Police::BossStage6Police(int x, int y, int direction) {
 
 BossStage6Police::~BossStage6Police() {
 	cleanUp();
-
+	numOfPoliceLeft--;
 }
 
 int BossStage6Police::update(Map& map, double elapsedTime, Player& player) {
@@ -150,5 +151,14 @@ void BossStage6Police::death(Map& map) {
 		delete bullet;
 		bullet = nullptr;
 	}
+
+}
+
+int BossStage6Police::getNumberOfPoliceLeft() {
+	return numOfPoliceLeft;
+}
+
+void BossStage6Police::setMaxNumberOfPolice(int num) {
+	numOfPoliceLeft = num;
 
 }

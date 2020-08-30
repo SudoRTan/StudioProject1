@@ -18,6 +18,7 @@ private:
 	double lastMovementTime;
 	double updateDelay;
 
+	static int numOfPoliceLeft;
 
 
 	Projectile* bullet;
@@ -36,5 +37,7 @@ public:
 
 	void death(Map& map);
 
+	static int getNumberOfPoliceLeft();
+	static void setMaxNumberOfPolice(int num);
 };
 

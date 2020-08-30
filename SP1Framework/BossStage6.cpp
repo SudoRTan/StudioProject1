@@ -2,13 +2,16 @@
 
 
 BossStage6::BossStage6(Player* player) : Stage(player){
-
+	//Total police that have to be defeated
 	numberOfPolice = 20;
 
+	//Maximun police at any one time
 	maxNumberOfPolice = 10;
 
 
-	numberOfPoliceLeft = numberOfPolice + 1;
+	numberOfPoliceLeft = numberOfPolice;
+
+	BossStage6Police::setMaxNumberOfPolice(numberOfPolice);
 
 	police = new Enemy * [maxNumberOfPolice];
 
@@ -26,10 +29,10 @@ BossStage6::~BossStage6() {
 
 void BossStage6::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
 	
-	if (numberOfPoliceLeft == 0) {
+	if (BossStage6Police::getNumberOfPoliceLeft() == 0) {
 		gameState = LEVEL_COMPLETE_MENU;
 	}
-	else if (g_dElapsedTime - lastSpawnTime > spawnDelay) {
+	else if (g_dElapsedTime - lastSpawnTime > spawnDelay && numberOfPoliceLeft!= 0) {
 		int i = 0;
 		while (i < maxNumberOfPolice) {
 			if (police[i] == nullptr) {
