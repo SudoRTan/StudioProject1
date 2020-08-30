@@ -51,50 +51,9 @@ Map::Map()
 
 }
 
-Map::Map(int height, int length)
-{
-	this->height = height;
-	this->length = length;
-
-	playerStartingPos.X = 0;
-	playerStartingPos.Y = 1;
-
-	// Sets default values for mapArrays
-	numberOfEnemies = 0;
-	numberOfCollectible = 0;
-
-	enemyTemplate = nullptr;
-	collectibleTemplate = nullptr;
-
-	mapArray = nullptr;
-	mapTemplate = nullptr;
-
-	tempMapArray = nullptr;
 
 
-	mapArray = new char* [height];
-	for (int i = 0; i < height; i++)
-	{
-		mapArray[i] = new char[length];
-	}
-
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < length; j++) {
-			mapArray[i][j] = EMPTY;
-		}
-	}
-	for (int i = 0; i < length; i++) {
-		if (i % 2 == 0) {
-			mapArray[0][i] = (char)FLOOR;
-		}
-		else {
-			mapArray[0][i] = (char)FLOOR + 1;
-		}
-	}
-
-}
-
-Map::Map(std::string fileName)
+Map::Map(int currStage, int currLevel)
 {
 	height = 0;
 	length = 0;
@@ -116,12 +75,20 @@ Map::Map(std::string fileName)
 	tempMapArray = nullptr;
 
 
+	this->currStage = currStage;
+
+	this->currLevel = currLevel;
+
+	std::stringstream ss;
+
+	ss << "Levels\\stage" << currStage << "_" << currLevel << ".txt";
+
 
 	std::string line = "";
 	int lines = 0;
 	int columns = 0;
 
-	std::ifstream file(fileName);
+	std::ifstream file(ss.str());
 
 	if (file.is_open()) {
 		while (!file.eof()) {
@@ -346,13 +313,6 @@ void Map::renderMap(Console& console, int x, int y) {
 	if (mapOffsetY < 0) {
 		mapOffsetY = 0;
 	}
-
-	/*
-	console.writeToBuffer(0, 4, (char)48 + playerX, FG_BLACK + BG_WHITE);
-	console.writeToBuffer(0, 5, (char)48 + playerY, FG_BLACK + BG_WHITE);
-	console.writeToBuffer(0, 6, (char)48+mapOffsetX, FG_BLACK + BG_WHITE);
-	console.writeToBuffer(0, 7, (char)48+mapOffsetY, FG_BLACK + BG_WHITE);
-	*/
 
 	for (int i = 0; i < getSmaller(16,height); i++){
 		for (int j = 0; j < getSmaller(80,length); j++){
