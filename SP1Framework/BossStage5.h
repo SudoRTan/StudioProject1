@@ -13,5 +13,6 @@ public:
 	void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
 private:
 	Enemy** aliens;
+	int getNumberOfEnemies();
 };
 
