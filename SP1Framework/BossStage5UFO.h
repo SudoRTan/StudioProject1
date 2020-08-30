@@ -16,18 +16,11 @@ private:
 	int numberOfBullets;
 
 	int state;
-	int previousHealth;
 
 	double lastFireTime;
 	double fireDelay;
 
-	double panicStartTime;
-	double panicDelay;
-	double panicDuration;
-
-
-	void panicMove(Map& map, double elapsedTime, Player& player);
-	void normalMove(Map& map, double elapsedTime, Player& player);
+	void move(Map& map, double elapsedTime, Player& player);
 	void fire(double elapsedTime, bool panic);
 
 public:
