@@ -25,11 +25,11 @@ SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_GAME; // initial state
 
 // Console object
-Console g_Console(80, 25, "SP1 Framework");
+Console g_Console(80, 25, "2020 Vision");
 
 
 // Game Manager object
-GameManager gameManager;
+GameManager* gameManager = new GameManager;
 
 
 //--------------------------------------------------------------
@@ -77,9 +77,13 @@ void shutdown( void )
     colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
 
     g_Console.clearBuffer();
+
+    delete gameManager;
+    gameManager = nullptr;
+
 }
 
-void testGetInput(void) {
+void asyncGetInput(void) {
     if (GetConsoleWindow() == GetForegroundWindow()) {
         SKeyEvent temp_skKeyEvent[K_COUNT];
         for (int i = 0; i < K_COUNT; i++)
@@ -140,8 +144,11 @@ void getInput( void )
     // resets all the keyboard events
     //memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
     // then call the console to detect input from user
-    //g_Console.readConsoleInput();   
-    testGetInput();
+    //g_Console.readConsoleInput(); 
+
+
+    // New Input Method to get asyncronous input
+    asyncGetInput();
 }
 
 //--------------------------------------------------------------
@@ -267,6 +274,9 @@ void update(double dt)
     g_dElapsedTime += dt;
     g_dDeltaTime = dt;
 
+
+    gameManager->update(g_skKeyEvent, g_dElapsedTime, g_bQuitGame);
+    /*
     switch (g_eGameState)
     {
         case S_SPLASHSCREEN : splashScreenWait(); // game logic for the splash screen
@@ -274,6 +284,7 @@ void update(double dt)
         case S_GAME: updateGame(); // gameplay logic when we are in the game
             break;
     }
+    */
 }
 
 void splashScreenWait()    // waits for time to pass in splash screen
@@ -297,7 +308,7 @@ void moveCharacter()
    
     //stage->update(g_skKeyEvent, g_dElapsedTime);
     
-    gameManager.update(g_skKeyEvent, g_dElapsedTime, g_bQuitGame);
+    gameManager->update(g_skKeyEvent, g_dElapsedTime, g_bQuitGame);
 
 
     // player.move(map, g_skKeyEvent, g_dElapsedTime);
@@ -321,17 +332,21 @@ void processUserInput()
 void render()
 {
     clearScreen();      // clears the current screen and draw from scratch 
-    switch (g_eGameState)
+    
+    /*switch (g_eGameState)
     {
     case S_SPLASHSCREEN: //renderSplashScreen();
         //ui.splashScreen(g_Console);
 
         break;
     case S_GAME:
-        renderGame();
         //ui.render(g_Console, player);
         break;
     }
+    */
+    // Renders the game to console
+    gameManager->render(g_Console);
+
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
     //renderInputEvents();    // renders status of input events
     renderToScreen();       // dump the contents of the buffer to the screen, one frame worth of game 
@@ -366,12 +381,8 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-    gameManager.render(g_Console);
-
-
-    //renderMap();        // renders the map to the buffer first
-    //map.renderMap(g_Console, player.getPositionX(), player.getPositionY());
-    //renderCharacter();  // renders the character into the buffer
+    renderMap();        // renders the map to the buffer first
+    renderCharacter();  // renders the character into the buffer
 }
 
 void renderUI()
