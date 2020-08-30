@@ -314,14 +314,47 @@ void Map::renderMap(Console& console, int x, int y) {
 		mapOffsetY = 0;
 	}
 
+	int colorScheme = 0;
+
+	switch (currStage) {
+	case 1:
+		colorScheme = BG_RED + FG_BLACK;
+		break;
+
+	case 2:
+		colorScheme = BG_YELLOW + FG_RED;
+		break;
+
+	case 3:
+		colorScheme = BG_SILVER + FG_RED;
+		break;
+
+	case 4:
+		colorScheme = BG_CYAN + BG_OLIVE;
+		break;
+		
+	case 5:
+		colorScheme = BG_CYAN + FG_GREEN;
+		break;
+
+	case 6:
+		colorScheme = BG_BLUE + FG_BLACK;
+		break;
+		
+	default:
+		colorScheme = FG_WHITE;
+		break;
+	}
+
+
 	for (int i = 0; i < getSmaller(16,height); i++){
 		for (int j = 0; j < getSmaller(80,length); j++){
 			if (tempMapArray[i + mapOffsetY][j + mapOffsetX]!=' ') {
-				console.writeToBuffer(j, 24 - i, tempMapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
+				console.writeToBuffer(j, 24 - i, tempMapArray[i + mapOffsetY][j + mapOffsetX], colorScheme);
 				tempMapArray[i + mapOffsetY][j + mapOffsetX] = ' ';
 			}
 			else {
-				console.writeToBuffer(j, 24 - i, mapArray[i + mapOffsetY][j + mapOffsetX], BG_CYAN + FG_LIGHTMAGENTA);
+				console.writeToBuffer(j, 24 - i, mapArray[i + mapOffsetY][j + mapOffsetX], colorScheme);
 
 			}
 		}
