@@ -24,13 +24,22 @@ BossStage6::BossStage6(Player* player) : Stage(player){
 }
 
 BossStage6::~BossStage6() {
+
+	for (int i = 0; i < maxNumberOfPolice; i++) {
+		if (police[i] != nullptr) {
+			delete police[i];
+		}
+	}
+	delete[] police;
+	police = nullptr;
+
 	cleanUp();
 }
 
 void BossStage6::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
 	
 	if (BossStage6Police::getNumberOfPoliceLeft() == 0) {
-		gameState = LEVEL_COMPLETE_MENU;
+		gameState = FINISHED_LEVEL;
 	}
 	else if (g_dElapsedTime - lastSpawnTime > spawnDelay && numberOfPoliceLeft!= 0) {
 		int i = 0;
