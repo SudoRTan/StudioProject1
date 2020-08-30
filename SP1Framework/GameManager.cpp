@@ -16,11 +16,8 @@ GameManager::GameManager(){
 	currGameState = START_MENU;
 
 	player = new Player;
-	stage5Player = new BossStage5Player();
 
 	stage = nullptr;
-
-
 }
 
 
@@ -163,7 +160,7 @@ void GameManager::loadStage(double enlapsedTime) {
 			break;
 
 		case 5:
-			stage = new BossStage5(stage5Player);
+			stage = new BossStage5(player);
 			break;
 
 		case 6:
