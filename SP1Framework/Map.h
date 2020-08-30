@@ -3,6 +3,7 @@
 #include "colors.h"
 #include "Position.h"
 #include <fstream>
+#include <sstream>
 #include "createArray.h"
 #include "EntityTemplate.h"
 
@@ -54,15 +55,16 @@ private:
 
 	COORD playerStartingPos;
 
+	int currStage;
 
+	int currLevel;
 
 
 
 public:
 	//Constructor/Destructor
 	Map();
-	Map(int height, int length);
-	Map(std::string fileName);
+	Map(int currStage, int currLevel);
 	~Map();
 
 

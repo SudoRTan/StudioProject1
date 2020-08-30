@@ -33,11 +33,8 @@ void Stage::loadMap(int stageToLoad, int levelToLoad) {
 	stageNumber = stageToLoad;
 	levelNumber = levelToLoad;
 
-	std::stringstream ss;
-
-	ss << "Levels\\stage" << stageToLoad << "_" << levelToLoad << ".txt";
 	
-	map = new Map(ss.str());
+	map = new Map(stageNumber, levelNumber);
 
 	EntityTemplate**  enemyPositions = map->getEnemyTemplate();
 	EntityTemplate** collectiblePositions = map->getCollectibleTemplate();
