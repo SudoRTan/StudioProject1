@@ -126,31 +126,13 @@
     <ClCompile Include="BossStage3Virus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BossStage5.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BossStage5Alien.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BossStage4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BossStage4People.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BossStage6.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BossStage6Police.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HelpMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BossStage5AlienBoss.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BossStage5Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -266,31 +248,13 @@
     <ClInclude Include="BossStage3Virus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BossStage5.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BossStage5Alien.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BossStage4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BossStage4People.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BossStage6.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BossStage6Police.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HelpMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BossStage5AlienBoss.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BossStage5Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

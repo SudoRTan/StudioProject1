@@ -20,6 +20,7 @@ private:
 	MenuManager menu;
 
 	Player* player;
+	Player* stage5Player;
 	Stage* stage;
 
 

@@ -43,7 +43,7 @@ BossStage3Virus::BossStage3Virus() : projectileArray{nullptr,nullptr,nullptr}
 	lastChargeTime = 0;
 
 	//Variables to track move time
-	updateDelay = 0.5;
+	updateDelay = 0.3;
 	lastMovementTime = 0;
 
 }
