@@ -31,8 +31,6 @@ public:
 	Stage(Player* player);
 	virtual ~Stage();
 
-	std::string getStage(void);
-
 
 	void loadMap(int stageToLoad, int levelToLoad);
 
