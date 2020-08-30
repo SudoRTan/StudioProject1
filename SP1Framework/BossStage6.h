@@ -2,10 +2,13 @@
 #include "Stage.h"
 #include "BossStage6Police.h"
 
+
+
 class BossStage6 :
 	public Stage
 {
 private:
+
 	int numberOfPolice;
 	int maxNumberOfPolice;
 

@@ -8,7 +8,7 @@ BossStage6::BossStage6(Player* player) : Stage(player){
 	maxNumberOfPolice = 10;
 
 
-	numberOfPoliceLeft = numberOfPolice;
+	numberOfPoliceLeft = numberOfPolice + 1;
 
 	police = new Enemy * [maxNumberOfPolice];
 
@@ -26,7 +26,10 @@ BossStage6::~BossStage6() {
 
 void BossStage6::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
 	
-	if (g_dElapsedTime - lastSpawnTime > spawnDelay) {
+	if (numberOfPoliceLeft == 0) {
+		gameState = LEVEL_COMPLETE_MENU;
+	}
+	else if (g_dElapsedTime - lastSpawnTime > spawnDelay) {
 		int i = 0;
 		while (i < maxNumberOfPolice) {
 			if (police[i] == nullptr) {
@@ -39,6 +42,7 @@ void BossStage6::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 					police[i] = new BossStage6Police(0, 1 + 3 * (rand() % 5), RIGHT);
 					break;
 				}
+				police[i]->init(*map);
 				numberOfPoliceLeft--;
 				break;
 			}
