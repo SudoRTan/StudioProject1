@@ -131,7 +131,6 @@ bool Entity::onSolidFloor(Map& map, int x, int y) {
 		switch (floorAtNewLocation) {
 		case PLATFORM:
 		case FLOOR:
-		case '=':
 			onSolidFloor = true;
 			break;
 

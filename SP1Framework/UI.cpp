@@ -51,19 +51,19 @@ void UI::render(Console& console, Player& player, int currStage, int currLevel)
 
 	for (int i = 0; i < 40; i++) {
 		if (i < currentHealth) {
-			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_RED);
+			console.writeToBuffer(1 + i, 2, (char)219, FG_RED);
 		}
 		else {
-			console.writeToBuffer(1 + i, 2, (char)FLOOR, FG_GRAY);
+			console.writeToBuffer(1 + i, 2, (char)219, FG_GRAY);
 		}
 
 		if (currentAmmo != -2)
 		{
 			if (i < currentAmmo) {
-				console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_YELLOW);
+				console.writeToBuffer(1 + i, 5, (char)219, FG_YELLOW);
 			}
 			else {
-				console.writeToBuffer(1 + i, 5, (char)FLOOR, FG_GRAY);
+				console.writeToBuffer(1 + i, 5, (char)219, FG_GRAY);
 			}
 		}
 	}
