@@ -1,6 +1,7 @@
 #pragma once 
-#include <vector> 
+#include <vector>
 #include "Enemy.h"
+#include "Player.h"
 #include "Projectile.h"
 class BossStage5AlienBoss :
     public Enemy
@@ -12,5 +13,5 @@ public:
 	int update(Map& map, double g_dElapsedTime, Player& player);
 private:
 	int toY;
-	std::vector<*Projectile> projectile;
+	std::vector<Projectile*> projectile;
 };
