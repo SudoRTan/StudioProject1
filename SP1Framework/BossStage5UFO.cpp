@@ -23,10 +23,19 @@ BossStage5UFO::BossStage5UFO(int x, int y) {
 	damage = 4;
 	health = 20;
 
+	bullets = new Projectile*[3];
+
+	for (int i = 0; i < 3; i++) {
+		bullets[i] = nullptr;
+	}
+	lastFireTime = 0;
+	fireDelay = 0.5;
+
+
 }
 
 BossStage5UFO::~BossStage5UFO() {
-
+	cleanUp();
 }
 
 int BossStage5UFO::update(Map& map, double elapsedTime, Player& player) {
@@ -41,6 +50,21 @@ int BossStage5UFO::update(Map& map, double elapsedTime, Player& player) {
 		fire(elapsedTime);
 		break;
 	}
+
+	//Updates Bullets
+	for (int i = 0; i < 3; i++) {
+		if (bullets[i] != nullptr) {
+			if (bullets[i]->getHealth() == 0) {
+				bullets[i]->death(map);
+				delete bullets[i];
+				bullets[i] = nullptr;
+			}
+			else {
+				bullets[i]->update(map, elapsedTime, &player);
+			}
+		}
+	}
+
 	return 0;
 }
 
@@ -92,5 +116,18 @@ void BossStage5UFO::normalMove(Map& map, double elapsedTime, Player& player) {
 }
 
 void BossStage5UFO::fire(double elapsedTime) {
+	if (elapsedTime - lastFireTime > fireDelay) {
+		lastFireTime = elapsedTime;
 
+		int i = 0;
+		//Loop through everything in the bullets array until it finds a nullptr
+		while (i < 3) {
+			if (bullets[i] == nullptr) {
+				bullets[i] = new Projectile(position.getX() + 1, position.getY(), DOWN, 5, (char)254, 0.5);
+				lastFireTime = elapsedTime;
+				break;
+			}
+			i++;
+		}
+	}
 }

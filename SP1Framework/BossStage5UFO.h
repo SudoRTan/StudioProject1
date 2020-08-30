@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
 #include "Player.h"
+#include "Projectile.h"
 
 enum UFO_STATE {
 	UFO_NORMAL,
@@ -11,6 +12,8 @@ class BossStage5UFO :
 	public Enemy
 {
 private:
+	Projectile** bullets;
+
 	int state;
 
 	double lastFireTime;
