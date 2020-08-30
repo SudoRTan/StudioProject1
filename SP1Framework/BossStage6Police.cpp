@@ -30,7 +30,8 @@ BossStage6Police::BossStage6Police(int x, int y, int direction) {
 	bullet = nullptr;
 
 	lastFireTime = 0;
-	fireDelay = 0.5;
+
+	fireDelay = ((double)(rand() % 3) + 3) / 10;
 }
 
 BossStage6Police::~BossStage6Police() {
