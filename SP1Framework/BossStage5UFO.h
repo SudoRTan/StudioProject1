@@ -13,18 +13,22 @@ class BossStage5UFO :
 {
 private:
 	Projectile** bullets;
+	int numberOfBullets;
 
 	int state;
+	int previousHealth;
 
 	double lastFireTime;
 	double fireDelay;
 
 	double panicStartTime;
+	double panicDelay;
 	double panicDuration;
 
 
+	void panicMove(Map& map, double elapsedTime, Player& player);
 	void normalMove(Map& map, double elapsedTime, Player& player);
-	void fire(double elapsedTime);
+	void fire(double elapsedTime, bool panic);
 
 public:
 	BossStage5UFO::BossStage5UFO(int x, int y);
