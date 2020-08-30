@@ -21,8 +21,10 @@ void BossStage4::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int&
 	else if (player->getHealth() > playerMaxHealth / 2) {
 		gunMan.update(*map, g_dElapsedTime, *player);
 	}
-	else if (player->getHealth() <= playerMaxHealth / 2) {
+	else if (player->getHealth() <= playerMaxHealth / 2 && player->getHealth() > 0) {
 		knifeMan.update(*map, g_dElapsedTime, *player);
 	}
-
+	else if (player->getHealth() <= 0) {
+		gameState = APRIL_FOOLS_MENU;
+	}
 }

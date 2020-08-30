@@ -122,6 +122,7 @@ void GameManager::render(Console& console) {
 	case PLAYER_DEATH:
 	case LEVEL_COMPLETE_MENU:
 	case HELP_MENU:
+	case APRIL_FOOLS_MENU:
 		menu.render(currGameState, console);
 		break;
 

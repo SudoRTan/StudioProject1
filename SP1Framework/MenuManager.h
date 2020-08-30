@@ -12,6 +12,7 @@
 #include "DeathMenu.h"
 #include "LevelCompleteMenu.h"
 #include "HelpMenu.h"
+#include "AprilFoolsMenu.h"
 
 class MenuManager
 {
