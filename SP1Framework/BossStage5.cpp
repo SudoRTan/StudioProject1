@@ -4,7 +4,7 @@ BossStage5::BossStage5(Player* player) : Stage(player) {
 	numberOfUfo = 1;
 	ufo = new Enemy*[numberOfUfo];
 
-	ufo[0] = new BossStage5UFO(77, 13);
+	ufo[0] = new BossStage5UFO();
 
 }
 BossStage5::~BossStage5() {

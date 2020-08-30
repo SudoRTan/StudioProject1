@@ -1,6 +1,7 @@
 #include "BossStage5UFO.h"
 
-BossStage5UFO::BossStage5UFO(int x, int y) {
+BossStage5UFO::BossStage5UFO()
+{
 	cleanUp();
 
 	height = 2;
@@ -15,197 +16,60 @@ BossStage5UFO::BossStage5UFO(int x, int y) {
 	symbolArray[1][1] = (char)239;
 	symbolArray[1][2] = (char)32;
 
-	position.setX(x);
-	position.setY(y);
+	position.setX(77);
+	position.setY(15);
 	
-	updateDelay = 0.3;
-
-	panicStartTime = 0;
-	panicDelay = 0.1;
-
-	panicDuration = 5;
-
+	direction = DOWN;
+	toY = 15;
+	updateDelay = 0.1;
 	damage = 4;
 	health = 20;
-	previousHealth = 20;
-
-	numberOfBullets = 3;
-	bullets = new Projectile*[numberOfBullets];
-
-	for (int i = 0; i < numberOfBullets; i++) {
-		bullets[i] = nullptr;
-	}
-
 	lastFireTime = 0;
-	fireDelay = 0.7;
 }
 
-BossStage5UFO::~BossStage5UFO() {
-	for (int i = 0; i < numberOfBullets; i++) {
-		if (bullets[i] != nullptr) {
-			delete bullets[i];
-			bullets[i] = nullptr;
-			
-		}
-	}
-	delete[] bullets;
-
+BossStage5UFO::~BossStage5UFO()
+{
 	cleanUp();
-}
-
-int BossStage5UFO::update(Map& map, double elapsedTime, Player& player) {
-	if (previousHealth != health) {
-		previousHealth = health;
-		state = UFO_PANIC;
-		panicStartTime = elapsedTime;
-	}
-	else if (elapsedTime - panicStartTime > panicDuration) {
-		state = UFO_NORMAL;
-	}
-
-	switch (state) {
-	case UFO_PANIC:
-		panicMove(map, elapsedTime, player);
-		fire(elapsedTime, true);
-		break;
-
-	case UFO_NORMAL:
-	default:
-		normalMove(map, elapsedTime, player);
-		fire(elapsedTime, false);
-		break;
-	}
-
-	//Updates Bullets
-	for (int i = 0; i < numberOfBullets; i++) {
-		if (bullets[i] != nullptr) {
-			if (bullets[i]->getHealth() == 0) {
-				bullets[i]->death(map);
-				delete bullets[i];
-				bullets[i] = nullptr;
-			}
-			else {
-				bullets[i]->update(map, elapsedTime, &player);
-			}
-		}
-	}
-
-	return 0;
-}
-
-void BossStage5UFO::panicMove(Map& map, double elapsedTime, Player& player) {
-	if (elapsedTime - lastMovementTime > panicDelay) {
-
-		int newX = position.getX();
-		int newY = position.getY();
-
-		// have enemy continually move in 1 direction until unable to
-		switch (direction) {
-		case 0:
-			newX--;
-			break;
-
-		case 1:
-			newX++;
-			break;
-
-		default:
-			break;
-		}
-		// Checks if the new location has space for the enemy to move into
-		bool validMove = canEntityMove(map, newX, newY);
-
-		// if both bool functions return true, execute code to check if enemy collides with player.
-		if (validMove) {
-			// Resets the last movement time to current time
-			lastMovementTime = elapsedTime;
-
-			//Check if new location has a player
-			if (contactPlayer(newX, newY, player)) {
-				//Cause the player to take damamge if it contacts
-				player.takeDamage(getDamage(), elapsedTime);
-			}
-			//Spot is empty and avaliable to move to 
-			else {
-				//Clear current map location and move to new location
-				updateNewPosition(map, newX, newY);
-			}
-		}
-		// if either of the bool function checks return false, reverse the direction that the enemy is facing
-		else {
-			direction = !direction;
-		}
+	for (int i = 0; i < projectile.size(); i++)
+	{
+		delete projectile.at(i);
+		projectile.at(i) = nullptr;
 	}
 }
 
+int BossStage5UFO::update(Map& map, double elapsedTime, Player& player)
+{
+	//update ufo on map
+	updateNewPosition(map, position.getX(), position.getY());
 
-void BossStage5UFO::normalMove(Map& map, double elapsedTime, Player& player) {
-	if (elapsedTime - lastMovementTime > updateDelay) {
-
-		int newX = position.getX();
-		int newY = position.getY();
-
-		// have enemy continually move in 1 direction until unable to
-		switch (direction) {
-		case 0:
-			newX--;
-			break;
-
-		case 1:
-			newX++;
-			break;
-
-		default:
-			break;
+	//set new y to move to
+	if (position.getY() == toY)
+	{
+		if (direction == UP)
+		{
+			toY = position.getY() - 5 - (rand() % 7);
+			if (toY < 1)
+				toY = 1;
+			direction = DOWN;
 		}
-		// Checks if the new location has space for the enemy to move into
-		bool validMove = canEntityMove(map, newX, newY);
-
-		// if both bool functions return true, execute code to check if enemy collides with player.
-		if (validMove) {
-			// Resets the last movement time to current time
-			lastMovementTime = elapsedTime;
-
-			//Check if new location has a player
-			if (contactPlayer(newX, newY, player)) {
-				//Cause the player to take damamge if it contacts
-				player.takeDamage(getDamage(), elapsedTime);
-			}
-			//Spot is empty and avaliable to move to 
-			else {
-				//Clear current map location and move to new location
-				updateNewPosition(map, newX, newY);
-			}
-		}
-		// if either of the bool function checks return false, reverse the direction that the enemy is facing
-		else {
-			direction = !direction;
+		else if (direction == DOWN)
+		{
+			toY = position.getY() + 5 + (rand() % 7);
+			if (toY > 15)
+				toY = 15;
+			direction = UP;
 		}
 	}
 
-}
-
-void BossStage5UFO::fire(double elapsedTime, bool panic) {
-	if (elapsedTime - lastFireTime > fireDelay) {
-		lastFireTime = elapsedTime;
-
-		// Randomize fire time
-		if (panic) {
-			fireDelay = ((double)(rand() % 3) + 1.0) / 10;
-		}
-		else {
-			fireDelay = ((double)(rand() % 6) + 1.0) / 10;
-		}
-
-		int i = 0;
-		//Loop through everything in the bullets array until it finds a nullptr
-		while (i < numberOfBullets) {
-			if (bullets[i] == nullptr) {
-				bullets[i] = new Projectile(position.getX() + 1, position.getY(), DOWN, 5, (char)179, 0.7);
-				lastFireTime = elapsedTime;
-				break;
-			}
-			i++;
-		}
+	//move to new y
+	if (elapsedTime - lastMovementTime > updateDelay)
+	{
+		if (position.getY() > toY)
+			position.setY(position.getY() - 1);
+		else if (position.getY() < toY)
+			position.setY(position.getY() + 1);
+		lastMovementTime = elapsedTime;
 	}
+
+	return NO_CHANGE;
 }
