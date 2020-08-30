@@ -37,5 +37,7 @@ public:
 	void loadCollectible(int sizeOfArray, EntityTemplate** collectibleTemplate);
 
 	void cleanUp();
+
+	void init(Map& map);
 };
 

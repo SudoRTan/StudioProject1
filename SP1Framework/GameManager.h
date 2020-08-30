@@ -44,7 +44,7 @@ public:
 	~GameManager(); 
 
 
-	void update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime);
+	void update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime, bool& quitGame);
 	void render(Console& console);
 
 	void loadStage(double enlapsedTime);

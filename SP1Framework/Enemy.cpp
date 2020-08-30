@@ -157,6 +157,7 @@ int Enemy::update(Map& map, double g_dElapsedTime, Player& player) {
 }
 
 void Enemy::death(Map& map) {
+	// Function that runs once enemy dies
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
 			map.setDefaultItem(position.getX() + i, position.getY() + j);
@@ -165,6 +166,7 @@ void Enemy::death(Map& map) {
 }
 
 bool Enemy::contactPlayer(int x, int y, Player& player) {
+	//Returns true if new location would contact player at the new location
 	bool contactingPlayer = false;
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
@@ -180,6 +182,7 @@ bool Enemy::contactPlayer(int x, int y, Player& player) {
 
 
 Enemy* getEnemy(int x, int y, Enemy** enemy, int arraySize) {
+	// Returns the enemy in the enemy double pointer array at the specific location.
 	Enemy* returnEnemy = nullptr;
 
 	if (enemy != nullptr) {

@@ -4,6 +4,8 @@
 
 Entity::Entity(): health{0}, damage{0}, canJump{0}, lastJumpTime{0}
 {
+	maxHealth = 0;
+	direction = 0;
 	damage = 0;
 	damageDelay = 0;
 	height = 0;
@@ -198,5 +200,17 @@ void Entity::cleanUp() {
 }
 
 void Entity::death(Map& map) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setDefaultItem(position.getX() + i, position.getY() + j);
+		}
+	}
+}
 
+void Entity::init(Map& map) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			map.setItem(position.getX() + i, position.getY() + j, symbolArray[j][i]);
+		}
+	}
 }

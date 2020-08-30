@@ -2,6 +2,14 @@
 
 Weapon::Weapon()
 {   
+	useTime = 0;
+	lastUseTime = 0;
+	lastAnimateTime = 0;
+	damage = 1;
+	currentAnimationPhase = 0;
+	currentAmmo = 0;
+	maxAmmo = 0;
+	animationPhases =  0;
 }
 
 Weapon::~Weapon()

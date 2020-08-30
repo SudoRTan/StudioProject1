@@ -52,6 +52,7 @@ void Stage::loadMap(int stageToLoad, int levelToLoad) {
 
 	player->setPosition(map->getPlayerPosition().X, map->getPlayerPosition().Y);
 	
+	entityManager.init(*map);
 
 }
 
