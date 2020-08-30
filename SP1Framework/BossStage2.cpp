@@ -31,6 +31,9 @@ BossStage2::~BossStage2()
 
 		}
 	}
+	delete[] locusts;
+	locusts = nullptr;
+
 }
 
 void BossStage2::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {

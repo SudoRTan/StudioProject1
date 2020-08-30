@@ -1,29 +1,30 @@
 #include "BossStage4.h"
 
-BossStage4::BossStage4(Player* player) : Stage(player)
+BossStage4::BossStage4(Player* player) : Stage(player), knifeMan(KNIFEMAN), gunMan(GUNMAN)
 {
-	enemies = new Enemy* [2];
-	enemies[0] = new BossStage4People;
-	enemies[1] = new BossStage4People;
+	playerMaxHealth = player->getHealth();
+	once = false;
 }
 
 BossStage4::~BossStage4()
 {
-	for (int i = 0; i < 2; i++)
-	{
-		enemies[i]->cleanUp();
-		delete enemies[i];
-		enemies[i] = nullptr;
-	}
+
 }
 
 void BossStage4::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)
 {
-	while (player->getHealth() != 0)
-	{
-		for (int i = 0; i < 2; i++)
-		{
-			enemies[i]->update(*map, g_dElapsedTime, *player);
-		}
+	if (!once) {
+		gunMan.init(*map);
+		knifeMan.init(*map);
+		once = true;
+	}
+	else if (player->getHealth() > playerMaxHealth / 2) {
+		gunMan.update(*map, g_dElapsedTime, *player);
+	}
+	else if (player->getHealth() <= playerMaxHealth / 2 && player->getHealth() > 0) {
+		knifeMan.update(*map, g_dElapsedTime, *player);
+	}
+	else if (player->getHealth() <= 0) {
+		gameState = APRIL_FOOLS_MENU;
 	}
 }

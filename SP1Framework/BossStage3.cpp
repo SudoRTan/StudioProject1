@@ -14,6 +14,8 @@ BossStage3::~BossStage3()
 		delete virus[0];
 		virus[0] = nullptr;
 	}
+	delete[] virus;
+	virus = nullptr;
 }
 
 void BossStage3::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState)

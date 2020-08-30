@@ -13,13 +13,12 @@ class BossStage4People :
     public Enemy
 {
 public:
-    BossStage4People();
+    BossStage4People(int type);
     ~BossStage4People();
     int update(Map& map, double g_dElapsedTime, Player& player);
+
 private:
-    static int personCount;
     int personType;
     int shotsFired;
-    Projectile* projectile[2];
-    double lastMoveTime;
+    Projectile* projectile;
 };

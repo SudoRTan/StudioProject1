@@ -39,7 +39,7 @@ BossStage6Police::BossStage6Police(int x, int y, int direction) {
 	// Each police have a unique firerate
 	fireDelay = ((double)(rand() % 3) + 3) / 10;
 
-	updateDelay = 0.5;
+	updateDelay = 0.1;
 }
 
 BossStage6Police::~BossStage6Police() {
