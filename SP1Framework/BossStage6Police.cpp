@@ -25,7 +25,7 @@ BossStage6Police::~BossStage6Police()
 
 int BossStage6Police::update(Map& map, double g_dElapsedTime, Player& player)
 {
-	
+	return NO_CHANGE;
 }
 
 int BossStage6Police::getNumberOfCops()

@@ -9,7 +9,7 @@ BossStage5Player::BossStage5Player()
 	direction = RIGHT;
 	cleanUp();
 	symbolArray = createArray(width, height);
-	symbolArray[0][0] == (char)80;
+	symbolArray[0][0] = (char)80;
 }
 
 BossStage5Player::~BossStage5Player()
@@ -55,7 +55,8 @@ int BossStage5Player::move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElap
 					}
 				}
 			}
-			if (enemyAtNewLocation != nullptr) {
+			if (enemyAtNewLocation != nullptr)
+			{
 				takeDamage(enemyAtNewLocation->getDamage(), g_dElapsedTime);
 			}
 			else {

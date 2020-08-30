@@ -40,20 +40,20 @@ int BossStage5AlienBoss::update(Map& map, double g_dElapsedTime, Player& player)
 	{
 		if (direction == UP)
 		{
-			direction == DOWN;
+			direction = DOWN;
 			toY = position.getY() + 3 + (rand() % 5);
 			if (toY > 13)
 			{
-				toY == 13;
+				toY = 13;
 			}
 		}
 		else if (direction == DOWN)
 		{
-			direction == UP;
+			direction = UP;
 			toY = position.getY() - 3 - (rand() % 5);
 			if (toY < 1)
 			{
-				toY == 1;
+				toY = 1;
 			}
 		}
 	}
@@ -72,19 +72,20 @@ int BossStage5AlienBoss::update(Map& map, double g_dElapsedTime, Player& player)
 
 	//check projectile location and update or delete accordingly
 	for (int i = 0; i < projectile.size(); i++)
-		if (player.isLocatedAt(projectile.at(i)->getPositionX(), projectile.at(i)->getPositionY()))
-		{
-			player.takeDamage(projectile.at(i)->getDamage());
-			delete projectile.at(i);
-			projectile.at(i) = nullptr;
-		}
-		else if (projectile.at(i)->getPositionX() == 0)
-		{
-			delete projectile.at(i);
-			projectile.at(i) = nullptr;
-		}
-		else
-			projectile.at(i)->update(map, g_dElapsedTime, &player);
+		if (projectile.at(i) != nullptr)
+			if (player.isLocatedAt(projectile.at(i)->getPositionX(), projectile.at(i)->getPositionY()))
+			{
+				player.takeDamage(projectile.at(i)->getDamage());
+				delete projectile.at(i);
+				projectile.at(i) = nullptr;
+			}
+			else if (projectile.at(i)->getPositionX() == 0)
+			{
+				delete projectile.at(i);
+				projectile.at(i) = nullptr;
+			}
+			else
+				projectile.at(i)->update(map, g_dElapsedTime, &player);
 
 	return NO_CHANGE;
 }

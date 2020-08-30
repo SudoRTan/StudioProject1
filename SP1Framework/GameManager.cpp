@@ -162,7 +162,7 @@ void GameManager::loadStage(double enlapsedTime) {
 			break;
 
 		case 5:
-			stage = new BossStage5(player);
+			stage = new BossStage5();
 			break;
 
 		case 6:
