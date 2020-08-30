@@ -19,17 +19,14 @@ class Player :
 	public Entity
 {
 private:
-	int ammo;
-	int maxAmmo;
 	bool dropping;
 	bool jumping;
 
 	double updateHeightDelay;
 
-	COORD enemyLocation;
 	Weapon* weapon;
 
-	int move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
+	virtual int move(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 	int updateHeight(Map& map, double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize);
 
 
@@ -44,14 +41,14 @@ public:
 	void renderPlayer(Console& console);
 	void touchEnemy(Enemy enemy, double g_dElapsedTime);
 
-	int update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize, Collectible** collectibleArray, int collectibleArraySize);
+	virtual int update(Map& map, SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, Enemy** enemyArray, int enemyArraySize, Collectible** collectibleArray, int collectibleArraySize);
 
 	char getItemBelow(Map& map);
 
 	void setPosition(int x, int y);
 
 	void resetWeapon();
+	void replenishAmmo();
 
-	COORD getEnemyLocation();
 
 };

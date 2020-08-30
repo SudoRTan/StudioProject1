@@ -31,7 +31,7 @@ GameManager::~GameManager() {
 	player = nullptr;
 }
 
-void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
+void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime, bool& quitGame) {
 	
 	
 	gameTime = enlapsedTime - timeEnlapsedSincePause;
@@ -84,6 +84,10 @@ void GameManager::update(SKeyEvent KeyEvent[K_COUNT], double enlapsedTime) {
 		else {
 			currGameState = LEVEL_COMPLETE_MENU;
 		}
+		break;
+
+	case EXIT_GAME:
+		g_bQuitGame = true;
 		break;
 
 	case START_MENU:

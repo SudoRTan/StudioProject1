@@ -19,11 +19,11 @@ BossStage4People::BossStage4People() : projectile{0}
 		width = 2;
 		symbolArray = createArray(width, height);
 		symbolArray[0][0] = (char)65;
-		symbolArray[0][1] = (char)124;
-		symbolArray[0][2] = (char)79;
-		symbolArray[1][0] = (char)32;
+		symbolArray[0][1] = (char)32;
+		symbolArray[1][0] = (char)124;
 		symbolArray[1][1] = (char)169;
-		symbolArray[1][2] = (char)32;
+		symbolArray[2][0] = (char)79;
+		symbolArray[2][1] = (char)32;
 		break;
 	case KNIFEMAN:
 		position.setX(77);
@@ -34,13 +34,13 @@ BossStage4People::BossStage4People() : projectile{0}
 		width = 3;
 		symbolArray = createArray(width, height);
 		symbolArray[0][0] = (char)32;
-		symbolArray[0][1] = (char)196;
-		symbolArray[0][2] = (char)32;
-		symbolArray[1][0] = (char)32;
-		symbolArray[1][1] = (char)199;
-		symbolArray[1][2] = (char)32;
-		symbolArray[2][0] = (char)65;
-		symbolArray[2][1] = (char)124;
+		symbolArray[0][1] = (char)32;
+		symbolArray[0][2] = (char)65;
+		symbolArray[1][0] = (char)45;
+		symbolArray[1][1] = (char)198;
+		symbolArray[1][2] = (char)180;
+		symbolArray[2][0] = (char)32;
+		symbolArray[2][1] = (char)32;
 		symbolArray[2][2] = (char)79;
 		break;
 	}
@@ -78,7 +78,7 @@ int BossStage4People::update(Map& map, double g_dElapsedTime, Player& player)
 				{
 					player.takeDamage(projectile[i]->getDamage());
 					delete projectile[i];
-					projectile[i] == nullptr;
+					projectile[i] = nullptr;
 				}
 				else
 					projectile[i]->update(map, g_dElapsedTime, &player);

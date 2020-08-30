@@ -138,6 +138,21 @@
     <ClCompile Include="BossStage4People.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BossStage6.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStage6Police.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HelpMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStage5AlienBoss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStage5Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h">
@@ -261,6 +276,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BossStage4People.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStage6.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStage6Police.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HelpMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStage5AlienBoss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossStage5Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

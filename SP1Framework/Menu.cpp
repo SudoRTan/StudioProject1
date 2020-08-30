@@ -2,11 +2,11 @@
 
 
 Menu::Menu() {
-	//Constructor left intentionally blank
+	totalSelections = 0;
+	currentSelection = 0;
 }
 
 Menu::~Menu() {
-	//Destructor left intentionally blank
 }
 
 

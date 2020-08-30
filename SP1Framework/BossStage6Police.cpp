@@ -13,9 +13,9 @@ BossStage6Police::BossStage6Police()
 	}
 	position.setX(80 + colcount);
 	position.setY(1 + 3 * rowcount);
-	health = 2;
-	updateDelay = 0.07 ;
-	setDamage(8);
+	health = 10;
+	updateDelay = (3 + (rand() % 5)) / 1000;
+	setDamage(5);
 	direction = 0;
 	rowcount++;
 	numberOfCops++;
@@ -26,7 +26,6 @@ BossStage6Police::~BossStage6Police()
 	cleanUp();
 	numberOfCops--;
 }
-
 
 int BossStage6Police::update(Map& map, double g_dElapsedTime, Player& player)
 {

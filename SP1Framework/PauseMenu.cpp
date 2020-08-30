@@ -48,30 +48,6 @@ void PauseMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 
 
 
-/*void PauseMenu::render(Console& console) {
-	std::string line;
-	std::ifstream pauseText("pauseButton.txt");
-	int linecount = 0;
-
-	if (pauseText.is_open()) {
-		while (std::getline(pauseText, line)) {
-			console.writeToBuffer(9, 5 + linecount, line, FG_BLUE);
-			linecount++;
-		}
-		pauseText.close();
-	}
-	if (currentSelection == 1) {
-		console.writeToBuffer(12, 12, "RESUME", FG_RED);
-		console.writeToBuffer(12, 14, "EXIT TO MAIN MENU", FG_WHITE);
-	}
-
-	else if (currentSelection == 2) {
-		console.writeToBuffer(12, 12, "RESUME", FG_WHITE);
-		console.writeToBuffer(12, 14, "EXIT TO MAIN MENU", FG_RED);
-	}
-
-
-}*/
 
 void PauseMenu::render(Console& console)
 {
