@@ -15,6 +15,7 @@ MenuManager::MenuManager() {
 	menus[LEVEL_COMPLETE_MENU] = new LevelCompleteMenu;
 	menus[HELP_MENU] = new HelpMenu;
 	menus[APRIL_FOOLS_MENU] = new AprilFoolsMenu;
+	menus[GAME_WIN] = new WinMenu;
 }
 
 MenuManager::~MenuManager() {

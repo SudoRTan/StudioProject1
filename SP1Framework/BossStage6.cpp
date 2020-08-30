@@ -39,7 +39,7 @@ BossStage6::~BossStage6() {
 void BossStage6::update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState) {
 	
 	if (BossStage6Police::getNumberOfPoliceLeft() == 0) {
-		gameState = FINISHED_LEVEL;
+		gameState = GAME_WIN;
 	}
 	else if (g_dElapsedTime - lastSpawnTime > spawnDelay && numberOfPoliceLeft!= 0) {
 		int i = 0;

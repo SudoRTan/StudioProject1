@@ -36,10 +36,6 @@ void StartMenu::update(int& gameState, SKeyEvent KeyEvent[K_COUNT], int& currSta
 			
 	}
 	
-//	if (KeyEvent[K_SPACE].keyOnce) {
-		//gameState = LEVEL_SELECT;
-	//	PlaySound(TEXT("./Sounds/menuConfirm.wav"), NULL, SND_FILENAME | SND_ASYNC);
-//	}
 }
 
 void StartMenu::render(Console& console) {

@@ -123,6 +123,7 @@ void GameManager::render(Console& console) {
 	case LEVEL_COMPLETE_MENU:
 	case HELP_MENU:
 	case APRIL_FOOLS_MENU:
+	case GAME_WIN:
 		menu.render(currGameState, console);
 		break;
 

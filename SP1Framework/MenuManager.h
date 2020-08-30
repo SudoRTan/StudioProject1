@@ -13,6 +13,7 @@
 #include "LevelCompleteMenu.h"
 #include "HelpMenu.h"
 #include "AprilFoolsMenu.h"
+#include "WinMenu.h"
 
 class MenuManager
 {

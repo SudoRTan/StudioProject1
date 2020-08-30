@@ -121,6 +121,7 @@
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WinMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AprilFoolsMenu.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WinMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
