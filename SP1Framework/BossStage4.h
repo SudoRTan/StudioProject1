@@ -9,5 +9,10 @@ public:
     ~BossStage4();
 private:
     void update(SKeyEvent KeyEvent[K_COUNT], double g_dElapsedTime, int& gameState);
-    Enemy** enemies;
+    
+    BossStage4People knifeMan;
+    BossStage4People gunMan;
+
+    int playerMaxHealth;
+    bool once;
 };

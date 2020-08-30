@@ -1,20 +1,18 @@
 #include "BossStage4People.h"
 
-int BossStage4People::personCount = 0;
 
-BossStage4People::BossStage4People() : projectile{0}
+
+BossStage4People::BossStage4People(int type) : Enemy()
 {
 	updateDelay = 3;
-	lastMoveTime = 0;
-	shotsFired = 0;
 	cleanUp();
-	personType = personCount;
-	switch (personType)
+	personType = type;
+
+	switch (type)
 	{
 	case GUNMAN:
 		position.setX(0);
 		position.setY(1);
-		lastMoveTime = 0;
 		height = 3;
 		width = 2;
 		symbolArray = createArray(width, height);
@@ -25,11 +23,11 @@ BossStage4People::BossStage4People() : projectile{0}
 		symbolArray[2][0] = (char)79;
 		symbolArray[2][1] = (char)32;
 		break;
+
 	case KNIFEMAN:
 		position.setX(77);
 		position.setY(1);
 		setDamage(10);
-		lastMoveTime = 1000;
 		height = 3;
 		width = 3;
 		symbolArray = createArray(width, height);
@@ -44,7 +42,7 @@ BossStage4People::BossStage4People() : projectile{0}
 		symbolArray[2][2] = (char)79;
 		break;
 	}
-	personCount++;
+	projectile = nullptr;
 }
 
 BossStage4People::~BossStage4People()
@@ -57,44 +55,48 @@ int BossStage4People::update(Map& map, double g_dElapsedTime, Player& player)
 	updateNewPosition(map, position.getX(), position.getY());
 	if (personType == GUNMAN)
 	{
-		if (g_dElapsedTime - lastMoveTime > 3)
-		{
-			if (shotsFired == 0)
-			{
-				projectile[0] = new Projectile(position.getX() + 1, position.getY(), RIGHT, 5, (char)254, 0.05);
-				lastMoveTime = g_dElapsedTime;
-				shotsFired++;
-			}
-			else if (shotsFired == 1)
-			{
-				projectile[1] = new Projectile(position.getX() + 1, position.getY(), RIGHT, 5, (char)254, 0.05);
-				lastMoveTime = g_dElapsedTime;
-				shotsFired++;
+		if (g_dElapsedTime - lastMovementTime > 2){
+			lastMovementTime = g_dElapsedTime;
+			if (projectile == nullptr) {
+				projectile = new Projectile(position.getX(), position.getY(), RIGHT, 5, (char)254, 4);
+
 			}
 		}
-		for (int i = 0; i < 2; i++)
-			if (projectile[i] != nullptr)
-				if (player.isLocatedAt(projectile[i]->getPositionX(), projectile[i]->getPositionY()))
-				{
-					player.takeDamage(projectile[i]->getDamage());
-					delete projectile[i];
-					projectile[i] = nullptr;
-				}
-				else
-					projectile[i]->update(map, g_dElapsedTime, &player);
+		if (projectile != nullptr) {
+			projectile->update(map, g_dElapsedTime, &player);
+			if (projectile->getHealth() == 0) {
+				projectile->death(map);
+				delete projectile;
+				projectile = nullptr;
+			}
+
+		}
+
 	}
 	else if (personType == KNIFEMAN)
 	{
-		if (player.getHealth() == 10)
-		{
-			lastMoveTime = g_dElapsedTime;
+		int newX = position.getX() - 1;
+		int newY = position.getY();
+
+
+		bool validMove = canEntityMove(map, newX, newY);
+
+		if (validMove) {
+			// Resets the last movement time to current time
+			lastMovementTime = g_dElapsedTime;
+
+			//Check if new location has a player
+			if (contactPlayer(newX, newY, player)) {
+				//Cause the player to take damamge if it contacts
+				player.takeDamage(getDamage(), g_dElapsedTime);
+			}
+			//Spot is empty and avaliable to move to 
+			else {
+				//Clear current map location and move to new location
+				updateNewPosition(map, newX, newY);
+			}
 		}
-		if (g_dElapsedTime - lastMoveTime > updateDelay)
-		{
-			updateDelay = 0.03;
-			if (position.getX() > 0)
-				updateNewPosition(map, position.getX() - 1, position.getY());
-		}
+
 	}
 	return NO_CHANGE;
 }
